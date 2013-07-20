@@ -41,7 +41,15 @@ end
 require 'cucumber/rake/task'
 Cucumber::Rake::Task.new(:features)
 
-task :default => :spec
+# task :default => :spec
+
+task :default => [] do
+  begin   
+    Rake::Task[:spec].invoke
+  rescue
+  end
+  Rake::Task[:features].invoke
+end
 
 task :test => [] do
   begin   
@@ -50,11 +58,6 @@ task :test => [] do
   end
   Rake::Task[:features].invoke
 end
-
-# RSpec::Core::RakeTask.new(:test) do |spec|
-#   Rake::Task[:spec].execute
-#   Rake::Task[:features].execute
-# end
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
