@@ -21,7 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF and related technologies }
   gem.email = "wstrinz@gmail.com"
   gem.authors = ["wstrinz"]
-  gem.version = "0.0.1"
+  gem.version = "0.0.2"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
