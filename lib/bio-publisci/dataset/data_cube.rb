@@ -1,13 +1,11 @@
   #monkey patch to make rdf string w/ heredocs prettier ;)  
-  class String
-    def unindent
-      gsub /^#{self[/\A\s*/]}/, ''
-     # gsub(/^#{scan(/^\s*/).min_by{|l|l.length}}/, "")
-    end
+class String
+  def unindent
+    gsub /^#{self[/\A\s*/]}/, ''
   end
+end
 
 module R2RDF
-  # used to generate data cube observations, data structure definitions, etc
   module Dataset
     module DataCube
       def defaults
@@ -16,29 +14,6 @@ module R2RDF
         encode_nulls: false,
         base_url: "http://www.rqtl.org",
       }
-      end
-
-      def default_namespaces(base, var)
-        {
-          ns: "#{base}/ns/dataset/#{var}#",
-
-        }
-          "@base <#{base}/ns/dc/> .
-          @prefix ns:    <#{base}/ns/dataset/#{var}#> .
-          @prefix qb:    <http://purl.org/linked-data/cube#> .
-          @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-          @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-          @prefix prop:  <#{base}/dc/properties/> .
-          @prefix dct:   <http://purl.org/dc/terms/> .
-          @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-          @prefix cs:    <#{base}/dc/dataset/#{var}/cs/> .
-          @prefix code:  <#{base}/dc/dataset/#{var}/code/> .
-          @prefix class: <#{base}/dc/dataset/#{var}/class/> .
-          @prefix owl:   <http://www.w3.org/2002/07/owl#> .
-          @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-          @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
-          @prefix org:      <http://www.w3.org/ns/org#> .
-          @prefix prov:     <http://www.w3.org/ns/prov#> ."
       end
 
       def generate_resources(measures, dimensions, codes, options={})

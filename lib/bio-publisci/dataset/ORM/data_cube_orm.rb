@@ -52,16 +52,23 @@ module R2RDF
 					puts "measures: #{measures}" if verbose
           name = execute_from_file('dataset.rq',graph).to_h.first[:label]
           puts "dataset: #{name}" if verbose
-					obs = execute_from_file('observations.rq',graph)
+          obs = execute_from_file('observations.rq',graph)
           puts "observations: #{obs}" if verbose
-          # observations = observation_hash(obs)
+          observations = observation_hash(obs)
+
           simple_observations = observation_hash(obs,true)
+
+          labels = execute_from_file('observation_labels.rq', graph)
+          labels = Hash[labels.map{|sol|
+            [strip_uri(sol[:observation].to_s), sol[:label].to_s]
+          }]
 
 					new_opts = {
 						measures: measures,
 						dimensions: dimensions,
 						observations: simple_observations.values,
 						name: name,
+            labels: labels.values
 					}
 
 					options = options.merge(new_opts)
@@ -96,6 +103,10 @@ module R2RDF
 					if options[:validate_each]
 						@options[:validate_each] = options[:validate_each]
 					end
+
+          if options[:labels]
+            @labels = options[:labels]
+          end
 				end
 
 				def to_n3

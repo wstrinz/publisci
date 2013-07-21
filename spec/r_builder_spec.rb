@@ -21,13 +21,13 @@ EOF
 			@builder = R2RDF::Writer::Builder.new
 		end
 
-		it "produces equivalent dataframe from rdf" do
+		it "produces equivalent dataframe from rdf" #do
 			#(a) problem is that builder and the @r connection are different b/c of
 			#how rserve works
 			# @builder.from_turtle(File.dirname(__FILE__) +'/turtle/reference', @r, 'mr', 'mo', false, false)
 			# puts @r.eval('ls()').payload.to_ruby
 			# @r.eval('identical(mr,mo)').to_ruby.should == true
-		end
+		#end
 
 	end
 end
