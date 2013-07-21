@@ -17,10 +17,11 @@ Jeweler::Tasks.new do |gem|
   gem.name = "bio-publisci"
   gem.homepage = "http://github.com/wstrinz/bioruby-publisci"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Publish science data using semantic web ontologies}
+  gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF and related technologies }
   gem.email = "wstrinz@gmail.com"
   gem.authors = ["wstrinz"]
+  gem.version = "0.0.1"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -36,14 +37,28 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
+
 require 'cucumber/rake/task'
 Cucumber::Rake::Task.new(:features)
 
 task :default => :spec
 
+task :test => [] do
+  begin   
+    Rake::Task[:spec].invoke
+  rescue
+  end
+  Rake::Task[:features].invoke
+end
+
+# RSpec::Core::RakeTask.new(:test) do |spec|
+#   Rake::Task[:spec].execute
+#   Rake::Task[:features].execute
+# end
+
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = File.exist?('VERSION') ? File.read('VERSION') : "0.0.1"
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "bio-publisci #{version}"

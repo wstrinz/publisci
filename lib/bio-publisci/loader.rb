@@ -16,19 +16,19 @@ def load_folder(folder)
 	end
 end
 
-load File.dirname(__FILE__) + '/bio-publisci/dataset/interactive.rb'
-load File.dirname(__FILE__) + '/bio-publisci/query/query_helper.rb'
-load File.dirname(__FILE__) + '/bio-publisci/parser.rb'
-load File.dirname(__FILE__) + '/bio-publisci/r_client.rb'
-load File.dirname(__FILE__) + '/bio-publisci/analyzer.rb'
-load File.dirname(__FILE__) + '/bio-publisci/store.rb'
-load File.dirname(__FILE__) + '/bio-publisci/dataset/data_cube.rb'
+load File.dirname(__FILE__) + '/dataset/interactive.rb'
+load File.dirname(__FILE__) + '/query/query_helper.rb'
+load File.dirname(__FILE__) + '/parser.rb'
+load File.dirname(__FILE__) + '/r_client.rb'
+load File.dirname(__FILE__) + '/analyzer.rb'
+load File.dirname(__FILE__) + '/store.rb'
+load File.dirname(__FILE__) + '/dataset/data_cube.rb'
 
 
-load_folder('bio-publisci/metadata')
-load_folder('bio-publisci/readers')
-load_folder('bio-publisci/writers')
-load_folder('bio-publisci/dataset/ORM')
+load_folder('metadata')
+load_folder('readers')
+load_folder('writers')
+load_folder('dataset/ORM')
 # Dir.foreach(File.dirname(__FILE__) + '/generators') do |file|
 # 	unless file == "." or file == ".."
 # 		load File.dirname(__FILE__) + '/generators/' + file

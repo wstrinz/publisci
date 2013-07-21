@@ -14,3 +14,11 @@ group :development do
   gem "bio", ">= 1.4.2"
   gem "rdoc", "~> 3.12"
 end
+
+group :production do
+  gem 'rdf'
+  gem 'rdf-4store'
+  gem 'rdf-turtle'
+  gem 'rserve-client'
+  gem 'sparql'
+end

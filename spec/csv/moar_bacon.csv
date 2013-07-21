@@ -1,0 +1,11 @@
+producer,pricerange,chunkiness,deliciousness
+hormel,low,1,1
+oscar_mayer,low,6,3
+newskies,medium,2,5
+hormel,low,2,2
+DArtagnan,medium,6,9
+oscar_mayer,low,5,4
+hormel,low,2,1
+farmland,high,6,9
+newskies,medium,6,9
+whys,nonexistant,9001,6

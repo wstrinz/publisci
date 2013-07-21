@@ -1,0 +1,25 @@
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+PREFIX qb:      <http://purl.org/linked-data/cube#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+
+# IC-14. All measures present
+
+SELECT * WHERE {
+    # Observation in a non-measureType cube
+    ?obs qb:dataSet ?dset .
+    ?dset qb:structure ?dsd .
+    FILTER NOT EXISTS { 
+    	?dsd qb:component ?comp .
+    	?comp qb:componentProperty ?prop .
+    	?prop qb:measureType [] .
+    }
+
+    # verify every measure is present
+    ?dsd qb:component ?comp .
+    ?comp qb:componentProperty ?measure .
+    ?measure a qb:MeasureProperty;
+    FILTER NOT EXISTS { ?obs ?measure [] }
+}

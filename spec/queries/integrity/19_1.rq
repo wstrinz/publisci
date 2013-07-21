@@ -1,0 +1,21 @@
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+PREFIX qb:      <http://purl.org/linked-data/cube#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+
+#IC-19_1 Codes from code list
+
+SELECT * WHERE {
+    ?obs qb:dataSet ?ds .
+    ?ds qb:structure ?str .
+    ?str qb:component ?prop .
+    ?prop qb:componentProperty ?dim .
+    ?dim a qb:DimensionProperty ;
+        qb:codeList ?list .
+    ?list a skos:ConceptScheme .
+    ?obs ?dim ?v .
+    FILTER NOT EXISTS { ?v a skos:Concept ; skos:inScheme ?list }
+}
+
