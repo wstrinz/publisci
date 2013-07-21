@@ -16,31 +16,14 @@
 @prefix prov:     <http://www.w3.org/ns/prov#> .
 
 ns:dsd-mr a qb:DataStructureDefinition;
-  qb:component
-    cs:chr ,
-    cs:pos ,
-    cs:lod ,
-    cs:refRow .
+  qb:component [ qb:dimension prop:refRow ] ;
+  qb:component [ qb:measure prop:chr ] ;
+  qb:component [ qb:measure prop:pos ] ;
+  qb:component [ qb:measure prop:lod ] .
 
 ns:dataset-mr a qb:DataSet ;
   rdfs:label "mr"@en ;
   qb:structure ns:dsd-mr .
-
-cs:refRow a qb:ComponentSpecification ;
-  rdfs:label "refRow Component" ;
-  qb:dimension prop:refRow .
-
-cs:chr a qb:ComponentSpecification ;
-  rdfs:label "chr Component" ;
-  qb:measure prop:chr .
-
-cs:pos a qb:ComponentSpecification ;
-  rdfs:label "pos Component" ;
-  qb:measure prop:pos .
-
-cs:lod a qb:ComponentSpecification ;
-  rdfs:label "lod Component" ;
-  qb:measure prop:lod .
 
 prop:refRow a rdf:Property, qb:DimensionProperty ;
   rdfs:label "refRow"@en ;

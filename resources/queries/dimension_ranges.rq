@@ -1,8 +1,8 @@
 PREFIX qb:   <http://purl.org/linked-data/cube#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 
-SELECT DISTINCT ?dimension ?range WHERE {
-	?dim a qb:DimensionProperty;
-		rdfs:label ?dimension;
+SELECT DISTINCT ?dimension ?range ?label WHERE {
+	?dimension a qb:DimensionProperty;
+		rdfs:label ?label;
 		rdfs:range ?range.
 }

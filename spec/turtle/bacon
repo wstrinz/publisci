@@ -16,31 +16,14 @@
 @prefix prov:     <http://www.w3.org/ns/prov#> .
 
 ns:dsd-bacon a qb:DataStructureDefinition;
-  qb:component
-    cs:chunkiness ,
-    cs:deliciousness ,
-    cs:producer ,
-    cs:pricerange .
+  qb:component [ qb:dimension prop:producer ] ;
+  qb:component [ qb:dimension prop:pricerange ] ;
+  qb:component [ qb:measure prop:chunkiness ] ;
+  qb:component [ qb:measure prop:deliciousness ] .
 
 ns:dataset-bacon a qb:DataSet ;
   rdfs:label "bacon"@en ;
   qb:structure ns:dsd-bacon .
-
-cs:producer a qb:ComponentSpecification ;
-  rdfs:label "producer Component" ;
-  qb:dimension prop:producer .
-
-cs:pricerange a qb:ComponentSpecification ;
-  rdfs:label "pricerange Component" ;
-  qb:dimension prop:pricerange .
-
-cs:chunkiness a qb:ComponentSpecification ;
-  rdfs:label "chunkiness Component" ;
-  qb:measure prop:chunkiness .
-
-cs:deliciousness a qb:ComponentSpecification ;
-  rdfs:label "deliciousness Component" ;
-  qb:measure prop:deliciousness .
 
 prop:producer a rdf:Property, qb:DimensionProperty ;
   rdfs:label "producer"@en ;

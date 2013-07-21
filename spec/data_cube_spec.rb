@@ -68,7 +68,7 @@ describe R2RDF::Dataset::DataCube do
 			end
 
 			it 'generates data structure definition' do
-				dsd = @generator.data_structure_definition(@measures | @dimensions, "bacon")
+				dsd = @generator.data_structure_definition(@measures, @dimensions, @codes, "bacon")
 				dsd.is_a?(String).should == true
 			end
 

@@ -50,7 +50,7 @@ module R2RDF
 				codes = codes(client,var,options)
 
 				str = prefixes(var, options)
-				str << data_structure_definition(meas,outvar,options)
+				str << data_structure_definition(meas,[],codes,outvar,options)
 				str << dataset(outvar,options)
     		component_specifications(meas, dim, var, options).map{ |c| str << c }
 				measure_properties(meas,var,options).map{|m| str << m}

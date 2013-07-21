@@ -58,7 +58,9 @@ module R2RDF
     end
 
     def strip_uri(uri)
-    	uri.to_s.split('/').last.split('#').last
+      uri = uri.to_s.dup
+      uri[-1] = '' if uri[-1] == '>'
+      uri.to_s.split('/').last.split('#').last
     end
 	end
 end

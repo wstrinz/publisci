@@ -31,8 +31,8 @@ EOS
 				repo = RDF::Repository.load(turtle_file)
 				puts "loaded #{repo.size} statements into temporary repo" if verbose
 				
-				dims = get_ary(execute_from_file("dimensions.rq",repo,:graph)).flatten
-				meas = get_ary(execute_from_file("measures.rq",repo,:graph)).flatten
+				dims = execute_from_file("dimensions.rq",repo,:graph).to_h.map{|d| d[:label].to_s}
+				meas = execute_from_file("measures.rq",repo,:graph).to_h.map{|m| m[:labels].to_s}
 				relation = execute_from_file("dataset.rq",repo,:graph).to_h.first[:label].to_s
 				codes = execute_from_file("codes.rq",repo,:graph).to_h.map{|e| e.values.map(&:to_s)}.inject({}){|h,el|
 					(h[el.first]||=[]) << el.last; h

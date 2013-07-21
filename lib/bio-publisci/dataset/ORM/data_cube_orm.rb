@@ -43,30 +43,30 @@ module R2RDF
 						if solution[:range].split('/')[-2] == "code"
 							type = :coded
 						else
-							type = strip_uri(solution[:range])
+							type = solution[:range].to_s
 						end
-						[strip_uri(solution[:dimension]), {type: type}]
+						[solution[:dimension], {type: type}]
 					}]
 					puts "dimensions: #{dimensions}" if verbose
-					measures = get_ary(execute_from_file('measures.rq',graph)).flatten
+					measures = execute_from_file('measures.rq',graph).to_h.map{|m| m[:measure].to_s}
 					puts "measures: #{measures}" if verbose
           name = execute_from_file('dataset.rq',graph).to_h.first[:label]
           puts "dataset: #{name}" if verbose
           obs = execute_from_file('observations.rq',graph)
-          puts "observations: #{obs}" if verbose
           observations = observation_hash(obs)
+          puts "observations: #{observations}" if verbose
 
-          simple_observations = observation_hash(obs,true)
+          # simple_observations = observation_hash(obs,true)
 
           labels = execute_from_file('observation_labels.rq', graph)
           labels = Hash[labels.map{|sol|
-            [strip_uri(sol[:observation].to_s), sol[:label].to_s]
+            [sol[:observation].to_s, sol[:label].to_s]
           }]
 
 					new_opts = {
 						measures: measures,
 						dimensions: dimensions,
-						observations: simple_observations.values,
+						observations: observations.values,
 						name: name,
             labels: labels.values
 					}
@@ -132,8 +132,6 @@ module R2RDF
 					
 
 					codes = @dimensions.map{|d,v| d if v[:type] == :coded}.compact
-
-
 					str = generate(@measures, @dimensions.keys, codes, data, @labels, @name, @generator_options)
 					unless @options[:skip_metadata]
 		        fields = {
