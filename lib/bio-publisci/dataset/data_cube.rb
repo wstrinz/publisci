@@ -16,26 +16,106 @@ module R2RDF
         encode_nulls: false,
         base_url: "http://www.rqtl.org",
       }
-     end
-     
-     def generate(measures, dimensions, codes, data, observation_labels, var, options={})
-      dimensions = sanitize(dimensions)
-      codes = sanitize(codes)
-      measures = sanitize(measures)
-      var = sanitize([var]).first
-      data = sanitize_hash(data)
+      end
 
-      str = prefixes(var,options)
-      str << data_structure_definition((measures | dimensions), var, options)
-      str << dataset(var, options)
-      component_specifications(measures, dimensions, var, options).map{ |c| str << c }
-      dimension_properties(dimensions, codes, var, options).map{|p| str << p}
-      measure_properties(measures, var, options).map{|p| str << p}
-      code_lists(codes, data, var, options).map{|l| str << l}
-      concept_codes(codes, data, var, options).map{|c| str << c}
-      observations(measures, dimensions, codes, data, observation_labels, var, options).map{|o| str << o}
-      str
-    end
+      def default_namespaces(base, var)
+        {
+          ns: "#{base}/ns/dataset/#{var}#",
+
+        }
+          "@base <#{base}/ns/dc/> .
+          @prefix ns:    <#{base}/ns/dataset/#{var}#> .
+          @prefix qb:    <http://purl.org/linked-data/cube#> .
+          @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+          @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+          @prefix prop:  <#{base}/dc/properties/> .
+          @prefix dct:   <http://purl.org/dc/terms/> .
+          @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+          @prefix cs:    <#{base}/dc/dataset/#{var}/cs/> .
+          @prefix code:  <#{base}/dc/dataset/#{var}/code/> .
+          @prefix class: <#{base}/dc/dataset/#{var}/class/> .
+          @prefix owl:   <http://www.w3.org/2002/07/owl#> .
+          @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+          @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+          @prefix org:      <http://www.w3.org/ns/org#> .
+          @prefix prov:     <http://www.w3.org/ns/prov#> ."
+      end
+
+      def generate_resources(measures, dimensions, codes, options={})
+        newm = measures.map {|m|
+          if m =~ /^http:\/\//
+            "<#{m}>"
+          elsif m =~ /^[a-zA-z]+:[a-zA-z]+$/
+            m
+          else
+            "prop:#{m}"
+          end            
+        }
+
+        newc = []
+
+        newd = dimensions.map{|d|
+            if d =~ /^http:\/\//
+              newc << "<#{d}>" if codes.include? d
+              "<#{d}>"
+            elsif d =~ /^[a-zA-z]+:[a-zA-z]+$/
+              d
+            else
+              newc << "prop:#{d}" if codes.include? d
+              "prop:#{d}"
+            end
+        }
+        [newm, newd, newc]
+      end
+
+      def encode_data(codes,data,var,options={})
+        new_data = {}
+        data.map{|k,v|
+          if codes.include? k
+            new_data[k] = v.map{|val|
+              if val =~ /^http:\/\//
+                "<#{val}>"
+              elsif val =~ /^[a-zA-z]+:[a-zA-z]+$/
+                val
+              else
+                "<code/#{k.downcase}/#{val}>"
+              end
+            }
+          else
+            new_data[k] = v
+          end
+        }
+        new_data
+      end
+
+      def vocabulary(vocab,options={})
+        if vocab.is_a?(String) && vocab =~ /^http:\/\//
+          RDF::Vocabulary.new(vocab)
+        elsif RDF.const_defined? vocab.to_sym && RDF.const_get(vocab.to_sym).inspect =~ /^RDF::Vocabulary/
+          RDF.const_get(vocab)
+        else
+          nil
+        end
+      end
+     
+      def generate(measures, dimensions, codes, data, observation_labels, var, options={})
+        dimensions = sanitize(dimensions)
+        codes = sanitize(codes)
+        measures = sanitize(measures)
+        var = sanitize([var]).first
+        data = sanitize_hash(data)
+
+        str = prefixes(var,options)
+        str << data_structure_definition((measures | dimensions), var, options)
+        str << dataset(var, options)
+        component_specifications(measures, dimensions, var, options).map{ |c| str << c }
+        dimension_properties(dimensions, codes, var, options).map{|p| str << p}
+        measure_properties(measures, var, options).map{|p| str << p}
+        code_lists(codes, data, var, options).map{|l| str << l}
+        concept_codes(codes, data, var, options).map{|c| str << c}
+        observations(measures, dimensions, codes, data, observation_labels, var, options).map{|o| str << o}
+        str
+      end
 
       def sanitize(array)
         #remove spaces and other special characters
@@ -183,6 +263,8 @@ module R2RDF
       def observations(measures, dimensions, codes, data, observation_labels, var, options={})  
         var = sanitize([var]).first
         options = defaults().merge(options)
+        rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
+        data = encode_data(codes, data, var, options)
         obs = []
         observation_labels.each_with_index.map{|r, i|
           contains_nulls = false
@@ -193,30 +275,39 @@ module R2RDF
 
           str << "  rdfs:label \"#{r}\" ;\n" unless options[:no_labels]
           
-          dimensions.map{|d|
+          dimensions.each_with_index{|d,j|
             contains_nulls = contains_nulls | (data[d][i] == nil)
             if codes.include? d
-              str << "  prop:#{d} <code/#{d.downcase}/#{data[d][i]}> ;\n"
+              # str << "  #{rdf_dimensions[j]} <code/#{d.downcase}/#{data[d][i]}> ;\n"
+              str << "  #{rdf_dimensions[j]} #{data[d][i]} ;\n"
             else
-              str << "  prop:#{d} ns:#{to_resource(data[d][i], options)} ;\n"
+              str << "  #{rdf_dimensions[j]} #{to_literal(data[d][i], options)} ;\n"
             end
           }
 
-          measures.map{|m|
+          measures.each_with_index{|m,j|
             contains_nulls = contains_nulls | (data[m][i] == nil)
-            str << "  prop:#{m} #{to_literal(data[m][i], options)} ;\n" 
+            str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n" 
             
           }
 
           str << "  .\n\n"
-          obs << str unless contains_nulls && !options[:encode_nulls]
-
+          if contains_nulls && !options[:encode_nulls]
+            if options[:whiny_nils]
+              raise "missing component for observation, skipping: #{str}, "
+            else
+              puts "missing component for observation, skipping: #{str}, "
+            end
+          else
+            obs << str 
+          end
         }
         obs
       end
 
       def code_lists(codes, data, var, options={})
         options = defaults().merge(options)
+        data = encode_data(codes, data, var, options)
         lists = []
         codes.map{|code|
           str = <<-EOF.unindent
@@ -234,7 +325,7 @@ module R2RDF
           EOF
           data[code].uniq.map{|value|
             unless value == nil && !options[:encode_nulls]
-              str << "  skos:hasTopConcept <code/#{code.downcase}/#{to_resource(value,options)}> ;\n"
+              str << "  skos:hasTopConcept #{to_resource(value,options)} ;\n"
             end
           }
           
@@ -249,13 +340,14 @@ module R2RDF
       def concept_codes(codes, data, var, options={})
         options = defaults().merge(options)
         concepts = []
+        new_data = encode_data(codes, data, var, options)
         codes.map{|code|
-          data[code].uniq.map{|value|
+          new_data[code].uniq.each_with_index{|value,i|
             unless value == nil && !options[:encode_nulls]
             concepts << <<-EOF.unindent
-              <code/#{code.downcase}/#{to_resource(value,options)}> a skos:Concept, code:#{code.downcase.capitalize};
+              #{to_resource(value,options)} a skos:Concept, code:#{code.downcase.capitalize};
                 skos:topConceptOf code:#{code.downcase} ;
-                skos:prefLabel "#{to_resource(value,options)}" ;
+                skos:prefLabel "#{data[code][i]}" ;
                 skos:inScheme code:#{code.downcase} .
 
             EOF
