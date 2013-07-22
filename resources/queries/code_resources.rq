@@ -1,0 +1,10 @@
+PREFIX qb:   <http://purl.org/linked-data/cube#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+
+SELECT DISTINCT ?dimension ?dimLabel ?codeList ?class WHERE{
+  ?dimension a qb:DimensionProperty;
+    rdfs:label ?dimLabel;
+    qb:codeList ?codeList;
+    rdfs:range ?class.
+}
