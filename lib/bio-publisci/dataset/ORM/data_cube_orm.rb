@@ -48,10 +48,18 @@ module R2RDF
 						[solution[:dimension], {type: type}]
 					}]
 					puts "dimensions: #{dimensions}" if verbose
-					measures = execute_from_file('measures.rq',graph).to_h.map{|m| m[:measure].to_s}
-					puts "measures: #{measures}" if verbose
+
+          codes = execute_from_file('code_resources.rq',graph).to_h.map{|sol|
+            [sol[:dimension].to_s, sol[:codeList].to_s, sol[:class].to_s]
+          }
+					puts "codes: #{codes}" if verbose
+          
+          measures = execute_from_file('measures.rq',graph).to_h.map{|m| m[:measure].to_s}
+          puts "measures: #{measures}" if verbose
+          
           name = execute_from_file('dataset.rq',graph).to_h.first[:label]
           puts "dataset: #{name}" if verbose
+          
           obs = execute_from_file('observations.rq',graph)
           observations = observation_hash(obs)
           puts "observations: #{observations}" if verbose
@@ -68,7 +76,8 @@ module R2RDF
 						dimensions: dimensions,
 						observations: observations.values,
 						name: name,
-            labels: labels.values
+            labels: labels.values,
+            codes: codes
 					}
 
 					options = options.merge(new_opts)
@@ -107,6 +116,10 @@ module R2RDF
           if options[:labels]
             @labels = options[:labels]
           end
+
+          if options[:codes]
+            @codes = options[:codes]
+          end
 				end
 
 				def to_n3
@@ -131,8 +144,8 @@ module R2RDF
 					}
 					
 
-					codes = @dimensions.map{|d,v| d if v[:type] == :coded}.compact
-					str = generate(@measures, @dimensions.keys, codes, data, @labels, @name, @generator_options)
+					@codes = @dimensions.map{|d,v| d if v[:type] == :coded}.compact unless @codes
+					str = generate(@measures, @dimensions.keys, @codes, data, @labels, @name, @generator_options)
 					unless @options[:skip_metadata]
 		        fields = {
 		          publishers: publishers(),

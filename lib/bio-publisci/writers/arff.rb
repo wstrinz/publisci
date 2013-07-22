@@ -54,7 +54,6 @@ EOS
               end
             end
         }
-        puts attributes
         build_arff(relation, attributes, data, turtle_file)
       end
 

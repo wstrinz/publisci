@@ -41,17 +41,21 @@ module R2RDF
             end
         }
 
-        newc = codes.map{|c|
-          if c =~ /^http:\/\//
-            # newc << "<#{d}>" if codes.include? d
-            "<#{c}>"
-          elsif c =~ /^[a-zA-z]+:[a-zA-z]+$/
-            c
-          else
-            # newc << "prop:#{d}" if codes.include? d
-            "code:#{c}"
-          end
-        }
+        if codes.first.is_a? Array
+          newc = codes.map{|c|
+            c.map{|el|
+              if el =~ /^http:\/\//
+                "<#{el}>"
+              else
+                el
+              end
+            }
+          }
+        else
+          newc = codes.map{|c|
+              ["#{c}","code:#{c.downcase}","code:#{c.downcase.capitalize}"]
+          }
+        end
         [newm, newd, newc]
       end
 
@@ -215,22 +219,23 @@ module R2RDF
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], dimensions, codes, options)
         props = []
-        rdf_dimensions.map{|d|  
-            if rdf_codes.map{|c| strip_prefixes(strip_uri(c))}.include?(strip_prefixes(strip_uri(d)))
-              props << <<-EOF.unindent
-              #{d} a rdf:Property, qb:DimensionProperty ;
-                rdfs:label "#{strip_prefixes(strip_uri(d))}"@en ;
-                qb:codeList code:#{strip_prefixes(strip_uri(d)).downcase} ;
-                rdfs:range code:#{strip_prefixes(strip_uri(d)).downcase.capitalize} .
+        rdf_dimensions.each_with_index{|d,i|
+          if rdf_codes.map{|c| c[0]}.include?(dimensions[i])
+            code = rdf_codes[rdf_codes.map{|c| c[0]}.index(dimensions[i])]
+            props << <<-EOF.unindent
+            #{d} a rdf:Property, qb:DimensionProperty ;
+              rdfs:label "#{strip_prefixes(strip_uri(d))}"@en ;
+              qb:codeList #{code[1]} ;
+              rdfs:range #{code[2]} .
 
-              EOF
-            else
-              props << <<-EOF.unindent
-              #{d} a rdf:Property, qb:DimensionProperty ;
-                rdfs:label "#{strip_prefixes(strip_uri(d))}"@en .
+            EOF
+          else
+            props << <<-EOF.unindent
+            #{d} a rdf:Property, qb:DimensionProperty ;
+              rdfs:label "#{strip_prefixes(strip_uri(d))}"@en .
 
-              EOF
-            end
+            EOF
+          end
           }
         
         props
@@ -259,6 +264,7 @@ module R2RDF
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
         data = encode_data(codes, data, var, options)
         obs = []
+        
         observation_labels.each_with_index.map{|r, i|
           contains_nulls = false
           str = <<-EOF.unindent 
@@ -270,9 +276,10 @@ module R2RDF
           
           dimensions.each_with_index{|d,j|
             contains_nulls = contains_nulls | (data[d][i] == nil)
-            if codes.include? d
+
+            if rdf_codes.map{|c| c[0]}.include? d
               # str << "  #{rdf_dimensions[j]} <code/#{d.downcase}/#{data[d][i]}> ;\n"
-              str << "  #{rdf_dimensions[j]} #{data[d][i]} ;\n"
+              str << "  #{rdf_dimensions[j]} #{to_resource(data[d][i], options)} ;\n"
             else
               str << "  #{rdf_dimensions[j]} #{to_literal(data[d][i], options)} ;\n"
             end
@@ -303,21 +310,26 @@ module R2RDF
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], [], codes, options)
         data = encode_data(codes, data, var, options)
         lists = []
-        codes.map{|code|
+        rdf_codes.map{|code|
+          if code[0] =~ /^<.+>$/
+            refcode = code[0][1..-2]
+          else
+            refcode = code[0]
+          end
           str = <<-EOF.unindent
-            code:#{strip_uri(code).downcase.capitalize} a rdfs:Class, owl:Class;
+            #{code[2]} a rdfs:Class, owl:Class;
               rdfs:subClassOf skos:Concept ;
-              rdfs:label "Code list for #{strip_uri(code)} - codelist class"@en;
-              rdfs:comment "Specifies the #{strip_uri(code)} for each observation";
-              rdfs:seeAlso code:#{strip_uri(code).downcase} .
+              rdfs:label "Code list for #{strip_prefixes(strip_uri(code[1]))} - codelist class"@en;
+              rdfs:comment "Specifies the #{strip_prefixes(strip_uri(code[1]))} for each observation";
+              rdfs:seeAlso #{code[1]} .
 
-            code:#{strip_uri(code).downcase} a skos:ConceptScheme;
-              skos:prefLabel "Code list for #{strip_uri(code)} - codelist scheme"@en;
-              rdfs:label "Code list for #{strip_uri(code)} - codelist scheme"@en;
-              skos:notation "CL_#{strip_uri(code).upcase}";
-              skos:note "Specifies the #{strip_uri(code)} for each observation";
+            #{code[1]} a skos:ConceptScheme;
+              skos:prefLabel "Code list for #{strip_prefixes(strip_uri(code[1]))} - codelist scheme"@en;
+              rdfs:label "Code list for #{strip_prefixes(strip_uri(code[1]))} - codelist scheme"@en;
+              skos:notation "CL_#{strip_prefixes(strip_uri(code[1])).upcase}";
+              skos:note "Specifies the #{strip_prefixes(strip_uri(code[1]))} for each observation";
           EOF
-          data[code].uniq.map{|value|
+          data[refcode].uniq.map{|value|
             unless value == nil && !options[:encode_nulls]
               str << "  skos:hasTopConcept #{to_resource(value,options)} ;\n"
             end
@@ -333,16 +345,22 @@ module R2RDF
 
       def concept_codes(codes, data, var, options={})
         options = defaults().merge(options)
+        rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], [], codes, options)
         concepts = []
-        new_data = encode_data(codes, data, var, options)
-        codes.map{|code|
-          new_data[code].uniq.each_with_index{|value,i|
+        data = encode_data(codes, data, var, options)
+        rdf_codes.map{|code|
+          if code[0] =~ /^<.+>$/
+            refcode = code[0][1..-2]
+          else
+            refcode = code[0]
+          end
+          data[refcode].uniq.each_with_index{|value,i|
             unless value == nil && !options[:encode_nulls]
             concepts << <<-EOF.unindent
-              #{to_resource(value,options)} a skos:Concept, code:#{strip_uri(code).downcase.capitalize};
-                skos:topConceptOf code:#{strip_uri(code).downcase} ;
-                skos:prefLabel "#{strip_uri(data[code][i])}" ;
-                skos:inScheme code:#{strip_uri(code).downcase} .
+              #{to_resource(value,options)} a skos:Concept, #{code[2]};
+                skos:topConceptOf #{code[1]} ;
+                skos:prefLabel "#{strip_uri(data[refcode][i])}" ;
+                skos:inScheme #{code[1]} .
 
             EOF
             end
@@ -355,6 +373,8 @@ module R2RDF
 
       def to_resource(obj, options)
         if obj.is_a? String
+          obj = "<#{obj}>" if obj =~ /^http:\/\//
+            
           #TODO decide the right way to handle missing values, since RDF has no null
           #probably throw an error here since a missing resource is a bigger problem
           obj = "NA" if obj.empty?
@@ -401,7 +421,7 @@ module R2RDF
       end
 
       def abbreviate_known(turtle_string)
-        turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>' )
+        turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\S+)>/, 'code:\2')
       end
     end
   end
