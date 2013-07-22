@@ -6,6 +6,7 @@ describe R2RDF::Dataset::ORM::DataCube do
     ref = IO.read(File.dirname(__FILE__) + '/../turtle/bacon')
     cube = R2RDF::Dataset::ORM::DataCube.load(ref, {skip_metadata: true, generator_options: {label_column: 0}})
     cube.abbreviate_known(cube.to_n3).should == ref
+    # cube.to_n3.should == ref
   end
   
 end

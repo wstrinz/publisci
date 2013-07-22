@@ -8,6 +8,7 @@ end
 module R2RDF
   module Dataset
     module DataCube
+      include R2RDF::Parser
       def defaults
       {
         type: :dataframe,
@@ -108,34 +109,6 @@ module R2RDF
         str
       end
 
-      def sanitize(array)
-        #remove spaces and other special characters
-        processed = []
-        array.map{|entry|
-          if entry.is_a? String
-            processed << entry.gsub(/[\s\.]/,'_')
-          else
-            processed << entry
-          end
-        }
-        processed
-      end
-
-      def sanitize_hash(h)
-        mappings = {}
-        h.keys.map{|k| 
-          if(k.is_a? String)
-            mappings[k] = k.gsub(' ','_')
-          end
-        }
-
-        h.keys.map{|k|
-          h[mappings[k]] = h.delete(k) if mappings[k]
-        }
-
-        h
-      end
-
       def prefixes(var, options={})
         var = sanitize([var]).first
         options = defaults().merge(options)
@@ -151,7 +124,6 @@ module R2RDF
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix cs:    <#{base}/dc/dataset/#{var}/cs/> .
         @prefix code:  <#{base}/dc/dataset/#{var}/code/> .
-        @prefix class: <#{base}/dc/dataset/#{var}/class/> .
         @prefix owl:   <http://www.w3.org/2002/07/owl#> .
         @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
         @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
@@ -219,7 +191,6 @@ module R2RDF
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], dimensions, codes, options)
         props = []
-        # puts dimensions
 
         dimension_codes = rdf_codes.map{|c| 
           if c[0]=~/^<http:/
@@ -228,10 +199,10 @@ module R2RDF
             c[0]
           end
         }
+
         rdf_dimensions.each_with_index{|d,i|
           if dimension_codes.include?(dimensions[i])
             code = rdf_codes[dimension_codes.index(dimensions[i])]
-            puts "#{code}"
             props << <<-EOF.unindent
             #{d} a rdf:Property, qb:DimensionProperty ;
               rdfs:label "#{strip_prefixes(strip_uri(d))}"@en ;
@@ -311,9 +282,9 @@ module R2RDF
 
           str << "  .\n\n"
           if contains_nulls && !options[:encode_nulls]
-            if options[:whiny_nils]
+            if options[:raise_nils]
               raise "missing component for observation, skipping: #{str}, "
-            else
+            elsif options[:whiny_nils]
               puts "missing component for observation, skipping: #{str}, "
             end
           else
@@ -389,56 +360,8 @@ module R2RDF
       end
 
 
-      def to_resource(obj, options)
-        if obj.is_a? String
-          obj = "<#{obj}>" if obj =~ /^http:\/\//
-            
-          #TODO decide the right way to handle missing values, since RDF has no null
-          #probably throw an error here since a missing resource is a bigger problem
-          obj = "NA" if obj.empty?
-          
-          #TODO  remove special characters (faster) as well (eg '?')
-          obj.gsub(' ','_').gsub('?','')
-        elsif obj == nil && options[:encode_nulls]
-          '"NA"'
-        elsif obj.is_a? Numeric
-          #resources cannot be referred to purely by integer (?)
-          "n"+obj.to_s
-        else
-          obj
-        end
-      end
-
-      def to_literal(obj, options)
-        if obj.is_a? String
-          # Depressing that there's no more elegant way to check if a string is 
-          # a number...
-          if val = Integer(obj) rescue nil
-            val
-          elsif val = Float(obj) rescue nil
-            val
-          else
-            '"'+obj+'"'
-          end
-        elsif obj == nil && options[:encode_nulls]
-          #TODO decide the right way to handle missing values, since RDF has no null
-          '"NA"'
-        else
-          obj
-        end
-      end
-
-      def strip_uri(uri)
-        uri = uri.to_s.dup
-        uri[-1] = '' if uri[-1] == '>'
-        uri.to_s.split('/').last.split('#').last
-      end
-
-      def strip_prefixes(string)
-        string.to_s.split(':').last
-      end
-
       def abbreviate_known(turtle_string)
+        #debug method
         turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\S+)>/, 'code:\2')
       end
     end

@@ -6,6 +6,8 @@ end
 
 module R2RDF
   module Metadata
+    include R2RDF::Parser
+
     def defaults
     {
       encode_nulls: false,
@@ -18,6 +20,17 @@ module R2RDF
       #make it just "var", and try to make that clear to calling classes
 
       fields[:var] = sanitize([fields[:var]]).first
+
+      unless fields[:creator]
+        if ENV['USER']
+          fields[:creator] = ENV['USER']
+        elsif ENV['USERNAME']
+          fields[:creator] = ENV['USERNAME']
+        end
+      end
+
+      fields[:date] = Time.now.strftime("%Y-%m-%d") unless fields[:date]
+
       options = defaults().merge(options)
       str = <<-EOF.unindent
       ns:dataset-#{fields[:var]} rdfs:label "#{fields[:title]}";
@@ -53,18 +66,44 @@ module R2RDF
       #TODO: should either add a prefixes method or replace some with full URIs
       var = sanitize([fields[:var]]).first
       source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
-
-      str = "qb:dataset-#{var} a prov:Entity.\n"
-      endstr = "qb:dataset-#{var} prov:wasGeneratredBy <#{options[:base_url]}/ns/R2RDF>\n" #replace once gem has an actual name
+      str = "ns:dataset-#{var} a prov:Entity.\n"
+      endstr = "ns:dataset-#{var} prov:wasGeneratredBy <#{options[:base_url]}/ns/R2RDF> .\n\n" #replace once gem has an actual name
       if source_software
-        source_software = [source_software] unless source_software.respond_to? :map
-        source_software.map{|soft|
-          str << "<#{options[:base_url]}/ns/prov/software/#{soft}> a prov:Entity .\n"
+        source_software = [source_software] unless source_software.is_a? Array
+        source_software.each_with_index.map{|soft,i|
+          str << "<#{options[:base_url]}/ns/prov/software/#{soft[:name]}> a prov:Entity .\n"
 
-          #Note: probably should say derived from the software object, then software object from software.
-          endstr << "qb:dataset-#{var} prov:wasDerivedFrom <#{options[:base_url]}/ns/prov/#{soft}> .\n"
+          endstr << "ns:dataset-#{var} prov:wasDerivedFrom <#{options[:base_url]}/ns/dataset/#{var}#var> .\n"
+
+          if soft[:process]
+            if File.exist? soft[:process]
+              soft[:process] = IO.read(soft[:process])
+            end
+            endstr << "<#{options[:base_url]}/ns/dataset/#{var}#var> prov:wasGeneratredBy ns:activity-#{i} .\n" 
+            endstr << process(i, soft[:process],"#{options[:base_url]}/ns/prov/software/#{soft[:name]}")
+          end
         }
       end
+      str + "\n" + endstr
+    end
+
+    def process(id, step_string, software_resource, options={})      
+      #TODO a better predicate for the steplist than rdfs:comment
+      # and make sure it looks good.
+      steps = '"' + step_string.split("\n").join('" "') + '"'
+      str = <<-EOF.unindent
+        ns:activity-#{id} a prov:Activity ;
+          prov:qualifiedAssociation [
+            a Assocation ;
+            prov:entity <#{software_resource}>;
+            prov:hadPlan ns:plan-#{id}
+          ].
+
+        ns:plan-#{id} a prov:Plan ;
+          rdfs:comment (#{steps});
+
+      EOF
+
     end
 
     def r2rdf_metadata

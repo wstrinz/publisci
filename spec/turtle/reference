@@ -8,7 +8,6 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix cs:    <http://www.rqtl.org/dc/dataset/mr/cs/> .
 @prefix code:  <http://www.rqtl.org/dc/dataset/mr/code/> .
-@prefix class: <http://www.rqtl.org/dc/dataset/mr/class/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
@@ -41,15 +40,15 @@ prop:lod a rdf:Property, qb:MeasureProperty ;
 
 code:Refrow a rdfs:Class, owl:Class;
   rdfs:subClassOf skos:Concept ;
-  rdfs:label "Code list for refRow - codelist class"@en;
-  rdfs:comment "Specifies the refRow for each observation";
+  rdfs:label "Code list for refrow - codelist class"@en;
+  rdfs:comment "Specifies the refrow for each observation";
   rdfs:seeAlso code:refrow .
 
 code:refrow a skos:ConceptScheme;
-  skos:prefLabel "Code list for refRow - codelist scheme"@en;
-  rdfs:label "Code list for refRow - codelist scheme"@en;
+  skos:prefLabel "Code list for refrow - codelist scheme"@en;
+  rdfs:label "Code list for refrow - codelist scheme"@en;
   skos:notation "CL_REFROW";
-  skos:note "Specifies the refRow for each observation";
+  skos:note "Specifies the refrow for each observation";
   skos:hasTopConcept <code/refrow/D10M44> ;
   skos:hasTopConcept <code/refrow/D1M3> ;
   skos:hasTopConcept <code/refrow/D1M75> ;

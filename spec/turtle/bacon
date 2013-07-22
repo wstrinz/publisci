@@ -8,7 +8,6 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix cs:    <http://www.rqtl.org/dc/dataset/bacon/cs/> .
 @prefix code:  <http://www.rqtl.org/dc/dataset/bacon/code/> .
-@prefix class: <http://www.rqtl.org/dc/dataset/bacon/class/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
