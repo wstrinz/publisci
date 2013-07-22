@@ -219,9 +219,19 @@ module R2RDF
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], dimensions, codes, options)
         props = []
+        # puts dimensions
+
+        dimension_codes = rdf_codes.map{|c| 
+          if c[0]=~/^<http:/
+            c[0][1..-2] 
+          else 
+            c[0]
+          end
+        }
         rdf_dimensions.each_with_index{|d,i|
-          if rdf_codes.map{|c| c[0]}.include?(dimensions[i])
-            code = rdf_codes[rdf_codes.map{|c| c[0]}.index(dimensions[i])]
+          if dimension_codes.include?(dimensions[i])
+            code = rdf_codes[dimension_codes.index(dimensions[i])]
+            puts "#{code}"
             props << <<-EOF.unindent
             #{d} a rdf:Property, qb:DimensionProperty ;
               rdfs:label "#{strip_prefixes(strip_uri(d))}"@en ;
@@ -265,6 +275,14 @@ module R2RDF
         data = encode_data(codes, data, var, options)
         obs = []
         
+        dimension_codes = rdf_codes.map{|c| 
+          if c[0]=~/^<http:/
+            c[0][1..-2] 
+          else 
+            c[0]
+          end
+        }
+
         observation_labels.each_with_index.map{|r, i|
           contains_nulls = false
           str = <<-EOF.unindent 
@@ -277,7 +295,7 @@ module R2RDF
           dimensions.each_with_index{|d,j|
             contains_nulls = contains_nulls | (data[d][i] == nil)
 
-            if rdf_codes.map{|c| c[0]}.include? d
+            if dimension_codes.include? d
               # str << "  #{rdf_dimensions[j]} <code/#{d.downcase}/#{data[d][i]}> ;\n"
               str << "  #{rdf_dimensions[j]} #{to_resource(data[d][i], options)} ;\n"
             else
