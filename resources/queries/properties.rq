@@ -1,0 +1,8 @@
+SELECT DISTINCT ?comp ?label
+WHERE {
+  {?comp a qb:MeasureProperty;
+    rdfs:label ?label.}
+  UNION
+  {?comp a qb:DimensionProperty;
+    rdfs:label ?label.}
+}LIMIT 5

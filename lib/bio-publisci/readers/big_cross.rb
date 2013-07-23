@@ -44,7 +44,7 @@ module R2RDF
         codes = codes(client,var,options)
 
         str = prefixes(var,options)
-        str << data_structure_definition(meas,var,options)
+        str << data_structure_definition(meas,dim,codes,var,options)
         str << dataset(var,options)
         component_specifications(meas, dim, var, options).map{ |c| str << c }
         measure_properties(meas,var,options).map{|m| str << m}
@@ -88,14 +88,14 @@ module R2RDF
         data["marker"] = []
         data["markerpos"] = []
         pheno_names = client.eval("names(#{var}$pheno)").to_ruby
-        pheno_names.to_ruby.map{|name|
+        pheno_names.map{|name|
           data[name] = []
         }
         # n_individuals.times{|row_individ|
           # puts "#{row_individ}/#{n_individuals}"
         data["individual"] << (1..entries_per_individual).to_a.fill(row_individ)
 
-        pheno_names.to_ruby.map{|name|
+        pheno_names.map{|name|
           data[name] << (1..entries_per_individual).to_a.fill(client.eval("#{var}$pheno$#{name}").to_ruby[row_individ])
         }
         # @rexp.payload["geno"].payload.names.map { |chr|
