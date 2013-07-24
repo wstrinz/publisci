@@ -4,7 +4,7 @@ module R2RDF
       if object.is_a? String
         if File.exist? object
           if File.extname(object).size > 0
-            extension = File.extname
+            extension = File.extname(object)
           elsif File.basename(object)[0] == '.' && File.basename(object).count('.') == 1
             extension = File.basename(object)
           else
@@ -14,6 +14,8 @@ module R2RDF
           case extension
           when ".RData"
             r_object(object, options, ask_on_ambiguous)
+          when /.csv/i
+            R2RDF::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
           end
         else
           raise "Unknown String type of data"
