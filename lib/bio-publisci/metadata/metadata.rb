@@ -32,6 +32,8 @@ module R2RDF
       fields[:date] = Time.now.strftime("%Y-%m-%d") unless fields[:date]
 
       options = defaults().merge(options)
+
+      #TODO some of these should probably be resources, eg dct:creator, or put under DC namespace
       str = <<-EOF.unindent
       ns:dataset-#{fields[:var]} rdfs:label "#{fields[:title]}";
         dct:title "#{fields[:title]}";
@@ -68,53 +70,66 @@ module R2RDF
       creator = fields[:creator] if fields[:creator] #should be URI
       org = fields[:organization] if fields[:organization] #should be URI
       source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
-      str = "ns:dataset-#{var} a prov:Entity.\n"
-      endstr = <<-EOF.unindent
-      ns:dataset-#{var} prov:wasGeneratredBy <#{options[:base_url]}/ns/R2RDF> .
-      
-      <#{options[:base_url]}/ns/R2RDF> a prov:Agent.
+      str = "ns:dataset-#{var} a prov:Entity.\n\n"
+      endstr = <<-EOF.unindent      
+        </ns/R2RDF> a prov:Agent .
+        ns:dataset-#{var} prov:wasGeneratredBy ns:activity-0 .
+
+        ns:activity-0 a prov:Activity ;
+          prov:qualifiedAssociation [
+            a prov:Assocation ;
+            prov:entity </ns/R2RDF>;
+            prov:hadPlan ns:plan-0
+          ];
+          prov:generated ns:dataset-#{var} .
+
+        ns:plan-0 a prov:Plan ;
+          rdfs:comment "generation of dataset-#{var} by R2RDF gem";
+
       EOF
 
       if creator
-        endstr << "<#{options[:base_url]}/ns/R2RDF> prov:actedOnBehalfOf <#{creator}> .\n"
-        endstr << "<#{creator}> a prov:Agent, prov:Person .\n"
+        str << "<#{creator}> a prov:Agent, prov:Person .\n"
+        str << "</ns/R2RDF> prov:actedOnBehalfOf <#{creator}> .\n\n"
 
         if org
-          endstr << "<#{creator}> prov:actedOnBehalfOf <#{org}> .\n"
-          endstr << "<#{org}> a prov:Agent, prov:Organization .\n"
+          str << "<#{org}> a prov:Agent, prov:Organization .\n"
+          str << "<#{creator}> prov:actedOnBehalfOf <#{org}> .\n"
         end
       end
 
       if source_software
         source_software = [source_software] unless source_software.is_a? Array
         source_software.each_with_index.map{|soft,i|
-          str << "<#{options[:base_url]}/ns/prov/software/#{soft[:name]}> a prov:Entity .\n"
+          str << "</ns/prov/software/#{soft[:name]}> a prov:Agent .\n"
 
-          endstr << "ns:dataset-#{var} prov:wasDerivedFrom <#{options[:base_url]}/ns/dataset/#{var}#var> .\n"
+          endstr << "ns:activity-0 prov:used </ns/dataset/#{var}#var> .\n"
+          endstr << "ns:dataset-#{var} prov:wasDerivedFrom </ns/dataset/#{var}#var> .\n\n"
 
           if soft[:process]
             if File.exist? soft[:process]
               soft[:process] = IO.read(soft[:process])
             end
-            endstr << "<#{options[:base_url]}/ns/dataset/#{var}#var> prov:wasGeneratredBy ns:activity-#{i} .\n" 
-            endstr << process(i, soft[:process],"#{options[:base_url]}/ns/prov/software/#{soft[:name]}")
+            endstr << "</ns/dataset/#{var}#var> prov:wasGeneratredBy ns:activity-#{i+1} .\n" 
+            endstr << process(i+1, soft[:process],"/ns/prov/software/#{soft[:name]}", var)
           end
         }
       end
       str + "\n" + endstr
     end
 
-    def process(id, step_string, software_resource, options={})      
+    def process(id, step_string, software_resource, software_var, options={})      
       #TODO a better predicate for the steplist than rdfs:comment
       # and make sure it looks good.
       steps = '"' + step_string.split("\n").join('" "') + '"'
-      str = <<-EOF.unindent
+      str = <<-EOF.unindent     
         ns:activity-#{id} a prov:Activity ;
           prov:qualifiedAssociation [
             a prov:Assocation ;
             prov:entity <#{software_resource}>;
             prov:hadPlan ns:plan-#{id}
-          ].
+          ];
+          prov:used </ns/dataset/#{software_var}#var>.
 
         ns:plan-#{id} a prov:Plan ;
           rdfs:comment (#{steps});
