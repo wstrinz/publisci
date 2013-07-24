@@ -1,57 +1,77 @@
 module R2RDF
-	class Dataset
-		module Interactive
-			#to be called by other classes if user input is required
-			def defaults
-				{
-					load_from_file: false
-				}
-			end
+  module Interactive
+    #to be called by other classes if user input is required
+    def defaults
+      {
+        load_from_file: false
+      }
+    end
 
-			def interactive(options={})
-				options = defaults.merge(options)
-				qb = {}
+    #take message, options, defaults. can be passed block to handle default as well
+    def interact(message, default, options=nil)
+      puts message + " (#{default})\n[#{options}]"
+      str = gets.chomp
+      if str.size > 0
+        if options
+          if str.split(',').all?{|s| Integer(s) rescue nil}
+            str.split(',').map(&:to_i).map{|i| options[i]}
+          else
+            str.split(',').each{|s| raise "unkown selection #{s}" unless options.include? s.strip}
+            str.split(',').map(&:strip)
+          end
+        else
+          str
+        end
+      elsif block_given?
+        yield str
+      else
+        default
+      end
+    end
 
-				puts "load config from file? [y/N]"
-				if gets.chomp == "y"
-					#use yaml or DSL file to configure
-				else
-					qb[:dimensions] = dimensions()
-					qb[:measures] = measures()
-				end
+    # def interactive(options={})
+    #   options = defaults.merge(options)
+    #   qb = {}
 
-				puts "load data from file? [y/N]"
-				if gets.chomp == "y"
-					#attempt to load dataset from file, ask user to resolve problems or ambiguity
-				else
-				end
-				qb
-			end
+    #   puts "load config from file? [y/N]"
+    #   if gets.chomp == "y"
+    #     #use yaml or DSL file to configure
+    #   else
+    #     qb[:dimensions] = dimensions()
+    #     qb[:measures] = measures()
+    #   end
 
-			def dimensions
-				puts "Enter a list of dimensions, separated by commas"
-				arr = gets.chomp.split(",")
-				dims = {}
+    #   puts "load data from file? [y/N]"
+    #   if gets.chomp == "y"
+    #     #attempt to load dataset from file, ask user to resolve problems or ambiguity
+    #   else
+    #   end
+    #   qb
+    # end
 
-				arr.map{|dim|
-					puts "What is the range of #{dim.chomp.strip}? [:coded]"
-					type = gets.chomp
-					type = :coded if type == ":coded" || type == ""
-					dims[dim.chomp.strip] = {type: type}
-				}
+    # def dimensions
+    #   puts "Enter a list of dimensions, separated by commas"
+    #   arr = gets.chomp.split(",")
+    #   dims = {}
 
-				dims
-			end
+    #   arr.map{|dim|
+    #     puts "What is the range of #{dim.chomp.strip}? [:coded]"
+    #     type = gets.chomp
+    #     type = :coded if type == ":coded" || type == ""
+    #     dims[dim.chomp.strip] = {type: type}
+    #   }
 
-			def measures
-				puts "Enter a list of measures, separated by commas"
-				arr = gets.chomp.split(",")
-				meas = []
+    #   dims
+    # end
 
-				arr.map{|m| meas << m.chomp.strip}
+    # def measures
+    #   puts "Enter a list of measures, separated by commas"
+    #   arr = gets.chomp.split(",")
+    #   meas = []
 
-				meas
-			end
-		end
-	end
+    #   arr.map{|m| meas << m.chomp.strip}
+
+    #   meas
+    # end
+  end
 end

@@ -16,7 +16,6 @@ def load_folder(folder)
 	end
 end
 
-# load File.dirname(__FILE__) + '/bio-publisci/dataset/interactive.rb'
 load File.dirname(__FILE__) + '/bio-publisci/query/query_helper.rb'
 load File.dirname(__FILE__) + '/bio-publisci/parser.rb'
 load File.dirname(__FILE__) + '/bio-publisci/r_client.rb'
@@ -24,6 +23,7 @@ load File.dirname(__FILE__) + '/bio-publisci/analyzer.rb'
 load File.dirname(__FILE__) + '/bio-publisci/store.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/data_cube.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/dataset_for.rb'
+load File.dirname(__FILE__) + '/bio-publisci/dataset/interactive.rb'
 
 
 load_folder('bio-publisci/metadata')
