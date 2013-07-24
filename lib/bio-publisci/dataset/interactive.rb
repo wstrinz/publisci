@@ -1,5 +1,5 @@
 module R2RDF
-	module Dataset
+	class Dataset
 		module Interactive
 			#to be called by other classes if user input is required
 			def defaults

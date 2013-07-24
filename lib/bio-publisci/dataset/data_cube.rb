@@ -6,7 +6,7 @@ class String
 end
 
 module R2RDF
-  module Dataset
+  class Dataset
     module DataCube
       include R2RDF::Parser
       def defaults

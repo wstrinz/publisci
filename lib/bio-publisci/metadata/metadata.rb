@@ -65,9 +65,26 @@ module R2RDF
     def provenance(fields, options={})
       #TODO: should either add a prefixes method or replace some with full URIs
       var = sanitize([fields[:var]]).first
+      creator = fields[:creator] if fields[:creator] #should be URI
+      org = fields[:organization] if fields[:organization] #should be URI
       source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
       str = "ns:dataset-#{var} a prov:Entity.\n"
-      endstr = "ns:dataset-#{var} prov:wasGeneratredBy <#{options[:base_url]}/ns/R2RDF> .\n\n" #replace once gem has an actual name
+      endstr = <<-EOF.unindent
+      ns:dataset-#{var} prov:wasGeneratredBy <#{options[:base_url]}/ns/R2RDF> .
+      
+      <#{options[:base_url]}/ns/R2RDF> a prov:Agent.
+      EOF
+
+      if creator
+        endstr << "<#{options[:base_url]}/ns/R2RDF> prov:actedOnBehalfOf <#{creator}> .\n"
+        endstr << "<#{creator}> a prov:Agent, prov:Person .\n"
+
+        if org
+          endstr << "<#{creator}> prov:actedOnBehalfOf <#{org}> .\n"
+          endstr << "<#{org}> a prov:Agent, prov:Organization .\n"
+        end
+      end
+
       if source_software
         source_software = [source_software] unless source_software.is_a? Array
         source_software.each_with_index.map{|soft,i|
@@ -94,7 +111,7 @@ module R2RDF
       str = <<-EOF.unindent
         ns:activity-#{id} a prov:Activity ;
           prov:qualifiedAssociation [
-            a Assocation ;
+            a prov:Assocation ;
             prov:entity <#{software_resource}>;
             prov:hadPlan ns:plan-#{id}
           ].
@@ -116,7 +133,7 @@ module R2RDF
 
     def org_metadata
       str <<-EOF.unindent
-        <http://sciruby.com/> a org:Organization;
+        <http://sciruby.com/> a org:Organization, prov:Organization;
           skos:prefLabel "SciRuby";
           rdfs:description "A Project to Build and Improve Tools for Scientific Computing in Ruby".
       EOF

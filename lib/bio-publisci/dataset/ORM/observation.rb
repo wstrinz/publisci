@@ -1,5 +1,5 @@
 module R2RDF
-	module Dataset
+	class Dataset
 		module ORM
 			class Observation
 				attr_accessor :data			

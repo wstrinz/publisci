@@ -1,5 +1,5 @@
 module R2RDF
-	module Dataset
+	class Dataset
 		module ORM
 			class DataCube
 				extend R2RDF::Dataset::DataCube
