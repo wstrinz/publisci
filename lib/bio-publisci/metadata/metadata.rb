@@ -71,20 +71,21 @@ module R2RDF
       org = fields[:organization] if fields[:organization] #should be URI
       source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
       str = "ns:dataset-#{var} a prov:Entity.\n\n"
+      assoc_id = Time.now.nsec.to_s(32)
       endstr = <<-EOF.unindent      
         </ns/R2RDF> a prov:Agent .
         ns:dataset-#{var} prov:wasGeneratredBy ns:activity-0 .
 
         ns:activity-0 a prov:Activity ;
-          prov:qualifiedAssociation [
-            a prov:Assocation ;
-            prov:entity </ns/R2RDF>;
-            prov:hadPlan ns:plan-0
-          ];
+          prov:qualifiedAssociation ns:assoc-0_#{assoc_id};
           prov:generated ns:dataset-#{var} .
 
+        ns:assoc-0_#{assoc_id} a prov:Assocation ;
+          prov:entity </ns/R2RDF>;
+          prov:hadPlan ns:plan-0.
+
         ns:plan-0 a prov:Plan ;
-          rdfs:comment "generation of dataset-#{var} by R2RDF gem";
+          rdfs:comment "generation of dataset-#{var} by R2RDF gem".
 
       EOF
 
@@ -122,14 +123,15 @@ module R2RDF
       #TODO a better predicate for the steplist than rdfs:comment
       # and make sure it looks good.
       steps = '"' + step_string.split("\n").join('" "') + '"'
+      assoc_id = Time.now.nsec.to_s(32)
       str = <<-EOF.unindent     
         ns:activity-#{id} a prov:Activity ;
-          prov:qualifiedAssociation [
-            a prov:Assocation ;
-            prov:entity <#{software_resource}>;
-            prov:hadPlan ns:plan-#{id}
-          ];
+          prov:qualifiedAssociation ns:assoc-#{assoc_id} ;
           prov:used </ns/dataset/#{software_var}#var>.
+
+        ns:assoc-#{id}_#{assoc_id} a prov:Assocation ;
+          prov:entity <#{software_resource}>;
+          prov:hadPlan ns:plan-#{id}.
 
         ns:plan-#{id} a prov:Plan ;
           rdfs:comment (#{steps});
