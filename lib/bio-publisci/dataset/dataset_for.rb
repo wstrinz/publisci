@@ -1,5 +1,7 @@
 module R2RDF
   class Dataset
+    extend R2RDF::Interactive
+
     def self.for(object, options={}, ask_on_ambiguous=true)
       if object.is_a? String
         if File.exist? object
@@ -18,10 +20,12 @@ module R2RDF
             R2RDF::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
           end
         else
-          raise "Unknown String type of data"
+          raise "Unable to find reader for File or String"
         end 
+      elsif object.is_a? Rserve::REXP
+        r_object(object, options, ask_on_ambiguous)
       else
-        raise "not recognize Ruby objects yet (#{object})"
+        raise "not recognize Ruby objects of this type yet (#{object})"
       end
     end
 
@@ -112,7 +116,32 @@ module R2RDF
         end
 
       elsif object.is_a? Rserve::REXP
-        raise "support for Rserve objects coming shortly"
+        if object.attr.payload["class"].payload.first
+          
+          df = R2RDF::Reader::Dataframe.new
+
+          var = nil
+
+          if ask_on_ambiguous
+            var = interact("Dataset name?",nil)
+          end
+
+          unless options[:dimensions] || !ask_on_ambiguous
+            dims = object.payload.names
+            selection = interact("Which dimensions?","row",dims){|s| puts s; nil}
+            options[:dimensions] = selection if selection
+          end
+
+          unless options[:measures] || !ask_on_ambiguous
+            meas = object.payload.names
+            options[:measures] = interact("Which measures?",meas,meas)
+          end
+          
+          df.generate_n3(object,var,options)
+        else
+          raise "support for other Rserve objects coming shortly"
+        end
+
       else
         raise "#{object} is not an R object"
       end

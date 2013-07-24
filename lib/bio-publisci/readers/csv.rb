@@ -20,8 +20,6 @@ module R2RDF
           else
             dataset_name = File.basename(file).split('.').first
           end
-          # puts "Dataset name? [#{File.basename(file).split('.').first}]"
-          # dataset_name = gets.chomp
         end
         
 
@@ -30,23 +28,12 @@ module R2RDF
 
         unless options[:dimensions] || !interactive
           options[:dimensions] = Array(interact("Dimensions?",categories[0],categories))
-          # dims = categories
-          # puts "Which dimensions? #{dims}"
-          # selection = gets.chomp
-          # if selection.size > 0
-          #   options[:dimensions] = selection.split(',').map(&:to_i).map{|i| dims[i]}
-          # end
         end
 
         unless options[:measures] || !interactive
           meas = categories - ((options[:dimensions] || []) | [categories[0]])
-          options[:measures] = interact("Measures?",meas,meas){|s| nil}
-          options[:measures] = Array(options[:measures]) unless options[:measures] == nil
-          # puts "Which measures? #{meas} "
-          # selection = gets.chomp
-          # if selection.size > 0
-          #   options[:measures] = selection.split(',').map(&:to_i).map{|i| meas[i]}
-          # end
+          selection = interact("Measures?",meas,meas){|s| nil}
+          options[:measures] = Array(selection) unless options[:measures] == nil
         end
 
         generate_n3(file,dataset_name,options)
