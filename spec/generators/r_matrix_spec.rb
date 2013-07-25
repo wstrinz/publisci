@@ -22,7 +22,7 @@ describe R2RDF::Reader::RMatrix do
 		@connection = Rserve::Connection.new 
 	end
 
-	it "generators a simple output automatically" do
+	it "generators a simple output automatically", no_travis: true do
 		f=Tempfile.new('matrix')
 		@connection.eval "mat = matrix(c(2, 4, 3, 1, 5, 7), nrow=3, ncol=2)" 
 		@generator.generate_n3(@connection,'mat',f.path,{quiet: true})

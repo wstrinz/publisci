@@ -1,11 +1,6 @@
 module R2RDF
   module Interactive
     #to be called by other classes if user input is required
-    def defaults
-      {
-        load_from_file: false
-      }
-    end
 
     #take message, options, defaults. can be passed block to handle default as well
     def interact(message, default, options=nil)

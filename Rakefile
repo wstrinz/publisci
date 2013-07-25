@@ -29,6 +29,7 @@ Jeweler::RubygemsDotOrgTasks.new
 require 'rspec/core'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.rspec_opts = "--tag ~no_travis"
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
@@ -44,11 +45,7 @@ Cucumber::Rake::Task.new(:features)
 # task :default => :spec
 
 task :default => [] do
-  begin   
-    Rake::Task[:spec].invoke
-  rescue
-  end
-  Rake::Task[:features].invoke
+  Rake::Task[:spec].invoke
 end
 
 task :test => [] do

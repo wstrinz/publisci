@@ -1,5 +1,5 @@
 Then(/^I should be able to cluster the result and print statistics$/) do
-  require 'ruby_mining'
+  require 'bio-band'
   f=Tempfile.open('arff'); f.write @result; f.close
   clustering = Weka::Clusterer::SimpleKMeans::Base
   clustering.set_options "-N 5"

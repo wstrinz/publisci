@@ -11,7 +11,7 @@ describe R2RDF::Reader::Dataframe do
 		graph
 	end
 
-  context "with r/qtl dataframe" do
+  context "with r/qtl dataframe", no_travis: true do
 		before(:all) do 
 			@r = Rserve::Connection.new
 			@generator = R2RDF::Reader::Dataframe.new
