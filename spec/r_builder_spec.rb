@@ -9,7 +9,7 @@ require_relative '../lib/bio-publisci.rb'
 
 describe R2RDF::Writer::Dataframe do
 
-	context "when using r/qtl dataframe" do
+	context "when using r/qtl dataframe", no_travis: true do
 
 		before(:all) do 
 			@r = Rserve::Connection.new

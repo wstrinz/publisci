@@ -8,6 +8,8 @@ require 'sparql'
 require 'sparql/client'
 require 'rdf/turtle'
 
+# require 'bio-band'
+
 def load_folder(folder)
 	Dir.foreach(File.dirname(__FILE__) + "/#{folder}") do |file|
 		unless file == "." or file == ".."
