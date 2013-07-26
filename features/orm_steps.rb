@@ -1,7 +1,7 @@
 require_relative '../lib/bio-publisci.rb'
 
 Given /^an ORM::DataCube entitled "(.*?)"$/ do |name|
-	@cube = R2RDF::Dataset::ORM::DataCube.new(name: name)
+	@cube = R2RDF::ORM::DataCube.new(name: name)
 end
 
 Given /^an ORM::DataCube entitled "(.*?)" with the following options:$/ do |name, opts|
@@ -12,13 +12,13 @@ Given /^an ORM::DataCube entitled "(.*?)" with the following options:$/ do |name
 
 		v = hash["value"]
 		v = v[1..-1].to_sym if k[0] == ":"
-		
+
 		v = true if v =="true"
 		v = false if v =="false"
 
 		options_hash[k] = v
 	}
-	@cube = R2RDF::Dataset::ORM::DataCube.new(options_hash)
+	@cube = R2RDF::ORM::DataCube.new(options_hash)
 end
 
 Given(/^a turtle string from file (.*)$/) do |file|
@@ -30,7 +30,7 @@ Given(/^the URI string "(.*?)"$/) do |uri|
 end
 
 When(/^I call the ORM::DataCube class method load on it$/) do
-  @cube = R2RDF::Dataset::ORM::DataCube.load(@string)
+  @cube = R2RDF::ORM::DataCube.load(@string)
 end
 
 When /^I add a "(.*?)" dimension$/ do |dim|
@@ -70,5 +70,5 @@ Then /^the to_n3 method should return a string with a "(.*?)"$/ do |search|
 end
 
 Then(/^I should receive an ORM::DataCube object$/) do
-  @cube.is_a?(R2RDF::Dataset::ORM::DataCube).should == true
+  @cube.is_a?(R2RDF::ORM::DataCube).should == true
 end

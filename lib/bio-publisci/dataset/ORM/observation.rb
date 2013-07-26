@@ -1,8 +1,7 @@
 module R2RDF
-	class Dataset
 		module ORM
 			class Observation
-				attr_accessor :data			
+				attr_accessor :data
 				def initialize(data={})
 					@data = data
 				end
@@ -15,6 +14,5 @@ module R2RDF
 
 				end
 			end
-		end
 	end
 end
