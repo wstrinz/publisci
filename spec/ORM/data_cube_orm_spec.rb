@@ -8,5 +8,5 @@ describe R2RDF::Dataset::ORM::DataCube do
     cube.abbreviate_known(cube.to_n3).should == ref
     # cube.to_n3.should == ref
   end
-  
+
 end

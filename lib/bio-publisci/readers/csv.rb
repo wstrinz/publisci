@@ -5,15 +5,17 @@ module R2RDF
 			include R2RDF::Interactive
 
       def automatic(file=nil,dataset_name=nil,options={},interactive=true)
-        #to do 
+        #to do
+        # puts "f #{file} \n ds #{dataset_name} opts #{options}"
+
         unless file || !interactive
           puts "Input file?"
           file = gets.chomp
         end
-        
+
         raise "CSV reader needs an input file" unless file && file.size > 0
 
-        
+
         unless dataset_name
           if interactive
             dataset_name = interact("Dataset name?","#{File.basename(file).split('.').first}"){|sel| File.basename(file).split('.').first }
@@ -21,7 +23,7 @@ module R2RDF
             dataset_name = File.basename(file).split('.').first
           end
         end
-        
+
 
         categories = ::CSV.read(file)[0]
 
@@ -31,9 +33,9 @@ module R2RDF
         end
 
         unless options[:measures] || !interactive
-          meas = categories - ((options[:dimensions] || []) | [categories[0]])
+          meas = categories - (options[:dimensions] || [categories[0]])
           selection = interact("Measures?",meas,meas){|s| nil}
-          options[:measures] = Array(selection) unless options[:measures] == nil
+          options[:measures] = Array(selection) unless selection == nil
         end
 
         generate_n3(file,dataset_name,options)
@@ -76,7 +78,7 @@ module R2RDF
 				}
 				tmp = @data.dup
 				tmp.shift
-				
+
 				tmp.map{|row|
 					row.each_with_index{|entry,i|
 						obs[@data[0][i]] << entry

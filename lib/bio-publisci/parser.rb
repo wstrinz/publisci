@@ -3,10 +3,15 @@ module R2RDF
 
     def sanitize(array)
       #remove spaces and other special characters
+      array = Array(array)
       processed = []
       array.map{|entry|
         if entry.is_a? String
-          processed << entry.gsub(/[\s\.]/,'_')
+          if entry =~ /^http:\/\//
+            processed << entry.gsub(/[\s]/,'_')
+          else
+            processed << entry.gsub(/[\s\.]/,'_')
+          end
         else
           processed << entry
         end
@@ -16,7 +21,7 @@ module R2RDF
 
     def sanitize_hash(h)
       mappings = {}
-      h.keys.map{|k| 
+      h.keys.map{|k|
         if(k.is_a? String)
           mappings[k] = k.gsub(' ','_')
         end
@@ -74,9 +79,9 @@ module R2RDF
 
     	if shorten_uris
 	    	newh= {}
-	    	h.map{|k,v| 
+	    	h.map{|k,v|
 	    		newh[strip_uri(k)] ||= {}
-	    		v.map{|kk,vv| 
+	    		v.map{|kk,vv|
 	    			newh[strip_uri(k)][strip_uri(kk)] = strip_uri(vv)
 	    		}
 	    	}
@@ -89,11 +94,11 @@ module R2RDF
     def to_resource(obj, options)
       if obj.is_a? String
         obj = "<#{obj}>" if obj =~ /^http:\/\//
-          
+
         #TODO decide the right way to handle missing values, since RDF has no null
         #probably throw an error here since a missing resource is a bigger problem
         obj = "NA" if obj.empty?
-        
+
         #TODO  remove special characters (faster) as well (eg '?')
         obj.gsub(' ','_').gsub('?','')
       elsif obj == nil && options[:encode_nulls]
@@ -108,7 +113,7 @@ module R2RDF
 
     def to_literal(obj, options)
       if obj.is_a? String
-        # Depressing that there's no more elegant way to check if a string is 
+        # Depressing that there's no more elegant way to check if a string is
         # a number...
         if val = Integer(obj) rescue nil
           val

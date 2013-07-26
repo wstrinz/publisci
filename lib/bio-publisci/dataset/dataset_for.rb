@@ -3,6 +3,12 @@ module R2RDF
     extend R2RDF::Interactive
 
     def self.for(object, options={}, ask_on_ambiguous=true)
+
+      if options == false || options == true
+        ask_on_ambiguous = options
+        options = {}
+      end
+
       if object.is_a? String
         if File.exist? object
           if File.extname(object).size > 0

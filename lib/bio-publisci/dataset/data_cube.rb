@@ -1,4 +1,4 @@
-  #monkey patch to make rdf string w/ heredocs prettier ;)  
+  #monkey patch to make rdf string w/ heredocs prettier ;)
 class String
   def unindent
     gsub /^#{self[/\A\s*/]}/, ''
@@ -25,7 +25,7 @@ module R2RDF
             m
           else
             "prop:#{m}"
-          end            
+          end
         }
 
         newc = []
@@ -54,13 +54,14 @@ module R2RDF
           }
         else
           newc = codes.map{|c|
-              ["#{c}","code:#{c.downcase}","code:#{c.downcase.capitalize}"]
+              ["#{sanitize(c).first}","code:#{sanitize(c).first.downcase}","code:#{sanitize(c).first.downcase.capitalize}"]
           }
         end
         [newm, newd, newc]
       end
 
       def encode_data(codes,data,var,options={})
+        codes = sanitize(codes)
         new_data = {}
         data.map{|k,v|
           if codes.include? k
@@ -89,7 +90,7 @@ module R2RDF
           nil
         end
       end
-     
+
       def generate(measures, dimensions, codes, data, observation_labels, var, options={})
         # dimensions = sanitize(dimensions)
         # codes = sanitize(codes)
@@ -154,7 +155,7 @@ module R2RDF
       def dataset(var,options={})
         var = sanitize([var]).first
         options = defaults().merge(options)
-        <<-EOF.unindent    
+        <<-EOF.unindent
         ns:dataset-#{var} a qb:DataSet ;
           rdfs:label "#{var}"@en ;
           qb:structure ns:dsd-#{var} .
@@ -165,7 +166,7 @@ module R2RDF
       def component_specifications(measure_names, dimension_names, var, options={})
         options = defaults().merge(options)
         specs = []
-        
+
           dimension_names.map{|d|
           specs << <<-EOF.unindent
             cs:#{d} a qb:ComponentSpecification ;
@@ -183,7 +184,7 @@ module R2RDF
 
               EOF
           }
-        
+
         specs
       end
 
@@ -192,10 +193,10 @@ module R2RDF
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources([], dimensions, codes, options)
         props = []
 
-        dimension_codes = rdf_codes.map{|c| 
+        dimension_codes = rdf_codes.map{|c|
           if c[0]=~/^<http:/
-            c[0][1..-2] 
-          else 
+            c[0][1..-2]
+          else
             c[0]
           end
         }
@@ -218,7 +219,7 @@ module R2RDF
             EOF
           end
           }
-        
+
         props
       end
 
@@ -226,43 +227,45 @@ module R2RDF
         options = defaults().merge(options)
         rdf_measures = generate_resources(measures, [], [], options)[0]
         props = []
-        
+
           rdf_measures.map{ |m|
-              
+
             props <<  <<-EOF.unindent
             #{m} a rdf:Property, qb:MeasureProperty ;
               rdfs:label "#{strip_prefixes(strip_uri(m))}"@en .
 
             EOF
             }
-        
+
         props
       end
 
-      def observations(measures, dimensions, codes, data, observation_labels, var, options={})  
+      def observations(measures, dimensions, codes, data, observation_labels, var, options={})
         var = sanitize([var]).first
+        measures = sanitize(measures)
+        dimensions = sanitize(dimensions)
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
         data = encode_data(codes, data, var, options)
         obs = []
-        
-        dimension_codes = rdf_codes.map{|c| 
+
+        dimension_codes = rdf_codes.map{|c|
           if c[0]=~/^<http:/
-            c[0][1..-2] 
-          else 
+            c[0][1..-2]
+          else
             c[0]
           end
         }
 
         observation_labels.each_with_index.map{|r, i|
           contains_nulls = false
-          str = <<-EOF.unindent 
+          str = <<-EOF.unindent
           ns:obs#{r} a qb:Observation ;
             qb:dataSet ns:dataset-#{var} ;
           EOF
 
           str << "  rdfs:label \"#{r}\" ;\n" unless options[:no_labels]
-          
+
           dimensions.each_with_index{|d,j|
             contains_nulls = contains_nulls | (data[d][i] == nil)
 
@@ -276,8 +279,8 @@ module R2RDF
 
           measures.each_with_index{|m,j|
             contains_nulls = contains_nulls | (data[m][i] == nil)
-            str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n" 
-            
+            str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n"
+
           }
 
           str << "  .\n\n"
@@ -288,7 +291,7 @@ module R2RDF
               puts "missing component for observation, skipping: #{str}, "
             end
           else
-            obs << str 
+            obs << str
           end
         }
         obs
@@ -323,11 +326,11 @@ module R2RDF
               str << "  skos:hasTopConcept #{to_resource(value,options)} ;\n"
             end
           }
-          
+
           str << "  .\n\n"
           lists << str
         }
-        
+
 
         lists
       end
@@ -362,6 +365,7 @@ module R2RDF
 
       def abbreviate_known(turtle_string)
         #debug method
+        # puts turtle_string
         turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\S+)>/, 'code:\2')
       end
     end
