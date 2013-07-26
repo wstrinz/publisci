@@ -15,7 +15,7 @@ Feature: Receive metadata as user input or extract from data sources
 
   Scenario: Generate process information
     Given a class which includes the Metadata module
-    When I call its provenance method with the hash {var: "example", software: {name: "R", process: 'spec/resource/example.Rhistory'}}
+    When I call its provenance method with the hash {var: "example", software: {name: "R", var: "mr", process: 'spec/resource/example.Rhistory'}}
     Then I should receive a metadata string
 
   Scenario: Generate organizational provenance information

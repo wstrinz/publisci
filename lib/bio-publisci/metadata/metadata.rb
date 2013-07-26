@@ -16,7 +16,7 @@ module R2RDF
     end
 
     def basic(fields, options={} )
-      #TODO don't assume base dataset is "ns:dataset-var", 
+      #TODO don't assume base dataset is "ns:dataset-var",
       #make it just "var", and try to make that clear to calling classes
 
       fields[:var] = sanitize([fields[:var]]).first
@@ -72,7 +72,7 @@ module R2RDF
       source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
       str = "ns:dataset-#{var} a prov:Entity.\n\n"
       assoc_id = Time.now.nsec.to_s(32)
-      endstr = <<-EOF.unindent      
+      endstr = <<-EOF.unindent
         </ns/R2RDF> a prov:Agent .
         ns:dataset-#{var} prov:wasGeneratredBy ns:activity-0 .
 
@@ -102,29 +102,32 @@ module R2RDF
       if source_software
         source_software = [source_software] unless source_software.is_a? Array
         source_software.each_with_index.map{|soft,i|
-          str << "</ns/prov/software/#{soft[:name]}> a prov:Agent .\n"
+          software_name = "/ns/prov/software/#{soft[:name]}"
+          var_name = "/ns/prov/software/#{soft[:name]}/var/#{soft[:var]}"
+          str << "<#{software_name}> a prov:Agent .\n"
+          str << "<#{var_name}> a prov:Entity .\n"
 
-          endstr << "ns:activity-0 prov:used </ns/dataset/#{var}#var> .\n"
-          endstr << "ns:dataset-#{var} prov:wasDerivedFrom </ns/dataset/#{var}#var> .\n\n"
+          endstr << "ns:activity-0 prov:used <#{var_name}>  .\n"
+          endstr << "ns:dataset-#{var} prov:wasDerivedFrom <#{var_name}>  .\n\n"
 
           if soft[:process]
             if File.exist? soft[:process]
               soft[:process] = IO.read(soft[:process])
             end
-            endstr << "</ns/dataset/#{var}#var> prov:wasGeneratredBy ns:activity-#{i+1} .\n" 
-            endstr << process(i+1, soft[:process],"/ns/prov/software/#{soft[:name]}", var)
+            endstr << "<#{var_name}> prov:wasGeneratredBy ns:activity-#{i+1} .\n"
+            endstr << process(i+1, soft[:process],"#{software_name}", var)
           end
         }
       end
       str + "\n" + endstr
     end
 
-    def process(id, step_string, software_resource, software_var, options={})      
+    def process(id, step_string, software_resource, software_var, options={})
       #TODO a better predicate for the steplist than rdfs:comment
       # and make sure it looks good.
       steps = '"' + step_string.split("\n").join('" "') + '"'
       assoc_id = Time.now.nsec.to_s(32)
-      str = <<-EOF.unindent     
+      str = <<-EOF.unindent
         ns:activity-#{id} a prov:Activity ;
           prov:qualifiedAssociation ns:assoc-#{assoc_id} ;
           prov:used </ns/dataset/#{software_var}#var>.
