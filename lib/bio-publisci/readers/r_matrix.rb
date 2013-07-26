@@ -13,11 +13,11 @@ module R2RDF
 				meas = measures(client,var,options)
 				dim = dimensions(client,var,options)
 				codes = codes(client,var,options)
-				
+
 				outvar = sanitize([var]).first
-				
+
 				probes_per_file = options[:probes_per_file] || 100
-				col_select = "colnames" 
+				col_select = "colnames"
 				col_select = "names" if options[:type] == :dataframe
 
 				#write structure
@@ -30,18 +30,42 @@ module R2RDF
 				end
 				markers = rows(client,var,options)
 
+        if options[:print]
+            puts prefixes(var,options)
+        end
+
+        if options[:output] == :string
+            str = prefixes(var,options)
+        end
+
 				probes.each_with_index{|probe,i|
 					#write prefixes and erase old file on first run
-					open(outfile_base+"_#{i/probes_per_file}.ttl",'w'){|f| f.write prefixes(var,options)} if i % probes_per_file == 0
+          unless options[:print] || options[:output] == :string
+  					open(outfile_base+"_#{i/probes_per_file}.ttl",'w'){|f| f.write prefixes(var,options)} if i % probes_per_file == 0
+          end
 					i+=1
 					obs_data = observation_data(client,var,i,markers,options)
 					labels = labels_for(client,var,probe)
-					
+
 					# labels = sanitize(labels)
 					# return obs_data
-					open(outfile_base+"_#{i/probes_per_file}.ttl",'a'){|f| observations(meas,dim,codes,obs_data,labels,outvar,options).map{|obs| f.write obs}}
-					puts "#{i}/#{probes.size}" unless options[:quiet]
+          if options[:print]
+            observations(meas,dim,codes,obs_data,labels,outvar,options).each{|obs| puts obs}
+          end
+
+          if options[:output] == :string
+            observations(meas,dim,codes,obs_data,labels,outvar,options).each{|obs| str << obs}
+          end
+
+          unless options[:print] || options[:output] == :string
+  					open(outfile_base+"_#{i/probes_per_file}.ttl",'a'){|f| observations(meas,dim,codes,obs_data,labels,outvar,options).map{|obs| f.write obs}}
+  					puts "#{i}/#{probes.size}" unless options[:quiet]
+          end
 				}
+
+        if options[:output] == :string
+          str
+        end
 			end
 
 			def structure(client,var,outvar,options={})
@@ -54,14 +78,14 @@ module R2RDF
 				str << dataset(outvar,options)
     		component_specifications(meas, dim, var, options).map{ |c| str << c }
 				measure_properties(meas,var,options).map{|m| str << m}
-				
+
 				str
 			end
 
 			#for now just make everything a measure
 			def measures(client, var, options={})
 				if options[:measures]
-						options[:measures] 
+						options[:measures]
 				else
 					["probe","marker","value"]
 				end
@@ -74,7 +98,7 @@ module R2RDF
 			end
 
 			def codes(client, var, options={})
-				[]				
+				[]
 			end
 
 			def labels_for(connection,var,probe_id,options={})
@@ -124,11 +148,11 @@ module R2RDF
 				data["#{col_label}"] = []
 				data["#{row_label}"] = []
 				data["#{val_label}"] = []
-				
+
 				# n_individuals.times{|row_individ|
 					# puts "#{row_individ}/#{n_individuals}"
 
-				col_select = "colnames" 
+				col_select = "colnames"
 				col_select = "names" if options[:type] == :dataframe
 
 				if options[:type] == :dataframe
@@ -143,7 +167,7 @@ module R2RDF
 					data["#{row_label}"] << row_names[i]
 					data["#{val_label}"] << lod
 				}
-				
+
 				data.map{|k,v| v.flatten!}
 				data
 			end

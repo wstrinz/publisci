@@ -21,7 +21,7 @@ module R2RDF
           end
         else
           raise "Unable to find reader for File or String"
-        end 
+        end
       elsif object.is_a? Rserve::REXP
         r_object(object, options, ask_on_ambiguous)
       else
@@ -60,11 +60,11 @@ module R2RDF
               options[:measures] = selection.split(',').map(&:to_i).map{|i| meas[i]}
             end
           end
-          
+
           df.generate_n3(con.eval(var),var,options)
-        
+
         elsif r_classes.include? "cross"
-          bc = R2RDF::Reader::BigCross.new
+          bc = R2RDF::Reader::RCross.new
 
           unless options[:measures] || !ask_on_ambiguous
             pheno_names = con.eval("names(#{var}$pheno)").to_ruby
@@ -87,7 +87,7 @@ module R2RDF
         elsif r_classes.include? "matrix"
           mat = R2RDF::Reader::RMatrix.new
 
-          unless options[:measures] || !ask_on_ambiguous  
+          unless options[:measures] || !ask_on_ambiguous
             puts "Row label"
             rows = gets.chomp
             rows = "row" unless rows.size > 0
@@ -102,7 +102,7 @@ module R2RDF
 
             options[:measures] = [cols,rows,vals]
           end
-          
+
           base = var
           if ask_on_ambiguous
             puts "Output file base?"
@@ -117,7 +117,7 @@ module R2RDF
 
       elsif object.is_a? Rserve::REXP
         if object.attr.payload["class"].payload.first
-          
+
           df = R2RDF::Reader::Dataframe.new
 
           var = nil
@@ -136,7 +136,7 @@ module R2RDF
             meas = object.payload.names
             options[:measures] = interact("Which measures?",meas,meas)
           end
-          
+
           df.generate_n3(object,var,options)
         else
           raise "support for other Rserve objects coming shortly"

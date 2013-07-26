@@ -1,17 +1,18 @@
 module R2RDF
 		module Reader
 		class Dataframe
-			include R2RDF::Dataset::DataCube
-		
+      include R2RDF::Dataset::DataCube
+			include R2RDF::Reader::Output
+
 			# def initialize(var)
 			# 	@var = var
 			# end
-			
+
 			def generate_n3(rexp, var, options={})
 				@rexp = rexp
-				@options = options
-
-				generate(measures, dimensions, codes, observation_data, observation_labels, var, options)
+        options[:type] ||= :string
+        @options = options
+				output(generate(measures, dimensions, codes, observation_data, observation_labels, var, options), options)
 			end
 
 			def dimensions
@@ -21,7 +22,7 @@ module R2RDF
 					[@options[:row_label]]
 				else
 					["refRow"]
-				end	
+				end
 			end
 
 			def codes
@@ -31,7 +32,7 @@ module R2RDF
 					[@options[:row_label]]
 				else
 					["refRow"]
-				end	
+				end
 			end
 
 			def measures

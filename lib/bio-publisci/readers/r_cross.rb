@@ -1,17 +1,17 @@
 module R2RDF
   module Reader
-    class BigCross
+    class RCross
       include R2RDF::Dataset::DataCube
+      include R2RDF::Reader::Output
 
       def generate_n3(client, var, outfile_base, options={})
         meas = measures(client,var,options)
         dim = dimensions(client,var,options)
         codes = codes(client,var,options)
-        
 
         #write structure
         open(outfile_base+'_structure.ttl','w'){|f| f.write structure(client,var,options)}
-        
+
         n_individuals = client.eval("length(#{var}$pheno[[1]])").payload.first
         chromosome_list = (1..19).to_a.map(&:to_s) + ["X"]
         chromosome_list.map{|chrom|
@@ -19,23 +19,19 @@ module R2RDF
           entries_per_individual = client.eval("length(#{var}$geno$'#{chrom}'$map)").to_ruby
 
           #get genotype data (currently only for chromosome 1)
-          # => puts "#{var}$geno$'#{chrom}'"
           geno_chr = client.eval("#{var}$geno$'#{chrom}'")
 
           #get number of markers per individual
 
           #write observations
           n_individuals.times{|indi|
-            #time ||= Time.now
             obs_data = observation_data(client,var,chrom.to_s,indi,geno_chr,entries_per_individual,options)
             labels = labels_for(obs_data,chrom.to_s,indi)
             open(outfile_base+"_#{chrom}.ttl",'a'){|f| observations(meas,dim,codes,obs_data,labels,var,options).map{|obs| f.write obs}}
-            puts "(#{chrom}) #{indi}/#{n_individuals}" #(#{Time.now - time})
-            #time = Time.now
+            puts "(#{chrom}) #{indi}/#{n_individuals}" unless options[:quiet]
           }
         }
 
-        #generate(measures, dimensions, codes, observation_data, observation_labels, var, options)
       end
 
       def structure(client,var,options={})
@@ -48,7 +44,7 @@ module R2RDF
         str << dataset(var,options)
         component_specifications(meas, dim, var, options).map{ |c| str << c }
         measure_properties(meas,var,options).map{|m| str << m}
-        
+
         str
       end
 
@@ -68,7 +64,7 @@ module R2RDF
       end
 
       def codes(client, var, options={})
-        []        
+        []
       end
 
       def labels_for(data,chr,individual,options={})
