@@ -64,62 +64,112 @@ module R2RDF
       str + "\n" + end_str
     end
 
-    def provenance(fields, options={})
+    def provenance(original, triplified, chain, options={})
       #TODO: should either add a prefixes method or replace some with full URIs
-      var = sanitize([fields[:var]]).first
-      creator = fields[:creator] if fields[:creator] #should be URI
-      org = fields[:organization] if fields[:organization] #should be URI
-      source_software = fields[:software] # software name, object type, optionally steps list for, eg, R
-      str = "ns:dataset-#{var} a prov:Entity.\n\n"
-      assoc_id = Time.now.nsec.to_s(32)
-      endstr = <<-EOF.unindent
-        </ns/R2RDF> a prov:Agent .
-        ns:dataset-#{var} prov:wasGeneratredBy ns:activity-0 .
+      raise "MissingOriginal: must specify a provenance source" unless original && original[:resource]
 
-        ns:activity-0 a prov:Activity ;
-          prov:qualifiedAssociation ns:assoc-0_#{assoc_id};
-          prov:generated ns:dataset-#{var} .
+      #TODO include file type etc, or create a separate method for it
 
-        ns:assoc-0_#{assoc_id} a prov:Assocation ;
-          prov:entity </ns/R2RDF>;
-          prov:hadPlan ns:plan-0.
+      str = <<-EOF.unindent
+        <#{original[:resource]}> a prov:Entity ;
+          prov:wasGeneratredBy ns:activity-1 .
 
-        ns:plan-0 a prov:Plan ;
-          rdfs:comment "generation of dataset-#{var} by R2RDF gem".
+        ns:activity-1 a prov:Activity ;
+          prov:generated <#{original[:resource]}> .
 
       EOF
 
-      if creator
-        str << "<#{creator}> a prov:Agent, prov:Person .\n"
-        str << "</ns/R2RDF> prov:actedOnBehalfOf <#{creator}> .\n\n"
+      if original[:software]
+        assoc_id = Time.now.nsec.to_s(32)
 
-        if org
-          str << "<#{org}> a prov:Agent, prov:Organization .\n"
-          str << "<#{creator}> prov:actedOnBehalfOf <#{org}> .\n"
+
+        str << <<-EOF.unindent
+          <#{original[:software]}> a prov:Entity.
+
+          ns:activity-1 prov:qualifiedAssociation ns:assoc-1_#{assoc_id} .
+
+          ns:assoc-1_#{assoc_id} a prov:Assocation ;
+            prov:entity <#{original[:software]}> .
+
+        EOF
+
+        if original[:process]
+          original[:process] = IO.read(original[:process]) if File.exist? original[:process]
+
+          steps = '"' + original[:process].split("\n").join('" "') + '"'
+          str << <<-EOF.unindent
+            ns:assoc-1_#{assoc_id} prov:hadPlan ns:plan-1.
+
+            ns:plan-1 a prov:Plan ;
+              rdfs:comment (#{steps});
+
+          EOF
         end
       end
 
-      if source_software
-        source_software = [source_software] unless source_software.is_a? Array
-        source_software.each_with_index.map{|soft,i|
-          software_name = "/ns/prov/software/#{soft[:name]}"
-          var_name = "/ns/prov/software/#{soft[:name]}/var/#{soft[:var]}"
-          str << "<#{software_name}> a prov:Agent .\n"
-          str << "<#{var_name}> a prov:Entity .\n"
+      if original[:author]
+        str << "<#{original[:author]}> a prov:Agent, prov:Person .\n"
+        str << "ns:activity-1 prov:wasAssociatedWith <#{original[:author]}> .\n"
 
-          endstr << "ns:activity-0 prov:used <#{var_name}>  .\n"
-          endstr << "ns:dataset-#{var} prov:wasDerivedFrom <#{var_name}>  .\n\n"
+        str << "<#{original[:author]}> foaf:givenName \"#{original[:author_name]}\" .\n" if original[:author_name]
 
-          if soft[:process]
-            if File.exist? soft[:process]
-              soft[:process] = IO.read(soft[:process])
-            end
-            endstr << "<#{var_name}> prov:wasGeneratredBy ns:activity-#{i+1} .\n"
-            endstr << process(i+1, soft[:process],"#{software_name}", var)
+        if original[:organization]
+          str << "<#{original[:author]}> prov:actedOnBehalfOf <#{original[:organization]}> .\n\n"
+          str << "<#{original[:organization]}> a prov:Agent, prov:Organization.\n"
+          if original[:organization_name]
+            str << "<#{original[:organization]}> foaf:name \"#{original[:organization_name]}\" .\n\n"
+          else
+            str << "\n"
           end
-        }
+        else
+          str << "\n"
+        end
       end
-      str + "\n" + endstr
+
+      if triplified
+        assoc_id = Time.now.nsec.to_s(32)
+
+        str << <<-EOF.unindent
+          <#{triplified[:resource]}> a prov:Entity;
+            prov:wasGeneratredBy ns:activity-0 .
+
+          </ns/R2RDF> a prov:Agent, prov:SoftwareAgent ;
+            rdfs:label "Semantic Publishing Toolkit" .
+
+          ns:activity-0 a prov:Activity ;
+            prov:qualifiedAssociation ns:assoc-0_#{assoc_id};
+            prov:generated <#{triplified[:resource]}> ;
+            prov:used <#{original[:resource]}> .
+
+          ns:assoc-0_#{assoc_id} a prov:Assocation ;
+            prov:entity </ns/R2RDF>;
+            prov:hadPlan ns:plan-0.
+
+          ns:plan-0 a prov:Plan ;
+            rdfs:comment "generation of <#{triplified[:resource]}> by R2RDF gem".
+
+        EOF
+
+        if triplified[:author]
+          str << "<#{triplified[:author]}> a prov:Agent, prov:Person .\n"
+
+          str << "<#{triplified[:author]}> foaf:givenName \"#{triplified[:author_name]}\" .\n" if triplified[:author_name]
+
+          if triplified[:organization]
+            str << "<#{triplified[:author]}> prov:actedOnBehalfOf <#{triplified[:organization]}> .\n\n"
+            str << "<#{triplified[:organization]}> a prov:Agent, prov:Organization.\n"
+            if triplified[:organization_name]
+              str << "<#{triplified[:organization]}> foaf:name \"#{triplified[:organization_name]}\" .\n\n"
+            else
+              str << "\n"
+            end
+          else
+            str << "\n"
+          end
+        end
+      end
+
+      str
     end
 
     def process(id, step_string, software_resource, software_var, options={})

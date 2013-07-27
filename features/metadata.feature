@@ -15,10 +15,14 @@ Feature: Receive metadata as user input or extract from data sources
 
   Scenario: Generate process information
     Given a class which includes the Metadata module
-    When I call its provenance method with the hash {var: "example", software: {name: "R", var: "mr", process: 'spec/resource/example.Rhistory'}}
+    And the source object {resource: 'http://example.org/software/R/var/ex', software:'http://r-project.org', process: 'spec/resource/example.Rhistory'}
+    And the rdf dataset {resource:'http://example.org/data'}
+    When I call its provenance method with the source object and the rdf object
     Then I should receive a metadata string
 
   Scenario: Generate organizational provenance information
     Given a class which includes the Metadata module
-    When I call its provenance method with the hash {var: "example", creator: "http://gsocsemantic.wordpress.com/me", organization: "http://sciruby.com/"}
+    And the source object {resource: 'http://example.org/software/R/var/ex', author: 'http://example.org/people/jrs', author_name: "J Random Scientist", organization: 'http://example.org/org/science', organization_name: "The League of Science" }
+    And the rdf dataset {resource:'http://example.org/data', author: 'http://gsocsemantic.wordpress.com/me', author_name: "Will Strinz", organization: 'http://sciruby.com/'}
+    When I call its provenance method with the source object and the rdf object
     Then I should receive a metadata string
