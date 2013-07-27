@@ -170,6 +170,31 @@ module R2RDF
       str
     end
 
+    def activity(entity, derivedFrom, used, options={})
+      assoc_id = Time.now.nsec.to_s(32)
+      activity_id = Time.now.nsec.to_s(32)
+
+      str = <<-EOF
+        <#{entity}> a prov:Entity;
+          prov:wasGeneratredBy ns:activity-a_#{activity_id} .
+
+        ns:activity-a_#{activity_id} a prov:Activity ;
+          prov:generated <#{entity}> ;
+      EOF
+
+      if used
+        str << "prov:used <#{used}> . \n"
+      else
+        str[-2] = '.'
+      end
+
+      if options[:agent]
+        str << <<-EOF
+          <#{options[:agent]}> a prov:Agent;
+        EOF
+      end
+    end
+
     def process(id, step_string, software_resource, software_var, options={})
       #TODO a better predicate for the steplist than rdfs:comment
       # and make sure it looks good.

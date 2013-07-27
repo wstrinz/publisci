@@ -155,7 +155,7 @@ module R2RDF
             var: @name,
           }
           # puts basic(fields,@generator_options)
-          str += "\n" + basic(fields,@generator_options)
+          str += "\n" + basic(fields)
         end
         str
       end
