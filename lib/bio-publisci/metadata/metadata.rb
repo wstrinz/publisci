@@ -15,7 +15,7 @@ module R2RDF
     }
     end
 
-    def basic(fields, options={} )
+    def basic(fields)
       #TODO don't assume base dataset is "ns:dataset-var",
       #make it just "var", and try to make that clear to calling classes
 
@@ -30,8 +30,6 @@ module R2RDF
       end
 
       fields[:date] = Time.now.strftime("%Y-%m-%d") unless fields[:date]
-
-      options = defaults().merge(options)
 
       #TODO some of these should probably be resources, eg dct:creator, or put under DC namespace
       str = <<-EOF.unindent
