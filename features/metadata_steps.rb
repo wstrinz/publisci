@@ -13,6 +13,15 @@ Given(/^the rdf dataset (\{.+\})$/) do |fields|
   @rdf = eval(fields)
 end
 
+Given(/^the chain object (\{.+\})$/) do |fields|
+  (@chain ||= []) << eval(fields)
+end
+
+When(/^I call its provenance method with the source object, the rdf object, and the chain$/) do
+  @response = @klass.new.provenance(@original, @rdf, @chain)
+end
+
+
 When(/^I call its provenance method with the source object and the rdf object$/) do
   @response = @klass.new.provenance(@original, @rdf, nil)
 end

@@ -26,3 +26,12 @@ Feature: Receive metadata as user input or extract from data sources
     And the rdf dataset {resource:'http://example.org/data', author: 'http://gsocsemantic.wordpress.com/me', author_name: "Will Strinz", organization: 'http://sciruby.com/'}
     When I call its provenance method with the source object and the rdf object
     Then I should receive a metadata string
+
+  Scenario: Generate a provenance chain
+    Given a class which includes the Metadata module
+    And the source object {resource: 'http://example.org/software/R/var/ex', software:'http://r-project.org'}
+    And the rdf dataset {resource:'http://example.org/data'}
+    And the chain object {resource: 'http://example.org/lab_results/1', author: 'http://example.org/people/brl', author_name: "B Random Labtech"}
+    And the chain object {resource: 'http://example.org/field_work/1', author: 'http://example.org/people/arn', organization: 'http://example.org/org/science'}
+    When I call its provenance method with the source object, the rdf object, and the chain
+    Then I should receive a metadata string

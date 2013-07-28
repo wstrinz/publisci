@@ -78,15 +78,15 @@ module R2RDF
       EOF
 
       if original[:software]
-        assoc_id = Time.now.nsec.to_s(32)
+        original_assoc_id = Time.now.nsec.to_s(32)
 
 
         str << <<-EOF.unindent
           <#{original[:software]}> a prov:Entity.
 
-          ns:activity-1 prov:qualifiedAssociation ns:assoc-1_#{assoc_id} .
+          ns:activity-1 prov:qualifiedAssociation ns:assoc-1_#{original_assoc_id} .
 
-          ns:assoc-1_#{assoc_id} a prov:Assocation ;
+          ns:assoc-1_#{original_assoc_id} a prov:Assocation ;
             prov:entity <#{original[:software]}> .
 
         EOF
@@ -96,7 +96,7 @@ module R2RDF
 
           steps = '"' + original[:process].split("\n").join('" "') + '"'
           str << <<-EOF.unindent
-            ns:assoc-1_#{assoc_id} prov:hadPlan ns:plan-1.
+            ns:assoc-1_#{original_assoc_id} prov:hadPlan ns:plan-1.
 
             ns:plan-1 a prov:Plan ;
               rdfs:comment (#{steps});
@@ -125,7 +125,7 @@ module R2RDF
       end
 
       if triplified
-        assoc_id = Time.now.nsec.to_s(32)
+        triples_assoc_id = Time.now.nsec.to_s(32)
 
         str << <<-EOF.unindent
           <#{triplified[:resource]}> a prov:Entity;
@@ -135,16 +135,16 @@ module R2RDF
             rdfs:label "Semantic Publishing Toolkit" .
 
           ns:activity-0 a prov:Activity ;
-            prov:qualifiedAssociation ns:assoc-0_#{assoc_id};
+            prov:qualifiedAssociation ns:assoc-0_#{triples_assoc_id};
             prov:generated <#{triplified[:resource]}> ;
             prov:used <#{original[:resource]}> .
 
-          ns:assoc-0_#{assoc_id} a prov:Assocation ;
+          ns:assoc-0_#{triples_assoc_id} a prov:Assocation ;
             prov:entity </ns/R2RDF>;
             prov:hadPlan ns:plan-0.
 
           ns:plan-0 a prov:Plan ;
-            rdfs:comment "generation of <#{triplified[:resource]}> by R2RDF gem".
+            rdfs:comment "generation of <#{triplified[:resource]}> by R2RDF gem" .
 
         EOF
 
@@ -167,32 +167,94 @@ module R2RDF
         end
       end
 
+      if chain
+        str << "ns:activity-1 prov:used <#{chain.first[:resource]}> .\n"
+        str << "<#{original[:resource]}> prov:wasDerivedFrom <#{chain.first[:resource]}> .\n\n"
+        chain.each_with_index{ |src,i|
+          if i == chain.size-1
+            str << activity(src[:resource],nil,src)
+          else
+            str << activity(src[:resource],chain[i+1][:resource],src)
+          end
+        }
+      end
+
       str
     end
 
-    def activity(entity, derivedFrom, used, options={})
+    def activity(entity, used, options={})
       assoc_id = Time.now.nsec.to_s(32)
       activity_id = Time.now.nsec.to_s(32)
+      plan_id = Time.now.nsec.to_s(32)
 
-      str = <<-EOF
-        <#{entity}> a prov:Entity;
-          prov:wasGeneratredBy ns:activity-a_#{activity_id} .
+      raise "NoEntityGiven: activity generation requires a subject entity" unless entity
 
+      entity_str = <<-EOF.unindent
+        <#{entity}> a prov:Entity ;
+          prov:wasGeneratredBy ns:activity-a_#{activity_id} ;
+      EOF
+
+      activity_str = <<-EOF.unindent
         ns:activity-a_#{activity_id} a prov:Activity ;
           prov:generated <#{entity}> ;
       EOF
 
       if used
-        str << "prov:used <#{used}> . \n"
+        entity_str << "\tprov:wasDerivedFrom <#{used}> . \n\n"
+        activity_str << "\tprov:used <#{used}> . \n\n"
       else
-        str[-2] = '.'
+        entity_str[-2] = ".\n"
+        activity_str[-2] = ".\n"
       end
 
-      if options[:agent]
-        str << <<-EOF
-          <#{options[:agent]}> a prov:Agent;
+      activity_str << <<-EOF.unindent
+        ns:activity-a_#{activity_id} prov:qualifiedAssociation ns:assoc-s_#{assoc_id} .
+
+        ns:assoc-s_#{assoc_id} a prov:Assocation .
+
+      EOF
+
+      if options[:software]
+
+        activity_str << <<-EOF.unindent
+          <#{options[:software]}> a prov:Entity .
+
+          ns:assoc-s_#{assoc_id} prov:agent <#{options[:software]}> .
         EOF
+
+        if options[:process]
+          options[:process] = IO.read(options[:process]) if File.exist? options[:process]
+
+          steps = '"' + options[:process].split("\n").join('" "') + '"'
+          activity_str << <<-EOF.unindent
+            ns:assoc-s_#{assoc_id} prov:hadPlan ns:plan-p_#{plan_id}.
+
+            ns:plan-p_#{plan_id} a prov:Plan ;
+              rdfs:comment (#{steps});
+          EOF
+        end
       end
+
+      if options[:author]
+        entity_str << "<#{options[:author]}> a prov:Agent, prov:Person .\n"
+        entity_str << "<#{options[:author]}> foaf:givenName \"#{options[:author_name]}\" .\n" if options[:author_name]
+
+        activity_str << "ns:activity-a_#{activity_id} prov:wasAssociatedWith <#{options[:author]}> .\n"
+        activity_str << "ns:assoc-s_#{assoc_id} prov:agent <#{options[:author]}> .\n"
+
+        if options[:organization]
+          entity_str << "<#{options[:organization]}> a prov:Agent, prov:Organization .\n"
+          activity_str << "<#{options[:author]}> prov:actedOnBehalfOf <#{options[:organization]}> .\n\n"
+          if options[:organization_name]
+            entity_str << "<#{options[:organization]}> foaf:name \"#{options[:organization_name]}\" .\n\n"
+          end
+        else
+          activity_str << "\n"
+          # entity_str << "\n"
+        end
+      end
+
+      entity_str + "\n" + activity_str
     end
 
     def process(id, step_string, software_resource, software_var, options={})

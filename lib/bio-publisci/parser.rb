@@ -1,13 +1,18 @@
 module R2RDF
 	module Parser
 
+    def is_uri?(string)
+      #Hopefully there's something built in I can use, but ::URI and RDF::URI don't seem to have it
+      string.to_s =~ %r{^http://}
+    end
+
     def sanitize(array)
       #remove spaces and other special characters
       array = Array(array)
       processed = []
       array.map{|entry|
         if entry.is_a? String
-          if entry =~ /^http:\/\//
+          if is_uri? entry
             processed << entry.gsub(/[\s]/,'_')
           else
             processed << entry.gsub(/[\s\.]/,'_')
@@ -93,7 +98,7 @@ module R2RDF
 
     def to_resource(obj, options)
       if obj.is_a? String
-        obj = "<#{obj}>" if obj =~ /^http:\/\//
+        obj = "<#{obj}>" if is_uri? obj
 
         #TODO decide the right way to handle missing values, since RDF has no null
         #probably throw an error here since a missing resource is a bigger problem
