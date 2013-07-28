@@ -13,6 +13,7 @@ group :development do
   gem "bundler", ">= 1.0.21"
   gem "bio", ">= 1.4.2"
   gem "rdoc", "~> 3.12"
+  gem "spoon"
 end
 
 
