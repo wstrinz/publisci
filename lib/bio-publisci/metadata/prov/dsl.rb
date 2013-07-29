@@ -20,7 +20,7 @@ module Prov
         args = Hash[*args]
         a = Prov::Agent.new
 
-        raise "NoSubject: Agent #{a} was not given a subject" unless args[:subject]
+        a.__label=name
 
         a.subject args[:subject]
 
@@ -28,7 +28,6 @@ module Prov
           raise "Unkown agent setting #{k}" unless try_auto_set(a,k,args[k])
         }
 
-        a.__label=name
 
         Prov.register(name, a)
       end
@@ -53,12 +52,12 @@ module Prov
         args = Hash[*args]
         e = Prov::Entity.new
 
+        e.__label=name
         e.subject args[:subject]
         (args.keys - [:subject]).map{|k|
           raise "Unkown entity setting #{k}" unless try_auto_set(e,k,args[k])
         }
 
-        e.__label=name
 
         Prov.register(name, e)
       end

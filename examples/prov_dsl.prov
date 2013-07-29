@@ -1,4 +1,4 @@
-agent :publisci, subject: 'http://gsocsemantic.wordpress.com/publisci', type: "software"
+agent :publisci, type: "software"
 agent :R, subject: "http://r-project.org"
 
 plan :do_things, steps: "spec/resource/example.Rhistory"
@@ -6,18 +6,14 @@ plan :do_things, steps: "spec/resource/example.Rhistory"
 organization :sciruby, subject: "http://sciruby.com"
 
 agent :Will do
-  subject "http://gsocsemantic.wordpress.com/me"
   type "person"
   name "Will Strinz"
   on_behalf_of :sciruby
 end
 
-data :triplified_example, subject: "http://example.org/dataset/ex"
+data :triplified_example
 
-data :original do
-  subject "http://example.org/R/ex"
-  source "./example.RData"
-end
+data :original, source: "./example.RData"
 
 activity :use_R do
   generated :original
