@@ -7,3 +7,8 @@ Feature: Receive metadata as user input or extract from data sources
     Given the prov DSL string from file examples/prov_dsl.prov
     When I call Prov.run on it
     Then I should receive a provenance string
+
+  Scenario: Generate without any magic (more open-world)
+    Given the prov DSL string from file examples/no_magic.prov
+    When I call Prov.run on it
+    Then I should receive a provenance string

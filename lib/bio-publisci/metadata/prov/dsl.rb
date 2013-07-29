@@ -135,6 +135,7 @@ module Prov
     def try_auto_set(object,method,args)
       if object.methods.include? method
         object.send(method,args)
+        true
       else
         false
       end

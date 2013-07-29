@@ -4,12 +4,15 @@ module Prov
 
     def generated(entity=nil)
       if entity
-        e = Prov.entities[entity.to_sym]
-        raise "UnkownEntity #{entity}" unless e
+        if entity.is_a? Symbol
+          entity = Prov.entities[entity.to_sym]
+        end
 
-        e.generated_by self
+        if entity.is_a? Entity
+          entity.generated_by self
+        end
 
-        (@generated ||= []) << e
+        (@generated ||= []) << entity
       else
         @generated
       end

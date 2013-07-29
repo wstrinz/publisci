@@ -12,6 +12,10 @@ module Prov
 
     def generated_by(activity=nil)
       if activity
+        if activity.is_a? Symbol
+          activity = Prov.entities[activity.to_sym]
+        end
+
         @generated_by = activity
       else
         @generated_by
@@ -21,7 +25,7 @@ module Prov
     def to_n3
       <<-EOF
 <#{subject}> a prov:Entity ;
-  prov:wasGeneratedBy <#{generated_by.subject}> ;
+  prov:wasGeneratedBy <#{generated_by}> ;
   rdfs:label "#{__label}" .
 
       EOF

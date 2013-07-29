@@ -1,0 +1,39 @@
+agent :publisci, subject: 'http://gsocsemantic.wordpress.com/publisci', type: "software"
+agent :R, subject: "http://r-project.org"
+
+plan :do_things, steps: "spec/resource/example.Rhistory"
+
+organization :sciruby, subject: "http://sciruby.com"
+
+agent :Will do
+  subject "http://gsocsemantic.wordpress.com/me"
+  type "person"
+  name "Will Strinz"
+  on_behalf_of "http://sciruby.com"
+end
+
+data :triplified_example, subject: "http://example.org/dataset/ex", generated_by: :triplify
+
+data :original do
+  generated_by :use_R
+  subject "http://example.org/R/ex"
+  source "./example.RData"
+end
+
+activity :use_R do
+  generated "http://sciruby.com"
+
+  associated_with {
+    agent :R
+  }
+
+  associated_with :Will
+end
+
+activity :triplify do
+  generated "http://example.org/dataset/ex"
+  associated_with :publisci
+  used :original
+end
+
+generate_n3
