@@ -1,5 +1,5 @@
 agent :publisci, subject: 'http://gsocsemantic.wordpress.com/publisci', type: "software"
-agent :R, subject: "http://r-project.org"
+rr = agent :R, subject: "http://r-project.org"
 
 agent :Will do
   subject "http://gsocsemantic.wordpress.com/me"
@@ -15,15 +15,19 @@ data :original do
 end
 
 activity :use_R do
-  generated "original"
-  associated_with "R"
-  associated_with "Will"
+  generated :original
+
+  associated_with {
+    agent rr
+  }
+
+  associated_with :Will
 end
 
 activity :triplify do
-  generated "triplified_example"
-  associated_with "publisci"
-  used "original"
+  generated :triplified_example
+  associated_with :publisci
+  used :original
 end
 
 generate_n3 true
