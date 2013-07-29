@@ -20,6 +20,7 @@ activity :use_R do
 
   associated_with {
     agent :R
+    plan :do_things
   }
 
   associated_with :Will

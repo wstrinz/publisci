@@ -46,28 +46,32 @@ module Prov
       end
     end
 
-    def had_plan(*args, &block)
-      if block_given?
-        p = Prov::Plan.new
-        p.instance_eval(&block)
-        p.__label=args[0]
-        Prov.register(args[0], e)
-      else
-        name = args.shift
-        args = Hash[*args]
-        p = Prov::Plan.new
+    # def had_plan(*args, &block)
+    #   if block_given?
+    #     p = Prov::Plan.new
+    #     p.instance_eval(&block)
+    #     p.__label=args[0]
+    #     @plan = p
+    #     Prov.register(args[0], p)
+    #   else
+    #     name = args.shift
+    #     args = Hash[*args]
+    #     p = Prov::Plan.new
 
-        p.subject args[:subject]
-        (args.keys - [:subject]).map{|k|
-          raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
-        }
+    #     p.__label=name
+    #     p.subject args[:subject]
+    #     (args.keys - [:subject]).map{|k|
+    #       raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
+    #     }
+    #     @plan = p
+    #     Prov.register(name, p)
+    #   end
+    # end
 
-        p.__label=name
-
-        Prov.register(name, p)
-      end
-    end
-    alias_method :plan, :had_plan
+    # def plan
+    #   @plan
+    # end
+    # alias_method :had_plan
 
     def to_n3
       str = "<#{subject}> a prov:Activity ;\n"

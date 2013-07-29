@@ -7,7 +7,6 @@ module Prov
         if File.exist? steps
           steps = Array[IO.read(steps).split("\n")]
         end
-
         @steps = Array[steps]
       else
         @steps

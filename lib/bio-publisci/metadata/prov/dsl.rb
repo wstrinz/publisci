@@ -142,7 +142,7 @@ module Prov
 
     def abbreviate_known(turtle)
       ttl = turtle.dup
-      %w{activity assoc agent}.each{|element|
+      %w{activity assoc agent plan}.each{|element|
         ttl.gsub!(%r{<#{Prov.base_url}/#{element}/([\w|\d]+)>}, "#{element}:" + '\1')
       }
 
