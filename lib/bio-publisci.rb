@@ -11,7 +11,8 @@ require 'rdf/turtle'
 def load_folder(folder)
 	Dir.foreach(File.dirname(__FILE__) + "/#{folder}") do |file|
 		unless file == "." or file == ".."
-			load File.dirname(__FILE__) + "/#{folder}/" + file
+			f = File.dirname(__FILE__) + "/#{folder}/" + file
+      load f unless File.directory?(f)
 		end
 	end
 end
@@ -28,6 +29,7 @@ load File.dirname(__FILE__) + '/bio-publisci/output.rb'
 
 
 load_folder('bio-publisci/metadata')
+load_folder('bio-publisci/metadata/prov')
 load_folder('bio-publisci/readers')
 load_folder('bio-publisci/writers')
 load_folder('bio-publisci/dataset/ORM')
