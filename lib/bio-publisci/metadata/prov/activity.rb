@@ -42,5 +42,65 @@ module Prov
         @used
       end
     end
+
+    def had_plan(*args, &block)
+      if block_given?
+        p = Prov::Plan.new
+        p.instance_eval(&block)
+        p.__label=args[0]
+        Prov.register(args[0], e)
+      else
+        name = args.shift
+        args = Hash[*args]
+        p = Prov::Plan.new
+
+        p.subject args[:subject]
+        (args.keys - [:subject]).map{|k|
+          raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
+        }
+
+        p.__label=name
+
+        Prov.register(name, p)
+      end
+    end
+    alias_method :plan, :had_plan
+
+    def to_n3
+      str = "<#{subject}> a prov:Activity ;\n"
+
+      if generated
+        str << "\tprov:generated "
+        generated.map{|src|
+          str << "<#{src}>, "
+        }
+        str[-2]=" "
+        str[-1]=";\n"
+      end
+
+      if used
+        str << "\tprov:used "
+        used.map{|used|
+          str << "<#{used}>, "
+        }
+        str[-2]=";"
+        str[-1]="\n"
+      end
+
+      if associated_with
+        str << "\tprov:wasAssociatedWith "
+        associated_with.map{|assoc|
+          str << "<#{assoc.agent}>, "
+        }
+        str[-2]=" "
+        str[-1]=";\n"
+
+        associated_with.map{|assoc|
+          str << "\tprov:qualifiedAssociation <#{assoc}> ;\n"
+        }
+      end
+
+      str << "\trdfs:label \"#{__label}\" .\n\n"
+    end
   end
 end

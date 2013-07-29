@@ -1,10 +1,15 @@
 agent :publisci, subject: 'http://gsocsemantic.wordpress.com/publisci', type: "software"
-rr = agent :R, subject: "http://r-project.org"
+agent :R, subject: "http://r-project.org"
+
+plan :do_things, steps: "spec/resource/example.Rhistory"
+
+organization :sciruby, subject: "http://sciruby.com"
 
 agent :Will do
   subject "http://gsocsemantic.wordpress.com/me"
   type "person"
   name "Will Strinz"
+  on_behalf_of :sciruby
 end
 
 data :triplified_example, subject: "http://example.org/dataset/ex"
@@ -18,7 +23,7 @@ activity :use_R do
   generated :original
 
   associated_with {
-    agent rr
+    agent :R
   }
 
   associated_with :Will

@@ -20,11 +20,6 @@ module Prov
         args = Hash[*args]
         a = Prov::Agent.new
 
-        # if args[:subject]
-        #   a.subject args[:subject]
-        # else
-        #   #eventually generate subject from name
-        # end
         raise "NoSubject: Agent #{a} was not given a subject" unless args[:subject]
 
         a.subject args[:subject]
@@ -39,6 +34,14 @@ module Prov
       end
     end
 
+    def organization(*args,&block)
+      newargs = [args.shift]
+      args=Hash[*args]
+      args[:type] = :organization
+      newargs << args
+      agent(*newargs,&block)
+    end
+
     def entity(*args, &block)
       if block_given?
         e = Prov::Entity.new
@@ -49,14 +52,11 @@ module Prov
         name = args.shift
         args = Hash[*args]
         e = Prov::Entity.new
-        raise "NoSubject: Entity #{e} was not given a subject" unless args[:subject]
 
         e.subject args[:subject]
         (args.keys - [:subject]).map{|k|
           raise "Unkown entity setting #{k}" unless try_auto_set(e,k,args[k])
         }
-
-        # e.source args[:source] if args[:source]
 
         e.__label=name
 
@@ -64,6 +64,28 @@ module Prov
       end
     end
     alias_method :data, :entity
+
+    def plan(*args, &block)
+      if block_given?
+        p = Prov::Plan.new
+        p.instance_eval(&block)
+        p.__label=args[0]
+        Prov.register(args[0], e)
+      else
+        name = args.shift
+        args = Hash[*args]
+        p = Prov::Plan.new
+
+        p.__label=name
+        p.subject args[:subject]
+        (args.keys - [:subject]).map{|k|
+          raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
+        }
+
+
+        Prov.register(name, p)
+      end
+    end
 
     def activity(*args, &block)
       if block_given?
@@ -74,8 +96,6 @@ module Prov
       else
         name = args.shift
         args = Hash[*args]
-
-        raise "NoSubject: Activity #{a} was not given a subject" unless args[:subject]
 
         act.subject args[:subject]
 
@@ -92,87 +112,14 @@ module Prov
     end
 
     def generate_n3(abbreviate = false)
-      # generate_missing
+      entities = Prov.entities.values.map(&:to_n3).join
+      agents = Prov.agents.values.map(&:to_n3).join
+      activities = Prov.activities.values.map(&:to_n3).join
+      associations = Prov.associations.map(&:to_n3).join
+      plans = Prov.plans.values.map(&:to_n3).join
 
-      entities = ""
-      Prov.entities.map{|k,v|
-        entities << "<#{v.subject}> a prov:Entity ;\n"
-        entities << "\tprov:wasGeneratedBy <#{v.generated_by.subject}> ;\n"
-        entities << "\trdfs:comment \"#{v.__label}\" .\n\n"
-      }
+      str = entities + agents + activities + associations + plans
 
-      agents = ""
-      Prov.agents.map{|k,v|
-        agents << "<#{v.subject}> a prov:Agent"
-        if v.type
-          if v.type.to_sym == :software
-            agents << ", prov:SoftwareAgent .\n"
-          elsif v.type.to_sym == :person
-            agents << ", prov:Person .\n"
-          end
-        else
-          agents << " ;\n"
-        end
-
-        if v.name
-          if v.type && v.type.to_sym == :person
-            agents << "\tfoaf:givenName \"#{v.name}\" ;\n"
-          else
-            agents << "\tfoaf:name \"#{v.name}\" ;\n"
-          end
-        end
-
-        agents << "\trdfs:comment \"#{v.__label}\" .\n\n"
-      }
-
-
-      activities = ""
-      Prov.activities.map{|k,v|
-
-        activities << "<#{v.subject}> a prov:Activity ;\n"
-
-        if v.generated
-          activities << "\tprov:generated "
-          v.generated.map{|src|
-            activities << "<#{src.subject}>, "
-          }
-          activities[-2]=" "
-          activities[-1]=";\n"
-        end
-
-        if v.used
-          activities << "\tprov:used "
-          v.used.map{|used|
-            activities << "<#{used.subject}>, "
-          }
-          activities[-2]=";"
-          activities[-1]="\n"
-        end
-
-        if v.associated_with
-          activities << "\tprov:wasAssociatedWith "
-          v.associated_with.map{|assoc|
-            activities << "<#{assoc.agent.subject}>, "
-          }
-          activities[-2]=" "
-          activities[-1]=";\n"
-
-          v.associated_with.map{|assoc|
-            activities << "\tprov:qualifiedAssociation <#{assoc.subject}> ;\n"
-          }
-        end
-
-        activities << "\trdfs:comment \"#{v.__label}\" .\n\n"
-      }
-
-      associations = ""
-
-      Prov.associations.map{|assoc|
-        associations << "<#{assoc.subject}> a prov:Association ;\n"
-        associations << "\tprov:agent <#{assoc.agent.subject}> .\n\n"
-      }
-
-      str = entities + agents + activities + associations
       if abbreviate
         abbreviate_known(str)
       else

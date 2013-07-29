@@ -17,5 +17,18 @@ module Prov
         @generated_by
       end
     end
+
+    def to_n3
+      <<-EOF
+<#{subject}> a prov:Entity ;
+  prov:wasGeneratedBy <#{generated_by.subject}> ;
+  rdfs:label "#{__label}" .
+
+      EOF
+    end
+
+    def to_s
+      subject
+    end
   end
 end

@@ -28,16 +28,19 @@ module Prov
     private
     def generate_subject
       # puts self.class == Prov::Activity
-      case self
+      category = case self
       when Agent
-        "#{Prov.base_url}/agent/#{__label}"
+        "agent"
       when Entity
-        "#{Prov.base_url}/entity/#{__label}"
+        "entity"
       when Activity
-        "#{Prov.base_url}/activity/#{__label}"
+        "activity"
+      when Plan
+        "plan"
       else
         raise "MissingSubject: No automatic subject generation for #{self}"
       end
+      "#{Prov.base_url}/#{category}/#{__label}"
     end
   end
 
@@ -51,6 +54,8 @@ module Prov
       sub = :activities
     elsif object.is_a? Association
       sub = :associations
+    elsif object.is_a? Plan
+      sub = :plans
     else
       raise "UnknownElement: unkown object type for #{object}"
     end
@@ -86,7 +91,11 @@ module Prov
   end
 
   def self.associations
-    registry[:associations] ||= {}
+    registry[:associations] ||= []
+  end
+
+  def self.plans
+    registry[:plans] ||= {}
   end
 
   def self.base_url

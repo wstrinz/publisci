@@ -1,5 +1,5 @@
 Given(/^the prov DSL string from file (.+)$/) do |file|
-  @dsl_string = IO.read(file)
+  @dsl_string = file
 end
 
 When(/^I call Prov\.run on it$/) do

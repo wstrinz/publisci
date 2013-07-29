@@ -18,5 +18,14 @@ module Prov
         @agent
       end
     end
+
+    def to_n3
+      str = "<#{subject}> a prov:Association ;\n"
+      str << "\tprov:agent <#{agent.to_s}> .\n\n"
+    end
+
+    def to_s
+      subject
+    end
   end
 end
