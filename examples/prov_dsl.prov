@@ -14,7 +14,6 @@ agent :Will do
 
   has foaf.mailbox, "wstrinz@gmail.com"
   has foaf.homepage, "http://gsocsemantic.wordpress.com/"
-  has vocabulary('http://mosspigletsunlimited.org/').waterbears, 9001
 end
 
 data :triplified_example, attributed_to: :Will

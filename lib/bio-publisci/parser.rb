@@ -2,8 +2,7 @@ module R2RDF
 	module Parser
 
     def is_uri?(string)
-      #Hopefully there's something built in I can use, but ::URI and RDF::URI don't seem to have it
-      string.to_s =~ %r{^http://}
+      RDF::Resource(string).valid?
     end
 
     def sanitize(array)
