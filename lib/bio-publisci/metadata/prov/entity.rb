@@ -12,11 +12,9 @@ module Prov
 
     def generated_by(activity=nil)
       if activity
-        if activity.is_a? Symbol
-          activity = Prov.entities[activity.to_sym]
-        end
-
         @generated_by = activity
+      elsif @generated_by.is_a? Symbol
+        @generated_by = Prov.activities[@generated_by]
       else
         @generated_by
       end

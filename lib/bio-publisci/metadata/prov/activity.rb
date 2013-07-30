@@ -13,6 +13,8 @@ module Prov
         end
 
         (@generated ||= []) << entity
+      elsif @generated.is_a? Symbol
+        @generated = Prov.entities[@generated]
       else
         @generated
       end
@@ -41,37 +43,12 @@ module Prov
         e = Prov.entities[entity.to_sym]
         raise "UnkownEntity #{entity}" unless e
         (@used ||= []) << e
+      elsif @used.is_a? Symbol
+        @used = Prov.entities[@used]
       else
         @used
       end
     end
-
-    # def had_plan(*args, &block)
-    #   if block_given?
-    #     p = Prov::Plan.new
-    #     p.instance_eval(&block)
-    #     p.__label=args[0]
-    #     @plan = p
-    #     Prov.register(args[0], p)
-    #   else
-    #     name = args.shift
-    #     args = Hash[*args]
-    #     p = Prov::Plan.new
-
-    #     p.__label=name
-    #     p.subject args[:subject]
-    #     (args.keys - [:subject]).map{|k|
-    #       raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
-    #     }
-    #     @plan = p
-    #     Prov.register(name, p)
-    #   end
-    # end
-
-    # def plan
-    #   @plan
-    # end
-    # alias_method :had_plan
 
     def to_n3
       str = "<#{subject}> a prov:Activity ;\n"
@@ -108,6 +85,10 @@ module Prov
       end
 
       str << "\trdfs:label \"#{__label}\" .\n\n"
+    end
+
+    def to_s
+      subject
     end
   end
 end

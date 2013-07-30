@@ -13,6 +13,12 @@ end
 
 data :triplified_example
 
+activity :triplify do
+  generated :triplified_example
+  associated_with :publisci
+  used :original
+end
+
 data :original, source: "./example.RData"
 
 activity :use_R do
@@ -26,10 +32,6 @@ activity :use_R do
   associated_with :Will
 end
 
-activity :triplify do
-  generated :triplified_example
-  associated_with :publisci
-  used :original
-end
+
 
 generate_n3 true

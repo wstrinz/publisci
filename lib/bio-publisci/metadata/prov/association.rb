@@ -10,10 +10,12 @@ module Prov
 
     def agent(agent=nil)
       if agent
-        agent = Prov.agents[agent.to_sym] if agent.is_a?(String) || agent.is_a?(Symbol)
-        raise "UnkownAgent #{ag}" unless agent
+        # agent = Prov.agents[agent.to_sym] if agent.is_a?(String) || agent.is_a?(Symbol)
+        # raise "UnkownAgent #{ag}" unless agent
         # puts "Warning: overwriting agent #{@agent.subject}" if @agent
         @agent = agent
+      elsif @agent.is_a? Symbol
+        @agent = Prov.agents[@agent]
       else
         @agent
       end
@@ -27,6 +29,9 @@ module Prov
         @plan = p
         Prov.register(args[0], p)
       elsif args.size == 0
+        if @plan.is_a? Symbol
+          @plan = Prov.plans[@plan]
+        end
         @plan
       elsif args.size == 1
         if args[0].is_a? Symbol

@@ -29,6 +29,8 @@ module Prov
     def organization(organization=nil)
       if organization
         @organization = organization
+      elsif @organization.is_a? Symbol
+        @organization = Prov.agents[@organization]
       else
         @organization
       end
