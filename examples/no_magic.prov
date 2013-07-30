@@ -1,9 +1,8 @@
 agent :publisci, subject: 'http://gsocsemantic.wordpress.com/publisci', type: "software"
 agent :R, subject: "http://r-project.org"
+agent :sciruby, subject: "http://sciruby.com", type: "organization"
 
-plan :do_things, steps: "spec/resource/example.Rhistory"
-
-organization :sciruby, subject: "http://sciruby.com"
+plan :R_steps, steps: "spec/resource/example.Rhistory"
 
 agent :Will do
   subject "http://gsocsemantic.wordpress.com/me"
@@ -12,16 +11,16 @@ agent :Will do
   on_behalf_of "http://sciruby.com"
 end
 
-data :triplified_example, subject: "http://example.org/dataset/ex", generated_by: :triplify
+entity :triplified_example, subject: "http://example.org/dataset/ex", generated_by: :triplify
 
-data :original do
+entity :original do
   generated_by :use_R
   subject "http://example.org/R/ex"
   source "./example.RData"
 end
 
 activity :use_R do
-  generated "http://sciruby.com"
+  generated :original
 
   associated_with {
     agent :R

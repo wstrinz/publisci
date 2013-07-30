@@ -1,3 +1,4 @@
+module PubliSci
 module Prov
   module Element
     def subject(s=nil)
@@ -72,9 +73,9 @@ module Prov
 
   def self.run(string)
     if File.exists? string
-      Prov::DSL::Singleton.new.instance_eval(IO.read(string),string)
+      DSL::Singleton.new.instance_eval(IO.read(string),string)
     else
-      Prov::DSL::Singleton.new.instance_eval(string)
+      DSL::Singleton.new.instance_eval(string)
     end
   end
 
@@ -105,4 +106,5 @@ module Prov
   def self.base_url=(url)
     @base_url = url
   end
+end
 end

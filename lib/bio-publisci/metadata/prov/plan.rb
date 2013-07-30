@@ -1,3 +1,4 @@
+module PubliSci
 module Prov
   class Plan
     include Prov::Element
@@ -26,4 +27,5 @@ module Prov
       subject
     end
   end
+end
 end

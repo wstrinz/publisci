@@ -1,3 +1,4 @@
+module PubliSci
 module Prov
   class Association
     def subject(sub=nil)
@@ -66,4 +67,5 @@ module Prov
       subject
     end
   end
+end
 end

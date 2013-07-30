@@ -1,7 +1,7 @@
 agent :publisci, type: "software"
 agent :R, subject: "http://r-project.org"
 
-plan :do_things, steps: "spec/resource/example.Rhistory"
+plan :R_steps, steps: "spec/resource/example.Rhistory"
 
 organization :sciruby, subject: "http://sciruby.com"
 
@@ -26,7 +26,7 @@ activity :use_R do
 
   associated_with {
     agent :R
-    plan :do_things
+    plan :R_steps
   }
 
   associated_with :Will

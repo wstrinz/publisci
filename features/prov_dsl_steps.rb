@@ -3,7 +3,7 @@ Given(/^the prov DSL string from file (.+)$/) do |file|
 end
 
 When(/^I call Prov\.run on it$/) do
-  @turtle_string = Prov.run(@dsl_string)
+  @turtle_string = PubliSci::Prov.run(@dsl_string)
 end
 
 Then(/^I should receive a provenance string$/) do

@@ -1,3 +1,4 @@
+module PubliSci
 module Prov
   module DSL
 
@@ -150,4 +151,5 @@ module Prov
       ttl
     end
   end
+end
 end
