@@ -19,6 +19,7 @@ module Prov
       if steps
         str << "\trdfs:comment (\"#{steps.join('" "')}\") ;\n"
       end
+      add_custom(str)
 
       str << "\trdfs:label \"#{__label}\" .\n\n"
     end

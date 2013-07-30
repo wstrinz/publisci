@@ -1,0 +1,28 @@
+# http://www.w3.org/TR/prov-primer/images/agents.png
+
+organization :chartgen
+
+agent :derek do
+  name "Derek"
+  on_behalf_of :chartgen
+end
+
+entity :chart1, attributed_to: :derek
+entity :composition1
+entity :regionList1
+entity :dataSet1
+
+activity :illustrate do
+  generated :chart1
+  associated_with :derek
+  used :composition1
+end
+
+activity :compose1 do
+  generated :composition1
+  associated_with :derek
+  used :regionList1
+  used :dataSet1
+end
+
+generate_n3(true)

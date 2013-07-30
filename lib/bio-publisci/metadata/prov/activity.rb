@@ -83,6 +83,8 @@ module Prov
         }
       end
 
+      add_custom(str)
+
       str << "\trdfs:label \"#{__label}\" .\n\n"
     end
 

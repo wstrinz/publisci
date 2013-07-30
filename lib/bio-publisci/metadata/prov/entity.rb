@@ -35,6 +35,14 @@ module PubliSci
         str = "<#{subject}> a prov:Entity ;\n"
         str << "\tprov:wasGeneratedBy <#{generated_by}> ;\n" if generated_by
         str << "\tprov:wasAttributedTo <#{attributed_to}> ;\n" if attributed_to
+
+        # if custom
+        #   @custom.map{|k,v|
+        #     str << "\t<#{k.to_s}> <#{v.to_s}> ;\n"
+        #   }
+        # end
+        add_custom(str)
+
         str << %Q(\trdfs:label "#{__label}" .\n\n)
       end
 

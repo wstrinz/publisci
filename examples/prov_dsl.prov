@@ -5,10 +5,15 @@ plan :R_steps, steps: "spec/resource/example.Rhistory"
 
 organization :sciruby, subject: "http://sciruby.com"
 
+foaf = vocabulary "http://xmlns.com/foaf/0.1/"
+
 agent :Will do
   type "person"
   name "Will Strinz"
   on_behalf_of :sciruby
+
+  set foaf.mailbox, "wstrinz@gmail.com"
+  set foaf.homepage, "http://gsocsemantic.wordpress.com/"
 end
 
 data :triplified_example, attributed_to: :Will

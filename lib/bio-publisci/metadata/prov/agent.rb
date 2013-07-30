@@ -81,6 +81,8 @@ module Prov
         str << "\tprov:actedOnBehalfOf <#{on_behalf_of}> ;\n"
       end
 
+      add_custom(str)
+
       str << "\trdfs:label \"#{__label}\" .\n\n"
     end
 
