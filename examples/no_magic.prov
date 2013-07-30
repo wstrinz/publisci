@@ -17,6 +17,8 @@ entity :original do
   generated_by :use_R
   subject "http://example.org/R/ex"
   source "./example.RData"
+
+  set "http://purl.org/dc/terms/title", "original data object"
 end
 
 activity :use_R do

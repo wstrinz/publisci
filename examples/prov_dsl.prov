@@ -12,8 +12,9 @@ agent :Will do
   name "Will Strinz"
   on_behalf_of :sciruby
 
-  set foaf.mailbox, "wstrinz@gmail.com"
-  set foaf.homepage, "http://gsocsemantic.wordpress.com/"
+  has foaf.mailbox, "wstrinz@gmail.com"
+  has foaf.homepage, "http://gsocsemantic.wordpress.com/"
+  has vocabulary('http://mosspigletsunlimited.org/').waterbears, 9001
 end
 
 data :triplified_example, attributed_to: :Will
@@ -36,7 +37,5 @@ activity :use_R do
 
   associated_with :Will
 end
-
-
 
 generate_n3 true

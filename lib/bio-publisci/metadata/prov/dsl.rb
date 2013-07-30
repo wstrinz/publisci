@@ -2,6 +2,8 @@ module PubliSci
 module Prov
   module DSL
 
+    include PubliSci::Vocabulary
+
     class Singleton
       include Prov::DSL
 
@@ -127,10 +129,10 @@ module Prov
       Prov.registry
     end
 
-    def vocabulary(url)
-      raise "InvalidVocabulary: #{url} is not a valid URI" unless RDF::Resource(url).valid?
-      RDF::Vocabulary.new(url)
-    end
+    # def vocabulary(url)
+    #   raise "InvalidVocabulary: #{url} is not a valid URI" unless RDF::Resource(url).valid?
+    #   RDF::Vocabulary.new(url)
+    # end
 
     private
     def try_auto_set(object,method,args)

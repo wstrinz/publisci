@@ -14,8 +14,10 @@ def load_folder(folder)
 			f = File.dirname(__FILE__) + "/#{folder}/" + file
       load f unless File.directory?(f)
 		end
-	end
+  end
 end
+
+load_folder('bio-publisci/mixins')
 
 load File.dirname(__FILE__) + '/bio-publisci/dataset/interactive.rb'
 load File.dirname(__FILE__) + '/bio-publisci/query/query_helper.rb'
@@ -27,6 +29,7 @@ load File.dirname(__FILE__) + '/bio-publisci/dataset/data_cube.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/dataset_for.rb'
 load File.dirname(__FILE__) + '/bio-publisci/output.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/prov.rb'
+load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/element.rb'
 
 
 load_folder('bio-publisci/metadata')
