@@ -4,21 +4,25 @@ module Prov
 
     class Singleton
       include Prov::DSL
+
+      def initialize
+        Prov.registry.clear
+      end
     end
 
     def self.included(mod)
       Prov.registry.clear
     end
 
-    def agent(*args, &block)
+    def agent(name,args={}, &block)
       if block_given?
         a = Prov::Agent.new
         a.instance_eval(&block)
-        a.__label=args[0]
-        Prov.register(args[0], a)
+        a.__label=name
+        Prov.register(name, a)
       else
-        name = args.shift
-        args = Hash[*args]
+        # name = args.shift
+        # args = Hash[*args]
         a = Prov::Agent.new
 
         a.__label=name
@@ -34,23 +38,20 @@ module Prov
       end
     end
 
-    def organization(*args,&block)
-      newargs = [args.shift]
-      args=Hash[*args]
+    def organization(name,args={},&block)
       args[:type] = :organization
-      newargs << args
-      agent(*newargs,&block)
+      agent(name,args,&block)
     end
 
-    def entity(*args, &block)
+    def entity(name, args={}, &block)
       if block_given?
         e = Prov::Entity.new
         e.instance_eval(&block)
-        e.__label=args[0]
-        Prov.register(args[0], e)
+        e.__label=name
+        Prov.register(name, e)
       else
-        name = args.shift
-        args = Hash[*args]
+        # name = args.shift
+        # args = Hash[*args]
         e = Prov::Entity.new
 
         e.__label=name
@@ -59,21 +60,18 @@ module Prov
           raise "Unkown entity setting #{k}" unless try_auto_set(e,k,args[k])
         }
 
-
         Prov.register(name, e)
       end
     end
     alias_method :data, :entity
 
-    def plan(*args, &block)
+    def plan(name, args={}, &block)
       if block_given?
         p = Prov::Plan.new
         p.instance_eval(&block)
-        p.__label=args[0]
-        Prov.register(args[0], e)
+        p.__label=name
+        Prov.register(name, e)
       else
-        name = args.shift
-        args = Hash[*args]
         p = Prov::Plan.new
 
         p.__label=name
@@ -87,15 +85,13 @@ module Prov
       end
     end
 
-    def activity(*args, &block)
+    def activity(name,args={}, &block)
       if block_given?
         act = Prov::Activity.new
         act.instance_eval(&block)
-        act.__label=args[0]
-        Prov.register(args[0], act)
+        act.__label=name
+        Prov.register(name, act)
       else
-        name = args.shift
-        args = Hash[*args]
 
         act.subject args[:subject]
 
@@ -143,7 +139,7 @@ module Prov
 
     def abbreviate_known(turtle)
       ttl = turtle.dup
-      %w{activity assoc agent plan}.each{|element|
+      %w{activity assoc agent plan entity}.each{|element|
         ttl.gsub!(%r{<#{Prov.base_url}/#{element}/([\w|\d]+)>}, "#{element}:" + '\1')
       }
 

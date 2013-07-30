@@ -11,7 +11,7 @@ agent :Will do
   on_behalf_of :sciruby
 end
 
-data :triplified_example
+data :triplified_example, attributed_to: :Will
 
 activity :triplify do
   generated :triplified_example

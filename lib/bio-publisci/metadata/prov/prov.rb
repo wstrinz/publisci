@@ -4,7 +4,7 @@ module Prov
     def subject(s=nil)
       if s
         if s.is_a? Symbol
-          raise "subject generation coming soon!"
+          raise "subject generation from symbol not yet implemented!"
         else
           @subject = s
         end
@@ -41,11 +41,13 @@ module Prov
       else
         raise "MissingSubject: No automatic subject generation for #{self}"
       end
+
       "#{Prov.base_url}/#{category}/#{__label}"
     end
   end
 
   def self.register(name,object)
+    # puts "register #{name} #{object} #{associations.size}"
     name = name.to_sym if name
     if object.is_a? Agent
       sub = :agents

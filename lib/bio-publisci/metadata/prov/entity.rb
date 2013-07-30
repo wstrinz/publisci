@@ -21,13 +21,21 @@ module PubliSci
         end
       end
 
-      def to_n3
-        <<-EOF
-<#{subject}> a prov:Entity ;
-  prov:wasGeneratedBy <#{generated_by}> ;
-  rdfs:label "#{__label}" .
+      def attributed_to(agent=nil)
+        if agent
+          @attributed_to = agent
+        elsif @attributed_to.is_a? Symbol
+          @attributed_to = Prov.agents[@attributed_to]
+        else
+          @attributed_to
+        end
+      end
 
-        EOF
+      def to_n3
+        str = "<#{subject}> a prov:Entity ;\n"
+        str << "\tprov:wasGeneratedBy <#{generated_by}> ;\n" if generated_by
+        str << "\tprov:wasAttributedTo <#{attributed_to}> ;\n" if attributed_to
+        str << %Q(\trdfs:label "#{__label}" .\n\n)
       end
 
       def to_s

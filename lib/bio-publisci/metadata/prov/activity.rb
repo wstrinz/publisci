@@ -41,11 +41,9 @@ module Prov
 
     def used(entity=nil)
       if entity
-        e = Prov.entities[entity.to_sym]
-        raise "UnkownEntity #{entity}" unless e
-        (@used ||= []) << e
-      elsif @used.is_a? Symbol
-        @used = Prov.entities[@used]
+        (@used ||= []) << entity
+      elsif @used
+        @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
       else
         @used
       end

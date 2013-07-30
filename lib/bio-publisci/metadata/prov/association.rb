@@ -60,7 +60,8 @@ module Prov
     def to_n3
       str = "<#{subject}> a prov:Association ;\n"
       str << "\tprov:agent <#{agent}> ;\n"
-      str << "\tprov:hadPlan <#{plan}> .\n\n" if plan
+      str << "\tprov:hadPlan <#{plan}> .\n" if plan
+      str << "\n"
     end
 
     def to_s
