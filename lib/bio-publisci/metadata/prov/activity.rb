@@ -14,9 +14,9 @@ module Prov
 
     def generated(entity=nil)
       if entity
-        if entity.is_a? Symbol
-          entity = Prov.entities[entity.to_sym]
-        end
+        # if entity.is_a? Symbol
+        #   entity = Prov.entities[entity.to_sym]
+        # end
 
         if entity.is_a? Entity
           entity.generated_by self
@@ -28,6 +28,10 @@ module Prov
       else
         @generated
       end
+    end
+
+    def generated=(gen)
+      @generated = gen
     end
 
     def associated_with(agent=nil, &block)
@@ -60,6 +64,7 @@ module Prov
       if generated
         str << "\tprov:generated "
         generated.map{|src|
+          src = Prov.entities[src] if src.is_a?(Symbol) && Prov.entities[src]
           str << "<#{src}>, "
         }
         str[-2]=" "

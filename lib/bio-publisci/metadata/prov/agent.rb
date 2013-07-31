@@ -59,11 +59,11 @@ module Prov
       if type
         case type.to_sym
         when :software
-          str << ", prov:SoftwareAgent .\n"
+          str << ", prov:SoftwareAgent ;\n"
         when :person
-          str << ", prov:Person .\n"
+          str << ", prov:Person ;\n"
         when :organization
-          str << ", prov:Organization .\n"
+          str << ", prov:Organization ;\n"
         end
       else
         str << " ;\n"

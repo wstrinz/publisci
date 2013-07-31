@@ -63,5 +63,14 @@ module PubliSci
     def self.base_url=(url)
       @base_url = url
     end
+
+    def self.prefixes
+      <<-EOF
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+      EOF
+    end
   end
 end

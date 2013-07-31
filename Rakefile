@@ -17,11 +17,11 @@ Jeweler::Tasks.new do |gem|
   gem.name = "bio-publisci"
   gem.homepage = "http://github.com/wstrinz/bioruby-publisci"
   gem.license = "MIT"
-  gem.summary = %Q{Publish science data using semantic web ontologies}
-  gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF and related technologies }
+  gem.summary = %Q{Publish scientific results to the semantic web}
+  gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF, OWL, and related technologies }
   gem.email = "wstrinz@gmail.com"
-  gem.authors = ["wstrinz"]
-  gem.version = "0.0.3"
+  gem.authors = ["Will Strinz"]
+  gem.version = "0.0.4"
 
   # dependencies defined in Gemfile
 end
@@ -50,7 +50,7 @@ task :default => [] do
 end
 
 task :test => [] do
-  begin   
+  begin
     Rake::Task[:spec].invoke
   rescue
   end
