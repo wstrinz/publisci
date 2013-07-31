@@ -14,7 +14,8 @@ module PubliSci
       elsif object.is_a? Plan
         sub = :plans
       else
-        raise "UnknownElement: unkown object type for #{object}"
+        sub = object.class.to_s.split('::').last.downcase.to_sym
+        # raise "UnknownElement: unkown object type for #{object}"
       end
       if name
         (registry[sub] ||= {})[name] = object

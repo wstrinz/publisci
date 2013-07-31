@@ -1,6 +1,16 @@
 module PubliSci
   module Prov
     class Entity
+      class Derivations < Array
+        def [](index)
+          if self.fetch(index).is_a? Symbol
+              Prov.entities[self.fetch(index)]
+          else
+            self.fetch(index)
+          end
+        end
+      end
+
       include Prov::Element
 
       def source(s=nil)
@@ -31,10 +41,45 @@ module PubliSci
         end
       end
 
+      def derived_from(entity=nil,&block)
+        if block_given?
+          deriv = Derivation.new
+          deriv.instance_eval(&block)
+          (@derived_from ||= Derivations.new) << deriv
+          Prov.register(nil,deriv)
+        else
+          if entity
+            (@derived_from ||= Derivations.new) << entity
+          else
+            @derived_from
+          end
+        end
+      end
+
+      # def derived_from[](entity)
+      #   if @derived_from && @derived_from[entity]
+      #     if entity.is_a? Symbol
+      #       Prov.entities[entity]
+      #     else
+      #       entity
+      #     end
+      #   end
+      # end
+
       def to_n3
         str = "<#{subject}> a prov:Entity ;\n"
         str << "\tprov:wasGeneratedBy <#{generated_by}> ;\n" if generated_by
         str << "\tprov:wasAttributedTo <#{attributed_to}> ;\n" if attributed_to
+        if derived_from
+          derived_from.map{|der|
+            if der.is_a? Derivation
+              str << "\tprov:wasDerivedFrom <#{der.entity}> ;\n"
+              str << "\tprov:qualifiedDerivation <#{der.subject}> ;\n"
+            else
+              str << "\tprov:wasDerivedFrom <#{der}> ;\n"
+            end
+          }
+        end
 
         # if custom
         #   @custom.map{|k,v|

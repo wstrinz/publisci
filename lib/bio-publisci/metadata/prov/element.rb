@@ -2,6 +2,7 @@ module PubliSci
   module Prov
     module Element
       include PubliSci::Vocabulary
+      include PubliSci::CustomPredicate
 
       def subject(s=nil)
         if s
@@ -26,30 +27,6 @@ module PubliSci
       def __label
         raise "MissingInternalLabel: no __label for #{self.inspect}" unless @__label
         @__label
-      end
-
-      #needs a better name/alias since its adding to not setting
-      def set(predicate, object)
-        predicate = RDF::Resource(predicate) if RDF::Resource(predicate).valid?
-        obj = RDF::Resource(object)
-        obj = RDF::Literal(object) unless obj.valid?
-        ((@custom ||= {})[predicate] ||= []) << obj
-      end
-      alias_method :has, :set
-
-      def custom
-        @custom
-      end
-
-      def add_custom(str)
-        if custom
-          custom.map{|k,v|
-            pk = k.respond_to?(:to_base) ? k.to_base : k
-            v.map{|vv|
-              str << "\t#{pk} #{vv.to_base} ;\n"
-            }
-          }
-        end
       end
 
       private

@@ -16,7 +16,13 @@ agent :Will do
   has foaf.homepage, "http://gsocsemantic.wordpress.com/"
 end
 
-data :triplified_example, attributed_to: :Will
+data :triplified_example do
+  attributed_to :Will
+  derived_from do
+    entity :original
+    activity :triplify
+  end
+end
 
 activity :triplify do
   generated :triplified_example
@@ -24,7 +30,12 @@ activity :triplify do
   used :original
 end
 
-data :original, source: "./example.RData"
+data :original do
+  derived_from :field_work
+  attributed_to :R
+end
+
+data :field_work
 
 activity :use_R do
   generated :original
