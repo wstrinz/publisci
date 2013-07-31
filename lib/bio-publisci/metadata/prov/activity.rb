@@ -5,6 +5,7 @@ module Prov
     class Associations < Array
       def [](index)
         if self.fetch(index).is_a? Symbol
+            raise "UnknownAgent: #{self.fetch(index)}" unless Prov.agents[self.fetch(index)]
             Prov.agents[self.fetch(index)]
         else
           self.fetch(index)
@@ -24,6 +25,7 @@ module Prov
 
         (@generated ||= []) << entity
       elsif @generated.is_a? Symbol
+        raise "UnknownEntity: #{@generated}" unless Prov.entities[@generated]
         @generated = Prov.entities[@generated]
       else
         @generated
@@ -37,7 +39,6 @@ module Prov
     def associated_with(agent=nil, &block)
       if agent
         (@associated ||= Associations.new) << agent
-        # Prov.register(nil,assoc)
       elsif block_given?
         assoc = Association.new
         assoc.instance_eval(&block)

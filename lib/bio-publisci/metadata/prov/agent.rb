@@ -31,6 +31,7 @@ module Prov
       if organization
         @organization = organization
       elsif @organization.is_a? Symbol
+        raise "UnknownAgent: #{@organization}" unless Prov.agents[@organization]
         @organization = Prov.agents[@organization]
       else
         @organization
@@ -56,18 +57,18 @@ module Prov
     alias_method :worked_for, :on_behalf_of
 
     def to_n3
-      str = "<#{subject}> a prov:Agent"
+      str = "<#{subject}> a"
       if type
         case type.to_sym
         when :software
-          str << ", prov:SoftwareAgent ;\n"
+          str << " prov:SoftwareAgent ;\n"
         when :person
-          str << ", prov:Person ;\n"
+          str << " prov:Person ;\n"
         when :organization
-          str << ", prov:Organization ;\n"
+          str << " prov:Organization ;\n"
         end
       else
-        str << " ;\n"
+        str << " prov:Agent ;\n"
       end
 
       if name

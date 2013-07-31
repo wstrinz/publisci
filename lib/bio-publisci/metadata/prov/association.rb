@@ -16,6 +16,7 @@ module Prov
         # puts "Warning: overwriting agent #{@agent.subject}" if @agent
         @agent = agent
       elsif @agent.is_a? Symbol
+        raise "UnknownAgent: #{@agent}" unless Prov.agents[@agent]
         @agent = Prov.agents[@agent]
       else
         @agent
@@ -31,16 +32,12 @@ module Prov
         Prov.register(args[0], p)
       elsif args.size == 0
         if @plan.is_a? Symbol
+          raise "UnknownPlan: #{@plan}" unless Prov.plans[@plan]
           @plan = Prov.plans[@plan]
         end
         @plan
       elsif args.size == 1
-        if args[0].is_a? Symbol
-          raise "UnknownPlan: #{args[0]}" unless Prov.plans[args[0]]
-          @plan = Prov.plans[args[0]]
-        else
-          @plan = args[0]
-        end
+        @plan = args[0]
       else
         name = args.shift
         args = Hash[*args]

@@ -15,7 +15,7 @@ module Prov
     end
 
     def to_n3
-      str = "<#{subject}> a prov:Plan, prov:Entity ;\n"
+      str = "<#{subject}> a prov:Plan ;\n"
       if steps
         str << "\trdfs:comment (\"#{steps.join('" "')}\") ;\n"
       end

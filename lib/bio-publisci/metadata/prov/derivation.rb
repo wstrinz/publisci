@@ -16,6 +16,7 @@ module PubliSci
         if activity
           @had_activity = activity
         elsif @had_activity.is_a? Symbol
+          raise "UnknownActivity #{@had_activity}" unless Prov.activities[@had_activity]
           @had_activity = Prov.activities[@had_activity]
         else
           @had_activity
@@ -27,6 +28,7 @@ module PubliSci
         if entity
           @entity = entity
         elsif @entity.is_a? Symbol
+          raise "UnknownEntity #{@entity}" unless Prov.entities[@entity]
           @entity = Prov.entities[@entity]
         else
           @entity
