@@ -1,6 +1,7 @@
 module PubliSci
   module Prov
     class Derivation
+
       include PubliSci::CustomPredicate
 
       def subject(sub=nil)

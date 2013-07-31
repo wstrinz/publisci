@@ -72,6 +72,8 @@ module PubliSci
         str << "\tprov:wasAttributedTo <#{attributed_to}> ;\n" if attributed_to
         if derived_from
           derived_from.map{|der|
+            der = Prov.entities[der] if der.is_a?(Symbol) && Prov.entities[der]
+
             if der.is_a? Derivation
               str << "\tprov:wasDerivedFrom <#{der.entity}> ;\n"
               str << "\tprov:qualifiedDerivation <#{der.subject}> ;\n"

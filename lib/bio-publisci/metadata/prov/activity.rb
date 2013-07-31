@@ -2,6 +2,15 @@ module PubliSci
 module Prov
   class Activity
     include Prov::Element
+    class Associations < Array
+      def [](index)
+        if self.fetch(index).is_a? Symbol
+            Prov.agents[self.fetch(index)]
+        else
+          self.fetch(index)
+        end
+      end
+    end
 
     def generated(entity=nil)
       if entity
@@ -23,16 +32,12 @@ module Prov
 
     def associated_with(agent=nil, &block)
       if agent
-        ag = Prov.agents[agent.to_sym]
-        raise "UnkownAgent #{ag}" unless ag
-        assoc = Association.new
-        assoc.agent(ag)
-        (@associated ||= []) << assoc
-        Prov.register(nil,assoc)
+        (@associated ||= Associations.new) << agent
+        # Prov.register(nil,assoc)
       elsif block_given?
         assoc = Association.new
         assoc.instance_eval(&block)
-        (@associated ||= []) << assoc
+        (@associated ||= Associations.new) << assoc
         Prov.register(nil,assoc)
       else
         @associated
@@ -71,15 +76,15 @@ module Prov
       end
 
       if associated_with
-        str << "\tprov:wasAssociatedWith "
         associated_with.map{|assoc|
-          str << "<#{assoc.agent}>, "
-        }
-        str[-2]=" "
-        str[-1]=";\n"
+          assoc = Prov.agents[assoc] if assoc.is_a?(Symbol) && Prov.agents[assoc]
 
-        associated_with.map{|assoc|
-          str << "\tprov:qualifiedAssociation <#{assoc}> ;\n"
+          if assoc.is_a? Association
+            str << "\tprov:wasAssociatedWith <#{assoc.agent}> ;\n"
+            str << "\tprov:qualifiedAssociation <#{assoc}> ;\n"
+          else
+            str << "\tprov:wasAssociatedWith <#{assoc}> ;\n"
+          end
         }
       end
 
