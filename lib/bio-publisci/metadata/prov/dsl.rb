@@ -109,6 +109,10 @@ module PubliSci
         end
       end
 
+      def base_url(url)
+        Prov.base_url=url
+      end
+
       def generate_n3(abbreviate = false)
         entities = Prov.entities.values.map(&:to_n3).join
         agents = Prov.agents.values.map(&:to_n3).join

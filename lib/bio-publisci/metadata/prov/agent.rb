@@ -41,16 +41,17 @@ module Prov
       @organization = organization
     end
 
-    def on_behalf_of(agent=nil)
-      if agent
-        if agent.is_a? Symbol
-          raise "UnknownAgent: #{agent}" unless Prov.agents.has_key?(agent)
-          agent = Prov.agents[agent]
-        end
-        @on_behalf_of = agent
+    def on_behalf_of(other_agent=nil)
+      if other_agent
+        @on_behalf_of = other_agent
+      elsif @on_behalf_of.is_a? Symbol
+        raise "UnknownAgent: #{@on_behalf_of}" unless Prov.agents.has_key?(@on_behalf_of)
+        @on_behalf_of = Prov.agents[@on_behalf_of]
       else
         @on_behalf_of
       end
+
+      @on_behalf_of
     end
     alias_method :worked_for, :on_behalf_of
 

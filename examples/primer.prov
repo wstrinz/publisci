@@ -1,28 +1,66 @@
-# http://www.w3.org/TR/prov-primer/images/agents.png
+# Provenance generation code for primer example at
+#  http://www.w3.org/TR/prov-primer/images/agents.png
 
-organization :chartgen
+# Set the base url
+base_url "http://example.org"
 
+# Elements can be created with an options hash
+entity :chart1, attributed_to: :derek
+
+# entity => http://www.w3.org/TR/prov-o/#Entity
+entity :composition1
+entity :regionList1
+
+# Elements can also be defined using a block
+#
+# agent => http://www.w3.org/TR/prov-o/#Agent
 agent :derek do
+
+  # name => foaf:name
   name "Derek"
+
+  # on_behalf_of => http://www.w3.org/TR/prov-o/#actedOnBehalfOf
   on_behalf_of :chartgen
 end
 
-entity :chart1, attributed_to: :derek
-entity :composition1
-entity :regionList1
-entity :dataSet1
+# Some methods are just wrappers with argument generation
+#  "organization" is short for agent :chartgen, type: "organization"
+#
+# organization => http://www.w3.org/TR/prov-o/#Organization
+organization :chartgen
 
+
+# An element of the correct type will be looked up for any
+#  method whose argument is a symbol
 activity :illustrate do
+
+  # generated => http://www.w3.org/TR/prov-o/#generated
   generated :chart1
+
+  # associated_with => http://www.w3.org/TR/prov-o/#wasAssociatedWith
   associated_with :derek
+
+  # used => http://www.w3.org/TR/prov-o/#used
   used :composition1
+
 end
 
 activity :compose1 do
   generated :composition1
   associated_with :derek
   used :regionList1
+
+  # Since symbols are lazy loaded (only when looked up by generate_n3)
+  #  you can call used here before declaring dataSet1
   used :dataSet1
 end
 
-generate_n3(true)
+# data is aliased to entity
+data :dataSet1
+
+# Returns the turtle form of each element
+generate_n3
+
+# Can return abbreviated form by passing true
+#  (easier to read, some prefixes not yet included so may not work w/ triple stores)
+#  generate_n3(true)
