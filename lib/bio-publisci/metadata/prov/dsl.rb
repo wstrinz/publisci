@@ -23,8 +23,6 @@ module PubliSci
           a.__label=name
           Prov.register(name, a)
         else
-          # name = args.shift
-          # args = Hash[*args]
           a = Prov::Agent.new
 
           a.__label=name
@@ -34,7 +32,6 @@ module PubliSci
           (args.keys - [:subject]).map{|k|
             raise "Unkown agent setting #{k}" unless try_auto_set(a,k,args[k])
           }
-
 
           Prov.register(name, a)
         end

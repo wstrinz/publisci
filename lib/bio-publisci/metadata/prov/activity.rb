@@ -4,7 +4,7 @@ module Prov
     include Prov::Element
     class Associations < Array
       include PubliSci::Prov::Dereferencable
-      def methods
+      def method
         :agents
       end
     end
@@ -24,18 +24,10 @@ module Prov
     end
 
     def generated(entity=nil)
-      if entity
-        if entity.is_a? Entity
-          entity.generated_by self
-        end
-        (@generated ||= Generations.new) << entity
-      else
-        @generated
+      if entity.is_a? Entity
+        entity.generated_by self
       end
-    end
-
-    def generated=(gen)
-      @generated = gen
+      basic_list(:generated,:entities,Generations,entity)
     end
 
     def associated_with(agent=nil, &block)
@@ -43,15 +35,7 @@ module Prov
     end
 
     def used(entity=nil)
-      if entity
-        (@used ||= Uses.new) << entity
-      # elsif @used
-      #   @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
-      elsif @used
-        @used.dereference
-      else
-        @used
-      end
+      basic_list(:used,:entities,Uses,entity)
     end
 
     def to_n3
@@ -59,8 +43,7 @@ module Prov
 
       if generated
         str << "\tprov:generated "
-        generated.map{|src|
-          src = Prov.entities[src] if src.is_a?(Symbol) && Prov.entities[src]
+        generated.dereference.map{|src|
           str << "<#{src}>, "
         }
         str[-2]=" "
@@ -69,7 +52,7 @@ module Prov
 
       if used
         str << "\tprov:used "
-        used.map{|used|
+        used.dereference.map{|used|
           str << "<#{used}>, "
         }
         str[-2]=";"
@@ -77,9 +60,7 @@ module Prov
       end
 
       if associated_with
-        associated_with.map{|assoc|
-          assoc = Prov.agents[assoc] if assoc.is_a?(Symbol) && Prov.agents[assoc]
-
+        associated_with.dereference.map{|assoc|
           if assoc.is_a? Association
             str << "\tprov:wasAssociatedWith <#{assoc.agent}> ;\n"
             str << "\tprov:qualifiedAssociation <#{assoc}> ;\n"

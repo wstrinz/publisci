@@ -1,26 +1,16 @@
 module PubliSci
 module Prov
   class Association
-    def subject(sub=nil)
-      if sub
-        @subject = sub
-      else
-        @subject ||= "#{Prov.base_url}/assoc/#{Time.now.nsec.to_s(32)}"
-      end
+    include Prov::Element
+
+
+    def __label
+      # raise "MissingInternalLabel: no __label for #{self.inspect}" unless @__label
+      @__label ||= Time.now.nsec.to_s(32)
     end
 
     def agent(agent=nil)
-      if agent
-        # agent = Prov.agents[agent.to_sym] if agent.is_a?(String) || agent.is_a?(Symbol)
-        # raise "UnkownAgent #{ag}" unless agent
-        # puts "Warning: overwriting agent #{@agent.subject}" if @agent
-        @agent = agent
-      elsif @agent.is_a? Symbol
-        raise "UnknownAgent: #{@agent}" unless Prov.agents[@agent]
-        @agent = Prov.agents[@agent]
-      else
-        @agent
-      end
+      basic_keyword(:agent,:agents,agent)
     end
 
     def had_plan(*args, &block)

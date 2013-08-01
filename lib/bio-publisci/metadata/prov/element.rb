@@ -20,6 +20,10 @@ module PubliSci
         @subject = s
       end
 
+      def subject_id
+        raise "MissingSubject: No automatic subject generation for #{self}"
+      end
+
       def __label=(l)
         @__label = l
       end
@@ -41,8 +45,11 @@ module PubliSci
           "activity"
         when Plan
           "plan"
+        when Association
+          "assoc"
         else
-          raise "MissingSubject: No automatic subject generation for #{self}"
+          subject_id
+          # raise "MissingSubject: No automatic subject generation for #{self}"
         end
 
         "#{Prov.base_url}/#{category}/#{__label}"
@@ -59,6 +66,23 @@ module PubliSci
           instance_variable_set("@#{var}", Prov.registry[type][ivar])
         else
           ivar
+        end
+      end
+
+      def basic_list(var,type,collection_class,identifier=nil)
+
+        if identifier
+          unless instance_variable_get("@#{var}")
+            instance_variable_set("@#{var}",collection_class.new)
+          end
+          instance_variable_get("@#{var}") << identifier
+          # (@used ||= Uses.new) << identifier
+        # elsif @used
+        #   @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
+        # elsif instance_variable_get("@#{var}")
+        #   @used.dereference
+        else
+          instance_variable_get("@#{var}")
         end
       end
 

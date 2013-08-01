@@ -6,6 +6,8 @@ module PubliSci
           if x.is_a? Symbol
             raise "Unknown#{method.capitalize}: #{x}" unless Prov.registry[method.to_sym][x]
             Prov.registry[method.to_sym][x]
+          else
+            x
           end
         }
       end
@@ -22,6 +24,10 @@ module PubliSci
         # else
         #   self.fetch(index)
         # end
+      end
+
+      def map_(&blk)
+        self.dereference.map(&blk)
       end
     end
   end
