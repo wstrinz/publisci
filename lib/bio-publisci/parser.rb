@@ -38,13 +38,13 @@ module R2RDF
       h
     end
 
-		def create_graph(string)
-			f = Tempfile.new('graph')
+		def load_string(string,repo=RDF::Repository.new)
+			f = Tempfile.new('repo')
 			f.write(string)
 			f.close
-			graph = RDF::Graph.load(f.path, :format => :ttl)
+			repo.load(f.path, :format => :ttl)
 			f.unlink
-			graph
+			repo
 		end
 
 		def get_ary(query_results,method='to_s')

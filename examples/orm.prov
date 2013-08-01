@@ -1,0 +1,48 @@
+agent :R, subject: "http://r-project.org"
+agent :publisci, type: "software"
+plan :R_steps, steps: "spec/resource/example.Rhistory"
+organization :sciruby, subject: "http://sciruby.com"
+
+foaf = vocabulary "http://xmlns.com/foaf/0.1/"
+
+agent :Will do
+  type "person"
+  name "Will Strinz"
+  on_behalf_of :sciruby
+
+  has foaf.mailbox, "wstrinz@gmail.com"
+  has "http://xmlns.com/foaf/0.1/", "http://gsocsemantic.wordpress.com/"
+end
+
+data :field_work
+
+data :original do
+  attributed_to :R
+  derived_from :field_work
+end
+
+data :triplified_example do
+  attributed_to :Will
+  derived_from do
+    entity :original
+    activity :triplify
+  end
+end
+
+activity :triplify do
+  generated :triplified_example
+  associated_with :publisci
+  used :original
+end
+
+
+activity :use_R do
+  generated :original
+  associated_with do
+    agent :R
+    plan :R_steps
+  end
+  associated_with :Will
+end
+
+to_repository

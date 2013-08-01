@@ -131,6 +131,21 @@ module PubliSci
         Prov.registry
       end
 
+      def to_repository(repo=:in_memory,turtle_string=(Prov.prefixes+generate_n3))
+        case repo
+        when :in_memory
+          repo = RDF::Repository.new
+        when :fourstore
+          repo = RDF::FourStore::Repository.new('http://localhost:8080')
+        end
+        f = Tempfile.new('repo')
+        f.write(turtle_string)
+        f.close
+        repo.load(f.path, :format => :ttl)
+        f.unlink
+        repo
+      end
+
       # def vocabulary(url)
       #   raise "InvalidVocabulary: #{url} is not a valid URI" unless RDF::Resource(url).valid?
       #   RDF::Vocabulary.new(url)

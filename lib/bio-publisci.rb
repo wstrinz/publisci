@@ -34,6 +34,7 @@ load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/element.rb'
 
 load_folder('bio-publisci/metadata')
 load_folder('bio-publisci/metadata/prov')
+load_folder('bio-publisci/metadata/prov/model')
 load_folder('bio-publisci/readers')
 load_folder('bio-publisci/writers')
 load_folder('bio-publisci/dataset/ORM')
