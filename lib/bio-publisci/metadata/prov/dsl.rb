@@ -118,8 +118,8 @@ module PubliSci
         agents = Prov.agents.values.map(&:to_n3).join
         activities = Prov.activities.values.map(&:to_n3).join
         plans = Prov.plans.values.map(&:to_n3).join
-        associations = Prov.associations.map(&:to_n3).join
-        derivations = Prov.registry[:derivation].map(&:to_n3).join if Prov.registry[:derivation]
+        associations = Prov.registry[:associations].values.map(&:to_n3).join if Prov.registry[:associations]
+        derivations = Prov.registry[:derivation].values.map(&:to_n3).join if Prov.registry[:derivation]
 
         str = "#{entities}#{agents}#{activities}#{plans}#{associations}#{derivations}"
 

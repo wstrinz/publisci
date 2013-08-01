@@ -50,5 +50,4 @@ describe PubliSci::Prov::Entity do
 
     e.derived_from[0].should == f
   end
-
 end

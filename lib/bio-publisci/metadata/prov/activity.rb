@@ -39,16 +39,7 @@ module Prov
     end
 
     def associated_with(agent=nil, &block)
-      if agent
-        (@associated ||= Associations.new) << agent
-      elsif block_given?
-        assoc = Association.new
-        assoc.instance_eval(&block)
-        (@associated ||= Associations.new) << assoc
-        Prov.register(nil,assoc)
-      else
-        @associated
-      end
+      block_list(:associated,:associations,Association,Associations,agent,&block)
     end
 
     def used(entity=nil)
@@ -56,6 +47,8 @@ module Prov
         (@used ||= Uses.new) << entity
       # elsif @used
       #   @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
+      elsif @used
+        @used.dereference
       else
         @used
       end

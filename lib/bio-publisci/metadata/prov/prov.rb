@@ -49,7 +49,7 @@ module PubliSci
     end
 
     def self.associations
-      registry[:associations] ||= []
+      registry[:associations] ||= {}
     end
 
     def self.plans

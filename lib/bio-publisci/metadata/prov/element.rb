@@ -47,6 +47,41 @@ module PubliSci
 
         "#{Prov.base_url}/#{category}/#{__label}"
       end
+
+      def basic_keyword(var,type,identifier=nil)
+        ivar = instance_variable_get("@#{var}")
+
+        if identifier
+          instance_variable_set("@#{var}", identifier)
+        elsif ivar.is_a? Symbol
+          raise "NotRegistered: #{type}" unless Prov.registry[type]
+          raise "Unknown#{type.capitalize}: #{ivar}" unless Prov.registry[type][ivar]
+          instance_variable_set("@#{var}", Prov.registry[type][ivar])
+        else
+          ivar
+        end
+      end
+
+      def block_list(var,type,instance_class,collection_class,name=nil,&block)
+        if block_given?
+          inst = instance_class.new
+          inst.instance_eval(&block)
+          unless instance_variable_get("@#{var}")
+            instance_variable_set("@#{var}",collection_class.new)
+          end
+          instance_variable_get("@#{var}") << inst
+          Prov.register(type,inst)
+        else
+          if name
+            unless instance_variable_get("@#{var}")
+              instance_variable_set("@#{var}",collection_class.new)
+            end
+            instance_variable_get("@#{var}") << name
+          else
+            instance_variable_get("@#{var}")
+          end
+        end
+      end
     end
   end
 end

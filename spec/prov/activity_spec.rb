@@ -49,6 +49,21 @@ describe PubliSci::Prov::Activity do
     expect {a.generated[0]}.to raise_error
   end
 
+  it "lazy loads generated relationships" do
+    a = activity :act, generated: :data
+    e = entity :data
+
+    a.generated[0].should == e
+  end
+
+  it "lazy loads used relationships" do
+    a = activity :act, generated: :data, used: :other_data
+    e = entity :data
+    f = entity :other_data
+
+    a.used[0].should == f
+  end
+
   # it "lazy loads other objects, so declaration order doesn't usually matter" do
   #   a = activity :name, on_behalf_of: :other
   #   b = activity :other
