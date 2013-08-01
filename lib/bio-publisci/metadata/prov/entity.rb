@@ -4,7 +4,8 @@ module PubliSci
       class Derivations < Array
         def [](index)
           if self.fetch(index).is_a? Symbol
-              Prov.entities[self.fetch(index)]
+            raise "UnknownEntity: #{self.fetch(index)}" unless Prov.entities[self.fetch(index)]
+            Prov.entities[self.fetch(index)]
           else
             self.fetch(index)
           end
@@ -25,6 +26,7 @@ module PubliSci
         if activity
           @generated_by = activity
         elsif @generated_by.is_a? Symbol
+          raise "UnknownActivity: #{@generated_by}" unless Prov.activities[@generated_by]
           @generated_by = Prov.activities[@generated_by]
         else
           @generated_by
@@ -35,6 +37,7 @@ module PubliSci
         if agent
           @attributed_to = agent
         elsif @attributed_to.is_a? Symbol
+          raise "UnknownAgent: #{@attributed_to}" unless Prov.agents[@attributed_to]
           @attributed_to = Prov.agents[@attributed_to]
         else
           @attributed_to
@@ -71,8 +74,8 @@ module PubliSci
         str << "\tprov:wasGeneratedBy <#{generated_by}> ;\n" if generated_by
         str << "\tprov:wasAttributedTo <#{attributed_to}> ;\n" if attributed_to
         if derived_from
-          derived_from.map{|der|
-            der = Prov.entities[der] if der.is_a?(Symbol) && Prov.entities[der]
+          derived_from.size.times.each{|k|
+            der = derived_from[k] # if der.is_a?(Symbol) && Prov.entities[der]
 
             if der.is_a? Derivation
               str << "\tprov:wasDerivedFrom <#{der.entity}> ;\n"
