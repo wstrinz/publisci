@@ -1,18 +1,15 @@
 module PubliSci
   module Prov
     class Entity
+      include Prov::Element
+
       class Derivations < Array
-        def [](index)
-          if self.fetch(index).is_a? Symbol
-            raise "UnknownEntity: #{self.fetch(index)}" unless Prov.entities[self.fetch(index)]
-            Prov.entities[self.fetch(index)]
-          else
-            self.fetch(index)
-          end
+        include PubliSci::Prov::Dereferencable
+        def method
+          :entities
         end
       end
 
-      include Prov::Element
 
       def source(s=nil)
         if s
@@ -52,6 +49,7 @@ module PubliSci
           Prov.register(nil,deriv)
         else
           if entity
+
             (@derived_from ||= Derivations.new) << entity
           else
             @derived_from

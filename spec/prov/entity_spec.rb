@@ -3,10 +3,6 @@ include PubliSci::Prov::DSL
 include PubliSci::Prov
 
 describe PubliSci::Prov::Entity do
-  class Ana
-    include R2RDF::Analyzer
-  end
-
   before(:each) do
     @evaluator = PubliSci::Prov::DSL::Singleton.new
   end
@@ -50,6 +46,7 @@ describe PubliSci::Prov::Entity do
   it "lazy loads other objects, so declaration order doesn't usually matter" do
     e = entity :name, derived_from: :other
     f = entity :other
+
 
     e.derived_from[0].should == f
   end

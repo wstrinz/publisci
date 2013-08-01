@@ -95,6 +95,8 @@ module PubliSci
           Prov.register(name, act)
         else
 
+          act = Prov::Activity.new
+          act.__label=name
           act.subject args[:subject]
 
           (args.keys - [:subject]).map{|k|
@@ -103,9 +105,7 @@ module PubliSci
 
           a = Prov::Activity.new
 
-          act.__label=name
           Prov.register(name, act)
-          raise "has based activity creation not yet implemented"
         end
       end
 

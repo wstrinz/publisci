@@ -3,30 +3,32 @@ module Prov
   class Activity
     include Prov::Element
     class Associations < Array
-      def [](index)
-        if self.fetch(index).is_a? Symbol
-            raise "UnknownAgent: #{self.fetch(index)}" unless Prov.agents[self.fetch(index)]
-            Prov.agents[self.fetch(index)]
-        else
-          self.fetch(index)
-        end
+      include PubliSci::Prov::Dereferencable
+      def methods
+        :agents
+      end
+    end
+
+    class Generations < Array
+      include PubliSci::Prov::Dereferencable
+      def method
+        :entities
+      end
+    end
+
+    class Uses < Array
+      include PubliSci::Prov::Dereferencable
+      def method
+        :entities
       end
     end
 
     def generated(entity=nil)
       if entity
-        # if entity.is_a? Symbol
-        #   entity = Prov.entities[entity.to_sym]
-        # end
-
         if entity.is_a? Entity
           entity.generated_by self
         end
-
-        (@generated ||= []) << entity
-      elsif @generated.is_a? Symbol
-        raise "UnknownEntity: #{@generated}" unless Prov.entities[@generated]
-        @generated = Prov.entities[@generated]
+        (@generated ||= Generations.new) << entity
       else
         @generated
       end
@@ -51,9 +53,9 @@ module Prov
 
     def used(entity=nil)
       if entity
-        (@used ||= []) << entity
-      elsif @used
-        @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
+        (@used ||= Uses.new) << entity
+      # elsif @used
+      #   @used.map{|u| u.is_a?(Symbol) ? Prov.entities[u] : u}
       else
         @used
       end

@@ -3,9 +3,6 @@ include PubliSci::Prov::DSL
 include PubliSci::Prov
 
 describe PubliSci::Prov::Agent do
-  class Ana
-    include R2RDF::Analyzer
-  end
 
   before(:each) do
     @evaluator = PubliSci::Prov::DSL::Singleton.new
