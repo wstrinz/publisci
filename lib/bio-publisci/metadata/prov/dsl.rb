@@ -170,6 +170,7 @@ module PubliSci
         }
 
         ttl.gsub!(%r{<http://gsocsemantic.wordpress.com/([\w|\d]+)>}, 'me:\1')
+        ttl.gsub!(%r{<http://www.w3.org/ns/prov#([\w|\d]+)>}, 'prov:\1')
         ttl
       end
     end
