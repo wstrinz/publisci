@@ -23,10 +23,22 @@ describe PubliSci::Prov::Role do
     act.used[0].role.to_n3["a prov:Role"].size.should > 0
   end
 
-  # it "can specify fields manually" do
-  #   a = activity :name, subject: "http://example.org/name"
-  #   a.subject.should == "http://example.org/name"
-  # end
+  it "can have a comment attached" do
+    ent1 = @ev.entity :some_data
+    ent2 = @ev.entity :other_data
+    ag = @ev.agent :some_guy
+    act = @ev.activity :do_things do
+      generated :some_data
+      associated_with :some_guy
+      used do
+        entity :other_data
+        role :plagirized do
+          comment "I stole all of this data"
+        end
+      end
+    end
+    act.used[0].role.to_n3["rdfs:comment"].size.should > 0
+  end
 
   # it "can be created with a block" do
   #   e = entity :data

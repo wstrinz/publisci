@@ -1,0 +1,41 @@
+base_url "http://example.org"
+
+dct = vocabulary "http://purl.org/dc/terms/"
+
+entity :article do
+  has dct.title, "Crime rises in cities"
+end
+
+entity :dataSet1
+entity :regionList
+entity :composition1
+entity :chart1, attributed_to: :derek
+
+agent :derek do
+  name "Derek"
+  on_behalf_of :chartgen
+end
+
+organization :chartgen, name: "Chart Generators Inc"
+
+activity :illustrate1 do
+  generated :chart1
+  associated_with :derek
+  used :composition1
+end
+
+activity :compose1 do
+  generated :composition1
+  associated_with :derek
+  used do
+    entity :regionList
+    role :regionsToAggregateBy
+  end
+
+  used do
+    entity :dataSet1
+    role :dataToCompose
+  end
+end
+
+generate_n3 true
