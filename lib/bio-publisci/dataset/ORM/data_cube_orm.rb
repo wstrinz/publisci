@@ -34,7 +34,7 @@ module R2RDF
       def self.load(graph,options={},verbose=false)
 
 
-        graph = create_graph(graph) unless graph =~ /^http/
+        graph = load_string(graph) unless graph =~ /^http/
 
         # puts get_hashes(execute_from_file('dimension_ranges.rq',graph))
         dimensions = Hash[get_hashes(execute_from_file('dimension_ranges.rq',graph),"to_s").map{|solution|
