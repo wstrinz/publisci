@@ -8,7 +8,7 @@ describe PubliSci::Prov::Usage do
     @evaluator = PubliSci::Prov::DSL::Singleton.new
   end
 
-  it "can create simple associations", no_travis: true do
+  it "can create simple associations" do
     ent1 = @ev.entity :some_data
     ent2 = @ev.entity :other_data
     ag = @ev.agent :some_guy
@@ -20,8 +20,23 @@ describe PubliSci::Prov::Usage do
         role :plagirized
       end
     end
-    act.used[0].should == ent2
-    # @ev.generate_n3["prov:wasAssociatedWith"].size.should > 0
+    act.used[0].entity.should == ent2
+  end
+
+  it "can generate n3" do
+    ent1 = @ev.entity :some_data
+    ent2 = @ev.entity :other_data
+    ag = @ev.agent :some_guy
+    act = @ev.activity :do_things do
+      generated :some_data
+      associated_with :some_guy
+      used do
+        entity :other_data
+        role :plagirized
+      end
+    end
+    act.to_n3["prov:qualifiedUsage"].size.should > 0
+    act.used[0].to_n3["a prov:Usage"].size.should > 0
   end
 
   # it "can specify fields manually" do

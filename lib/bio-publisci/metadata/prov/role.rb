@@ -1,7 +1,17 @@
 module PubliSci
   module Prov
     class Role
+      # attr_writer :comment
+
       include Prov::Element
+
+      def comment(str=nil)
+        if str
+          @comment = str
+        else
+          @comment
+        end
+      end
 
       # def steps(steps=nil)
       #   if steps
@@ -16,9 +26,7 @@ module PubliSci
 
       def to_n3
         str = "<#{subject}> a prov:Role ;\n"
-        # if steps
-        #   str << "\trdfs:comment (\"#{steps.join('" "')}\") ;\n"
-        # end
+        str << "\trdfs:comment \"#{comment}\" ;\n" if comment
         add_custom(str)
 
         str << "\trdfs:label \"#{__label}\" .\n\n"

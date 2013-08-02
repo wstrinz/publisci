@@ -21,7 +21,7 @@ module PubliSci
       end
 
       def subject_id
-        raise "MissingSubject: No automatic subject generation for #{self}"
+        self.class.to_s.split('::').last.downcase
       end
 
       def __label=(l)
@@ -48,11 +48,20 @@ module PubliSci
         when Association
           "assoc"
         else
-          subject_id
+          subject_id()
           # raise "MissingSubject: No automatic subject generation for #{self}"
         end
 
         "#{Prov.base_url}/#{category}/#{__label}"
+      end
+
+      def try_auto_set(object,method,args)
+        if object.methods.include? method
+          object.send(method,args)
+          true
+        else
+          false
+        end
       end
 
       def basic_keyword(var,type,identifier=nil)

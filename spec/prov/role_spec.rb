@@ -8,12 +8,19 @@ describe PubliSci::Prov::Role do
     @evaluator = PubliSci::Prov::DSL::Singleton.new
   end
 
-  it "can create simple associations" do
-    e = @ev.entity :name
-    f = @ev.agent :other
-    g = @ev.activity :do_things, generated: :name, associated_with: :other
-    g.associated_with[0].should == f
-    @ev.generate_n3["prov:wasAssociatedWith"].size.should > 0
+  it "creates a role in a used block" do
+    ent1 = @ev.entity :some_data
+    ent2 = @ev.entity :other_data
+    ag = @ev.agent :some_guy
+    act = @ev.activity :do_things do
+      generated :some_data
+      associated_with :some_guy
+      used do
+        entity :other_data
+        role :plagirized
+      end
+    end
+    act.used[0].role.to_n3["a prov:Role"].size.should > 0
   end
 
   # it "can specify fields manually" do

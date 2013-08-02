@@ -117,8 +117,10 @@ module PubliSci
         plans = Prov.plans.values.map(&:to_n3).join
         associations = Prov.registry[:associations].values.map(&:to_n3).join if Prov.registry[:associations]
         derivations = Prov.registry[:derivation].values.map(&:to_n3).join if Prov.registry[:derivation]
+        usages = Prov.registry[:usage].values.map(&:to_n3).join if Prov.registry[:usage]
+        roles = Prov.registry[:role].values.map(&:to_n3).join if Prov.registry[:role]
 
-        str = "#{entities}#{agents}#{activities}#{plans}#{associations}#{derivations}"
+        str = "#{entities}#{agents}#{activities}#{plans}#{associations}#{derivations}#{usages}#{roles}"
 
         if abbreviate
           abbreviate_known(str)
@@ -163,7 +165,7 @@ module PubliSci
 
       def abbreviate_known(turtle)
         ttl = turtle.dup
-        %w{activity assoc agent plan entity derivation}.each{|element|
+        %w{activity assoc agent plan entity derivation usage role}.each{|element|
           ttl.gsub!(%r{<#{Prov.base_url}/#{element}/([\w|\d]+)>}, "#{element}:" + '\1')
         }
 

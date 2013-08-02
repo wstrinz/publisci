@@ -4,7 +4,6 @@ module PubliSci
       include Prov::Element
 
       def __label
-        # raise "MissingInternalLabel: no __label for #{self.inspect}" unless @__label
         @__label ||= Time.now.nsec.to_s(32)
       end
 
@@ -18,26 +17,32 @@ module PubliSci
           p.instance_eval(&block)
           p.__label=args[0]
           @role = p
+          # puts p.class
           Prov.register(args[0], p)
         elsif args.size == 0
           if @role.is_a? Symbol
-            raise "UnknownPlan: #{@role}" unless (Prov.registry[:role]||={})[@role]
+            raise "UnknownRole: #{@role}" unless (Prov.registry[:role]||={})[@role]
             @role = Prov.registry[:role][@role]
           end
           @role
         elsif args.size == 1
-          @role = args[0]
+          unless (Prov.registry[:role]||={})[args[0]]
+            p = Prov::Role.new
+            p.__label=args[0]
+            @role = p
+            Prov.register(args[0], p)
+          end
         else
           name = args.shift
           args = Hash[*args]
-          p = Prov::Plan.new
+          p = Prov::Role.new
 
           p.__label=name
           p.subject args[:subject]
           (args.keys - [:subject]).map{|k|
-            raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
+            raise "Unkown Role setting #{k}" unless try_auto_set(p,k,args[k])
           }
-          @plan = p
+          @role = p
           Prov.register(name, p)
         end
       end

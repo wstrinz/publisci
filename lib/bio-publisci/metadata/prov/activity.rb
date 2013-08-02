@@ -16,7 +16,7 @@ module Prov
       end
     end
 
-    class Uses < Array
+    class Usages < Array
       include PubliSci::Prov::Dereferencable
       def method
         :entities
@@ -34,8 +34,8 @@ module Prov
       block_list(:associated,:associations,Association,Associations,agent,&block)
     end
 
-    def used(entity=nil)
-      basic_list(:used,:entities,Uses,entity)
+    def used(entity=nil, &block)
+      block_list(:use,:usages,Usage,Usages,entity, &block)
     end
 
     def to_n3
@@ -51,12 +51,14 @@ module Prov
       end
 
       if used
-        str << "\tprov:used "
-        used.dereference.map{|used|
-          str << "<#{used}>, "
+        used.dereference.map{|u|
+          if u.is_a? Usage
+            str << "\tprov:used <#{u.entity}> ;\n"
+            str << "\tprov:qualifiedUsage <#{u}> ;\n"
+          else
+            str << "\tprov:used <#{u}> ;\n"
+          end
         }
-        str[-2]=";"
-        str[-1]="\n"
       end
 
       if associated_with

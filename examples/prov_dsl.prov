@@ -63,9 +63,11 @@ end
 activity :triplify do
   generated :triplified_example
   associated_with :publisci
-  used :original
+  used do
+    entity :original
+    role :generation_input, comment: "source data for triplification"
+  end
 end
-
 
 activity :use_R do
   generated :original
