@@ -75,5 +75,5 @@ module PubliSci
   end
 end
 rescue LoadError
-  # puts "spira not installed, ORM unavailable"
+  puts "spira not installed, ORM unavailable"
 end

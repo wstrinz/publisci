@@ -24,11 +24,8 @@ module PubliSci
           Prov.register(name, a)
         else
           a = Prov::Agent.new
-
           a.__label=name
-
           a.subject args[:subject]
-
           (args.keys - [:subject]).map{|k|
             raise "Unkown agent setting #{k}" unless try_auto_set(a,k,args[k])
           }
@@ -147,11 +144,6 @@ module PubliSci
         f.unlink
         repo
       end
-
-      # def vocabulary(url)
-      #   raise "InvalidVocabulary: #{url} is not a valid URI" unless RDF::Resource(url).valid?
-      #   RDF::Vocabulary.new(url)
-      # end
 
       private
       def try_auto_set(object,method,args)
