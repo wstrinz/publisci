@@ -1,12 +1,16 @@
 base_url "http://example.org"
 
 dct = vocabulary "http://purl.org/dc/terms/"
+prv = vocabulary "http://www.w3.org/ns/prov#"
 
 entity :article do
   has dct.title, "Crime rises in cities"
 end
 
 entity :dataSet1
+entity :dataSet2 do
+  has prv.wasRevisionOf, :dataSet1
+end
 entity :regionList
 entity :composition1
 entity :chart1, attributed_to: :derek
