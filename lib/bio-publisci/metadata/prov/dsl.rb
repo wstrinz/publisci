@@ -16,22 +16,22 @@ module PubliSci
         Prov.registry.clear
       end
 
-      def agent(name,args={}, &block)
+      def named_element(name,element_class,args={},&block)
+        el = element_class.new
+        el.__label=name
         if block_given?
-          a = Prov::Agent.new
-          a.instance_eval(&block)
-          a.__label=name
-          Prov.register(name, a)
+          el.instance_eval(&block)
+          Prov.register(name,el)
         else
-          a = Prov::Agent.new
-          a.__label=name
-          a.subject args[:subject]
-          (args.keys - [:subject]).map{|k|
-            raise "Unkown agent setting #{k}" unless try_auto_set(a,k,args[k])
+          args.keys.map{|k|
+            raise "Unkown #{element_class} setting #{k}" unless try_auto_set(el,k,args[k])
           }
-
-          Prov.register(name, a)
+          Prov.register(name,el)
         end
+      end
+
+      def agent(name,args={}, &block)
+        named_element(name,Prov::Agent,args,&block)
       end
 
       def organization(name,args={},&block)
@@ -40,67 +40,16 @@ module PubliSci
       end
 
       def entity(name, args={}, &block)
-        if block_given?
-          e = Prov::Entity.new
-          e.instance_eval(&block)
-          e.__label=name
-          Prov.register(name, e)
-        else
-          # name = args.shift
-          # args = Hash[*args]
-          e = Prov::Entity.new
-
-          e.__label=name
-          e.subject args[:subject]
-          (args.keys - [:subject]).map{|k|
-            raise "Unkown entity setting #{k}" unless try_auto_set(e,k,args[k])
-          }
-
-          Prov.register(name, e)
-        end
+        named_element(name,Prov::Entity,args,&block)
       end
       alias_method :data, :entity
 
       def plan(name, args={}, &block)
-        if block_given?
-          p = Prov::Plan.new
-          p.instance_eval(&block)
-          p.__label=name
-          Prov.register(name, e)
-        else
-          p = Prov::Plan.new
-
-          p.__label=name
-          p.subject args[:subject]
-          (args.keys - [:subject]).map{|k|
-            raise "Unkown plan setting #{k}" unless try_auto_set(p,k,args[k])
-          }
-
-
-          Prov.register(name, p)
-        end
+        named_element(name,Prov::Plan,args,&block)
       end
 
       def activity(name,args={}, &block)
-        if block_given?
-          act = Prov::Activity.new
-          act.instance_eval(&block)
-          act.__label=name
-          Prov.register(name, act)
-        else
-
-          act = Prov::Activity.new
-          act.__label=name
-          act.subject args[:subject]
-
-          (args.keys - [:subject]).map{|k|
-            raise "Unkown agent setting #{k}" unless try_auto_set(act,k,args[k])
-          }
-
-          a = Prov::Activity.new
-
-          Prov.register(name, act)
-        end
+        named_element(name,Prov::Activity,args,&block)
       end
 
       def base_url(url)

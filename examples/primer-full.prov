@@ -34,6 +34,7 @@ entity :chart2 do
 end
 
 entity :article do
+  has dct.title, "Crime rises in cities"
 end
 
 entity :articleV1 do
@@ -46,6 +47,7 @@ entity :articleV2 do
 end
 
 entity :quoteInBlogEntry20130326 do
+  subject "http://example.com/blog_entry"
   has prov.wasQuotedFrom, :article
 end
 
