@@ -51,7 +51,6 @@ module PubliSci
         has_many :qualifiedAssociation, predicate: PROV.qualifiedAssociation
       end
 
-
       class Association < Spira::Base
         type PROV.Association
         property :label, predicate: RDF::RDFS.label
@@ -75,5 +74,5 @@ module PubliSci
   end
 end
 rescue LoadError
-  # puts "spira not installed, ORM unavailable"
+  puts "spira not installed, ORM unavailable"
 end
