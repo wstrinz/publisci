@@ -52,5 +52,8 @@ Gemfile.lock
 *.gemspec
 *.gem
 
+# Example output
+examples/visualization/*.png
+
 # RDF files
 resources/*.ttl

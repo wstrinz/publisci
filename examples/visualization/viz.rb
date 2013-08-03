@@ -2,24 +2,32 @@ require 'graphviz'
 
 def entity_node(label)
   ent = @g.add_nodes(label)
-  ent.color = "#ddaa66"
+  ent.color = "#F3F781"
   ent.style = "filled"
+  ent
 end
 
 def agent_node(label)
   ag = @g.add_nodes(label)
-  ag.color = "#ddaa66"
+  ag.color = "#FE9A2E"
   ag.style = "filled"
+	ag.shape = "box"
+	ag
+end
+
+def activity_node(label)
+  act = @g.add_nodes(label)
+  act.color = "#5858FA"
+  act.style = "filled"
+  act.shape = "box"
+  act
 end
 
 @g = GraphViz.new(:G, type: :digraph)
 g = @g
 
-ent_n = g.add_nodes("entity")
-ent_n.color = "#ddaa66"
-ent_n.style = "filled"
-ag_n = g.add_nodes("activity")
-ag_n.shape = "box"
+ent_n = entity_node("entity") #g.add_nodes("entity")
+ag_n = activity_node("activity")
 
 g.add_edges(ent_n,ag_n).label="attributed"
 

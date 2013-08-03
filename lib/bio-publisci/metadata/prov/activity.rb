@@ -26,6 +26,8 @@ module Prov
     def generated(entity=nil)
       if entity.is_a? Entity
         entity.generated_by self
+      elsif Prov.entities[entity]
+        Prov.entities[entity].generated_by self
       end
       basic_list(:generated,:entities,Generations,entity)
     end
