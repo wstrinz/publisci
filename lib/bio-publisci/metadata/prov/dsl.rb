@@ -16,6 +16,10 @@ module PubliSci
         Prov.registry.clear
       end
 
+      def configure
+        yield Prov.config
+      end
+
       def named_element(name,element_class,args={},&block)
         el = element_class.new
         el.__label=name
@@ -92,6 +96,16 @@ module PubliSci
         repo.load(f.path, :format => :ttl)
         f.unlink
         repo
+      end
+
+      def output
+        cfg = Prov.config
+        case cfg.output
+        when :generate_n3
+          generate_n3(cfg.abbreviate)
+        when :to_repository
+          raise "not implemented yet"
+        end
       end
 
       private

@@ -1,5 +1,9 @@
 module PubliSci
   module Prov
+    def self.configuration
+      @config ||= Configuration.new
+    end
+
     def self.register(name,object)
       # puts "register #{name} #{object} #{associations.size}"
       name = name.to_sym if name
