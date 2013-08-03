@@ -95,7 +95,7 @@ module Prov
       str << "\tprov:agent <#{agent}> ;\n"
       str << "\tprov:hadPlan <#{plan}> ;\n" if plan
       str << "\tprov:hadRole <#{role}> ;\n" if role
-      str[-2] = ".\n"
+      str << "\trdfs:label \"#{__label}\".\n\n"
       str
     end
 

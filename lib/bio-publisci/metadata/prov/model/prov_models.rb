@@ -55,14 +55,14 @@ module PubliSci
         type PROV.Association
         property :label, predicate: RDF::RDFS.label
         property :agent, predicate: PROV.agent
-        property :hadPlan, predicate: PROV.plan
+        property :hadPlan, predicate: PROV.hadPlan
       end
 
       class Derivation < Spira::Base
         type PROV.Derivation
         property :label, predicate: RDF::RDFS.label
         property :agent, predicate: PROV.agent
-        property :hadPlan, predicate: PROV.plan
+        property :hadPlan, predicate: PROV.hadPlan
       end
 
       class Plan < Spira::Base

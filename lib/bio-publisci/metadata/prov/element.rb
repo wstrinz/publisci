@@ -103,7 +103,7 @@ module PubliSci
             instance_variable_set("@#{var}",collection_class.new)
           end
           instance_variable_get("@#{var}") << inst
-          Prov.register(type,inst)
+          Prov.register(inst.__label,inst)
         else
           if name
             unless instance_variable_get("@#{var}")

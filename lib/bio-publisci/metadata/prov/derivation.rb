@@ -4,6 +4,11 @@ module PubliSci
 
       include PubliSci::CustomPredicate
 
+    def __label
+      # raise "MissingInternalLabel: no __label for #{self.inspect}" unless @__label
+      @__label ||= Time.now.nsec.to_s(32)
+    end
+
       def subject(sub=nil)
         if sub
           @subject = sub
@@ -40,6 +45,7 @@ module PubliSci
         str = "<#{subject}> a prov:Derivation ;\n"
         str << "\tprov:entity <#{entity}> ;\n" if entity
         str << "\tprov:hadActivity <#{had_activity}> ;\n" if had_activity
+        str << "\trdfs:label \"#{__label}\".\n\n"
 
         add_custom(str)
 
