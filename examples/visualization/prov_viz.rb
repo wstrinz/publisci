@@ -24,68 +24,71 @@ def activity_node(label)
 	act
 end
 
-nodemap={}
-@g = GraphViz.new(:G, type: :digraph)
+def make_edges(from_obj,to_class,predicate)
+  # from_class.enum_for.to_a.map{|from_obj|
+    raise "Unknown From Node: #{from_obj.subject}" unless @nodemap[from_obj.subject]
+    relation = from_obj.send(predicate)
+    if relation
+      if relation.is_a? Array
+        relation.map{|r|
+        other = to_class.for(r)
+        raise "Unknown From Node: #{other.subject}" unless @nodemap[other.subject]
+          @g.add_edges(@nodemap[from_obj.subject],@nodemap[other.subject]).label=predicate.to_s
+        }
+      else
+        other = to_class.for(relation)
+        raise "Unknown From Node: #{other.subject}" unless @nodemap[other.subject]
+        @g.add_edges(@nodemap[from_obj.subject],@nodemap[other.subject]).label=predicate.to_s
+      end
+    end
+  # }
+end
 
-# runner = PubliSci::Prov::Model::Entity
+@nodemap={}
+@g = GraphViz.new(:G, type: :digraph)
+infile = ARGV[0] || 'primer.prov'
 runner = PubliSci::Prov::DSL::Singleton.new
-runner.instance_eval(IO.read('primer.prov'),'primer.prov')
+runner.instance_eval(IO.read(infile),infile)
 repo = runner.to_repository
 Spira.add_repository :default, repo
 
 include PubliSci::Prov::Model
 
 Entity.enum_for.to_a.map{|e|
-  nodemap[e.subject]=entity_node(e.label)
+  @nodemap[e.subject]=entity_node(e.label)
 }
 
 Agent.enum_for.to_a.map{|agent|
-  nodemap[agent.subject]=agent_node(agent.label)
+  @nodemap[agent.subject]=agent_node(agent.label)
 }
 
 Activity.enum_for.to_a.map{|act|
-  nodemap[act.subject]=activity_node(act.label)
+  @nodemap[act.subject]=activity_node(act.label)
 }
 
 Entity.enum_for.to_a.map{|e|
-  if e.wasAttributedTo.first
-    agent_node = nodemap[Agent.for(e.wasAttributedTo.first).subject]
-    @g.add_edges(nodemap[e.subject],agent_node).label="wasAttributedTo"
-  end
-
-  if e.wasGeneratedBy
-    activity_node = nodemap[Activity.for(e.wasGeneratedBy).subject]
-    @g.add_edges(nodemap[e.subject],activity_node).label="wasGeneratedBy"
-  end
+  attribs ={
+    "wasAttributedTo" => Agent,
+    "wasGeneratedBy" => Activity
+  }
+  attribs.each{|predicate,range| make_edges(e,range,predicate)}
 }
 
 Activity.enum_for.to_a.map{|act|
-  if act.generated.first
-    entity_node = nodemap[Entity.for(act.generated.first).subject]
-    @g.add_edges(nodemap[act.subject],entity_node).label="generated"
-  end
-
-  if act.used.first
-    entity_node = nodemap[Entity.for(act.used.first).subject]
-    @g.add_edges(nodemap[act.subject],entity_node).label="used"
-  end
-  # if act.wasGeneratedBy
-  #   activity_node = nodemap[Activity.for(act.wasGeneratedBy).subject]
-  #   @g.add_edges(nodemap[act.subject],activity_node).label="wasGeneratedBy"
-  # end
+  attribs ={
+    "generated" => Entity,
+    "used" => Entity,
+    "wasAssociatedWith" => Agent,
+  }
+  attribs.each{|predicate,range| make_edges(act,range,predicate)}
 }
 
-# puts "#{Agent.for(Entity.first.wasAttributedTo.first)}"
-
-# g = GraphViz.new(:G, type: :digraph)
-
-# ent = Entity.first
-# ag = Agent.for(ent.wasAttributedTo.first)
-
-# ent_n = g.add_nodes(ent.label)
-# ag_n = g.add_nodes(ag.label)
-
-# g.add_edges(ent_n,ag_n).label="prov:wasAttributedTo"
+Agent.enum_for.to_a.map{|agent|
+  attribs ={
+    "actedOnBehalfOf" => Agent
+  }
+  attribs.each{|predicate,range| make_edges(agent,range,predicate)}
+}
 
 @g.output(png: "out.png")
-`eog out.png`
+begin `eog out.png` rescue nil end
