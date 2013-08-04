@@ -17,7 +17,7 @@ module PubliSci
       end
 
       def configure
-        yield Prov.config
+        yield Prov.configuration
       end
 
       def named_element(name,element_class,args={},&block)

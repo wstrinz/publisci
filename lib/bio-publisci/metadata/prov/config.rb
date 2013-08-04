@@ -1,7 +1,7 @@
 module PubliSci
   module Prov
     class Configuration
-      def defaults
+      def self.defaults
         {
           output: :generate_n3,
           abbreviate: false,
@@ -10,37 +10,19 @@ module PubliSci
         }
       end
 
-      def output
-        @output ||= defaults[:output]
-      end
+      defaults.keys.each{|k|
+        default = defaults[k]
+        define_method k do
+          var = instance_variable_get :"@#{k}"
+          if var
+            var
+          else
+            instance_variable_set :"@#{k}", default
+          end
+        end
 
-      def output=(output)
-        @output = output
-      end
-
-      def abbreviate
-        @abbreviate ||= defaults[:abbreviate]
-      end
-
-      def abbreviate=(abbreviate)
-        @abbreviate = abbreviate
-      end
-
-      def repository
-        @repository ||= defaults[:repository]
-      end
-
-      def repository=(repository)
-        @repository = repository
-      end
-
-      def repository_url
-        @repository_url ||= defaults[:repository_url]
-      end
-
-      def repository_url=(repository_url)
-        @repository_url = repository_url
-      end
+        attr_writer k
+      }
     end
   end
 end
