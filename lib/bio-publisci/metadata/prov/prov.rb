@@ -33,11 +33,13 @@ module PubliSci
     end
 
     def self.run(string)
+      sing =DSL::Singleton.new
       if File.exists? string
-        DSL::Singleton.new.instance_eval(IO.read(string),string)
+        sing.instance_eval(IO.read(string),string)
       else
-        DSL::Singleton.new.instance_eval(string)
+        sing.instance_eval(string)
       end
+      sing.output
     end
 
     def self.agents

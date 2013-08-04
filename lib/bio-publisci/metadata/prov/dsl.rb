@@ -16,6 +16,10 @@ module PubliSci
         Prov.registry.clear
       end
 
+      # def configure(&block)
+      #   Prov.configuration.instance_eval(&block)
+      # end
+
       def configure
         yield Prov.configuration
       end
@@ -34,7 +38,7 @@ module PubliSci
         end
       end
 
-      def agent(name,args={}, &block)
+      def agent(name, args={}, &block)
         named_element(name,Prov::Agent,args,&block)
       end
 
@@ -99,7 +103,7 @@ module PubliSci
       end
 
       def output
-        cfg = Prov.config
+        cfg = Prov.configuration
         case cfg.output
         when :generate_n3
           generate_n3(cfg.abbreviate)

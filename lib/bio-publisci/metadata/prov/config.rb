@@ -12,7 +12,7 @@ module PubliSci
 
       defaults.keys.each{|k|
         default = defaults[k]
-        define_method k do
+        define_method(k) do
           var = instance_variable_get :"@#{k}"
           if var
             var
