@@ -12,10 +12,13 @@ describe PubliSci::Metadata::DSL do
     title 'Bacon Data'
     description 'a dataset about bacon'
     creator 'Will'
+    topic 'Delicious Bacon'
     str = generate_n3
     str[/rdfs:label "(.+)";/,1].should == "Bacon Data"
     str[/dct:creator "(.+)";/,1].should == "Will"
+    str[/dct:subject "(.+)";/,1].should == "Delicious Bacon"
     str[/dct:description "(.+)";/,1].should == "a dataset about bacon"
+    str[/dct:issued "(.+)"\^\^xsd:date;/,1].should == Time.now.strftime("%Y-%m-%d")
   end
 
   it "can add additional information about publisher" do
@@ -24,6 +27,8 @@ describe PubliSci::Metadata::DSL do
       label "pub"
       uri "http://some-organization.com"
     end
+
+    p.label.should == "pub"
     generate_n3[%r{dct:publisher <(.+)> .},1].should == "http://some-organization.com"
   end
 

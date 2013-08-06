@@ -44,8 +44,13 @@ module R2RDF
       end_str = ""
 
       if fields[:subject] && fields[:subject].size > 0
-        str << "\tdct:subject \n"
-        fields[:subject].each{|subject| str << "\t\t" + subject + ",\n" }
+        str << "  dct:subject"
+        fields[:subject].each{|subject|
+          sub = RDF::Resource(subject)
+          sub = RDF::Literal(subject) unless sub.valid?
+
+          str << " " + sub.to_base + ",\n"
+        }
         str[-2] = ";"
       end
 

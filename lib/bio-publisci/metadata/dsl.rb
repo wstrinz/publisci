@@ -37,9 +37,10 @@ module PubliSci
 
       def generate_n3
         opts = {}
-        %w{var creator topic description title}.each{|field|
+        %w{var creator description title}.each{|field|
           opts[field.to_sym] = send(field.to_sym) if send(field.to_sym)
         }
+        opts[:subject] = topic if topic
         publishers.each{|pub|
           opts[:publishers] ||= [] << {label: pub.label, uri: pub.uri}
         } if publishers
