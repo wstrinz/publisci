@@ -2,29 +2,35 @@ module PubliSci
   module Metadata
     module DSL
 
-      def dataset(name=nil)
-        set_or_get('dataset',name)
+      def var(name=nil)
+        set_or_get('var',name)
       end
+      alias_method :dataset, :var
 
       def creator(id=nil)
         set_or_get('creator',id)
-      end
-
-      def subject(sub=nil)
-        add_or_get('subject',sub)
       end
 
       def description(desc=nil)
         set_or_get('description',desc)
       end
 
-      def publisher(pub=nil)
-        add_or_get('publisher',pub)
+      def title(desc=nil)
+        set_or_get('title',desc)
       end
+
+      def topic(sub=nil)
+        add_or_get('topic',sub)
+      end
+
+      def publishers(pub=nil)
+        add_or_get('publishers',pub)
+      end
+      alias_method :publisher, :publishers
 
       def generate_n3
         opts = {}
-        %w{dataset creator subject description publisher}.each{|field|
+        %w{var creator topic description publishers title}.each{|field|
           opts[field.to_sym] = send(field.to_sym) if send(field.to_sym)
         }
         gen = Class.new do
@@ -51,6 +57,7 @@ module PubliSci
         if input
           instance_variable_set("@#{var}", []) unless ivar
           instance_variable_get("@#{var}") << input
+          instance_variable_get("@#{var}")
         else
           ivar
         end

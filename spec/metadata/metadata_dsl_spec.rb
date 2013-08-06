@@ -4,22 +4,25 @@ include PubliSci::Metadata::DSL
 describe PubliSci::Metadata::DSL do
 
   before(:each) do
-    # @evaluator = PubliSci::Prov::DSL::Singleton.new
+    PubliSci::Prov.registry.clear
   end
 
-  it "can generate basic metadata as n3", no_travis: true do
+  it "can generate basic metadata as n3" do
     dataset 'bacon'
+    title 'Bacon Data'
+    description 'a dataset about bacon'
     creator 'Will'
-    generate_n3
-    # a = agent :name
-    # a.is_a?(Agent).should be true
-    # a.subject.should == "http://rqtl.org/ns/agent/name"
+    str = generate_n3
+    str[/rdfs:label "(.+)";/,1].should == "Bacon Data"
+    str[/dct:creator "(.+)";/,1].should == "Will"
+    str[/dct:description "(.+)";/,1].should == "a dataset about bacon"
   end
 
-  # it "can specify fields manually" do
-  #   a = agent :name, subject: "http://example.org/name"
-  #   a.subject.should == "http://example.org/name"
-  # end
+  it "can add additional information about publisher" do
+    dataset 'bacon'
+    publisher label: "pub", uri: "http://asdf.com"
+    generate_n3[%r{dct:publisher <(.+)> .},1].should == "http://asdf.com"
+  end
 
   # it "can be created with a block" do
   #   a = agent :ag do
