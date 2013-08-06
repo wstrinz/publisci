@@ -15,7 +15,7 @@ describe PubliSci::Prov::Activity do
     settings.output.should == :to_repository
   end
 
-  it "can configure different repository types" do
+  it "can configure different repository types", no_travis: true do
     configure do |cfg|
       cfg.repository :fourstore
     end
