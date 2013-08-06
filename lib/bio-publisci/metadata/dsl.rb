@@ -23,16 +23,26 @@ module PubliSci
         add_or_get('topic',sub)
       end
 
-      def publishers(pub=nil)
-        add_or_get('publishers',pub)
+      def publishers(pub=nil,&block)
+        if block_given?
+          p = Publisher.new
+          p.instance_eval(&block)
+          @publishers ||= [] << p
+          p
+        else
+          add_or_get('publishers',pub)
+        end
       end
       alias_method :publisher, :publishers
 
       def generate_n3
         opts = {}
-        %w{var creator topic description publishers title}.each{|field|
+        %w{var creator topic description title}.each{|field|
           opts[field.to_sym] = send(field.to_sym) if send(field.to_sym)
         }
+        publishers.each{|pub|
+          opts[:publishers] ||= [] << {label: pub.label, uri: pub.uri}
+        } if publishers
         gen = Class.new do
           include R2RDF::Metadata
         end

@@ -20,8 +20,11 @@ describe PubliSci::Metadata::DSL do
 
   it "can add additional information about publisher" do
     dataset 'bacon'
-    publisher label: "pub", uri: "http://asdf.com"
-    generate_n3[%r{dct:publisher <(.+)> .},1].should == "http://asdf.com"
+    p = publisher do
+      label "pub"
+      uri "http://some-organization.com"
+    end
+    generate_n3[%r{dct:publisher <(.+)> .},1].should == "http://some-organization.com"
   end
 
   # it "can be created with a block" do
