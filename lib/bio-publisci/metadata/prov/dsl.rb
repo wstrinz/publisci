@@ -83,11 +83,16 @@ module PubliSci
         end
       end
 
+      def settings
+        Prov.configuration
+      end
+
       def return_objects
         Prov.registry
       end
 
-      def to_repository(repo=:in_memory,turtle_string=(Prov.prefixes+generate_n3))
+      def to_repository(turtle_string=(Prov.prefixes+generate_n3))
+        repo = settings.repository
         case repo
         when :in_memory
           repo = RDF::Repository.new
