@@ -1,5 +1,4 @@
 require 'rdf/4store'
-require 'spira'
 
 module R2RDF
   module ORM

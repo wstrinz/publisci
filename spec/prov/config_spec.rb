@@ -2,7 +2,7 @@ require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
 include PubliSci::Prov
 
-describe PubliSci::Prov::Activity do
+describe PubliSci::Prov::Configuration do
 
   before(:each) do
     @evaluator = PubliSci::Prov::DSL::Singleton.new

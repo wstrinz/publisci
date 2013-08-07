@@ -1,7 +1,7 @@
 require 'rdf/4store'
 
-begin
-  require 'spira'
+# begin
+  # require 'spira'
 
 module PubliSci
   module Prov
@@ -73,6 +73,6 @@ module PubliSci
     end
   end
 end
-rescue LoadError
-  puts "spira not installed, ORM unavailable"
-end
+# rescue LoadError
+#   puts "spira not installed, ORM unavailable"
+# end
