@@ -1,5 +1,6 @@
 module PubliSci
-  module Prov
+  class Prov
+    # include PubliSci::Registry
     def self.configuration
       @config ||= Configuration.new
     end

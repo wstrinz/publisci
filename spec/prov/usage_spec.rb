@@ -1,11 +1,10 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
 
 describe PubliSci::Prov::Usage do
 
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "can create simple associations" do

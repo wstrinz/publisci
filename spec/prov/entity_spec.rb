@@ -1,15 +1,14 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
 
 describe PubliSci::Prov::Entity do
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "can generate entity fields from symbol" do
     e = entity :name
-    e.is_a?(Entity).should be true
+    e.is_a?(Prov::Entity).should be true
     e.subject.should == "http://rqtl.org/ns/entity/name"
   end
 
@@ -23,7 +22,7 @@ describe PubliSci::Prov::Entity do
       subject "http://things.com/stuff"
       source "/somefile.txt"
     end
-    e.is_a?(Entity).should be true
+    e.is_a?(Prov::Entity).should be true
     e.subject.should == "http://things.com/stuff"
     e.source[0].should == "/somefile.txt"
   end

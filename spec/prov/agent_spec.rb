@@ -1,16 +1,15 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
 
 describe PubliSci::Prov::Agent do
 
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "can generate agent fields from symbol" do
     a = agent :name
-    a.is_a?(Agent).should be true
+    a.is_a?(Prov::Agent).should be true
     a.subject.should == "http://rqtl.org/ns/agent/name"
   end
 
@@ -24,7 +23,7 @@ describe PubliSci::Prov::Agent do
       subject "http://things.com/stuff"
       name "Mr Person"
     end
-    a.is_a?(Agent).should be true
+    a.is_a?(Prov::Agent).should be true
     a.subject.should == "http://things.com/stuff"
     a.name.should == "Mr Person"
   end

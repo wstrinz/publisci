@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     module Dereferencable
       def dereference
         self.map{|x|

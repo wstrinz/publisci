@@ -1,10 +1,10 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
+# include PubliSci::Prov
 
 describe PubliSci::Prov::Model do
   it "can be loaded from" do
-    ev = PubliSci::Prov::DSL::Singleton.new
+    ev = PubliSci::Prov::DSL::Instance.new
     r = ev.instance_eval do
       entity :datathing
 

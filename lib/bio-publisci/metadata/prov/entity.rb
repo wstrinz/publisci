@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     class Entity
       include Prov::Element
 
@@ -28,31 +28,10 @@ module PubliSci
 
       def attributed_to(agent=nil)
         basic_keyword(:attributed_to,:agents,agent)
-        # if agent
-        #   @attributed_to = agent
-        # elsif @attributed_to.is_a? Symbol
-        #   raise "UnknownAgent: #{@attributed_to}" unless Prov.agents[@attributed_to]
-        #   @attributed_to = Prov.agents[@attributed_to]
-        # else
-        #   @attributed_to
-        # end
       end
 
       def derived_from(entity=nil,&block)
         block_list(:derived_from,:derivations,Derivation,Derivations,entity,&block)
-        # if block_given?
-        #   deriv = Derivation.new
-        #   deriv.instance_eval(&block)
-        #   (@derived_from ||= Derivations.new) << deriv
-        #   Prov.register(nil,deriv)
-        # else
-        #   if entity
-
-        #     (@derived_from ||= Derivations.new) << entity
-        #   else
-        #     @derived_from
-        #   end
-        # end
       end
 
       def to_n3

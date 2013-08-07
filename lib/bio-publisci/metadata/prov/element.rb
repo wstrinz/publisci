@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     module Element
       include PubliSci::Vocabulary
       include PubliSci::CustomPredicate

@@ -1,11 +1,10 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
 
 describe PubliSci::Prov::Role do
 
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "creates a role in a used block" do

@@ -4,7 +4,7 @@ require 'rdf/4store'
   # require 'spira'
 
 module PubliSci
-  module Prov
+  class Prov
     module Model
       PROV ||= RDF::Vocabulary.new(RDF::URI.new('http://www.w3.org/ns/prov#'))
 

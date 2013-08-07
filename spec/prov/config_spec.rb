@@ -1,11 +1,11 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
+include PubliSci
 
 describe PubliSci::Prov::Configuration do
 
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "can set basic config methods" do
@@ -20,7 +20,7 @@ describe PubliSci::Prov::Configuration do
       cfg.repository :fourstore
     end
     a = activity :name
-    a.is_a?(Activity).should be true
+    a.is_a?(Prov::Activity).should be true
     r=to_repository
     a.subject.should == "http://rqtl.org/ns/activity/name"
     r.is_a?(RDF::FourStore::Repository).should be true

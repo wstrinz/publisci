@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     class Derivation
 
       include PubliSci::CustomPredicate

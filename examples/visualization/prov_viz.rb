@@ -55,7 +55,7 @@ end
 @nodemap={}
 @g = GraphViz.new(:G, type: :digraph)
 infile = ARGV[0] || 'primer.prov'
-runner = PubliSci::Prov::DSL::Singleton.new
+runner = PubliSci::Prov::DSL::Instance.new
 runner.instance_eval(IO.read(infile),infile)
 repo = runner.to_repository
 Spira.add_repository :default, repo

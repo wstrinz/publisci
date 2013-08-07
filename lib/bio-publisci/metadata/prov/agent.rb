@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     class Agent
       include Prov::Element
       attr_accessor :organization

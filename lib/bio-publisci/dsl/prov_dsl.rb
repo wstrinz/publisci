@@ -1,10 +1,10 @@
 module PubliSci
-  module Prov
+  class Prov
     module DSL
 
       include PubliSci::Vocabulary
 
-      class Singleton
+      class Instance
         include Prov::DSL
 
         def initialize

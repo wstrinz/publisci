@@ -1,16 +1,16 @@
 require_relative '../../lib/bio-publisci.rb'
 include PubliSci::Prov::DSL
-include PubliSci::Prov
+# include PubliSci
 
 describe PubliSci::Prov::Activity do
 
   before(:each) do
-    @evaluator = PubliSci::Prov::DSL::Singleton.new
+    @evaluator = PubliSci::Prov::DSL::Instance.new
   end
 
   it "can generate activity fields from symbol" do
     a = activity :name
-    a.is_a?(Activity).should be true
+    a.is_a?(Prov::Activity).should be true
     a.subject.should == "http://rqtl.org/ns/activity/name"
   end
 
@@ -25,7 +25,7 @@ describe PubliSci::Prov::Activity do
       subject "http://things.com/stuff"
       generated :data
     end
-    a.is_a?(Activity).should be true
+    a.is_a?(Prov::Activity).should be true
     a.subject.should == "http://things.com/stuff"
   end
 

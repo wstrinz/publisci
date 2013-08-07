@@ -1,5 +1,5 @@
 module PubliSci
-  module Prov
+  class Prov
     class Role
       # attr_writer :comment
 
