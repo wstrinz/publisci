@@ -49,7 +49,6 @@ module PubliSci
 
         add_custom(str)
 
-        str[-2] = ".\n"
         str
       end
 

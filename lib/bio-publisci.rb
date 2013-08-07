@@ -7,11 +7,11 @@ require 'rserve'
 require 'sparql'
 require 'sparql/client'
 require 'rdf/turtle'
-# begin
+begin
 	require 'spira'
-# rescue LoadError
-	#puts "can't load spira; orm unavailable"
-# end
+rescue LoadError
+	puts "can't load spira; orm unavailable"
+end
 
 def load_folder(folder)
 	Dir.foreach(File.dirname(__FILE__) + "/#{folder}") do |file|
