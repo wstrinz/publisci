@@ -5,11 +5,15 @@ module PubliSci
     end
 
     def metadata(&block)
-
+      inst=PubliSci::Metadata::DSL::Instance.new
+      inst.instance_eval(&block)
+      inst
     end
 
     def provenance(&block)
-      puts PubliSci::Prov::DSL.module_eval(&block)
+      inst=PubliSci::Prov::DSL::Instance.new
+      inst.instance_eval(&block)
+      inst
     end
   end
 end

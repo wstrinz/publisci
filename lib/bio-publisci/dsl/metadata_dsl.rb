@@ -2,6 +2,14 @@ module PubliSci
   class Metadata
     module DSL
 
+      class Instance
+        include Metadata::DSL
+
+        def initialize
+          Metadata.registry.clear
+        end
+      end
+
       def var(name=nil)
         set_or_get('var',name)
       end
@@ -10,6 +18,7 @@ module PubliSci
       def creator(id=nil)
         set_or_get('creator',id)
       end
+      alias_method :name, :creator
 
       def description(desc=nil)
         set_or_get('description',desc)
