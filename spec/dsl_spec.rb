@@ -6,21 +6,30 @@ describe PubliSci::DSL do
   before(:each) do
     PubliSci::Prov.registry.clear
     PubliSci::Metadata.registry.clear
+    PubliSci::Dataset.registry.clear
   end
 
-  it "can generate basic metadata as n3" do
+  it "can generate dataset, metadata, and provenance when given a script" do
+
+    dat = data do
+      object 'spec/csv/bacon.csv'
+      generate_n3
+    end
+
     met = metadata do
       name "Will"
-      generate_n3
     end
 
     prv = provenance do
       entity :a_thing
-      generate_n3
     end
 
     met.should_not be nil
     prv.should_not be nil
+    dat.should_not be nil
+
+
+    generate_n3.size.should > 0
   end
 
 end
