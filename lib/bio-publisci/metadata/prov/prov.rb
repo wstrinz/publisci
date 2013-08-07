@@ -1,40 +1,30 @@
 module PubliSci
   class Prov
-    # include PubliSci::Registry
+    extend PubliSci::Registry
+
     def self.configuration
       @config ||= Configuration.new
     end
 
-    def self.register(name,object)
-      # puts "register #{name} #{object} #{associations.size}"
-      name = name.to_sym if name
+    def self.symbol_for(object)
       if object.is_a? Agent
-        sub = :agents
+        :agents
       elsif object.is_a? Entity
-        sub = :entities
+        :entities
       elsif object.is_a? Activity
-        sub = :activities
+        :activities
       elsif object.is_a? Association
-        sub = :associations
+        :associations
       elsif object.is_a? Plan
-        sub = :plans
+        :plans
       else
-        sub = object.class.to_s.split('::').last.downcase.to_sym
-        # raise "UnknownElement: unkown object type for #{object}"
-      end
-      if name
-        (registry[sub] ||= {})[name] = object
-      else
-        (registry[sub] ||= []) << object
+        false
       end
     end
 
-    def self.registry
-      @registry ||= {}
-    end
 
     def self.run(string)
-      sing =DSL::Singleton.new
+      sing =DSL::Instance.new
       if File.exists? string
         sing.instance_eval(IO.read(string),string)
       else

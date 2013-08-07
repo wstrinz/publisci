@@ -1,7 +1,7 @@
-module R2RDF
+module PubliSci
   # handles connection and messaging to/from the triple store
   class Store
-    include R2RDF::Query
+    include PubliSci::Query
 
     def defaults
       {
@@ -27,7 +27,7 @@ module R2RDF
     end
 
     def add_all(dir, graph, pattern=nil)
-      pattern = /.+\.ttl/ if pattern == :turtle || pattern == :ttl 
+      pattern = /.+\.ttl/ if pattern == :turtle || pattern == :ttl
 
       files = Dir.entries(dir) - %w(. ..)
       files = files.grep(pattern) if pattern.is_a? Regexp

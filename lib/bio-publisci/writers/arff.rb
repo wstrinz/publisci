@@ -1,9 +1,9 @@
-module R2RDF
+module PubliSci
   module Writer
     class ARFF
-      include R2RDF::Query
-      include R2RDF::Parser
-      include R2RDF::Analyzer
+      include PubliSci::Query
+      include PubliSci::Parser
+      include PubliSci::Analyzer
 
       def build_arff(relation, attributes, data, source)
         str = <<-EOS
@@ -11,7 +11,7 @@ module R2RDF
 %
 % 2. Sources:
 %    (a) Generated from RDF source #{source}
-%     
+%
 @RELATION #{relation}
 
 EOS
@@ -30,7 +30,7 @@ EOS
         puts "loading #{turtle_file}" if verbose
         repo = RDF::Repository.load(turtle_file)
         puts "loaded #{repo.size} statements into temporary repo" if verbose
-        
+
         dims = execute_from_file("dimensions.rq",repo,:graph).to_h.map{|d| [d[:dimension].to_s, d[:label].to_s]}
         meas = execute_from_file("measures.rq",repo,:graph).to_h.map{|m| [m[:measure].to_s, m[:label].to_s]}
         relation = execute_from_file("dataset.rq",repo,:graph).to_h.first[:label].to_s

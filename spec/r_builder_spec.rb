@@ -7,18 +7,18 @@
 require_relative '../lib/bio-publisci.rb'
 
 
-describe R2RDF::Writer::Dataframe do
+describe PubliSci::Writer::Dataframe do
 
 	context "when using r/qtl dataframe", no_travis: true do
 
-		before(:all) do 
+		before(:all) do
 			@r = Rserve::Connection.new
 			@r.eval <<-EOF
 				library(qtl)
 				data(listeria)
 				mr = scanone(listeria,method="mr")
 EOF
-			@builder = R2RDF::Writer::Builder.new
+			@builder = PubliSci::Writer::Builder.new
 		end
 
 		it "produces equivalent dataframe from rdf" #do

@@ -1,4 +1,4 @@
-module R2RDF
+module PubliSci
   module Interactive
     #to be called by other classes if user input is required
 

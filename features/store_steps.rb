@@ -1,7 +1,7 @@
 require_relative '../lib/bio-publisci.rb'
 
 Given /a store of type (.*?)$/ do |type|
-	@store = R2RDF::Store.new(type: :"#{type}")
+	@store = PubliSci::Store.new(type: :"#{type}")
 end
 
 When /^I call the stores add method with the turtle file (.*?) and an RDF::(.*?)$/ do |file,graph|

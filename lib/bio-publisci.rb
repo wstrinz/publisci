@@ -22,7 +22,6 @@ def load_folder(folder)
   end
 end
 
-load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/prov.rb'
 load_folder('bio-publisci/mixins')
 
 load File.dirname(__FILE__) + '/bio-publisci/dataset/interactive.rb'
@@ -35,6 +34,7 @@ load File.dirname(__FILE__) + '/bio-publisci/dataset/data_cube.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/dataset_for.rb'
 load File.dirname(__FILE__) + '/bio-publisci/output.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/element.rb'
+load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/prov.rb'
 
 
 load_folder('bio-publisci/dsl')

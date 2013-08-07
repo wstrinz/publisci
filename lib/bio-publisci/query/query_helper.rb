@@ -16,7 +16,7 @@ module RDF
 	end
 end
 
-module R2RDF
+module PubliSci
   #.gsub(/^\s+/,'')
   module Query
     def vocabulary
@@ -30,19 +30,19 @@ module R2RDF
       }
     end
 
-    
+
 
     # def execute_internal(query,repo)
     #   SPARQL.execute(query,repo)
     # end
 
     def execute(string,store,type=:fourstore)
-    	if type == :graph || store.is_a?(RDF::Graph) || store.is_a?(RDF::Repository)    		
+    	if type == :graph || store.is_a?(RDF::Graph) || store.is_a?(RDF::Repository)
 				sparql = SPARQL::Client.new(store)
-			elsif store.is_a? R2RDF::Store
-				sparql = SPARQL::Client.new(store.url+"/sparql/")				
+			elsif store.is_a? PubliSci::Store
+				sparql = SPARQL::Client.new(store.url+"/sparql/")
 			elsif type == :fourstore
-				sparql = SPARQL::Client.new(store+"/sparql/")				
+				sparql = SPARQL::Client.new(store+"/sparql/")
       end
       sparql.query(string)
     end
@@ -62,13 +62,13 @@ module R2RDF
 
 #     def prefixes
 #       <<-EOF
-# PREFIX ns:     <http://www.rqtl.org/ns/#> 
-# PREFIX qb:   <http://purl.org/linked-data/cube#> 
-# PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-# PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-# PREFIX prop: <http://www.rqtl.org/dc/properties/> 
+# PREFIX ns:     <http://www.rqtl.org/ns/#>
+# PREFIX qb:   <http://purl.org/linked-data/cube#>
+# PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+# PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+# PREFIX prop: <http://www.rqtl.org/dc/properties/>
 # PREFIX cs:   <http://www.rqtl.org/dc/cs/>
-# PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+# PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 #       EOF
 #     end
@@ -109,6 +109,6 @@ SELECT DISTINCT ?label WHERE {
   end
 
   class QueryHelper
-    include R2RDF::Query
-  end  
+    include PubliSci::Query
+  end
 end

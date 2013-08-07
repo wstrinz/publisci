@@ -1,8 +1,8 @@
-module R2RDF
+module PubliSci
   module Reader
     class RCross
-      include R2RDF::Dataset::DataCube
-      include R2RDF::Reader::Output
+      include PubliSci::Dataset::DataCube
+      include PubliSci::Reader::Output
 
       def generate_n3(client, var, outfile_base, options={})
         meas = measures(client,var,options)

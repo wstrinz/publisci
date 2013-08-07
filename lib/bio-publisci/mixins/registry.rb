@@ -1,21 +1,12 @@
 module PubliSci
   module Registry
-    def self.register(name,object)
+    def register(name,object)
       # puts "register #{name} #{object} #{associations.size}"
       name = name.to_sym if name
-      if object.is_a? Agent
-        sub = :agents
-      elsif object.is_a? Entity
-        sub = :entities
-      elsif object.is_a? Activity
-        sub = :activities
-      elsif object.is_a? Association
-        sub = :associations
-      elsif object.is_a? Plan
-        sub = :plans
+      if symbol_for(object)
+        sub = symbol_for(object)
       else
         sub = object.class.to_s.split('::').last.downcase.to_sym
-        # raise "UnknownElement: unkown object type for #{object}"
       end
       if name
         (registry[sub] ||= {})[name] = object
@@ -24,8 +15,13 @@ module PubliSci
       end
     end
 
-    def self.registry
+    def registry
       @registry ||= {}
+    end
+
+    #should be overridden
+    def symbol_for(object)
+      false
     end
   end
 end

@@ -1,7 +1,7 @@
-module R2RDF
+module PubliSci
 	module Reader
 		class RMatrix
-			include R2RDF::Dataset::DataCube
+			include PubliSci::Dataset::DataCube
 
 			#NOTE; this is pretty much hard coded for Karl's application right now, and doesn't
 			# do any dimension or code generation. Since its a set of LOD scores indexed by dimension

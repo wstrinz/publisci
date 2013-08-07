@@ -1,4 +1,4 @@
-module R2RDF
+module PubliSci
   module Writer
     module Dataframe
 
@@ -39,7 +39,7 @@ module R2RDF
   end
 
   class Builder
-    include R2RDF::Writer::Dataframe
+    include PubliSci::Writer::Dataframe
 
 
     def from_turtle(turtle_file, connection, variable_in=nil, variable_out=nil, verbose=true, save=true)
@@ -51,7 +51,7 @@ module R2RDF
       repo = RDF::Repository.load(turtle_file)
       puts "loaded #{repo.size} statements into temporary repo" if verbose
       # connection = Rserve::Connection.new
-      query = R2RDF::QueryHelper.new
+      query = PubliSci::QueryHelper.new
       rows = get_rownames(variable_in, query, repo)
       puts "frame has #{rows.size} rows" if verbose
 
@@ -69,8 +69,8 @@ module R2RDF
       end
       puts "connecting to endpoint at #{endpoint_url}" if verbose
       sparql = SPARQL::Client.new(endpoint_url)
-      # client = R2RDF::Client.new
-      query = R2RDF::QueryHelper.new
+      # client = PubliSci::Client.new
+      query = PubliSci::QueryHelper.new
 
       rows = query.get_ary(sparql.query(query.row_names(variable_in))).flatten
 

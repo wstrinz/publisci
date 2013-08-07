@@ -1,6 +1,6 @@
-module R2RDF
+module PubliSci
   class Dataset
-    extend R2RDF::Interactive
+    extend PubliSci::Interactive
 
     def self.for(object, options={}, ask_on_ambiguous=true)
 
@@ -23,7 +23,7 @@ module R2RDF
           when ".RData"
             r_object(object, options, ask_on_ambiguous)
           when /.csv/i
-            R2RDF::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
+            PubliSci::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
           end
         else
           raise "Unable to find reader for File or String"
@@ -49,7 +49,7 @@ module R2RDF
         r_classes = con.eval("class(#{var})").to_ruby
 
         if r_classes.include? "data.frame"
-          df = R2RDF::Reader::Dataframe.new
+          df = PubliSci::Reader::Dataframe.new
           unless options[:dimensions] || !ask_on_ambiguous
             dims = con.eval("names(#{var})").to_ruby
             puts "Which dimensions? #{dims}"
@@ -70,7 +70,7 @@ module R2RDF
           df.generate_n3(con.eval(var),var,options)
 
         elsif r_classes.include? "cross"
-          bc = R2RDF::Reader::RCross.new
+          bc = PubliSci::Reader::RCross.new
 
           unless options[:measures] || !ask_on_ambiguous
             pheno_names = con.eval("names(#{var}$pheno)").to_ruby
@@ -91,7 +91,7 @@ module R2RDF
           bc.generate_n3(con, var, base, options)
 
         elsif r_classes.include? "matrix"
-          mat = R2RDF::Reader::RMatrix.new
+          mat = PubliSci::Reader::RMatrix.new
 
           unless options[:measures] || !ask_on_ambiguous
             puts "Row label"
@@ -118,13 +118,13 @@ module R2RDF
 
           mat.generate_n3(con, var, base, options)
         else
-          raise "no R2RDF::Reader found for #{r_classes}"
+          raise "no PubliSci::Reader found for #{r_classes}"
         end
 
       elsif object.is_a? Rserve::REXP
         if object.attr.payload["class"].payload.first
 
-          df = R2RDF::Reader::Dataframe.new
+          df = PubliSci::Reader::Dataframe.new
 
           var = nil
 

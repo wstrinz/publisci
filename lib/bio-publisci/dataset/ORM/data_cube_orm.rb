@@ -1,17 +1,17 @@
-module R2RDF
+module PubliSci
   module ORM
     class DataCube
-      extend R2RDF::Dataset::DataCube
-      extend R2RDF::Analyzer
-      extend R2RDF::Metadata
-      extend R2RDF::Query
-      extend R2RDF::Parser
+      extend PubliSci::Dataset::DataCube
+      extend PubliSci::Analyzer
+      # extend PubliSci::Metadata
+      extend PubliSci::Query
+      extend PubliSci::Parser
 
-      include R2RDF::Dataset::DataCube
-      include R2RDF::Analyzer
-      include R2RDF::Metadata
-      include R2RDF::Query
-      include R2RDF::Parser
+      include PubliSci::Dataset::DataCube
+      include PubliSci::Analyzer
+      include PubliSci::Metadata::Generator
+      include PubliSci::Query
+      include PubliSci::Parser
 
       attr_accessor :labels
       attr_accessor :dimensions

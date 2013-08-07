@@ -1,5 +1,5 @@
 module PubliSci
-  module Metadata
+  class Metadata
     module DSL
 
       def var(name=nil)
@@ -44,9 +44,7 @@ module PubliSci
         publishers.each{|pub|
           opts[:publishers] ||= [] << {label: pub.label, uri: pub.uri}
         } if publishers
-        gen = Class.new do
-          include R2RDF::Metadata
-        end
+        gen = Class.new {include PubliSci::Metadata::Generator}
 
         gen.new.basic(opts)
       end

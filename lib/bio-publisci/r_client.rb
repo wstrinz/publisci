@@ -1,6 +1,6 @@
-module R2RDF
+module PubliSci
 	module Rconnect
-		
+
 		def connect(address=nil)
 			if address
 				Rserve::Connection.new(address)
@@ -22,12 +22,12 @@ module R2RDF
 			connection.eval("ls()")
 		end
 
-	end 
+	end
 
 	class Client
-		include R2RDF::Rconnect
+		include PubliSci::Rconnect
     attr :R
-    
+
 		def initialize(auto=true, loc=Dir.home)
       @R = connect
 			@loc = loc

@@ -1,7 +1,7 @@
 require_relative '../../lib/bio-publisci.rb'
 
 describe PubliSci::Metadata::DSL do
-include PubliSci::Metadata::DSL
+  include PubliSci::Metadata::DSL
 
   before(:each) do
     PubliSci::Prov.registry.clear

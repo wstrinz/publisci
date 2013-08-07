@@ -1,7 +1,7 @@
 require_relative '../../lib/bio-publisci.rb'
 
-describe R2RDF::Reader::Dataframe do
-	
+describe PubliSci::Reader::Dataframe do
+
 	def create_graph(turtle_string)
 		f = Tempfile.new('graph')
 		f.write(turtle_string)
@@ -12,9 +12,9 @@ describe R2RDF::Reader::Dataframe do
 	end
 
   context "with r/qtl dataframe", no_travis: true do
-		before(:all) do 
+		before(:all) do
 			@r = Rserve::Connection.new
-			@generator = R2RDF::Reader::Dataframe.new
+			@generator = PubliSci::Reader::Dataframe.new
 			@r.eval <<-EOF
 				library(qtl)
 				data(listeria)
@@ -28,7 +28,7 @@ EOF
 			turtle = @generator.generate_n3(@rexp,'mr')
 			turtle.is_a?(String).should be true
 		end
-		
+
 		it "creates correct graph according to refrence file" do
 			reference = IO.read(File.dirname(__FILE__) + '/../turtle/reference')
 			@turtle.should eq reference
@@ -39,6 +39,6 @@ EOF
 		end
 	end
 
-		
+
 
 end

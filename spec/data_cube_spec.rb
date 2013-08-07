@@ -7,13 +7,13 @@
 require_relative '../lib/bio-publisci.rb'
 
 
-describe R2RDF::Dataset::DataCube do
+describe PubliSci::Dataset::DataCube do
 
 	context "with Plain Old Ruby objects" do
 		#define a temporary class to use module methods
 		before(:all) do
 			class Gen
-				include R2RDF::Dataset::DataCube
+				include PubliSci::Dataset::DataCube
 			end
 
 			@generator = Gen.new
@@ -21,17 +21,17 @@ describe R2RDF::Dataset::DataCube do
 			@dimensions = ['producer', 'pricerange']
 			@codes = @dimensions #all dimensions coded for the tests
 			@labels = %w(hormel newskies whys)
-			@data = 
+			@data =
 			{
 				"producer" =>      ["hormel","newskies",  "whys"],
 				"pricerange" =>    ["low",   "medium",    "nonexistant"],
 				"chunkiness"=>     [1,         6,          9001],
-				"deliciousness"=>  [1,         9,          6]  
+				"deliciousness"=>  [1,         9,          6]
 			}
 		end
 
 		it "should have correct output according to the reference file" do
-			
+
 			turtle_string = @generator.generate(@measures, @dimensions, @codes,	@data, @labels, 'bacon')
 			ref = IO.read(File.dirname(__FILE__) + '/turtle/bacon')
 			turtle_string.should == ref
@@ -45,12 +45,12 @@ describe R2RDF::Dataset::DataCube do
 					"producer" =>      "missingbacon",
 					"pricerange" =>    "unknown",
 					"chunkiness"=>     nil,
-					"deliciousness"=>  nil,  
+					"deliciousness"=>  nil,
 				}
 				missingobs.map{|k,v| @missing_data[k] << v}
 			end
 
-			it "skips observations with missing values by default" do				
+			it "skips observations with missing values by default" do
 				turtle_string = @generator.generate(@measures, @dimensions, @codes,	@missing_data, @labels + ["missingbacon"], 'bacon')
 				turtle_string[/.*obsmissingbacon.*\n/].should be nil
 			end
@@ -97,16 +97,16 @@ describe R2RDF::Dataset::DataCube do
 
 			it 'generates observations' do
 				#measures, dimensions, codes, var, observation_labels, data, options={}
-				
+
 				observations = @generator.observations(@measures, @dimensions, @codes, @data, @labels, "bacon")
 				observations.is_a?(Array).should == true
 				observations.first.is_a?(String).should == true
 			end
 	end
-	
+
   context "under official integrity constraints" do
   	before(:all) do
-  		@graph = RDF::Graph.load(File.dirname(__FILE__) + '/turtle/reference', :format => :ttl)  		
+  		@graph = RDF::Graph.load(File.dirname(__FILE__) + '/turtle/reference', :format => :ttl)
 			@checks = {}
 			Dir.foreach(File.dirname(__FILE__) + '/queries/integrity') do |file|
 				if file.split('.').last == 'rq'
@@ -156,7 +156,7 @@ describe R2RDF::Dataset::DataCube do
   		# SPARQL.execute(@checks['19_2'], @graph).first.should be_nil
   	end
   end
-		
+
 
 		it "can set dimensions vs measures via hash" do
 

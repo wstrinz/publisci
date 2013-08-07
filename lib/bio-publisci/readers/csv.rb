@@ -1,8 +1,8 @@
-module R2RDF
+module PubliSci
 	module Reader
 		class CSV
-      include R2RDF::Dataset::DataCube
-			include R2RDF::Interactive
+      include PubliSci::Dataset::DataCube
+			include PubliSci::Interactive
 
       def automatic(file=nil,dataset_name=nil,options={},interactive=true)
         #to do

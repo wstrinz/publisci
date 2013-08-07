@@ -6,7 +6,7 @@ require_relative '../../lib/bio-publisci.rb'
 
 require 'tempfile'
 
-describe R2RDF::Reader::RMatrix do
+describe PubliSci::Reader::RMatrix do
 
 	def create_graph(turtle_string)
 		f = Tempfile.new('graph')
@@ -18,7 +18,7 @@ describe R2RDF::Reader::RMatrix do
 	end
 
 	before(:each) do
-		@generator = R2RDF::Reader::RMatrix.new
+		@generator = PubliSci::Reader::RMatrix.new
 		@connection = Rserve::Connection.new
 	end
 

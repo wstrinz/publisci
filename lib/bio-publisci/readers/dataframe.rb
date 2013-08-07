@@ -1,8 +1,8 @@
-module R2RDF
+module PubliSci
 		module Reader
 		class Dataframe
-      include R2RDF::Dataset::DataCube
-			include R2RDF::Reader::Output
+      include PubliSci::Dataset::DataCube
+			include PubliSci::Reader::Output
 
 			# def initialize(var)
 			# 	@var = var

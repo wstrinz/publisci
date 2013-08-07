@@ -1,8 +1,6 @@
 Given(/^a class which includes the Metadata module$/) do
-  class Meta
-    include R2RDF::Metadata
-  end
-  @klass = Meta
+
+  @klass = Class.new {include PubliSci::Metadata::Generator}
 end
 
 Given(/^the source object (\{.+\})$/) do |fields|

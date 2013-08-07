@@ -1,5 +1,5 @@
-module R2RDF
-  
+module PubliSci
+
   #handles analysis of R expression to extract properties and recognize potential
   #ambiguity
   module Analyzer
@@ -13,10 +13,10 @@ module R2RDF
   			data.map{|datum|
   				return true if dirty?(datum)
   			}
-  		else 
+  		else
   			dirty_characters = [".",' ']
   			if data.to_s.scan(/./) & dirty_characters
-  				true 
+  				true
   			else
   				false
   			end

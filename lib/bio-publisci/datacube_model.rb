@@ -1,6 +1,6 @@
 require 'rdf/4store'
 
-module R2RDF
+module PubliSci
   module ORM
 
     # class Person < Spira::Base
@@ -52,7 +52,7 @@ module R2RDF
     end
 
     def observation
-      unless R2RDF::ORM.const_defined?("Observation")
+      unless PubliSci::ORM.const_defined?("Observation")
         obs = Class.new(Spira::Base) do
           type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
 
@@ -62,13 +62,13 @@ module R2RDF
             property strip_uri(component.subject.to_s), predicate: component.subject
           }
         end
-        R2RDF::ORM.const_set("Observation",obs)
+        PubliSci::ORM.const_set("Observation",obs)
       end
       Observation
     end
 
     def reload_observation
-      R2RDF::ORM.send(:remove_const, "Observation")
+      PubliSci::ORM.send(:remove_const, "Observation")
       observation
     end
 

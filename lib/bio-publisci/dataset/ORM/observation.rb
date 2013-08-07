@@ -1,4 +1,4 @@
-module R2RDF
+module PubliSci
 		module ORM
 			class Observation
 				attr_accessor :data

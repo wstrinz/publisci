@@ -1,5 +1,5 @@
 Given(/^a (.*) writer$/) do |type|
-  @writer = R2RDF::Writer.const_get(type).new
+  @writer = PubliSci::Writer.const_get(type).new
 end
 
 When(/^I call its from_turtle method on the file (.*)$/) do |file|

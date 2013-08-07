@@ -1,15 +1,15 @@
-module R2RDF
+module PubliSci
 		module Reader
 		class ARFF
-			include R2RDF::Dataset::DataCube
+			include PubliSci::Dataset::DataCube
 			def generate_n3(arff, options={})
-				arff = IO.read(arff) if File.exist? arff	
+				arff = IO.read(arff) if File.exist? arff
 				options[:no_labels] = true # unless options[:no_labels] == nil
 				@options = options
 				comps =  components(arff)
 				obs = data(arff, comps.keys)
 				repl = generate(comps.reject{|c| comps[c][:codes]}.keys, comps.select{|c| comps[c][:codes]}.keys, comps.select{|c| comps[c][:codes]}.keys, obs, (1..obs.first[1].size).to_a, relation(arff), options)
-				
+
 			end
 
 			def relation(arff)
@@ -52,7 +52,7 @@ module R2RDF
 		# 			[@options[:row_label]]
 		# 		else
 		# 			["refRow"]
-		# 		end	
+		# 		end
 		# 	end
 
 		# 	def measures

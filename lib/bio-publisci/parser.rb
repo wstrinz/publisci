@@ -1,4 +1,4 @@
-module R2RDF
+module PubliSci
 	module Parser
 
     def is_uri?(string)

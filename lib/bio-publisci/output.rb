@@ -1,4 +1,4 @@
-module R2RDF
+module PubliSci
   module Reader
     module Output
       def output(string, options={},append=false)

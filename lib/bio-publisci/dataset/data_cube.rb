@@ -5,10 +5,10 @@ class String
   end
 end
 
-module R2RDF
+module PubliSci
   class Dataset
     module DataCube
-      include R2RDF::Parser
+      include PubliSci::Parser
       def defaults
       {
         type: :dataframe,

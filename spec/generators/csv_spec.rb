@@ -5,8 +5,8 @@ require_relative '../../lib/bio-publisci.rb'
 # require 'rdf/turtle'
 require 'tempfile'
 
-describe R2RDF::Reader::CSV do
-	
+describe PubliSci::Reader::CSV do
+
 	def create_graph(turtle_string)
 		f = Tempfile.new('graph')
 		f.write(turtle_string)
@@ -16,8 +16,8 @@ describe R2RDF::Reader::CSV do
 		graph
 	end
 
-	before(:each) do 
-		@generator = R2RDF::Reader::CSV.new
+	before(:each) do
+		@generator = PubliSci::Reader::CSV.new
 	end
 
 	context 'with reference CSV' do

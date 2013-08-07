@@ -1,5 +1,5 @@
 module PubliSci
-  module Metadata
+  class Metadata
     class Publisher
 
       def uri(uri=nil)
