@@ -30,12 +30,40 @@ module PubliSci
       inst
     end
 
+    def configuration
+      @_dsl_config ||= DSL::Configuration.new
+    end
+
+    def configure
+      yield configuration
+    end
+
+    def settings
+      configuration
+    end
+
     def generate_n3
       out = ""
       @_dsl_data.each{|dat| out << dat.generate_n3 } if @_dsl_data
       out << @_dsl_metadata.generate_n3 if @_dsl_metadata
       out << @_dsl_prov.generate_n3 if @_dsl_prov
       out
+    end
+
+    def to_repository(turtle_string=(Prov.prefixes+generate_n3))
+      repo = settings.repository
+      case repo
+      when :in_memory
+        repo = RDF::Repository.new
+      when :fourstore
+        repo = RDF::FourStore::Repository.new('http://localhost:8080')
+      end
+      f = Tempfile.new('repo')
+      f.write(turtle_string)
+      f.close
+      repo.load(f.path, :format => :ttl)
+      f.unlink
+      repo
     end
   end
 end

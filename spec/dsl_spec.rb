@@ -45,4 +45,18 @@ describe PubliSci::DSL do
     str = generate_n3
     str[/rdfs:label "\d"/].should == nil
   end
+
+  it "can output to in-memory repository" do
+    dat = data do
+      object 'spec/csv/bacon.csv'
+    end
+
+    repo = to_repository
+    repo.is_a?(RDF::Repository).should be true
+    repo.size.should > 0
+  end
+
+  # it "can configure from the DSL" do
+
+  # end
 end

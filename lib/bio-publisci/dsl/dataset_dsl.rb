@@ -17,6 +17,7 @@ module PubliSci
       def object(file=nil)
         set_or_get('object',file)
       end
+      alias_method :source, :object
 
       def dimension(*args)
         if args.size == 0
