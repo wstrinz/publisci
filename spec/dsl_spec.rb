@@ -13,13 +13,10 @@ describe PubliSci::DSL do
 
     dat = data do
       object 'spec/csv/bacon.csv'
-      generate_n3
     end
-
     met = metadata do
       name "Will"
     end
-
     prv = provenance do
       entity :a_thing
     end
@@ -28,8 +25,24 @@ describe PubliSci::DSL do
     prv.should_not be nil
     dat.should_not be nil
 
-
     generate_n3.size.should > 0
   end
 
+  it "can generate dataset, metadata, and provenance when given a script" do
+    dat = data do
+      object 'https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv'
+    end
+    dat.should_not be nil
+    generate_n3.size.should > 0
+  end
+
+  it "can set generator options" do
+    dat = data do
+      object 'spec/csv/bacon.csv'
+      option :no_labels, true
+    end
+
+    str = generate_n3
+    str[/rdfs:label "\d"/].should == nil
+  end
 end

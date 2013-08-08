@@ -38,6 +38,15 @@ module PubliSci
         end
       end
 
+      def option(opt=nil,value=nil)
+        if opt == nil || value == nil
+          @dataset_generator_options
+        else
+          (@dataset_generator_options ||= {})[opt] = value
+        end
+      end
+      alias_method :options, :option
+
       def settings
         Dataset.configuration
       end
@@ -48,11 +57,9 @@ module PubliSci
           opts[field.to_sym] = send(field.to_sym) if send(field.to_sym)
         }
         interact = settings.interactive
-        # publishers.each{|pub|
-        #   opts[:publishers] ||= [] << {label: pub.label, uri: pub.uri}
-        # } if publishers
-        # gen = Class.new {include PubliSci::Metadata::Generator}
-
+        if options
+          opts = opts.merge(options)
+        end
         Dataset.for(object,opts,interact)
       end
 
