@@ -99,7 +99,7 @@ module PubliSci
         when :fourstore
           repo = RDF::FourStore::Repository.new('http://localhost:8080')
         end
-        f = Tempfile.new('repo')
+        f = Tempfile.new(['repo','.ttl'])
         f.write(turtle_string)
         f.close
         repo.load(f.path, :format => :ttl)

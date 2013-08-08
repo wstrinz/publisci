@@ -50,7 +50,7 @@ module PubliSci
       out
     end
 
-    def to_repository(turtle_string=(Prov.prefixes+generate_n3))
+    def to_repository(turtle_string=generate_n3)
       repo = settings.repository
       case repo
       when :in_memory
@@ -58,10 +58,10 @@ module PubliSci
       when :fourstore
         repo = RDF::FourStore::Repository.new('http://localhost:8080')
       end
-      f = Tempfile.new('repo')
+      f=Tempfile.new(['repo','.ttl'])
       f.write(turtle_string)
       f.close
-      repo.load(f.path, :format => :ttl)
+      repo.load(f.path, :format => :ttl).to_s
       f.unlink
       repo
     end

@@ -56,7 +56,17 @@ describe PubliSci::DSL do
     repo.size.should > 0
   end
 
-  # it "can configure from the DSL" do
+  it "can output to 4store repository", no_travis: true do
+    configure do |cfg|
+      cfg.repository = :fourstore
+    end
 
-  # end
+    dat = data do
+      object 'spec/csv/bacon.csv'
+    end
+
+    repo = to_repository
+    repo.is_a?(RDF::FourStore::Repository).should be true
+    repo.size.should > 0
+  end
 end
