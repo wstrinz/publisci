@@ -25,5 +25,12 @@ describe PubliSci::Dataset do
       (turtle_string =~ /prop:pricerange/).should_not be nil
       (turtle_string =~ /prop:producer/).should_not be nil
     end
+
+    it "will attempt to load remote file if given URI" do
+      loc = 'https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv'
+      turtle_string = PubliSci::Dataset.for(loc,false)
+      (turtle_string =~ /prop:pricerange/).should_not be nil
+      (turtle_string =~ /prop:producer/).should_not be nil
+    end
   end
 end

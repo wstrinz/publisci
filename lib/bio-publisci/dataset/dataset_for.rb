@@ -1,3 +1,4 @@
+require 'open-uri'
 module PubliSci
   class Dataset
     extend PubliSci::Interactive
@@ -25,14 +26,23 @@ module PubliSci
           when /.csv/i
             PubliSci::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
           end
+        elsif object =~ %r{http[s]://.+}
+          self.for(download(object).path, options, ask_on_ambiguous)
         else
-          raise "Unable to find reader for File or String"
+          raise "Unable to find reader for File or String #{object}"
         end
       elsif object.is_a? Rserve::REXP
         r_object(object, options, ask_on_ambiguous)
       else
         raise "not recognize Ruby objects of this type yet (#{object})"
       end
+    end
+
+    def self.download(uri)
+      out = Tempfile.new(uri.split('/').last)
+      out.write open(uri).read
+      out.close
+      out
     end
 
     def self.r_object(object, options={}, ask_on_ambiguous=true)
