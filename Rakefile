@@ -21,7 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF, OWL, and related technologies }
   gem.email = "wstrinz@gmail.com"
   gem.authors = ["Will Strinz"]
-  gem.version = "0.0.6"
+  gem.version = "0.0.7"
 
   # dependencies defined in Gemfile
 end
