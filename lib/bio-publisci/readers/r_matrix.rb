@@ -76,7 +76,7 @@ module PubliSci
 				str = prefixes(var, options)
 				str << data_structure_definition(meas,[],codes,outvar,options)
 				str << dataset(outvar,options)
-    		component_specifications(meas, dim, var, options).map{ |c| str << c }
+    		component_specifications(meas, dim, codes, var, options).map{ |c| str << c }
 				measure_properties(meas,var,options).map{|m| str << m}
 
 				str

@@ -33,6 +33,11 @@ module PubliSci
       sing.output
     end
 
+    def self.reset_settings
+      Configuration.defaults.map{|k,v| configuration.send("#{k}=",v)}
+      @base_url=nil
+    end
+
     def self.agents
       registry[:agents] ||= {}
     end

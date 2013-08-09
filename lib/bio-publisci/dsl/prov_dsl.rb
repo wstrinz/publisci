@@ -6,14 +6,15 @@ module PubliSci
 
       class Instance
         include Prov::DSL
-
         def initialize
           Prov.registry.clear
+          Prov.reset_settings
         end
       end
 
       def self.included(mod)
         Prov.registry.clear
+        Prov.reset_settings
       end
 
       # def configure(&block)
