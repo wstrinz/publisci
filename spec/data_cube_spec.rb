@@ -34,7 +34,7 @@ describe PubliSci::Dataset::DataCube do
 
 			turtle_string = @generator.generate(@measures, @dimensions, @codes,	@data, @labels, 'bacon')
 			ref = IO.read(File.dirname(__FILE__) + '/turtle/bacon')
-			turtle_string.should == ref
+      turtle_string.should == ref
 		end
 
 		context "with missing values" do
@@ -78,7 +78,7 @@ describe PubliSci::Dataset::DataCube do
 			end
 
 			it 'generates component specifications' do
-				components = @generator.component_specifications(@measures , @dimensions, "bacon")
+				components = @generator.component_specifications(@measures , @dimensions, @codes, "bacon")
 				components.is_a?(Array).should == true
 				components.first.is_a?(String).should == true
 			end

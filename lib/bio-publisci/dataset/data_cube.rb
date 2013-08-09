@@ -60,6 +60,11 @@ module PubliSci
         [newm, newd, newc]
       end
 
+      def component_gen(args,options={})
+        args = Array[args].flatten
+        args.map{|arg| arg.gsub("prop:","cs:").gsub(%r{<#{options[:base_url]}/.+/(\w.+)>$},'cs:'+'\1')}
+      end
+
       def encode_data(codes,data,var,options={})
         codes = sanitize(codes)
         new_data = {}
@@ -101,7 +106,7 @@ module PubliSci
         str = prefixes(var,options)
         str << data_structure_definition(measures, dimensions, codes, var, options)
         str << dataset(var, options)
-        # component_specifications(measures, dimensions, var, options).map{ |c| str << c }
+        component_specifications(measures, dimensions, codes, var, options).map{ |c| str << c }
         dimension_properties(dimensions, codes, var, options).map{|p| str << p}
         measure_properties(measures, var, options).map{|p| str << p}
         code_lists(codes, data, var, options).map{|l| str << l}
@@ -138,14 +143,15 @@ module PubliSci
         var = sanitize([var]).first
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
-
+        cs_dims = component_gen(rdf_dimensions,options)  #rdf_dimensions.map{|d| d.gsub('prop:','cs:')}
+        cs_meas = component_gen(rdf_measures,options) #rdf_measures.map!{|m| m.gsub('prop:','cs:')}
         str = "ns:dsd-#{var} a qb:DataStructureDefinition;\n"
-        rdf_dimensions.map{|d|
-          str << "  qb:component [ qb:dimension #{d} ] ;\n"
+        cs_dims.map{|d|
+          str << "  qb:component #{d} ;\n"
         }
 
-        rdf_measures.map{|m|
-          str << "  qb:component [ qb:measure #{m} ] ;\n"
+        cs_meas.map{|m|
+          str << "  qb:component #{m} ;\n"
         }
         str[-2]='.'
         str<<"\n"
@@ -163,24 +169,29 @@ module PubliSci
         EOF
       end
 
-      def component_specifications(measure_names, dimension_names, var, options={})
+      def component_specifications(measure_names, dimension_names, codes, var, options={})
         options = defaults().merge(options)
+        rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measure_names, dimension_names, codes, options)
+        cs_dims = component_gen(rdf_dimensions,options)
+        cs_meas = component_gen(rdf_measures,options)
+        # cs_dims = rdf_dimensions.map{|d| d.gsub('prop:','cs:')}
+        # cs_meas = rdf_measures.map{|m| m.gsub('prop:','cs:')}
         specs = []
 
-          dimension_names.map{|d|
+          rdf_dimensions.each_with_index.map{|d,i|
           specs << <<-EOF.unindent
-            cs:#{d} a qb:ComponentSpecification ;
-              rdfs:label "#{d} Component" ;
-              qb:dimension prop:#{d} .
+            #{cs_dims[i]} a qb:ComponentSpecification ;
+              rdfs:label "#{strip_prefixes(strip_uri(dimension_names[i]))} Component" ;
+              qb:dimension #{d} .
 
             EOF
           }
 
-          measure_names.map{|n|
+          rdf_measures.each_with_index.map{|n,i|
             specs << <<-EOF.unindent
-              cs:#{n} a qb:ComponentSpecification ;
-                rdfs:label "#{n} Component" ;
-                qb:measure prop:#{n} .
+              #{cs_meas[i]} a qb:ComponentSpecification ;
+                rdfs:label "#{strip_prefixes(strip_uri(measure_names[i]))} Component" ;
+                qb:measure #{n} .
 
               EOF
           }

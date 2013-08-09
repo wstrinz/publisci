@@ -65,8 +65,26 @@ describe PubliSci::DSL do
       object 'spec/csv/bacon.csv'
     end
 
+    repo = RDF::FourStore::Repository.new('http://localhost:8080/')
+    old_size = repo.size
     repo = to_repository
     repo.is_a?(RDF::FourStore::Repository).should be true
-    repo.size.should > 0
+    repo.size.should > old_size
+  end
+
+  it "can output provenance to 4store", no_travis: true do
+    ev = PubliSci::Prov::DSL::Instance.new
+    str = IO.read('examples/primer-full.prov')
+    ev.instance_eval(str,'examples/primer-full.prov')
+    ev.instance_eval <<-EOF
+      configure do |cfg|
+        cfg.repository = :fourstore
+      end
+    EOF
+    repo = RDF::FourStore::Repository.new('http://localhost:8080/')
+    old_size = repo.size
+    repo = ev.to_repository
+    repo.is_a?(RDF::FourStore::Repository).should be true
+    repo.size.should > old_size
   end
 end
