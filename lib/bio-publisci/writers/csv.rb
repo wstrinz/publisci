@@ -3,28 +3,6 @@ module PubliSci
     class CSV
       include PubliSci::Query
       include PubliSci::Parser
-      # include PubliSci::Analyzer
-
-#       def build_arff(relation, attributes, data, source)
-#         str = <<-EOS
-# % 1. Title: #{relation.capitalize} Database
-# %
-# % 2. Sources:
-# %    (a) Generated from RDF source #{source}
-# %
-# @RELATION #{relation}
-
-# EOS
-
-#         Hash[attributes.sort].map{|attribute,type|
-#           str << "@ATTRIBUTE #{attribute} #{type}\n"
-#         }
-
-#         str << "\n@DATA\n"
-#         data.map { |d| str << Hash[d[1].sort].values.join(',') + "\n" }
-
-#         str
-#       end
 
       def build_csv(components,data)
         str = components.join(',') + "\n"
