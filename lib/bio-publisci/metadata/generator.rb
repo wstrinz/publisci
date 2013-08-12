@@ -39,7 +39,7 @@ module PubliSci
           dct:creator "#{fields[:creator]}";
           rdfs:comment "#{fields[:description]}";
           dct:description "#{fields[:description]}";
-          dct:issued "#{fields[:date]}"^^xsd:date;
+          dct:issued "#{fields[:date]}"^^xsd:date.
         EOF
 
         end_str = ""

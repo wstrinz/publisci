@@ -13,5 +13,12 @@ When(/^I call its from_turtle method on the turtle string$/) do
 end
 
 Then(/^I should receive a \.arff file as a string$/) do
+  puts @result
   @result.is_a?(String).should be true
 end
+
+Then(/^I should receive a \.csv file as a string$/) do
+  puts @result
+  @result.is_a?(String).should be true
+end
+

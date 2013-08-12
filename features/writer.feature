@@ -7,3 +7,8 @@ Feature: export to various formats using writers
 		Given a ARFF writer
 		When I call its from_turtle method on the file spec/turtle/bacon
 		Then I should receive a .arff file as a string
+
+  Scenario: write to CSV
+    Given a CSV writer
+    When I call its from_turtle method on the file spec/turtle/bacon
+    Then I should receive a .csv file as a string
