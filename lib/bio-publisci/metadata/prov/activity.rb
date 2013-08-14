@@ -35,6 +35,7 @@ class Prov
     def associated_with(agent=nil, &block)
       block_list(:associated,:associations,Association,Associations,agent,&block)
     end
+    alias_method :wasAssociatedWith, :associated_with
 
     def used(entity=nil, &block)
       block_list(:use,:usages,Usage,Usages,entity, &block)

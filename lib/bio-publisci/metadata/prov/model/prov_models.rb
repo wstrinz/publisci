@@ -23,6 +23,7 @@ module PubliSci
             end
           }
         end
+
       end
 
       class Agent < Spira::Base
@@ -34,10 +35,18 @@ module PubliSci
         property :foaf_name, predicate: RDF::FOAF.name
         property :foaf_given, predicate: RDF::FOAF.givenName
         property :actedOnBehalfOf, predicate: PROV.actedOnBehalfOf
-        
+
 
         def name
           foaf_given || foaf_name
+        end
+
+        def activities
+          #should do this in a SPARQL query instead
+          Activity.enum_for.map{|act|
+            subj = subject()
+            act if act.wasAssociatedWith.any?{|assoc| assoc == subj}
+          }.reject{|x| x==nil}
         end
       end
 
