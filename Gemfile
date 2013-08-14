@@ -14,7 +14,7 @@ group :development do
   gem "bio", ">= 1.4.2"
   gem "rdoc", "~> 3.12"
   gem "spoon"
-  gem "spira"
+  gem "spira", git: "https://github.com/ruby-rdf/spira.git"
 end
 
 

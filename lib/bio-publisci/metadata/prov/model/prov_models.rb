@@ -31,11 +31,10 @@ module PubliSci
         type PROV.SoftwareAgent
         type PROV.Person
         property :label, predicate: RDF::RDFS.label
-        property :wasGeneratedBy, predicate: PROV.wasGeneratedBy
         property :foaf_name, predicate: RDF::FOAF.name
         property :foaf_given, predicate: RDF::FOAF.givenName
-        property :name, predicate: PROV.actedOnBehalfOf
         property :actedOnBehalfOf, predicate: PROV.actedOnBehalfOf
+        
 
         def name
           foaf_given || foaf_name
