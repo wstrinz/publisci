@@ -2,6 +2,9 @@ module PubliSci
   module DSL
     attr_reader :base_url
 
+    class Instance
+      include PubliSci::DSL
+    end
     # Use to set base url for whole script; helps when referring to dataset
     # resources from metadata and
     def base_url=(url)

@@ -2,14 +2,6 @@ require 'rdf/4store'
 
 module PubliSci
   module ORM
-
-    # class Person < Spira::Base
-    # configure :base_uri => "http://example.org/example/people"
-
-    # property :name, :predicate => FOAF.name, :type => String
-
-    # end
-
     # class Observation < Spira::Base
     #   type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
     #   property :label, predicate: RDFS.label
@@ -31,6 +23,7 @@ module PubliSci
     class DataSet < Spira::Base
       type QB.DataSet
       property :label, predicate: RDFS.label
+      property :structure, predicate: QB.structure
 
     end
 

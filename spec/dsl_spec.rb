@@ -29,11 +29,14 @@ describe PubliSci::DSL do
   end
 
   it "can generate dataset, metadata, and provenance when given a script" do
-    dat = data do
+    ev = PubliSci::DSL::Instance.new
+    dat = ev.instance_eval <<-EOF
+    data do
       object 'https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv'
     end
+    EOF
     dat.should_not be nil
-    generate_n3.size.should > 0
+    ev.generate_n3.size.should > 0
   end
 
   it "can set generator options" do

@@ -34,6 +34,7 @@ load File.dirname(__FILE__) + '/bio-publisci/dataset/data_cube.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/dataset_for.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/configuration.rb'
 load File.dirname(__FILE__) + '/bio-publisci/dataset/dataset.rb'
+load File.dirname(__FILE__) + '/bio-publisci/datacube_model.rb'
 load File.dirname(__FILE__) + '/bio-publisci/output.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/element.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/prov.rb'
@@ -47,7 +48,7 @@ load_folder('bio-publisci/readers')
 load_folder('bio-publisci/writers')
 load_folder('bio-publisci/dataset/ORM')
 # Dir.foreach(File.dirname(__FILE__) + '/generators') do |file|
-# 	unless file == "." or file == ".."
+	# unless file == "." or file == ".."
 # 		load File.dirname(__FILE__) + '/generators/' + file
 # 	end
 # end
