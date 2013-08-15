@@ -25,6 +25,11 @@ module PubliSci
       property :label, predicate: RDFS.label
       property :structure, predicate: QB.structure
 
+
+      def retrieve
+        self.structure.as(DataStructureDefinition).component.each{||
+        }
+      end
     end
 
     class Dimension < Spira::Base
@@ -44,20 +49,53 @@ module PubliSci
       Spira.add_repository :default, repo
     end
 
-    def observation
-      unless PubliSci::ORM.const_defined?("Observation")
-        obs = Class.new(Spira::Base) do
-          type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
+    # def observation
+    #   unless PubliSci::ORM.const_defined?("Observation")
+    #     obs = Class.new(Spira::Base) do
+    #       type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
 
-          property :structure, predicate: QB.dataSet
+    #       property :structure, predicate: QB.dataSet
 
-          ((Dimension.each.to_a | Measure.each.to_a) || []).each{|component|
-            property strip_uri(component.subject.to_s), predicate: component.subject
-          }
-        end
-        PubliSci::ORM.const_set("Observation",obs)
+    #       ((Dimension.each.to_a | Measure.each.to_a) || []).each{|component|
+    #         property strip_uri(component.subject.to_s), predicate: component.subject
+    #       }
+    #     end
+    #     PubliSci::ORM.const_set("Observation",obs)
+    #   end
+    #   Observation
+    # end
+
+    class Observation < Spira::Base
+      type QB.Observation
+      property :label, predicate: RDFS.label
+      property :dataset, predicate: QB.dataSet
+
+      def load_properties
+        comps = dataset.as(DataSet).structure.as(DataStructureDefinition).component.map{|comp| comp.as(Component)}
+        props = comps.map{|comp| comp.dimension ? comp.dimension.as(Dimension) : comp.measure.as(Measure) }
+        props.each{|prop|
+          ss =  strip_uri(prop.subject.to_s)
+          
+          self.class.property ss.to_sym, predicate: prop.subject
+        }
       end
-      Observation
+
+      # for testing; DRY up eventually
+      def strip_uri(uri)
+        uri = uri.to_s.dup
+        uri[-1] = '' if uri[-1] == '>'
+        uri.to_s.split('/').last.split('#').last
+      end
+
+      # def method_missing(meth, *args, &block)
+      #         if meth.to_s =~ /^find_by_(.+)$/
+      #           run_find_by_method($1, *args, &block)
+      #         else
+      #           super # You *must* call super if you don't handle the
+      #                 # method, otherwise you'll mess up Ruby's method
+      #                 # lookup.
+      #         end
+      #       end
     end
 
     def reload_observation

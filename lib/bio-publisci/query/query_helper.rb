@@ -47,7 +47,7 @@ module PubliSci
       sparql.query(string)
     end
 
-    def execute_from_file(file,store,type=:fourstore)
+    def execute_from_file(file,store,type=:fourstore,substitutions={})
       if File.exist?(file)
         string = IO.read(file)
       elsif File.exist?(File.dirname(__FILE__) + '/../../../resources/queries/' + file)
@@ -57,6 +57,10 @@ module PubliSci
       else
         raise "couldn't find query for #{file}"
       end
+
+      substitutions.map{|k,v|
+        string = string.gsub(k,v)
+      }
     	execute(string, store, type)
     end
 
