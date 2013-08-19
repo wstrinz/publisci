@@ -58,14 +58,13 @@ EOS
         build_arff(relation, attributes, data, turtle_file)
       end
 
-      def from_store(repo, dataset=nil, verbose=false)
+      def from_store(repo, dataset=nil, title=nil, verbose=false)
         # data = observation_hash(execute_from_file("observations.rq",repo,:graph,{"%{dataSet}"=>"<#{dataSet}>"}), true)
 
         dims = dimensions(repo,dataset)
         meas = measures(repo,dataset)
         data = observations(repo,dataset)
         codes = codes(repo,dataset)
-
         attributes = {}
 
         (dims | meas).map{|component|
@@ -84,7 +83,8 @@ EOS
         }
 
         dataset = dataSet(repo) unless dataset
-        build_arff(dataset,attributes,data,dataset)
+        title = dataset unless title
+        build_arff(title,attributes,data,dataset)
       end
     end
   end

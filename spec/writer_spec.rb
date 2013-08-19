@@ -37,12 +37,27 @@ describe PubliSci::Writers do
     out.should == IO.read('resources/weather.numeric.arff').gsub(/%.*\n/,'')
   end
 
-  it "can restrict to a particular dataset" do
-    writer = PubliSci::Writers::CSV.new
-    repo = RDF::Repository.load('spec/turtle/reference')
-    repo.load('spec/turtle/bacon')
-    out = writer.from_store(repo,'http://www.rqtl.org/ns/dataset/bacon/dataset-bacon')
+  context "can restrict to a particular dataset" do
+    it "for arff" do
+      writer = PubliSci::Writers::ARFF.new
+      repo = RDF::Repository.load('spec/turtle/weather')
+      repo.load('spec/turtle/bacon')
+      out = writer.from_store(repo, 'http://www.rqtl.org/ns/dataset/weather/dataset-weather','weather')
 
-    out.should == IO.read('spec/csv/bacon.csv')
+      out = out.gsub(/%.*\n/,'')
+
+      out.should == IO.read('resources/weather.numeric.arff').gsub(/%.*\n/,'')
+    end
+
+    it "for csv" do
+      writer = PubliSci::Writers::CSV.new
+      repo = RDF::Repository.load('spec/turtle/reference')
+      repo.load('spec/turtle/bacon')
+      out = writer.from_store(repo,'http://www.rqtl.org/ns/dataset/bacon/dataset-bacon')
+
+      out.should == IO.read('spec/csv/bacon.csv')
+    end
   end
+
+
 end

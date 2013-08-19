@@ -6,6 +6,7 @@ SELECT DISTINCT ?dimension ?label WHERE{
 		rdfs:label ?label.
 
   ?component qb:dimension ?dimension.
+  ?dsd qb:component ?component.
 
-  ?dataSet qb:component ?component.
+  ?dataSet qb:structure ?dsd.
 }

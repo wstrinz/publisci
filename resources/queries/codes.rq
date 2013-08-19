@@ -9,7 +9,9 @@ SELECT DISTINCT ?dimension ?code ?codeLabel WHERE {
 		qb:codeList ?codes.
 
   ?component qb:dimension ?dim.
-  ?dataSet qb:component ?component.
+  ?dsd qb:component ?component.
+
+  ?dataSet qb:structure ?dsd.
 
 	?codes skos:hasTopConcept ?code.
 	?code skos:prefLabel ?codeLabel.
