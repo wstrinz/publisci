@@ -20,6 +20,14 @@ describe PubliSci::Writers do
     out.should == IO.read('spec/csv/bacon.csv')
   end
 
+  it "can output Wekka ARFF from turtle string" do
+    writer = PubliSci::Writers::ARFF.new
+    # repo = RDF::Repository.load('spec/turtle/bacon')
+    out = writer.from_turtle('spec/turtle/weather')
+    # puts out
+    out.should == IO.read('resources/weather.numeric.arff')
+  end
+
   it "can restrict to a particular dataset" do
     writer = PubliSci::Writers::CSV.new
     repo = RDF::Repository.load('spec/turtle/reference')

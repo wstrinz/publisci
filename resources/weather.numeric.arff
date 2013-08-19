@@ -1,23 +1,28 @@
-@relation weather
+% 1. Title: Weather Database
+%
+% 2. Sources:
+%    (a) Generated from RDF source spec/turtle/weather
+%
+@RELATION weather
 
-@attribute outlook {sunny, overcast, rainy}
-@attribute temperature real
-@attribute humidity real
-@attribute windy {TRUE, FALSE}
-@attribute play {yes, no}
+@ATTRIBUTE humidity integer
+@ATTRIBUTE outlook {sunny, overcast, rainy}
+@ATTRIBUTE play {yes, no}
+@ATTRIBUTE temperature integer
+@ATTRIBUTE windy {TRUE, FALSE}
 
-@data
-sunny,85,85,FALSE,no
-sunny,80,90,TRUE,no
-overcast,83,86,FALSE,yes
-rainy,70,96,FALSE,yes
-rainy,68,80,FALSE,yes
-rainy,65,70,TRUE,no
-overcast,64,65,TRUE,yes
-sunny,72,95,FALSE,no
-sunny,69,70,FALSE,yes
-rainy,75,80,FALSE,yes
-sunny,75,70,TRUE,yes
-overcast,72,90,TRUE,yes
-overcast,81,75,FALSE,yes
-rainy,71,91,TRUE,no
+@DATA
+85,sunny,no,85,FALSE
+90,sunny,no,80,TRUE
+86,overcast,yes,83,FALSE
+96,rainy,yes,70,FALSE
+80,rainy,yes,68,FALSE
+70,rainy,no,65,TRUE
+65,overcast,yes,64,TRUE
+95,sunny,no,72,FALSE
+70,sunny,yes,69,FALSE
+80,rainy,yes,75,FALSE
+70,sunny,yes,75,TRUE
+90,overcast,yes,72,TRUE
+75,overcast,yes,81,FALSE
+91,rainy,no,71,TRUE
