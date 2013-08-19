@@ -1,7 +1,7 @@
 require_relative '../lib/bio-publisci.rb'
 
 Given /^an ORM::DataCube entitled "(.*?)"$/ do |name|
-	@cube = PubliSci::ORM::DataCube.new(name: name)
+	@cube = PubliSci::DataSet::ORM::DataCube.new(name: name)
 end
 
 Given /^an ORM::DataCube entitled "(.*?)" with the following options:$/ do |name, opts|
@@ -18,7 +18,7 @@ Given /^an ORM::DataCube entitled "(.*?)" with the following options:$/ do |name
 
 		options_hash[k] = v
 	}
-	@cube = PubliSci::ORM::DataCube.new(options_hash)
+	@cube = PubliSci::DataSet::ORM::DataCube.new(options_hash)
 end
 
 Given(/^a turtle string from file (.*)$/) do |file|
@@ -30,7 +30,7 @@ Given(/^the URI string "(.*?)"$/) do |uri|
 end
 
 When(/^I call the ORM::DataCube class method load on it$/) do
-  @cube = PubliSci::ORM::DataCube.load(@string)
+  @cube = PubliSci::DataSet::ORM::DataCube.load(@string)
 end
 
 When /^I add a "(.*?)" dimension$/ do |dim|
@@ -70,5 +70,5 @@ Then /^the to_n3 method should return a string with a "(.*?)"$/ do |search|
 end
 
 Then(/^I should receive an ORM::DataCube object$/) do
-  @cube.is_a?(PubliSci::ORM::DataCube).should == true
+  @cube.is_a?(PubliSci::DataSet::ORM::DataCube).should == true
 end

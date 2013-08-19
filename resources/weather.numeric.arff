@@ -7,9 +7,9 @@
 
 @ATTRIBUTE humidity integer
 @ATTRIBUTE outlook {sunny, overcast, rainy}
-@ATTRIBUTE play {yes, no}
+@ATTRIBUTE play {no, yes}
 @ATTRIBUTE temperature integer
-@ATTRIBUTE windy {TRUE, FALSE}
+@ATTRIBUTE windy {FALSE, TRUE}
 
 @DATA
 85,sunny,no,85,FALSE

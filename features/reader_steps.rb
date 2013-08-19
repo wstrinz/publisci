@@ -41,6 +41,7 @@ end
 
 When /^generate a turtle string from it$/ do
 	@turtle_string = @generator.send :generate_n3, *@attr
+	# open('weather.ttl','w'){|f| f.write @turtle_string}
 end
 
 Then /^I should have access to a (.*) method$/ do |method|

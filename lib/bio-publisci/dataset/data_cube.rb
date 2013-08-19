@@ -342,7 +342,6 @@ module PubliSci
           lists << str
         }
 
-
         lists
       end
 
@@ -357,12 +356,13 @@ module PubliSci
           else
             refcode = code[0]
           end
+          # puts data[refcode].uniq
           data[refcode].uniq.each_with_index{|value,i|
             unless value == nil && !options[:encode_nulls]
             concepts << <<-EOF.unindent
               #{to_resource(value,options)} a skos:Concept, #{code[2]};
                 skos:topConceptOf #{code[1]} ;
-                skos:prefLabel "#{strip_uri(data[refcode][i])}" ;
+                skos:prefLabel "#{strip_uri(value)}" ;
                 skos:inScheme #{code[1]} .
 
             EOF

@@ -16,10 +16,10 @@
 
 ns:dsd-weather a qb:DataStructureDefinition;
   qb:component cs:outlook ;
-  qb:component cs:windy ;
   qb:component cs:play ;
-  qb:component cs:temperature ;
-  qb:component cs:humidity .
+  qb:component cs:windy ;
+  qb:component cs:humidity ;
+  qb:component cs:temperature .
 
 ns:dataset-weather a qb:DataSet ;
   rdfs:label "weather"@en ;
@@ -29,42 +29,42 @@ cs:outlook a qb:ComponentSpecification ;
   rdfs:label "outlook Component" ;
   qb:dimension prop:outlook .
 
-cs:windy a qb:ComponentSpecification ;
-  rdfs:label "windy Component" ;
-  qb:dimension prop:windy .
-
 cs:play a qb:ComponentSpecification ;
   rdfs:label "play Component" ;
   qb:dimension prop:play .
 
-cs:temperature a qb:ComponentSpecification ;
-  rdfs:label "temperature Component" ;
-  qb:measure prop:temperature .
+cs:windy a qb:ComponentSpecification ;
+  rdfs:label "windy Component" ;
+  qb:dimension prop:windy .
 
 cs:humidity a qb:ComponentSpecification ;
   rdfs:label "humidity Component" ;
   qb:measure prop:humidity .
+
+cs:temperature a qb:ComponentSpecification ;
+  rdfs:label "temperature Component" ;
+  qb:measure prop:temperature .
 
 prop:outlook a rdf:Property, qb:DimensionProperty ;
   rdfs:label "outlook"@en ;
   qb:codeList code:outlook ;
   rdfs:range code:Outlook .
 
-prop:windy a rdf:Property, qb:DimensionProperty ;
-  rdfs:label "windy"@en ;
-  qb:codeList code:windy ;
-  rdfs:range code:Windy .
-
 prop:play a rdf:Property, qb:DimensionProperty ;
   rdfs:label "play"@en ;
   qb:codeList code:play ;
   rdfs:range code:Play .
 
-prop:temperature a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "temperature"@en .
+prop:windy a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "windy"@en ;
+  qb:codeList code:windy ;
+  rdfs:range code:Windy .
 
 prop:humidity a rdf:Property, qb:MeasureProperty ;
   rdfs:label "humidity"@en .
+
+prop:temperature a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "temperature"@en .
 
 code:Outlook a rdfs:Class, owl:Class;
   rdfs:subClassOf skos:Concept ;
@@ -82,21 +82,6 @@ code:outlook a skos:ConceptScheme;
   skos:hasTopConcept <code/outlook/rainy> ;
   .
 
-code:Windy a rdfs:Class, owl:Class;
-  rdfs:subClassOf skos:Concept ;
-  rdfs:label "Code list for windy - codelist class"@en;
-  rdfs:comment "Specifies the windy for each observation";
-  rdfs:seeAlso code:windy .
-
-code:windy a skos:ConceptScheme;
-  skos:prefLabel "Code list for windy - codelist scheme"@en;
-  rdfs:label "Code list for windy - codelist scheme"@en;
-  skos:notation "CL_WINDY";
-  skos:note "Specifies the windy for each observation";
-  skos:hasTopConcept <code/windy/FALSE> ;
-  skos:hasTopConcept <code/windy/TRUE> ;
-  .
-
 code:Play a rdfs:Class, owl:Class;
   rdfs:subClassOf skos:Concept ;
   rdfs:label "Code list for play - codelist class"@en;
@@ -112,6 +97,21 @@ code:play a skos:ConceptScheme;
   skos:hasTopConcept <code/play/yes> ;
   .
 
+code:Windy a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for windy - codelist class"@en;
+  rdfs:comment "Specifies the windy for each observation";
+  rdfs:seeAlso code:windy .
+
+code:windy a skos:ConceptScheme;
+  skos:prefLabel "Code list for windy - codelist scheme"@en;
+  rdfs:label "Code list for windy - codelist scheme"@en;
+  skos:notation "CL_WINDY";
+  skos:note "Specifies the windy for each observation";
+  skos:hasTopConcept <code/windy/FALSE> ;
+  skos:hasTopConcept <code/windy/TRUE> ;
+  .
+
 <code/outlook/sunny> a skos:Concept, code:Outlook;
   skos:topConceptOf code:outlook ;
   skos:prefLabel "sunny" ;
@@ -119,13 +119,23 @@ code:play a skos:ConceptScheme;
 
 <code/outlook/overcast> a skos:Concept, code:Outlook;
   skos:topConceptOf code:outlook ;
-  skos:prefLabel "sunny" ;
+  skos:prefLabel "overcast" ;
   skos:inScheme code:outlook .
 
 <code/outlook/rainy> a skos:Concept, code:Outlook;
   skos:topConceptOf code:outlook ;
-  skos:prefLabel "overcast" ;
+  skos:prefLabel "rainy" ;
   skos:inScheme code:outlook .
+
+<code/play/no> a skos:Concept, code:Play;
+  skos:topConceptOf code:play ;
+  skos:prefLabel "no" ;
+  skos:inScheme code:play .
+
+<code/play/yes> a skos:Concept, code:Play;
+  skos:topConceptOf code:play ;
+  skos:prefLabel "yes" ;
+  skos:inScheme code:play .
 
 <code/windy/FALSE> a skos:Concept, code:Windy;
   skos:topConceptOf code:windy ;
@@ -137,139 +147,129 @@ code:play a skos:ConceptScheme;
   skos:prefLabel "TRUE" ;
   skos:inScheme code:windy .
 
-<code/play/no> a skos:Concept, code:Play;
-  skos:topConceptOf code:play ;
-  skos:prefLabel "no" ;
-  skos:inScheme code:play .
-
-<code/play/yes> a skos:Concept, code:Play;
-  skos:topConceptOf code:play ;
-  skos:prefLabel "no" ;
-  skos:inScheme code:play .
-
 ns:obs1 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/no> ;
-  prop:temperature 85 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 85 ;
+  prop:temperature 85 ;
   .
 
 ns:obs2 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/no> ;
-  prop:temperature 80 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 90 ;
+  prop:temperature 80 ;
   .
 
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 83 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 86 ;
+  prop:temperature 83 ;
   .
 
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 70 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 96 ;
+  prop:temperature 70 ;
   .
 
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 68 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 80 ;
+  prop:temperature 68 ;
   .
 
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/no> ;
-  prop:temperature 65 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 70 ;
+  prop:temperature 65 ;
   .
 
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 64 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 65 ;
+  prop:temperature 64 ;
   .
 
 ns:obs8 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/no> ;
-  prop:temperature 72 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 95 ;
+  prop:temperature 72 ;
   .
 
 ns:obs9 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 69 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 70 ;
+  prop:temperature 69 ;
   .
 
 ns:obs10 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 75 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 80 ;
+  prop:temperature 75 ;
   .
 
 ns:obs11 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 75 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 70 ;
+  prop:temperature 75 ;
   .
 
 ns:obs12 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 72 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 90 ;
+  prop:temperature 72 ;
   .
 
 ns:obs13 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
-  prop:windy <code/windy/FALSE> ;
   prop:play <code/play/yes> ;
-  prop:temperature 81 ;
+  prop:windy <code/windy/FALSE> ;
   prop:humidity 75 ;
+  prop:temperature 81 ;
   .
 
 ns:obs14 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
-  prop:windy <code/windy/TRUE> ;
   prop:play <code/play/no> ;
-  prop:temperature 71 ;
+  prop:windy <code/windy/TRUE> ;
   prop:humidity 91 ;
+  prop:temperature 71 ;
   .
 
