@@ -38,6 +38,7 @@ load File.dirname(__FILE__) + '/bio-publisci/datacube_model.rb'
 load File.dirname(__FILE__) + '/bio-publisci/output.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/element.rb'
 load File.dirname(__FILE__) + '/bio-publisci/metadata/prov/prov.rb'
+load File.dirname(__FILE__) + '/bio-publisci/writers/base.rb'
 
 
 load_folder('bio-publisci/dsl')

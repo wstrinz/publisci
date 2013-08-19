@@ -58,6 +58,4 @@ describe PubliSci::Writers do
       out.should == IO.read('spec/csv/bacon.csv')
     end
   end
-
-
 end
