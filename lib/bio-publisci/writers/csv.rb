@@ -23,7 +23,7 @@ module PubliSci
       end
 
       def from_store(repo,dataSet=nil, variable_out=nil, verbose=false)
-        data = observations(repo,true,dataSet)
+        data = observations(repo,dataSet,true)
         build_csv(data)
       end
     end

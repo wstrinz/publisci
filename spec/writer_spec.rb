@@ -22,10 +22,19 @@ describe PubliSci::Writers do
 
   it "can output Wekka ARFF from turtle string" do
     writer = PubliSci::Writers::ARFF.new
-    # repo = RDF::Repository.load('spec/turtle/bacon')
     out = writer.from_turtle('spec/turtle/weather')
-    # puts out
     out.should == IO.read('resources/weather.numeric.arff')
+  end
+
+  it "can output Wekka ARFF from a store" do
+    writer = PubliSci::Writers::ARFF.new
+    repo = RDF::Repository.load('spec/turtle/weather')
+    out = writer.from_store(repo)
+
+    # minor hack since metadata isn't the same
+    out = out.gsub(/%.*\n/,'')
+
+    out.should == IO.read('resources/weather.numeric.arff').gsub(/%.*\n/,'')
   end
 
   it "can restrict to a particular dataset" do
