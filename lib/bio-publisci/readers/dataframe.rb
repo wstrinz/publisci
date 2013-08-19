@@ -1,5 +1,5 @@
 module PubliSci
-		module Reader
+	module Reader
 		class Dataframe
       include PubliSci::Dataset::DataCube
 			include PubliSci::Reader::Output

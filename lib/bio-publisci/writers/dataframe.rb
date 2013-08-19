@@ -1,5 +1,5 @@
 module PubliSci
-  module Writer
+  module Writers
     module Dataframe
 
     def framestring(name,vectors)
@@ -39,7 +39,7 @@ module PubliSci
   end
 
   class Builder
-    include PubliSci::Writer::Dataframe
+    include PubliSci::Writers::Dataframe
 
 
     def from_turtle(turtle_file, connection, variable_in=nil, variable_out=nil, verbose=true, save=true)

@@ -24,12 +24,6 @@ module PubliSci
       type QB.DataSet
       property :label, predicate: RDFS.label
       property :structure, predicate: QB.structure
-
-
-      def retrieve
-        self.structure.as(DataStructureDefinition).component.each{||
-        }
-      end
     end
 
     class Dimension < Spira::Base
@@ -75,7 +69,7 @@ module PubliSci
         props = comps.map{|comp| comp.dimension ? comp.dimension.as(Dimension) : comp.measure.as(Measure) }
         props.each{|prop|
           ss =  strip_uri(prop.subject.to_s)
-          
+
           self.class.property ss.to_sym, predicate: prop.subject
         }
       end

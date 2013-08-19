@@ -41,6 +41,12 @@ module PubliSci
           foaf_given || foaf_name
         end
 
+        def name=(name)
+          foaf_given = name
+          foaf_name = name
+
+        end
+
         def activities
           #should do this in a SPARQL query instead
           Activity.enum_for.map{|act|

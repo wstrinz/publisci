@@ -1,5 +1,5 @@
 module PubliSci
-  module Writer
+  module Writers
     class CSV
       include PubliSci::Query
       include PubliSci::Parser
@@ -25,8 +25,8 @@ module PubliSci
       end
 
       def from_store(repo,dataSet=nil, variable_out=nil, verbose=false)
-        
-        data = observation_hash(execute_from_file("observations.rq",repo,:graph,{"%{dataSet}"=>"<#{dataSet}>"}), true)
+
+        data = observation_hash(execute_from_file("observations.rq",repo,:graph,{"?dataSet}"=>"<#{dataSet}>"}), true)
         build_csv(data)
       end
     end

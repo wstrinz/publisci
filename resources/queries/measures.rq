@@ -1,7 +1,10 @@
-PREFIX qb:   <http://purl.org/linked-data/cube#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?measure ?label WHERE{
 	?measure a qb:MeasureProperty;
 		rdfs:label ?label.
+
+  ?component qb:measure ?measure.
+  ?dataSet qb:component ?component.
 }

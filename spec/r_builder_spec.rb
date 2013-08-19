@@ -7,7 +7,7 @@
 require_relative '../lib/bio-publisci.rb'
 
 
-describe PubliSci::Writer::Dataframe do
+describe PubliSci::Writers::Dataframe do
 
 	context "when using r/qtl dataframe", no_travis: true do
 
@@ -18,7 +18,7 @@ describe PubliSci::Writer::Dataframe do
 				data(listeria)
 				mr = scanone(listeria,method="mr")
 EOF
-			@builder = PubliSci::Writer::Builder.new
+			@builder = PubliSci::Writers::Builder.new
 		end
 
 		it "produces equivalent dataframe from rdf" #do

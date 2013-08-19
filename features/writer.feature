@@ -1,7 +1,7 @@
 Feature: export to various formats using writers
 
 	In order to use RDF encoded data in other applications
-	I want to export domain objects using an PubliSci::Writer object
+	I want to export domain objects using an PubliSci::Writers object
 
 	Scenario: write to ARFF format
 		Given a ARFF writer

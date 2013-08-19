@@ -1,6 +1,6 @@
-PREFIX qb:   <http://purl.org/linked-data/cube#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
 
 
 SELECT DISTINCT ?dimension ?code ?codeLabel WHERE{
@@ -8,6 +8,9 @@ SELECT DISTINCT ?dimension ?code ?codeLabel WHERE{
 		rdfs:label ?dimension;
 		qb:codeList ?codes.
 
-	?codes skos:hasTopConcept ?code. 
+  ?component qb:dimension ?dim.
+  ?dataSet qb:component ?component.
+
+	?codes skos:hasTopConcept ?code.
 	?code skos:prefLabel ?codeLabel.
 }
