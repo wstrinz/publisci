@@ -1,15 +1,13 @@
 module PubliSci
   module Writers
-    class CSV
-      include PubliSci::Query
-      include PubliSci::Parser
-
+    class CSV < Base
       def build_csv(data,components=nil)
         unless components
           components = data.values.map(&:keys).uniq
         end
         str = components.join(',') + "\n"
-        data.map {|d| str << Hash[d[1].sort].values.join(',') + "\n" }
+        data.map {|d| str << Hash[d[1]].values.join(',') + "\n" }
+        str[-1]=""
         str
       end
 
@@ -18,15 +16,14 @@ module PubliSci
         repo = RDF::Repository.load(turtle_file)
         puts "loaded #{repo.size} statements into temporary repo" if verbose
 
-        dims = execute_from_file("dimensions.rq",repo,:graph).to_h.map{|d| d[:label].to_s}
-        meas = execute_from_file("measures.rq",repo,:graph).to_h.map{|m| m[:label].to_s}
-        data = observation_hash(execute_from_file("observations.rq",repo,:graph), true)
+        dims = dimensions(repo)
+        meas = measures(repo)
+        data = observations(repo)
         build_csv(data, (dims | meas))
       end
 
       def from_store(repo,dataSet=nil, variable_out=nil, verbose=false)
-
-        data = observation_hash(execute_from_file("observations.rq",repo,:graph,{"?dataSet}"=>"<#{dataSet}>"}), true)
+        data = observations(repo,true,dataSet)
         build_csv(data)
       end
     end
