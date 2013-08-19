@@ -121,7 +121,7 @@ module PubliSci
         base = options[:base_url]
         <<-EOF.unindent
         @base <#{base}/ns/dc/> .
-        @prefix ns:    <#{base}/ns/dataset/#{var}#> .
+        @prefix ns:    <#{base}/ns/dataset/#{var}/> .
         @prefix qb:    <http://purl.org/linked-data/cube#> .
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .

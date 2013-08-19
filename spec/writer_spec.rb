@@ -41,7 +41,7 @@ describe PubliSci::Writers do
     writer = PubliSci::Writers::CSV.new
     repo = RDF::Repository.load('spec/turtle/reference')
     repo.load('spec/turtle/bacon')
-    out = writer.from_store(repo,'http://www.rqtl.org/ns/dataset/bacon#dataset-bacon')
+    out = writer.from_store(repo,'http://www.rqtl.org/ns/dataset/bacon/dataset-bacon')
 
     out.should == IO.read('spec/csv/bacon.csv')
   end
