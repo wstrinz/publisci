@@ -17,7 +17,7 @@ module PubliSci
           elsif File.basename(object)[0] == '.' && File.basename(object).count('.') == 1
             extension = File.basename(object)
           else
-            raise "Can't load file #{object}; type inference not yet implemented"
+            raise "Can't load file #{object}; file type inference not yet implemented"
           end
 
           case extension
@@ -25,11 +25,19 @@ module PubliSci
             r_object(object, options, ask_on_ambiguous)
           when /.csv/i
             PubliSci::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
+          else
+            false
           end
-        elsif object =~ %r{http[s]://.+}
-          self.for(download(object).path, options, ask_on_ambiguous)
+        elsif object =~ %r{htt(p|ps)://.+}
+          res = self.for(download(object).path, options, ask_on_ambiguous) || "#{object} <http://semanticscience.org/resource/hasValue> \"\"\"#{IO.read(download(object).path)}\"\"\""
+          # puts res
+          res
+          # raise res
+          # self.for_remote(object)
         else
-          raise "Unable to find reader for File or String #{object}"
+          raise "Unable to find reader for String '#{object}'"
+          # TODO: better handling of missing readers; need this way for raw strings for now
+          # false
         end
       elsif object.is_a? Rserve::REXP
         r_object(object, options, ask_on_ambiguous)
@@ -38,12 +46,27 @@ module PubliSci
       end
     end
 
+    # def for_remote
+    #   addr = object
+    #   tmp = download(object)
+    #   self.for(tmp.path) || "#{addr} <http://semanticscience.org/resource/"
+    # end
+
     def self.download(uri)
       out = Tempfile.new(uri.split('/').last)
       out.write open(uri).read
       out.close
       out
     end
+
+    # private
+    # def self.reader_exists?(object)
+    #   if object.is_a? String
+    #     if File.exist? object
+
+    #   elsif
+    #   end
+    # end
 
     def self.r_object(object, options={}, ask_on_ambiguous=true)
       if object.is_a? String

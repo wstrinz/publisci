@@ -15,7 +15,7 @@ module PubliSci
       # end
 
       def object(file=nil)
-        set_or_get('object',file)
+        add_or_get('object',file)
       end
       alias_method :source, :object
 
@@ -61,7 +61,9 @@ module PubliSci
         if options
           opts = opts.merge(options)
         end
-        Dataset.for(object,opts,interact)
+        object().map{|obj|
+          Dataset.for(obj,opts,interact)
+        }.join("\n")
       end
 
       private

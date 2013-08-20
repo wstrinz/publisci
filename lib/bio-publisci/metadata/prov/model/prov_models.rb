@@ -70,6 +70,10 @@ module PubliSci
         property :label, predicate: RDF::RDFS.label
         property :agent, predicate: PROV.agent
         property :hadPlan, predicate: PROV.hadPlan
+
+        def activity
+          Activity.each.to_a.select{|act| act.qualifiedAssociation.include? self}
+        end
       end
 
       class Derivation < Spira::Base
