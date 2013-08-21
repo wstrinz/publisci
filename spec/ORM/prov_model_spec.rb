@@ -54,9 +54,11 @@ describe PubliSci::Prov::Model do
 
       r = ev.instance_eval do
         agent :some_dudette
+
         entity :datathing do
           has RDF.type, qb.DataSet
         end
+
         activity :process, generated: :datathing, wasAssociatedWith: :some_dudette
 
         to_repository

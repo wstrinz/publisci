@@ -29,9 +29,7 @@ module PubliSci
             false
           end
         elsif object =~ %r{htt(p|ps)://.+}
-          res = self.for(download(object).path, options, ask_on_ambiguous) || "#{object} <http://semanticscience.org/resource/hasValue> \"\"\"#{IO.read(download(object).path)}\"\"\""
-          # puts res
-          res
+          self.for(download(object).path, options, ask_on_ambiguous) || RDF::Statement.new(RDF::URI(object), RDF::URI('http://semanticscience.org/resource/hasValue'), IO.read(download(object).path)).to_s
           # raise res
           # self.for_remote(object)
         else
