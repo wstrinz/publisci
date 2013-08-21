@@ -24,6 +24,15 @@ module PubliSci
           }
         end
 
+        def all_types
+          me = self.subject
+          type_query = RDF::Query.new do
+            pattern [me, RDF.type, :type]
+          end
+
+          type_query.execute(self.class.repository).map{|t| t[:type]}
+        end
+
       end
 
       class Agent < Spira::Base
