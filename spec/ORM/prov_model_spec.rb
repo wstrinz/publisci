@@ -66,6 +66,7 @@ describe PubliSci::Prov::Model do
 
       Spira.add_repository :default, r
       PubliSci::Prov::Model::Entity.first.all_types.should == %w{http://www.w3.org/ns/prov#Entity http://purl.org/linked-data/cube#DataSet}
+      PubliSci::Prov::Model::Entity.first.has_data?.should == true
     end
   end
 end

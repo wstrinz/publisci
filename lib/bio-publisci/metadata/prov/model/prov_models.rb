@@ -33,6 +33,10 @@ module PubliSci
           type_query.execute(self.class.repository).map{|t| t[:type]}
         end
 
+        def has_data?
+          all_types.include?('http://purl.org/linked-data/cube#DataSet')
+        end
+
       end
 
       class Agent < Spira::Base

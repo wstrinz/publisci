@@ -17,6 +17,7 @@ module PubliSci
 
     class DataStructureDefinition < Spira::Base
       type QB.DataStructureDefinition
+      property :label, predicate: RDFS.label
       has_many :component, predicate: QB.component
     end
 
