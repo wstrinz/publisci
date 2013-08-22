@@ -33,7 +33,7 @@ describe PubliSci::Dataset do
     end
 
     it "will request user input if not provided" do
-      gen = PubliSci::Reader::CSV.new
+      gen = PubliSci::Readers::CSV.new
       gen.stub(:gets).and_return('pricerange,producer')
       gen.stub(:puts)
       turtle_string = gen.automatic(@file,nil,{measures:["chunkiness"]})

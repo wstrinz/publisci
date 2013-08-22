@@ -1,5 +1,5 @@
 module PubliSci
-  module Reader
+  module Readers
     module Output
       def output(string, options={},append=false)
         options[:type] = [:string] unless options[:type]

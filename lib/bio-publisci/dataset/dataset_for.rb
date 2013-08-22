@@ -24,7 +24,7 @@ module PubliSci
           when ".RData"
             r_object(object, options, ask_on_ambiguous)
           when /.csv/i
-            PubliSci::Reader::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
+            PubliSci::Readers::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
           else
             false
           end
@@ -80,7 +80,7 @@ module PubliSci
         r_classes = con.eval("class(#{var})").to_ruby
 
         if r_classes.include? "data.frame"
-          df = PubliSci::Reader::Dataframe.new
+          df = PubliSci::Readers::Dataframe.new
           unless options[:dimensions] || !ask_on_ambiguous
             dims = con.eval("names(#{var})").to_ruby
             puts "Which dimensions? #{dims}"
@@ -101,7 +101,7 @@ module PubliSci
           df.generate_n3(con.eval(var),var,options)
 
         elsif r_classes.include? "cross"
-          bc = PubliSci::Reader::RCross.new
+          bc = PubliSci::Readers::RCross.new
 
           unless options[:measures] || !ask_on_ambiguous
             pheno_names = con.eval("names(#{var}$pheno)").to_ruby
@@ -122,7 +122,7 @@ module PubliSci
           bc.generate_n3(con, var, base, options)
 
         elsif r_classes.include? "matrix"
-          mat = PubliSci::Reader::RMatrix.new
+          mat = PubliSci::Readers::RMatrix.new
 
           unless options[:measures] || !ask_on_ambiguous
             puts "Row label"
@@ -149,13 +149,13 @@ module PubliSci
 
           mat.generate_n3(con, var, base, options)
         else
-          raise "no PubliSci::Reader found for #{r_classes}"
+          raise "no PubliSci::Readers found for #{r_classes}"
         end
 
       elsif object.is_a? Rserve::REXP
         if object.attr.payload["class"].payload.first
 
-          df = PubliSci::Reader::Dataframe.new
+          df = PubliSci::Readers::Dataframe.new
 
           var = nil
 

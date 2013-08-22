@@ -1,5 +1,5 @@
 module PubliSci
-		module Reader
+		module Readers
 		class ARFF
 			include PubliSci::Dataset::DataCube
 

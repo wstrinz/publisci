@@ -1,8 +1,8 @@
 module PubliSci
-	module Reader
+	module Readers
 		class Dataframe
       include PubliSci::Dataset::DataCube
-			include PubliSci::Reader::Output
+			include PubliSci::Readers::Output
 
 			# def initialize(var)
 			# 	@var = var

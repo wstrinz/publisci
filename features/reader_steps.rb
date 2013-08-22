@@ -1,7 +1,7 @@
 require_relative '../lib/bio-publisci.rb'
 
 Given /^a (.*) generator$/ do |generator|
-	@generator = PubliSci::Reader.const_get(generator).new
+	@generator = PubliSci::Readers.const_get(generator).new
 end
 
 When /^I ask for its methods$/ do

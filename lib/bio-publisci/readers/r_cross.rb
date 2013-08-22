@@ -1,8 +1,8 @@
 module PubliSci
-  module Reader
+  module Readers
     class RCross
       include PubliSci::Dataset::DataCube
-      include PubliSci::Reader::Output
+      include PubliSci::Readers::Output
 
       def generate_n3(client, var, outfile_base, options={})
         meas = measures(client,var,options)

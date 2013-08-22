@@ -1,6 +1,6 @@
 require_relative '../../lib/bio-publisci.rb'
 
-describe PubliSci::Reader::Dataframe do
+describe PubliSci::Readers::Dataframe do
 
 	def create_graph(turtle_string)
 		f = Tempfile.new('graph')
@@ -14,7 +14,7 @@ describe PubliSci::Reader::Dataframe do
   context "with r/qtl dataframe", no_travis: true do
 		before(:all) do
 			@r = Rserve::Connection.new
-			@generator = PubliSci::Reader::Dataframe.new
+			@generator = PubliSci::Readers::Dataframe.new
 			@r.eval <<-EOF
 				library(qtl)
 				data(listeria)

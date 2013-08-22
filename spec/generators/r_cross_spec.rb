@@ -2,7 +2,7 @@ require_relative '../../lib/bio-publisci.rb'
 
 require 'tempfile'
 
-describe PubliSci::Reader::RCross do
+describe PubliSci::Readers::RCross do
 
   def create_graph(turtle_string)
     f = Tempfile.new('graph')
@@ -16,7 +16,7 @@ describe PubliSci::Reader::RCross do
   context "with reduced listeria cross", no_travis: true do
     before(:all) do
       @r = Rserve::Connection.new
-      @generator = PubliSci::Reader::RCross.new
+      @generator = PubliSci::Readers::RCross.new
       @r.eval <<-EOF
         library(qtl)
         data(listeria)
