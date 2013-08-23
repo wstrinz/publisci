@@ -1,6 +1,26 @@
 require_relative '../lib/bio-publisci.rb'
 
 describe PubliSci::Dataset do
+  it "should use sio:has_value for unknown string types" do
+    turtle_string = PubliSci::Dataset.for('http://www.biostat.wisc.edu/~kbroman/D3/cistrans/data/probe_data/probe497638.json',false)
+    (turtle_string =~ /hasValue/).should_not be nil
+    # open('ttl.ttl','w'){|f| f.write turtle_string}
+    repo = RDF::Repository.new
+
+    f = Tempfile.new(['repo','.ttl'])
+    f.write(turtle_string)
+    f.close
+    repo.load(f.path, :format => :ttl)
+    f.unlink
+
+    repo.size.should > 0
+  end
+
+  it "can convert arff files" do
+    turtle_string = PubliSci::Dataset.for('resources/weather.numeric.arff',false)
+    turtle_string.should == IO.read('spec/turtle/weather')
+  end
+
   context 'with a csv file' do
     before(:all) do
       @file = File.dirname(__FILE__) + '/csv/bacon.csv'
@@ -9,21 +29,6 @@ describe PubliSci::Dataset do
     it "should load with no prompts if all details are specified" do
       turtle_string = PubliSci::Dataset.for(@file,{dimensions:["producer"],measures:["pricerange"]},false)
       (turtle_string =~ /qb:Observation/).should_not be nil
-    end
-
-    it "should use sio:has_value for unknown string types" do
-      turtle_string = PubliSci::Dataset.for('http://www.biostat.wisc.edu/~kbroman/D3/cistrans/data/probe_data/probe497638.json',false)
-      (turtle_string =~ /hasValue/).should_not be nil
-      # open('ttl.ttl','w'){|f| f.write turtle_string}
-      repo = RDF::Repository.new
-
-      f = Tempfile.new(['repo','.ttl'])
-      f.write(turtle_string)
-      f.close
-      repo.load(f.path, :format => :ttl)
-      f.unlink
-
-      repo.size.should > 0
     end
 
     it "will download remote files" do
@@ -54,4 +59,6 @@ describe PubliSci::Dataset do
       (turtle_string =~ /prop:producer/).should_not be nil
     end
   end
+
+
 end

@@ -25,6 +25,8 @@ module PubliSci
             r_object(object, options, ask_on_ambiguous)
           when /.csv/i
             PubliSci::Readers::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
+          when /.arff/i
+            PubliSci::Readers::ARFF.new.generate_n3(object)
           else
             false
           end
