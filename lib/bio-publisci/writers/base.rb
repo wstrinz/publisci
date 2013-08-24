@@ -63,6 +63,7 @@ module PubliSci
 
       def codes(input, data_set = nil, select = :label)
         repo = handle_input(input)
+
         if data_set
           codes = execute_from_file("codes.rq",repo,:graph,{"?dataSet"=>"<#{data_set}>"}).to_h
         else
@@ -71,6 +72,21 @@ module PubliSci
         codes.map{|c| c.values.map(&:to_s)}.inject({}){|h,el|
           (h[el.first]||=[]) << el.last; h
         }
+      end
+
+      def turtle_to_ruby(turtle_file, select_dataset=nil, shorten_url=true)
+        repo = RDF::Repository.load(turtle_file)
+
+        repo_to_ruby(repo,select_dataset,shorten_url)
+      end
+
+      def repo_to_ruby(repo,select_dataset=nil, shorten_url=true)
+        select_dataset = dataSet(repo,:dataset) unless select_dataset
+        dims = dimensions(repo,select_dataset)
+        meas = measures(repo,select_dataset)
+        codes = codes(repo,select_dataset)
+        data = observations(repo,select_dataset,shorten_url)
+        {measures: meas, dimensions: dims, coded_dimensions: codes, data: data}
       end
     end
   end

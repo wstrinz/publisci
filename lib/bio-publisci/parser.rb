@@ -97,6 +97,7 @@ module PubliSci
 
     def to_resource(obj, options)
       if obj.is_a? String
+
         obj = "<#{obj}>" if is_uri? obj
 
         #TODO decide the right way to handle missing values, since RDF has no null
@@ -104,7 +105,8 @@ module PubliSci
         obj = "NA" if obj.empty?
 
         #TODO  remove special characters (faster) as well (eg '?')
-        obj.gsub(' ','_').gsub('?','')
+        obj=  obj.gsub(' ','_')
+
       elsif obj == nil && options[:encode_nulls]
         '"NA"'
       elsif obj.is_a? Numeric

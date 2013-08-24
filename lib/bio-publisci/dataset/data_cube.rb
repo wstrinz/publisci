@@ -32,12 +32,10 @@ module PubliSci
 
         newd = dimensions.map{|d|
             if d =~ /^http:\/\//
-              # newc << "<#{d}>" if codes.include? d
               "<#{d}>"
             elsif d =~ /^[a-zA-z]+:[a-zA-z]+$/
               d
             else
-              # newc << "prop:#{d}" if codes.include? d
               "prop:#{d}"
             end
         }
