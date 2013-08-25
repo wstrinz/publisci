@@ -11,7 +11,7 @@ module PubliSci
       end
 
       def from_store(file,select_dataset=nil,shorten_url=true)
-        build_json(repo_to_ruby(file,select_dataset,shorten_url))
+        build_json(repo_to_ruby(file,select_dataset,shorten_url)[:data])
       end
     end
   end

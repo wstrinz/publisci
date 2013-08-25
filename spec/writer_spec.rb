@@ -47,7 +47,6 @@ describe PubliSci::Writers do
     writer = PubliSci::Writers::JSON.new
     repo = RDF::Repository.load('spec/turtle/weather')
     out = writer.from_store(repo)
-
     # minor hack since metadata isn't the same
     JSON.parse(out).size.should > 0
   end
