@@ -5,8 +5,10 @@ module PubliSci
 
       def generate_n3(input_file, dataset_name=nil, output=:file, output_base=nil, options={})
         # TODO - coded property info not yet generated
-        @dimensions = %w{Variant_Classification Variant_Type Mutation_Status Sequencing_Phase Sequence_Source filter} #etc
+
+        @dimensions = %w{Variant_Classification Variant_Type Mutation_Status Sequencing_Phase Sequence_Source filter}
         @codes = @dimensions
+        # @codes = []
         @measures = COLUMN_NAMES - @dimensions
         @dataset_name ||= File.basename(input_file,'.*')
         options[:encode_nulls] = true
@@ -20,17 +22,18 @@ module PubliSci
           }
           str
         else
+          # TODO - allow multi file / separate structure output for very large datasets
+          # open("#{file_base}_structure.ttl",'w'){|f| f.write structure(options)}
           file_base = output_base || @dataset_name
-          open("#{file_base}_structure.ttl",'w'){|f| f.write structure(@dataset_name,options)}
 
-          # file can be processed line by line, so no need to in-memory everything for large files
-          # TODO - allow multi file output for very large datasets
           out = open("#{file_base}.ttl",'w')
+          out.write(structure(options))
           f = open(input_file)
           f.each_line{|line|
             processed = process_line(line,options)
             out.write(processed.first) if processed
           }
+
         end
       end
 
