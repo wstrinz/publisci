@@ -26,15 +26,15 @@ ns:dataset-weather a qb:DataSet ;
   qb:structure ns:dsd-weather .
 
 cs:outlook a qb:ComponentSpecification ;
-  rdfs:label "outlook Component" ;
+  rdfs:label "outlook" ;
   qb:dimension prop:outlook .
 
 cs:play a qb:ComponentSpecification ;
-  rdfs:label "play Component" ;
+  rdfs:label "play" ;
   qb:dimension prop:play .
 
 cs:windy a qb:ComponentSpecification ;
-  rdfs:label "windy Component" ;
+  rdfs:label "windy" ;
   qb:dimension prop:windy .
 
 cs:humidity a qb:ComponentSpecification ;

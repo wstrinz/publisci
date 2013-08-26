@@ -25,11 +25,11 @@ ns:dataset-bacon a qb:DataSet ;
   qb:structure ns:dsd-bacon .
 
 cs:producer a qb:ComponentSpecification ;
-  rdfs:label "producer Component" ;
+  rdfs:label "producer" ;
   qb:dimension prop:producer .
 
 cs:pricerange a qb:ComponentSpecification ;
-  rdfs:label "pricerange Component" ;
+  rdfs:label "pricerange" ;
   qb:dimension prop:pricerange .
 
 cs:chunkiness a qb:ComponentSpecification ;

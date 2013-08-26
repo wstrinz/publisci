@@ -18,3 +18,8 @@ EOF
 rexp = rcon.eval 'mr'
 turtle_string = gen.generate_n3(rexp,'mr')
 open(File.dirname(__FILE__) + '/../spec/turtle/reference', 'w'){|f| f.write turtle_string}
+puts "overwriting #{File.absolute_path(File.dirname(__FILE__) + '/../spec/turtle/reference')}"
+
+turtle_string = PubliSci::Dataset.for('resources/weather.numeric.arff',false)
+open(File.dirname(__FILE__) + '/../spec/turtle/weather', 'w'){|f| f.write turtle_string}
+puts "overwriting #{File.absolute_path(File.dirname(__FILE__) + '/../spec/turtle/weather')}"

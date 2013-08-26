@@ -179,7 +179,7 @@ module PubliSci
           rdf_dimensions.each_with_index.map{|d,i|
           specs << <<-EOF.unindent
             #{cs_dims[i]} a qb:ComponentSpecification ;
-              rdfs:label "#{strip_prefixes(strip_uri(dimension_names[i]))} Component" ;
+              rdfs:label "#{strip_prefixes(strip_uri(dimension_names[i]))}" ;
               qb:dimension #{d} .
 
             EOF

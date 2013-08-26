@@ -25,7 +25,7 @@ ns:dataset-mr a qb:DataSet ;
   qb:structure ns:dsd-mr .
 
 cs:refRow a qb:ComponentSpecification ;
-  rdfs:label "refRow Component" ;
+  rdfs:label "refRow" ;
   qb:dimension prop:refRow .
 
 cs:chr a qb:ComponentSpecification ;
