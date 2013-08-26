@@ -75,33 +75,29 @@ module PubliSci
 
       def observation_data(client, var, chr, row_individ, geno_chr, entries_per_individual, options={})
         data = {}
-        # geno_chr = client.eval("#{var}$geno$'#{chr}'")
-        # n_individuals = client.eval("#{var}$pheno[[1]]").to_ruby.size
-        # entries_per_individual = @rexp.payload["geno"].payload[row_individ].payload["map"].payload.size * @rexp.payload["geno"].payload.names.size
+
         data["chr"] = []
         data["genotype"] = []
         data["individual"] = []
         data["marker"] = []
         data["markerpos"] = []
+
         pheno_names = client.eval("names(#{var}$pheno)").to_ruby
         pheno_names.map{|name|
           data[name] = []
         }
-        # n_individuals.times{|row_individ|
-          # puts "#{row_individ}/#{n_individuals}"
         data["individual"] << (1..entries_per_individual).to_a.fill(row_individ)
 
         pheno_names.map{|name|
           data[name] << (1..entries_per_individual).to_a.fill(client.eval("#{var}$pheno$#{name}").to_ruby[row_individ])
         }
-        # @rexp.payload["geno"].payload.names.map { |chr|
+
         num_markers = geno_chr.payload.first.to_ruby.column_size
         data["chr"] << (1..num_markers).to_a.fill(chr)
         data["genotype"] << geno_chr.payload["data"].to_ruby.row(row_individ).to_a
         data["marker"] << client.eval("names(#{var}$geno$'#{chr}'$map)").payload
         data["markerpos"] << geno_chr.payload["map"].to_a
-          # }
-        # }
+
         data.map{|k,v| v.flatten!}
         data
       end

@@ -4,7 +4,7 @@ module PubliSci
       include PubliSci::Query
       include PubliSci::Parser
       include PubliSci::Analyzer
-
+      include PubliSci::Dataset::DataCube
 
     end
   end
