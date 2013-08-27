@@ -19,6 +19,6 @@ end
 describe MafQuery do
   it "should query", no_travis: true do
     m = MafQuery.new
-    m.select_patient.size.should > 0
+    m.select_patient("BH-A0HP").size.should > 0
   end
 end
