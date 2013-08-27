@@ -12,13 +12,16 @@ module PubliSci
         @measures = COLUMN_NAMES - @dimensions
         @dataset_name ||= File.basename(input_file,'.*')
         options[:encode_nulls] = true
+        options[:no_labels] = true
 
         if output == :print
           str = structure(options)
           f = open(input_file)
+          n = 0
           f.each_line{|line|
-            processed = process_line(line,options)
+            processed = process_line(line,n.to_s,options)
             str << processed.first if processed
+            n +=1
           }
           str
         else
@@ -29,21 +32,23 @@ module PubliSci
           out = open("#{file_base}.ttl",'w')
           out.write(structure(options))
           f = open(input_file)
+          n = 0
           f.each_line{|line|
-            processed = process_line(line,options)
+            processed = process_line(line,n.to_s,options)
             out.write(processed.first) if processed
+            n += 1
           }
 
         end
       end
 
-      def process_line(line,options)
+      def process_line(line,label,options)
         unless line[0] == "#" || line[0..3] == "Hugo"
           entry = ::CSV.parse(line, {col_sep: "\t"}).flatten
           data = Hash[*COLUMN_NAMES.zip(entry).flatten]
           data.each{|k,v| data[k]=Array(v)}
 
-          observations(@measures,@dimensions,@codes,data,[entry[0]],@dataset_name,options)
+          observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)
         end
       end
 
