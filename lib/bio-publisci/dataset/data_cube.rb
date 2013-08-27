@@ -276,32 +276,38 @@ module PubliSci
           str << "  rdfs:label \"#{r}\" ;\n" unless options[:no_labels]
 
           dimensions.each_with_index{|d,j|
+
             contains_nulls = contains_nulls | (data[d][i] == nil)
 
-            if dimension_codes.include? d
-              # str << "  #{rdf_dimensions[j]} <code/#{d.downcase}/#{data[d][i]}> ;\n"
-              str << "  #{rdf_dimensions[j]} #{to_resource(data[d][i], options)} ;\n"
-            else
-              str << "  #{rdf_dimensions[j]} #{to_literal(data[d][i], options)} ;\n"
+            unless contains_nulls && !options[:encode_nulls]
+              if dimension_codes.include? d
+                # str << "  #{rdf_dimensions[j]} <code/#{d.downcase}/#{data[d][i]}> ;\n"
+                str << "  #{rdf_dimensions[j]} #{to_resource(data[d][i], options)} ;\n"
+              else
+                str << "  #{rdf_dimensions[j]} #{to_literal(data[d][i], options)} ;\n"
+              end
             end
           }
 
           measures.each_with_index{|m,j|
             contains_nulls = contains_nulls | (data[m][i] == nil)
-            str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n"
+
+            unless contains_nulls && !options[:encode_nulls]
+              str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n"
+            end
 
           }
 
           str << "  .\n\n"
-          if contains_nulls && !options[:encode_nulls]
-            if options[:raise_nils]
-              raise "missing component for observation, skipping: #{str}, "
-            elsif options[:whiny_nils]
-              puts "missing component for observation, skipping: #{str}, "
-            end
-          else
+          # if contains_nulls && !options[:encode_nulls]
+          #   if options[:raise_nils]
+          #     raise "missing component for observation, skipping: #{str}, "
+          #   elsif options[:whiny_nils]
+          #     puts "missing component for observation, skipping: #{str}, "
+          #   end
+          # else
             obs << str
-          end
+          # end
         }
         obs
       end
