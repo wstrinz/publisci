@@ -102,13 +102,13 @@ module PubliSci
 
         #TODO decide the right way to handle missing values, since RDF has no null
         #probably throw an error here since a missing resource is a bigger problem
-        obj = "NA" if obj.empty?
+        obj = "rdf:nil" if obj.empty?
 
         #TODO  remove special characters (faster) as well (eg '?')
         obj=  obj.gsub(' ','_')
 
       elsif obj == nil && options[:encode_nulls]
-        '"NA"'
+        'rdf:nil'
       elsif obj.is_a? Numeric
         #resources cannot be referred to purely by integer (?)
         "n"+obj.to_s
@@ -130,7 +130,7 @@ module PubliSci
         end
       elsif obj == nil && options[:encode_nulls]
         #TODO decide the right way to handle missing values, since RDF has no null
-        '"NA"'
+        'rdf:nil'
       else
         obj
       end

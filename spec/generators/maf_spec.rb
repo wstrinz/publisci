@@ -19,7 +19,8 @@ describe PubliSci::Readers::MAF do
     end
 
     context "print output" do
-      before { @str = @generator.generate_n3(@in_file, nil, :print) }
+      before { @str = @generator.generate_n3(@in_file, nil, :print)
+        puts @str}
       it { is_cube(@str) }
     end
 
