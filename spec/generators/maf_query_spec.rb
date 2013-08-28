@@ -14,9 +14,9 @@ class MafQuery
     end
 
     def select_patient_count(repo,patient_id="A8-A08G")
-        qry = IO.read('resources/queries/patient.rq')
-        qry = qry.gsub('%{patient}',patient_id)
-        SPARQL.execute(qry,repo)
+      qry = IO.read('resources/queries/patient.rq')
+      qry = qry.gsub('%{patient}',patient_id)
+      SPARQL.execute(qry,repo)
     end
 
     def select_patient_genes(repo,patient_id="A8-A08G")
@@ -26,7 +26,8 @@ class MafQuery
     end
 
     def select_property(repo,property="Hugo_Symbol",patient_id="A8-A08G")
-
+    	qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
+    	SPARQL.execute(qry,repo)
     end
 end
 
@@ -44,7 +45,14 @@ describe MafQuery, no_travis: true do
       it { @maf.select_patient_genes(@repo).size.should > 0 }
     end
 
-    context ".select_property" do
+    describe ".select_property" do
     	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"Center","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
+
+    	context "non-existant properties" do
+    		it { @maf.select_property(@repo,"Chunkiness","BH-A0HP").should == [] }
+    	end    	  
     end
 end

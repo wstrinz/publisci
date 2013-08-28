@@ -1,0 +1,18 @@
+PREFIX qb:   <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?column WHERE {
+  [] a qb:ComponentSpecification;
+    rdfs:label "Tumor_Sample_Barcode Component";
+    qb:measure ?barcode_measure.
+
+  [] a qb:ComponentSpecification;
+    rdfs:label "%{column} Component";
+    qb:measure ?column_measure.
+
+  [] a qb:Observation;
+    ?barcode_measure ?barcode;
+    ?column_measure ?column.
+  
+  FILTER (regex(?barcode, "TCGA-%{patient}.*"))
+}
