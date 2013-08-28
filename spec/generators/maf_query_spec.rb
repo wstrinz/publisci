@@ -27,11 +27,11 @@ class MafQuery
 
     def select_property(repo,property="Hugo_Symbol",patient_id="A8-A08G")
     	qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
-    	SPARQL.execute(qry,repo)
+    	SPARQL.execute(qry,repo).map(&:column)
     end
 end
 
-describe MafQuery, no_travis: true do
+describe MafQuery do
 	before(:all) do
     @maf = MafQuery.new
 		@repo = @maf.generate_data
