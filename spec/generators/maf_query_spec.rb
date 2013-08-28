@@ -24,21 +24,27 @@ class MafQuery
       qry = qry.gsub('%{patient}',patient_id)
       SPARQL.execute(qry,repo)
     end
+
+    def select_property(repo,property="Hugo_Symbol",patient_id="A8-A08G")
+
+    end
 end
 
 describe MafQuery, no_travis: true do
 	before(:all) do
-    m = MafQuery.new
-		@repo = m.generate_data
+    @maf = MafQuery.new
+		@repo = @maf.generate_data
 	end
 
-    it "should query number of entries" do
-        m = MafQuery.new
-        m.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0
+	  describe "query number of entries" do
+	  	it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
     end
     
-    it "should query genes" do
-        m = MafQuery.new
-        m.select_patient_genes(@repo,"BH-A0HP").size.should > 0
+    describe "query genes" do
+      it { @maf.select_patient_genes(@repo).size.should > 0 }
+    end
+
+    context ".select_property" do
+    	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }
     end
 end
