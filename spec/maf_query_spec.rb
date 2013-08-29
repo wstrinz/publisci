@@ -1,4 +1,4 @@
-require_relative '../../lib/bio-publisci.rb'
+require_relative '../lib/bio-publisci.rb'
 
 class MafQuery
 
@@ -53,6 +53,7 @@ describe MafQuery do
 
     	context "extra parsed properties" do
     		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
+    		it { @maf.select_property(@repo,"patient_id","BH-A0HP").size.should > 0 }
     	end
 
     	context "non-existant properties" do
