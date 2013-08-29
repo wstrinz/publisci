@@ -51,6 +51,10 @@ describe MafQuery do
     	it { @maf.select_property(@repo,"Center","BH-A0HP").size.should > 0 }
     	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
 
+    	context "extra parsed properties" do
+    		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
+    	end
+
     	context "non-existant properties" do
     		it { @maf.select_property(@repo,"Chunkiness","BH-A0HP").should == [] }
     	end    	  

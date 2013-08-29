@@ -29,6 +29,7 @@ describe PubliSci::Readers::MAF do
         f.close
         @generator.generate_n3(@in_file, nil, :file, f.path)
         @str = IO.read(f.path+'.ttl')
+        open('resources/maf_rdf.ttl','w'){|f| f.write @str}
         f.unlink
       }
 
