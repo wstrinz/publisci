@@ -1,7 +1,6 @@
 require_relative '../lib/bio-publisci.rb'
 
 class MafQuery
-
     def generate_data
     	@generator = PubliSci::Readers::MAF.new
     	@in_file = 'resources/maf_example.maf'
