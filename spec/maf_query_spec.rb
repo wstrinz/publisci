@@ -8,8 +8,9 @@ class MafQuery
     	f.close
     	generator.generate_n3(in_file, nil, :file, f.path)
     	repo = RDF::Repository.load(f.path+'.ttl')
+      File.delete(f.path+'.ttl')
     	f.unlink
-    	repo
+      repo
     end
 
     def select_patient_count(repo,patient_id="A8-A08G")
@@ -68,14 +69,15 @@ describe MafQuery do
     @maf = MafQuery.new
 		@repo = @maf.generate_data
 	end
+    
+    describe "query genes" do
+      it { @maf.select_patient_genes(@repo,"BH-A0HP").size.should > 0 }
+    end
 
-	  describe "query number of entries" do
-	  	it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
+    describe "query number of entries" do
+      it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
     end
     
-    # describe "query genes" do
-    #   it { @maf.select_patient_genes(@repo).size.should > 0 }
-    # end
 
     describe ".select_property" do
     	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }

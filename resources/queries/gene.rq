@@ -6,13 +6,9 @@ SELECT DISTINCT ?gene WHERE {
     rdfs:label "Tumor_Sample_Barcode";
     qb:measure ?barcode_measure.
 
-  [] a qb:ComponentSpecification;
-    rdfs:label "Hugo_Symbol";
-    qb:measure ?gene_measure.
-
   ?patient_obs a qb:Observation;
     ?barcode_measure ?barcode;
-    ?gene_measure ?gene.
+    <http://rqtl.org/maf/terms/Hugo_Symbol> ?gene.
   
   FILTER (regex(?barcode, "TCGA-%{patient}.*"))
 }
