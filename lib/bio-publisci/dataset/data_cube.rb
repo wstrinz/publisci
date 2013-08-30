@@ -58,9 +58,10 @@ module PubliSci
         [newm, newd, newc]
       end
 
-      def component_gen(args,options={})
+      def component_gen(args,var,options={})
         args = Array[args].flatten
-        args.map{|arg| arg.gsub("prop:","cs:").gsub(%r{<#{options[:base_url]}/.+/(\w.+)>$},'cs:'+'\1')}
+        args = args.map{|arg| arg.gsub("prop:","cs:").gsub(%r{<#{options[:base_url]}/.+/(\w.+)>$},'cs:'+'\1')}
+        args.map{|arg| arg.gsub(%r{<http://(.+)>},"<#{options[:base_url]}/dc/dataset/#{var}/cs/"+'\1'+'>')}
       end
 
       def encode_data(codes,data,var,options={})
@@ -141,8 +142,8 @@ module PubliSci
         var = sanitize([var]).first
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
-        cs_dims = component_gen(rdf_dimensions,options)  #rdf_dimensions.map{|d| d.gsub('prop:','cs:')}
-        cs_meas = component_gen(rdf_measures,options) #rdf_measures.map!{|m| m.gsub('prop:','cs:')}
+        cs_dims = component_gen(rdf_dimensions,var,options)  #rdf_dimensions.map{|d| d.gsub('prop:','cs:')}
+        cs_meas = component_gen(rdf_measures,var,options) #rdf_measures.map!{|m| m.gsub('prop:','cs:')}
         str = "ns:dsd-#{var} a qb:DataStructureDefinition;\n"
         cs_dims.map{|d|
           str << "  qb:component #{d} ;\n"
@@ -170,10 +171,8 @@ module PubliSci
       def component_specifications(measure_names, dimension_names, codes, var, options={})
         options = defaults().merge(options)
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measure_names, dimension_names, codes, options)
-        cs_dims = component_gen(rdf_dimensions,options)
-        cs_meas = component_gen(rdf_measures,options)
-        # cs_dims = rdf_dimensions.map{|d| d.gsub('prop:','cs:')}
-        # cs_meas = rdf_measures.map{|m| m.gsub('prop:','cs:')}
+        cs_dims = component_gen(rdf_dimensions,var,options)
+        cs_meas = component_gen(rdf_measures,var,options)
         specs = []
 
           rdf_dimensions.each_with_index.map{|d,i|
@@ -188,7 +187,7 @@ module PubliSci
           rdf_measures.each_with_index.map{|n,i|
             specs << <<-EOF.unindent
               #{cs_meas[i]} a qb:ComponentSpecification ;
-                rdfs:label "#{strip_prefixes(strip_uri(measure_names[i]))} Component" ;
+                rdfs:label "#{strip_prefixes(strip_uri(measure_names[i]))}" ;
                 qb:measure #{n} .
 
               EOF

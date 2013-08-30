@@ -38,11 +38,11 @@ cs:windy a qb:ComponentSpecification ;
   qb:dimension prop:windy .
 
 cs:humidity a qb:ComponentSpecification ;
-  rdfs:label "humidity Component" ;
+  rdfs:label "humidity" ;
   qb:measure prop:humidity .
 
 cs:temperature a qb:ComponentSpecification ;
-  rdfs:label "temperature Component" ;
+  rdfs:label "temperature" ;
   qb:measure prop:temperature .
 
 prop:outlook a rdf:Property, qb:DimensionProperty ;

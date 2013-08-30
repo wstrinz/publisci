@@ -3,7 +3,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT (COUNT(?barcode) as ?barcodes) WHERE {
   [] a qb:ComponentSpecification;
-    rdfs:label "Tumor_Sample_Barcode Component";
+    rdfs:label "Tumor_Sample_Barcode";
     qb:measure ?barcode_measure.
 
   ?patient_obs a qb:Observation;

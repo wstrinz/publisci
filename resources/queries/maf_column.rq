@@ -3,11 +3,11 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?column WHERE {
   [] a qb:ComponentSpecification;
-    rdfs:label "Tumor_Sample_Barcode Component";
+    rdfs:label "Tumor_Sample_Barcode";
     qb:measure ?barcode_measure.
 
   [] a qb:ComponentSpecification;
-    rdfs:label "%{column} Component";
+    rdfs:label "%{column}";
     qb:measure ?column_measure.
 
   [] a qb:Observation;

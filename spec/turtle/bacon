@@ -33,11 +33,11 @@ cs:pricerange a qb:ComponentSpecification ;
   qb:dimension prop:pricerange .
 
 cs:chunkiness a qb:ComponentSpecification ;
-  rdfs:label "chunkiness Component" ;
+  rdfs:label "chunkiness" ;
   qb:measure prop:chunkiness .
 
 cs:deliciousness a qb:ComponentSpecification ;
-  rdfs:label "deliciousness Component" ;
+  rdfs:label "deliciousness" ;
   qb:measure prop:deliciousness .
 
 prop:producer a rdf:Property, qb:DimensionProperty ;
