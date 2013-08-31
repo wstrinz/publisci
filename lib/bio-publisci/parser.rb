@@ -139,6 +139,8 @@ module PubliSci
     def encode_value(obj,options={})
       if RDF::Resource(obj).valid?
         to_resource(obj,options)
+      elsif obj && (obj[0]=="<" && obj[-1] = ">")
+        obj
       else
         to_literal(obj,options)
       end
