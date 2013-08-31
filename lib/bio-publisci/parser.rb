@@ -14,7 +14,7 @@ module PubliSci
           if is_uri? entry
             processed << entry.gsub(/[\s]/,'_')
           else
-            processed << entry.gsub(/[\s\.]/,'_')
+            processed << entry.gsub(/[\s]/,'_')
           end
         else
           processed << entry
@@ -95,7 +95,7 @@ module PubliSci
 	    end
     end
 
-    def to_resource(obj, options)
+    def to_resource(obj, options={})
       if obj.is_a? String
 
         obj = "<#{obj}>" if is_uri? obj
@@ -117,7 +117,7 @@ module PubliSci
       end
     end
 
-    def to_literal(obj, options)
+    def to_literal(obj, options={})
       if obj.is_a? String
         # Depressing that there's no more elegant way to check if a string is
         # a number...
@@ -133,6 +133,14 @@ module PubliSci
         'rdf:nil'
       else
         obj
+      end
+    end
+
+    def encode_value(obj,options={})
+      if RDF::Resource(obj).valid?
+        to_resource(obj,options)
+      else
+        to_literal(obj,options)
       end
     end
 

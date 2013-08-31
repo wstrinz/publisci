@@ -25,18 +25,36 @@ class MafQuery
       SPARQL.execute(qry,repo)
     end
 
-    def select_property(repo,property="Hugo_Symbol",patient_id="A8-A08G")
+    def select_property(repo,property="hgnc.symbol",patient_id="A8-A08G")
     	qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
     	SPARQL.execute(qry,repo).map(&:column)
     end
 
-    def gene_length(hugo_symbol = 'A2BP1')
+    def official_symbol(hugo_symbol)
+      qry = <<-EOF
+      
+      SELECT distinct ?official where {
+       {?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> "#{hugo_symbol}"}
+       UNION
+       {?hgnc <http://bio2rdf.org/hgnc_vocabulary:synonym> "#{hugo_symbol}"}
+       
+       ?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> ?official
+      }
+
+      EOF
+
+      sparql = SPARQL::Client.new("http://cu.hgnc.bio2rdf.org/sparql")
+      sparql.query(qry).map(&:official).first.to_s
+    end
+
+    def gene_length(hugo_symbol)
+      hugo_symbol = hugo_symbol.split('/').last
       qry = IO.read('resources/queries/hugo_to_ensembl.rq').gsub('%{hugo_symbol}',hugo_symbol)
       sparql = SPARQL::Client.new("http://cu.hgnc.bio2rdf.org/sparql")
       sol = sparql.query(qry)
 
       if sol.size == 0
-        raise "No Ensembl entry found for #{hugo_id}"
+        raise "No Ensembl entry found for #{hugo_symbol}"
       else
         ensemble_id = sol.map(&:ensembl).first.to_s.split(':').last
       end
@@ -55,7 +73,7 @@ class MafQuery
     end
 
     def patient_info(id,repo)
-      symbols = select_property(repo,"Hugo_Symbol",id).map(&:to_s)
+      symbols = select_property(repo,"hgnc.symbol",id).map(&:to_s)
       patient_id = select_property(repo,"patient_id",id).first.to_s
       patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
       
@@ -80,7 +98,7 @@ describe MafQuery do
     
 
     describe ".select_property" do
-    	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"hgnc.symbol","BH-A0HP").size.should > 0 }
     	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").size.should > 0 }
     	it { @maf.select_property(@repo,"Center","BH-A0HP").size.should > 0 }
     	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
@@ -99,12 +117,16 @@ describe MafQuery do
       it { @maf.gene_length('A2BP1').should == 1694245 }
     end
 
+    describe ".official_symbol" do
+      it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
+    end
+
     describe ".patient_info" do
       it 'collects the number of mutations and gene lengths for each mutation' do
         patient = @maf.patient_info('BH-A0HP',@repo)
         patient[:mutation_count].should == 1
         patient[:mutations].first[:length].should == 79113
-        patient[:mutations].first[:symbol].should == 'A1CF'
+        patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
       end
     end
 end

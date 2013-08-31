@@ -292,7 +292,7 @@ module PubliSci
             contains_nulls = contains_nulls | (data[m][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
-              str << "  #{rdf_measures[j]} #{to_literal(data[m][i], options)} ;\n"
+              str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
             end
 
           }
