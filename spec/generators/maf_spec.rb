@@ -16,6 +16,7 @@ describe PubliSci::Readers::MAF do
       str[/a qb:Observation/].should_not be nil
       str[/a rdf:Property, qb:DimensionProperty/].should_not be nil
       str[/a rdf:Property, qb:MeasureProperty/].should_not be nil
+      str[/a qb:ComponentSpecification/].should_not be nil
     end
 
     context "print output" do
