@@ -252,7 +252,11 @@ module PubliSci
         var = sanitize([var]).first
         measures = sanitize(measures)
         dimensions = sanitize(dimensions)
+
+        data.each{|k,v| data[k]=Array(v)}
+        observation_labels = Array(observation_labels)
         options = defaults().merge(options)
+
         rdf_measures, rdf_dimensions, rdf_codes  = generate_resources(measures, dimensions, codes, options)
         data = encode_data(codes, data, var, options)
         obs = []

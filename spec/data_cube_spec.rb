@@ -106,7 +106,15 @@ describe PubliSci::Dataset::DataCube do
 				observations.is_a?(Array).should == true
 				observations.first.is_a?(String).should == true
 			end
-	end
+
+      it "coerces single values into arrays" do
+        newdata = Hash[@data.map{|k,v| [k,v.first] }]
+        observations = @generator.observations(@measures, @dimensions, @codes, newdata, @labels[0], "bacon")
+        observations.is_a?(Array).should == true
+        observations.first.is_a?(String).should == true
+      end
+  end
+
 
   context "under official integrity constraints" do
   	before(:all) do
@@ -160,11 +168,6 @@ describe PubliSci::Dataset::DataCube do
   		# SPARQL.execute(@checks['19_2'], @graph).first.should be_nil
   	end
   end
-
-
-		it "can set dimensions vs measures via hash" do
-
-		end
 
 
 end

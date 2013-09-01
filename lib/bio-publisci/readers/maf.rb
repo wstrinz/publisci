@@ -66,7 +66,6 @@ module PubliSci
           entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
           
           data = Hash[*COLUMN_NAMES.zip(entry).flatten]
-          data.each{|k,v| data[k]=Array(v)}
 
           observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)
         end
