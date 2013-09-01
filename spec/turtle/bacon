@@ -1,5 +1,5 @@
-@base <http://www.rqtl.org/ns/dc/> .
-@prefix ns:    <http://www.rqtl.org/ns/dataset/bacon/> .
+@base <http://www.rqtl.org/dc/dataset/bacon/> .
+@prefix ns:    <http://www.rqtl.org/dc/dataset/bacon/> .
 @prefix qb:    <http://purl.org/linked-data/cube#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .

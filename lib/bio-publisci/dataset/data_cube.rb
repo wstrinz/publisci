@@ -119,8 +119,8 @@ module PubliSci
         options = defaults().merge(options)
         base = options[:base_url]
         <<-EOF.unindent
-        @base <#{base}/ns/dc/> .
-        @prefix ns:    <#{base}/ns/dataset/#{var}/> .
+        @base <#{base}/dc/dataset/#{var}/> .
+        @prefix ns:    <#{base}/dc/dataset/#{var}/> .
         @prefix qb:    <http://purl.org/linked-data/cube#> .
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
@@ -284,7 +284,11 @@ module PubliSci
             contains_nulls = (data[d][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
-                str << "  #{rdf_dimensions[j]} #{encode_value(data[d][i], options)} ;\n"
+                # if codes.include? d
+                  # str << " #{rdf_dimensions[j]} #{data[d][i]} ;\n"
+                # else
+                  str << "  #{rdf_dimensions[j]} #{encode_value(data[d][i], options)} ;\n"
+                # end
             end
           }
 
@@ -374,7 +378,7 @@ module PubliSci
       def abbreviate_known(turtle_string)
         #debug method
         # puts turtle_string
-        turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\S+)>/, 'code:\2')
+        turtle_string.gsub(/<http:\/\/www\.rqtl\.org\/dc\/properties\/(\S+)>/, 'prop:\1').gsub(/<http:\/\/www.rqtl.org\/ns\/dc\/code\/(\S+)\/(\S+)>/, '<code/\1/\2>').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\w+)>/, 'code:\2').gsub(/<http:\/\/www.rqtl.org\/dc\/dataset\/(\S+)\/code\/(\S+)>/, '<code/' + '\2' +'>')
       end
     end
   end

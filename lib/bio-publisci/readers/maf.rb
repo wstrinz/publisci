@@ -8,8 +8,8 @@ module PubliSci
 
         @dimensions = %w{Variant_Classification Variant_Type Mutation_Status Sequencing_Phase Sequence_Source filter}
         # @codes = @dimensions
-        @codes = []
-        @measures = (COLUMN_NAMES - @dimensions)
+        @codes = %w{Variant_Classification}
+        @measures = (COLUMN_NAMES - @dimensions - @codes)
         @dataset_name ||= File.basename(input_file,'.*')
         @barcode_index = COLUMN_NAMES.index('Tumor_Sample_Barcode')
 
@@ -116,8 +116,19 @@ module PubliSci
         component_specifications(@measures, @dimensions, @codes, @dataset_name, options).map{ |c| str << c }
         measure_properties(@measures,@dataset_name,options).map{|m| str << m}
         dimension_properties(@dimensions,@codes, @dataset_name,options).map{|d| str << d}
-
+        # puts tcga_codes
+        code_lists(@codes,tcga_codes,@dataset_name,options).map{|c| str << c}
+        concept_codes(@codes,tcga_codes,@dataset_name,options).map{|c| str << c}
         str
+      end
+
+      def tcga_codes
+        {
+          "Variant_Classification" => %w{Frame_Shift_Del Frame_Shift_Ins In_Frame_Del In_Frame_Ins Missense_Mutation Nonsense_Mutation Silent Splice_Site Translation_Start_Site Nonstop_Mutation 3'UTR 3'Flank 5'UTR 5'Flank IGR1  Intron RNA Targeted_Region},
+
+          "Variant_Type" => %w{SNP DNP TNP ONP INS DEL Consolidated}
+
+        }
       end
     end
   end
