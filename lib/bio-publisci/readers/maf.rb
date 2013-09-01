@@ -52,10 +52,18 @@ module PubliSci
           entry = (entry.fill(nil,entry.length...COLUMN_NAMES.length-2) + parse_barcode(entry[@barcode_index])).flatten
           
           if options[:lookup_hugo]
-            entry[0] = "http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}"
+            entry[0] = "http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}" if entry[0]
           else
-            entry[0] = "http://identifiers.org/hgnc.symbol/#{entry[0]}"
+            entry[0] = "http://identifiers.org/hgnc.symbol/#{entry[0]}" if entry[0]
           end
+
+          # A 0 in the entrez-id column appears to mean null
+          col = COLUMN_NAMES.index('Entrez_Gene_Id')
+          entry[col] = nil if entry[col] == '0'
+
+          # Replace entrez genes
+          col = COLUMN_NAMES.index('Entrez_Gene_Id')
+          entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
           
           data = Hash[*COLUMN_NAMES.zip(entry).flatten]
           data.each{|k,v| data[k]=Array(v)}
@@ -64,6 +72,14 @@ module PubliSci
         end
       end
 
+      def column_replace(entry,column,prefix,value=nil)
+        if value
+          entry[COLUMN_NAMES.index(column)] = prefix + value
+        else
+          entry[COLUMN_NAMES.index(column)] += prefix
+        end
+      end
+      
       def official_symbol(hugo_symbol)
         qry = <<-EOF
         
