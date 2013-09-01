@@ -61,10 +61,17 @@ module PubliSci
           col = COLUMN_NAMES.index('Entrez_Gene_Id')
           entry[col] = nil if entry[col] == '0'
 
-          # Replace entrez genes
+          # Link entrez genes
           col = COLUMN_NAMES.index('Entrez_Gene_Id')
           entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
           
+          # Link known SNPs
+          col = COLUMN_NAMES.index('dbSNP_RS')
+          if entry[col][0..1] == "rs"
+            entry[col] = "http://identifiers.org/dbsnp/#{entry[col].gsub('rs','')}"
+          end
+
+
           data = Hash[*COLUMN_NAMES.zip(entry).flatten]
 
           observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)
