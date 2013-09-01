@@ -13,7 +13,7 @@ module PubliSci
         @dataset_name ||= File.basename(input_file,'.*')
         @barcode_index = COLUMN_NAMES.index('Tumor_Sample_Barcode')
 
-        options[:encode_nulls] ||= true
+        # options[:encode_nulls] ||= true
         options[:no_labels] ||= true
         options[:lookup_hugo] ||= true
 

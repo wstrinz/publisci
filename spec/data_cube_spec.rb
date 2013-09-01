@@ -51,14 +51,17 @@ describe PubliSci::Dataset::DataCube do
 			end
 
 			it "skips observations with missing values by default" do
-        pending('waiting for decision on null values')
-				# turtle_string = @generator.generate(@measures, @dimensions, @codes,	@missing_data, @labels + ["missingbacon"], 'bacon')
-				# turtle_string[/.*obsmissingbacon.*\n/].should be nil
-			end
+        # pending('waiting for decision on null values')
 
-			it "includes observations with missing values if flag is set" do
-				turtle_string = @generator.generate(@measures, @dimensions, @codes,	@missing_data, @labels + ["missingbacon"], 'bacon',{encode_nulls: true})
-				turtle_string[/.*obsmissingbacon.*\n/].should_not be nil
+				turtle_string = @generator.generate(@measures, @dimensions, @codes,	@missing_data, @labels + ["missingbacon"], 'bacon')
+        turtle_string[/.*obsmissingbacon.*\n/].should_not be nil
+        turtle_string[/\S+obsmissingbacon.*prop:chunkiness.*\n\n/m].should be nil
+      end
+
+      it "includes observations with missing values if flag is set" do
+        turtle_string = @generator.generate(@measures, @dimensions, @codes, @missing_data, @labels + ["missingbacon"], 'bacon',{encode_nulls: true})
+        turtle_string[/.*obsmissingbacon.*\n/].should_not be nil
+  			turtle_string[/\S+obsmissingbacon.*prop:chunkiness.*\n\n/m].should_not be nil
 			end
 
 		end

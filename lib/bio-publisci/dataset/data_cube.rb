@@ -266,7 +266,7 @@ module PubliSci
         }
 
         observation_labels.each_with_index.map{|r, i|
-          contains_nulls = false
+          # contains_nulls = false
           str = <<-EOF.unindent
           ns:obs#{r} a qb:Observation ;
             qb:dataSet ns:dataset-#{var} ;
@@ -276,7 +276,8 @@ module PubliSci
 
           dimensions.each_with_index{|d,j|
 
-            contains_nulls = contains_nulls | (data[d][i] == nil)
+            # contains_nulls = contains_nulls | (data[d][i] == nil)
+            contains_nulls = (data[d][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
                 str << "  #{rdf_dimensions[j]} #{encode_value(data[d][i], options)} ;\n"
@@ -284,7 +285,8 @@ module PubliSci
           }
 
           measures.each_with_index{|m,j|
-            contains_nulls = contains_nulls | (data[m][i] == nil)
+            # contains_nulls = contains_nulls | (data[m][i] == nil)
+            contains_nulls = (data[m][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
               str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
