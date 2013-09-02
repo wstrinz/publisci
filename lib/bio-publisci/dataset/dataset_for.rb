@@ -3,6 +3,14 @@ module PubliSci
   class Dataset
     extend PubliSci::Interactive
 
+    def self.registry
+      @registry ||= {}
+    end
+
+    def self.register(extension,klass)
+      registry[extension] = klass
+    end
+
     def self.for(object, options={}, ask_on_ambiguous=true)
 
       if options == false || options == true
@@ -20,15 +28,20 @@ module PubliSci
             raise "Can't load file #{object}; file type inference not yet implemented"
           end
 
-          case extension
-          when ".RData"
-            r_object(object, options, ask_on_ambiguous)
-          when /.csv/i
-            PubliSci::Readers::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
-          when /.arff/i
-            PubliSci::Readers::ARFF.new.generate_n3(object)
+          if registry.keys.include? extension
+            registry[extension].new.automatic(object)
           else
-            false
+            case extension
+            when ".RData"
+              r_object(object, options, ask_on_ambiguous)
+            when /.csv/i
+              PubliSci::Readers::CSV.new.automatic(object,nil,options,ask_on_ambiguous)
+            when /.arff/i
+              PubliSci::Readers::ARFF.new.generate_n3(object)
+            else
+              # false
+              raise "Unkown Extension #{extension}"
+            end
           end
         elsif object =~ %r{htt(p|ps)://.+}
           self.for(download(object).path, options, ask_on_ambiguous) || RDF::Statement.new(RDF::URI(object), RDF::URI('http://semanticscience.org/resource/hasValue'), IO.read(download(object).path)).to_s
@@ -46,27 +59,12 @@ module PubliSci
       end
     end
 
-    # def for_remote
-    #   addr = object
-    #   tmp = download(object)
-    #   self.for(tmp.path) || "#{addr} <http://semanticscience.org/resource/"
-    # end
-
     def self.download(uri)
       out = Tempfile.new(uri.split('/').last)
       out.write open(uri).read
       out.close
       out
     end
-
-    # private
-    # def self.reader_exists?(object)
-    #   if object.is_a? String
-    #     if File.exist? object
-
-    #   elsif
-    #   end
-    # end
 
     def self.r_object(object, options={}, ask_on_ambiguous=true)
       if object.is_a? String

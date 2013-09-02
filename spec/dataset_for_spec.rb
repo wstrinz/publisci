@@ -2,6 +2,7 @@ require_relative '../lib/bio-publisci.rb'
 
 describe PubliSci::Dataset do
   it "should use sio:has_value for unknown string types" do
+    pending("refactor dataset_for to handle raw remote files better")
     turtle_string = PubliSci::Dataset.for('http://www.biostat.wisc.edu/~kbroman/D3/cistrans/data/probe_data/probe497638.json',false)
     (turtle_string =~ /hasValue/).should_not be nil
     # open('ttl.ttl','w'){|f| f.write turtle_string}
@@ -19,6 +20,15 @@ describe PubliSci::Dataset do
   it "can convert arff files" do
     turtle_string = PubliSci::Dataset.for('resources/weather.numeric.arff',false)
     turtle_string.should == IO.read('spec/turtle/weather')
+  end
+
+  describe ".register" do
+    it "can register readers to be used by Dataset.for" do
+      expect { PubliSci::Dataset.for('resources/maf_example.maf') }.to raise_error
+      PubliSci::Dataset.register('.maf',PubliSci::Readers::MAF)
+      str = PubliSci::Dataset.for('resources/maf_example.maf')
+      str.size.should > 0
+    end
   end
 
   context 'with a csv file' do
@@ -59,6 +69,5 @@ describe PubliSci::Dataset do
       (turtle_string =~ /prop:producer/).should_not be nil
     end
   end
-
 
 end
