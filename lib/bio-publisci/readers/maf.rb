@@ -5,8 +5,11 @@ module PubliSci
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
 
-      def generate_n3(input_file, dataset_name=nil, output=:file, output_base=nil, options={})
+      def generate_n3(input_file, options={})
 
+        dataset_name = options[:dataset_name] || nil
+        output = options[:output] || :file
+        output_base = options[:output_base] || nil
         # @dimensions = %w{Variant_Classification Variant_Type Mutation_Status Sequencing_Phase Sequence_Source filter}
         @dimensions = %w{Variant_Classification Variant_Type}
         @codes = %w{Variant_Classification Variant_Type}
@@ -17,6 +20,7 @@ module PubliSci
         options[:no_labels] ||= true
         options[:lookup_hugo] ||= false
         options[:ranges] ||= COMPONENT_RANGES
+
 
         if output == :print
           str = structure(options)

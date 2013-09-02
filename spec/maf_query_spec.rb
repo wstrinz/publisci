@@ -6,7 +6,7 @@ class MafQuery
     	in_file = 'resources/maf_example.maf'
     	f = Tempfile.new('graph')
     	f.close
-    	generator.generate_n3(in_file, nil, :file, f.path)
+    	generator.generate_n3(in_file, {output: :file, output_base: f.path})
     	repo = RDF::Repository.load(f.path+'.ttl')
       File.delete(f.path+'.ttl')
     	f.unlink
@@ -32,12 +32,12 @@ class MafQuery
 
     def official_symbol(hugo_symbol)
       qry = <<-EOF
-      
+
       SELECT distinct ?official where {
        {?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> "#{hugo_symbol}"}
        UNION
        {?hgnc <http://bio2rdf.org/hgnc_vocabulary:synonym> "#{hugo_symbol}"}
-       
+
        ?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> ?official
       }
 
@@ -76,7 +76,7 @@ class MafQuery
       symbols = select_property(repo,"hgnc.symbol",id).map(&:to_s)
       patient_id = select_property(repo,"patient_id",id).first.to_s
       patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
-      
+
       symbols.each{|sym| patient[:mutations] << {symbol: sym, length: gene_length(sym)}}
       patient
     end
@@ -87,7 +87,7 @@ describe MafQuery do
     @maf = MafQuery.new
 		@repo = @maf.generate_data
 	end
-    
+
     describe "query genes" do
       it { @maf.select_patient_genes(@repo,"BH-A0HP").size.should > 0 }
     end
@@ -95,7 +95,7 @@ describe MafQuery do
     describe "query number of entries" do
       it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
     end
-    
+
 
     describe ".select_property" do
     	it { @maf.select_property(@repo,"hgnc.symbol","BH-A0HP").size.should > 0 }
@@ -110,7 +110,7 @@ describe MafQuery do
 
     	context "non-existant properties" do
     		it { @maf.select_property(@repo,"Chunkiness","BH-A0HP").should == [] }
-    	end    	  
+    	end
     end
 
     describe ".gene_length" do

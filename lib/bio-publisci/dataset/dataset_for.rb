@@ -3,16 +3,15 @@ module PubliSci
   class Dataset
     extend PubliSci::Interactive
 
-    def self.registry
-      @registry ||= {}
+    def self.reader_registry
+      @reader_registry ||= {}
     end
 
-    def self.register(extension,klass)
-      registry[extension] = klass
+    def self.register_reader(extension,klass)
+      reader_registry[extension] = klass
     end
 
     def self.for(object, options={}, ask_on_ambiguous=true)
-
       if options == false || options == true
         ask_on_ambiguous = options
         options = {}
@@ -28,8 +27,8 @@ module PubliSci
             raise "Can't load file #{object}; file type inference not yet implemented"
           end
 
-          if registry.keys.include? extension
-            registry[extension].new.generate_n3(object)
+          if reader_registry.keys.include? extension
+            reader_registry[extension].new.automatic(object,options,ask_on_ambiguous)
           else
             case extension
             when ".RData"

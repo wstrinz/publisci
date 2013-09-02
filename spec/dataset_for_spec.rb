@@ -22,13 +22,12 @@ describe PubliSci::Dataset do
     turtle_string.should == IO.read('spec/turtle/weather')
   end
 
-  describe ".register" do
+  describe ".register_reader" do
     it "can register readers to be used by Dataset.for" do
       expect { PubliSci::Dataset.for('resources/maf_example.maf') }.to raise_error
-      PubliSci::Dataset.register('.maf',PubliSci::Readers::MAF)
+      PubliSci::Dataset.register_reader('.maf',PubliSci::Readers::MAF)
       file = PubliSci::Dataset.for('resources/maf_example.maf')
       str = IO.read(file)
-      # File.delete(file)
       str.size.should > 0
       (str =~ /qb:Observation/).should_not be nil
     end

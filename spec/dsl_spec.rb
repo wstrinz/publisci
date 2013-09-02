@@ -9,6 +9,44 @@ describe PubliSci::DSL do
     PubliSci::Dataset.registry.clear
   end
 
+  context "maf files" do
+    describe "set options" do
+      before { PubliSci::Dataset.register_reader('.maf',PubliSci::Readers::MAF) }
+      it "can change output type" do
+
+        dat = data do
+          object 'resources/maf_example.maf'
+          option :output, :print
+        end
+
+        str = generate_n3
+        str[/a qb:Observation/].should_not == nil
+      end
+
+      it "can output to repository" do
+        dat = data do
+          object 'resources/maf_example.maf'
+          option :output, :print
+        end
+
+        repo = to_repository
+        repo.is_a?(RDF::Repository).should be true
+        repo.size.should > 0
+
+        qry = <<-EOF
+        SELECT ?observation where {
+          ?observation a <http://purl.org/linked-data/cube#Observation>;
+            <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1>
+        }
+
+        EOF
+
+        sparql = SPARQL::Client.new(repo)
+        sparql.query(qry).size.should > 0
+      end
+    end
+  end
+
   it "can generate dataset, metadata, and provenance when given a script" do
 
     dat = data do
@@ -48,6 +86,8 @@ describe PubliSci::DSL do
     str = generate_n3
     str[/rdfs:label "\d"/].should == nil
   end
+
+
 
   it "can output to in-memory repository" do
     dat = data do

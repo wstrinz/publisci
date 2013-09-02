@@ -20,7 +20,7 @@ describe PubliSci::Readers::MAF do
     end
 
     context "print output" do
-      before { @str = @generator.generate_n3(@in_file, nil, :print)}
+      before { @str = @generator.generate_n3(@in_file, {output: :print})}
       it { is_cube(@str) }
     end
 
@@ -28,7 +28,7 @@ describe PubliSci::Readers::MAF do
       before {
         f = Tempfile.new('graph')
         f.close
-        @generator.generate_n3(@in_file, nil, :file, f.path)
+        @generator.generate_n3(@in_file,{output: :file, output_base: f.path})
         @str = IO.read(f.path+'.ttl')
         open('resources/maf_rdf.ttl','w'){|f| f.write @str}
         f.unlink
