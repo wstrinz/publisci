@@ -42,7 +42,7 @@ module PubliSci
             out.write(processed.first) if processed
             n += 1
           }
-
+          out
         end
       end
 

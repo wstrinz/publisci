@@ -2,7 +2,7 @@ require_relative '../lib/bio-publisci.rb'
 
 describe PubliSci::Dataset do
   it "should use sio:has_value for unknown string types" do
-    pending("refactor dataset_for to handle raw remote files better")
+    pending("pending refactor dataset_for to handle raw remote files better")
     turtle_string = PubliSci::Dataset.for('http://www.biostat.wisc.edu/~kbroman/D3/cistrans/data/probe_data/probe497638.json',false)
     (turtle_string =~ /hasValue/).should_not be nil
     # open('ttl.ttl','w'){|f| f.write turtle_string}
@@ -26,8 +26,11 @@ describe PubliSci::Dataset do
     it "can register readers to be used by Dataset.for" do
       expect { PubliSci::Dataset.for('resources/maf_example.maf') }.to raise_error
       PubliSci::Dataset.register('.maf',PubliSci::Readers::MAF)
-      str = PubliSci::Dataset.for('resources/maf_example.maf')
+      file = PubliSci::Dataset.for('resources/maf_example.maf')
+      str = IO.read(file)
+      # File.delete(file)
       str.size.should > 0
+      (str =~ /qb:Observation/).should_not be nil
     end
   end
 

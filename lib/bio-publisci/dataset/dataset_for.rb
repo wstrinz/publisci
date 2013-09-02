@@ -29,7 +29,7 @@ module PubliSci
           end
 
           if registry.keys.include? extension
-            registry[extension].new.automatic(object)
+            registry[extension].new.generate_n3(object)
           else
             case extension
             when ".RData"
