@@ -211,6 +211,7 @@ module PubliSci
 
         rdf_dimensions.each_with_index{|d,i|
           if dimension_codes.include?(dimensions[i])
+
             code = rdf_codes[dimension_codes.index(dimensions[i])]
             props << <<-EOF.unindent
             #{d} a rdf:Property, qb:DimensionProperty ;
@@ -222,9 +223,13 @@ module PubliSci
           else
             props << <<-EOF.unindent
             #{d} a rdf:Property, qb:DimensionProperty ;
-              rdfs:label "#{strip_prefixes(strip_uri(d))}"@en .
-
+              rdfs:label "#{strip_prefixes(strip_uri(d))}"@en ;
             EOF
+            if options[:ranges] && options[:ranges][dimension[i]]
+              props.last << "\n  rdfs:range #{options[:ranges][dimensions[i]]} .\n\n"
+            else
+              props.last[-2] = ".\n"
+            end
           end
           }
 
@@ -236,14 +241,19 @@ module PubliSci
         rdf_measures = generate_resources(measures, [], [], options)[0]
         props = []
 
-          rdf_measures.map{ |m|
+        rdf_measures.each_with_index{ |m,i|
 
-            props <<  <<-EOF.unindent
-            #{m} a rdf:Property, qb:MeasureProperty ;
-              rdfs:label "#{strip_prefixes(strip_uri(m))}"@en .
+          props <<  <<-EOF.unindent
+          #{m} a rdf:Property, qb:MeasureProperty ;
+            rdfs:label "#{strip_prefixes(strip_uri(m))}"@en ;
+          EOF
 
-            EOF
-            }
+          if options[:ranges] && options[:ranges][measures[i]]
+            props.last << "  rdfs:range #{options[:ranges][measures[i]]} .\n\n"
+          else
+            props.last[-2] = ".\n"
+          end
+        }
 
         props
       end
