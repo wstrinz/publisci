@@ -1,0 +1,38 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://example.org/entity/chart1> a prov:Entity ;
+	prov:wasAttributedTo <http://example.org/agent/derek> ;
+	rdfs:label "chart1" .
+
+<http://example.org/entity/composition1> a prov:Entity ;
+	rdfs:label "composition1" .
+
+<http://example.org/entity/regionList1> a prov:Entity ;
+	rdfs:label "regionList1" .
+
+<http://example.org/entity/dataSet1> a prov:Entity ;
+	rdfs:label "dataSet1" .
+
+<http://example.org/agent/derek> a prov:Agent ;
+	foaf:name "Derek" ;
+	prov:actedOnBehalfOf <http://example.org/agent/chartgen> ;
+	rdfs:label "derek" .
+
+<http://example.org/agent/chartgen> a prov:Organization ;
+	rdfs:label "chartgen" .
+
+<http://example.org/activity/illustrate> a prov:Activity ;
+	prov:generated <http://example.org/entity/chart1> ;
+	prov:used <http://example.org/entity/composition1>;
+	prov:wasAssociatedWith <http://example.org/agent/derek> ;
+	rdfs:label "illustrate" .
+
+<http://example.org/activity/compose1> a prov:Activity ;
+	prov:generated <http://example.org/entity/composition1> ;
+	prov:used <http://example.org/entity/regionList1>, <http://example.org/entity/dataSet1>;
+	prov:wasAssociatedWith <http://example.org/agent/derek> ;
+	rdfs:label "compose1" .
+

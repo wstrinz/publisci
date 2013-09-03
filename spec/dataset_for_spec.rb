@@ -28,6 +28,7 @@ describe PubliSci::Dataset do
       PubliSci::Dataset.register_reader('.maf',PubliSci::Readers::MAF)
       file = PubliSci::Dataset.for('resources/maf_example.maf')
       str = IO.read(file)
+      File.delete(file.path)
       str.size.should > 0
       (str =~ /qb:Observation/).should_not be nil
     end

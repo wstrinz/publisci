@@ -1,0 +1,1369 @@
+@base <http://www.rqtl.org/dc/dataset/maf_example/> .
+@prefix ns:    <http://www.rqtl.org/dc/dataset/maf_example/> .
+@prefix qb:    <http://purl.org/linked-data/cube#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prop:  <http://www.rqtl.org/dc/properties/> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix cs:    <http://www.rqtl.org/dc/dataset/maf_example/cs/> .
+@prefix code:  <http://www.rqtl.org/dc/dataset/maf_example/code/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix org:      <http://www.w3.org/ns/org#> .
+@prefix prov:     <http://www.w3.org/ns/prov#> .
+
+ns:dsd-maf_example a qb:DataStructureDefinition;
+  qb:component cs:Variant_Classification ;
+  qb:component cs:Variant_Type ;
+  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> ;
+  qb:component cs:Entrez_Gene_Id ;
+  qb:component cs:Center ;
+  qb:component cs:NCBI_Build ;
+  qb:component cs:Chromosome ;
+  qb:component cs:Start_position ;
+  qb:component cs:End_position ;
+  qb:component cs:Strand ;
+  qb:component cs:Reference_Allele ;
+  qb:component cs:Tumor_Seq_Allele1 ;
+  qb:component cs:Tumor_Seq_Allele2 ;
+  qb:component cs:dbSNP_RS ;
+  qb:component cs:dbSNP_Val_Status ;
+  qb:component cs:Tumor_Sample_Barcode ;
+  qb:component cs:Matched_Norm_Sample_Barcode ;
+  qb:component cs:Match_Norm_Seq_Allele1 ;
+  qb:component cs:Match_Norm_Seq_Allele2 ;
+  qb:component cs:Tumor_Validation_Allele1 ;
+  qb:component cs:Tumor_Validation_Allele2 ;
+  qb:component cs:Match_Norm_Validation_Allele1 ;
+  qb:component cs:Match_Norm_Validation_Allele2 ;
+  qb:component cs:Verification_Status ;
+  qb:component cs:Validation_Status ;
+  qb:component cs:Mutation_Status ;
+  qb:component cs:Sequencing_Phase ;
+  qb:component cs:Sequence_Source ;
+  qb:component cs:Validation_Method ;
+  qb:component cs:Score ;
+  qb:component cs:BAM_file ;
+  qb:component cs:Sequencer ;
+  qb:component cs:Tumor_Sample_UUID ;
+  qb:component cs:Matched_Norm_Sample_UUID ;
+  qb:component cs:Genome_Change ;
+  qb:component cs:Annotation_Transcript ;
+  qb:component cs:Transcript_Strand ;
+  qb:component cs:Transcript_Exon ;
+  qb:component cs:Transcript_Position ;
+  qb:component cs:cDNA_Change ;
+  qb:component cs:Codon_Change ;
+  qb:component cs:Protein_Change ;
+  qb:component cs:Other_Transcripts ;
+  qb:component cs:Refseq_mRNA_Id ;
+  qb:component cs:Refseq_prot_Id ;
+  qb:component cs:SwissProt_acc_Id ;
+  qb:component cs:SwissProt_entry_Id ;
+  qb:component cs:Description ;
+  qb:component cs:UniProt_AApos ;
+  qb:component cs:UniProt_Region ;
+  qb:component cs:UniProt_Site ;
+  qb:component cs:UniProt_Natural_Variations ;
+  qb:component cs:UniProt_Experimental_Info ;
+  qb:component cs:GO_Biological_Process ;
+  qb:component cs:GO_Cellular_Component ;
+  qb:component cs:GO_Molecular_Function ;
+  qb:component cs:COSMIC_overlapping_mutations ;
+  qb:component cs:COSMIC_fusion_genes ;
+  qb:component cs:COSMIC_tissue_types_affected ;
+  qb:component cs:COSMIC_total_alterations_in_gene ;
+  qb:component cs:Tumorscape_Amplification_Peaks ;
+  qb:component cs:Tumorscape_Deletion_Peaks ;
+  qb:component cs:TCGAscape_Amplification_Peaks ;
+  qb:component cs:TCGAscape_Deletion_Peaks ;
+  qb:component cs:DrugBank ;
+  qb:component cs:ref_context ;
+  qb:component cs:gc_content ;
+  qb:component cs:CCLE_ONCOMAP_overlapping_mutations ;
+  qb:component cs:CCLE_ONCOMAP_total_mutations_in_gene ;
+  qb:component cs:CGC_Mutation_Type ;
+  qb:component cs:CGC_Translocation_Partner ;
+  qb:component cs:CGC_Tumor_Types_Somatic ;
+  qb:component cs:CGC_Tumor_Types_Germline ;
+  qb:component cs:CGC_Other_Diseases ;
+  qb:component cs:DNARepairGenes_Role ;
+  qb:component cs:FamilialCancerDatabase_Syndromes ;
+  qb:component cs:MUTSIG_Published_Results ;
+  qb:component cs:OREGANNO_ID ;
+  qb:component cs:OREGANNO_Values ;
+  qb:component cs:t_alt_count ;
+  qb:component cs:t_ref_count ;
+  qb:component cs:validation_status ;
+  qb:component cs:validation_method ;
+  qb:component cs:validation_tumor_sample ;
+  qb:component cs:validation_alt_allele ;
+  qb:component cs:filter ;
+  qb:component cs:patient_id ;
+  qb:component cs:sample_id .
+
+ns:dataset-maf_example a qb:DataSet ;
+  rdfs:label "maf_example"@en ;
+  qb:structure ns:dsd-maf_example .
+
+cs:Variant_Classification a qb:ComponentSpecification ;
+  rdfs:label "Variant_Classification" ;
+  qb:dimension prop:Variant_Classification .
+
+cs:Variant_Type a qb:ComponentSpecification ;
+  rdfs:label "Variant_Type" ;
+  qb:dimension prop:Variant_Type .
+
+<http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> a qb:ComponentSpecification ;
+  rdfs:label "hgnc.symbol" ;
+  qb:measure <http://identifiers.org/hgnc.symbol/> .
+
+cs:Entrez_Gene_Id a qb:ComponentSpecification ;
+  rdfs:label "Entrez_Gene_Id" ;
+  qb:measure prop:Entrez_Gene_Id .
+
+cs:Center a qb:ComponentSpecification ;
+  rdfs:label "Center" ;
+  qb:measure prop:Center .
+
+cs:NCBI_Build a qb:ComponentSpecification ;
+  rdfs:label "NCBI_Build" ;
+  qb:measure prop:NCBI_Build .
+
+cs:Chromosome a qb:ComponentSpecification ;
+  rdfs:label "Chromosome" ;
+  qb:measure prop:Chromosome .
+
+cs:Start_position a qb:ComponentSpecification ;
+  rdfs:label "Start_position" ;
+  qb:measure prop:Start_position .
+
+cs:End_position a qb:ComponentSpecification ;
+  rdfs:label "End_position" ;
+  qb:measure prop:End_position .
+
+cs:Strand a qb:ComponentSpecification ;
+  rdfs:label "Strand" ;
+  qb:measure prop:Strand .
+
+cs:Reference_Allele a qb:ComponentSpecification ;
+  rdfs:label "Reference_Allele" ;
+  qb:measure prop:Reference_Allele .
+
+cs:Tumor_Seq_Allele1 a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Seq_Allele1" ;
+  qb:measure prop:Tumor_Seq_Allele1 .
+
+cs:Tumor_Seq_Allele2 a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Seq_Allele2" ;
+  qb:measure prop:Tumor_Seq_Allele2 .
+
+cs:dbSNP_RS a qb:ComponentSpecification ;
+  rdfs:label "dbSNP_RS" ;
+  qb:measure prop:dbSNP_RS .
+
+cs:dbSNP_Val_Status a qb:ComponentSpecification ;
+  rdfs:label "dbSNP_Val_Status" ;
+  qb:measure prop:dbSNP_Val_Status .
+
+cs:Tumor_Sample_Barcode a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Sample_Barcode" ;
+  qb:measure prop:Tumor_Sample_Barcode .
+
+cs:Matched_Norm_Sample_Barcode a qb:ComponentSpecification ;
+  rdfs:label "Matched_Norm_Sample_Barcode" ;
+  qb:measure prop:Matched_Norm_Sample_Barcode .
+
+cs:Match_Norm_Seq_Allele1 a qb:ComponentSpecification ;
+  rdfs:label "Match_Norm_Seq_Allele1" ;
+  qb:measure prop:Match_Norm_Seq_Allele1 .
+
+cs:Match_Norm_Seq_Allele2 a qb:ComponentSpecification ;
+  rdfs:label "Match_Norm_Seq_Allele2" ;
+  qb:measure prop:Match_Norm_Seq_Allele2 .
+
+cs:Tumor_Validation_Allele1 a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Validation_Allele1" ;
+  qb:measure prop:Tumor_Validation_Allele1 .
+
+cs:Tumor_Validation_Allele2 a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Validation_Allele2" ;
+  qb:measure prop:Tumor_Validation_Allele2 .
+
+cs:Match_Norm_Validation_Allele1 a qb:ComponentSpecification ;
+  rdfs:label "Match_Norm_Validation_Allele1" ;
+  qb:measure prop:Match_Norm_Validation_Allele1 .
+
+cs:Match_Norm_Validation_Allele2 a qb:ComponentSpecification ;
+  rdfs:label "Match_Norm_Validation_Allele2" ;
+  qb:measure prop:Match_Norm_Validation_Allele2 .
+
+cs:Verification_Status a qb:ComponentSpecification ;
+  rdfs:label "Verification_Status" ;
+  qb:measure prop:Verification_Status .
+
+cs:Validation_Status a qb:ComponentSpecification ;
+  rdfs:label "Validation_Status" ;
+  qb:measure prop:Validation_Status .
+
+cs:Mutation_Status a qb:ComponentSpecification ;
+  rdfs:label "Mutation_Status" ;
+  qb:measure prop:Mutation_Status .
+
+cs:Sequencing_Phase a qb:ComponentSpecification ;
+  rdfs:label "Sequencing_Phase" ;
+  qb:measure prop:Sequencing_Phase .
+
+cs:Sequence_Source a qb:ComponentSpecification ;
+  rdfs:label "Sequence_Source" ;
+  qb:measure prop:Sequence_Source .
+
+cs:Validation_Method a qb:ComponentSpecification ;
+  rdfs:label "Validation_Method" ;
+  qb:measure prop:Validation_Method .
+
+cs:Score a qb:ComponentSpecification ;
+  rdfs:label "Score" ;
+  qb:measure prop:Score .
+
+cs:BAM_file a qb:ComponentSpecification ;
+  rdfs:label "BAM_file" ;
+  qb:measure prop:BAM_file .
+
+cs:Sequencer a qb:ComponentSpecification ;
+  rdfs:label "Sequencer" ;
+  qb:measure prop:Sequencer .
+
+cs:Tumor_Sample_UUID a qb:ComponentSpecification ;
+  rdfs:label "Tumor_Sample_UUID" ;
+  qb:measure prop:Tumor_Sample_UUID .
+
+cs:Matched_Norm_Sample_UUID a qb:ComponentSpecification ;
+  rdfs:label "Matched_Norm_Sample_UUID" ;
+  qb:measure prop:Matched_Norm_Sample_UUID .
+
+cs:Genome_Change a qb:ComponentSpecification ;
+  rdfs:label "Genome_Change" ;
+  qb:measure prop:Genome_Change .
+
+cs:Annotation_Transcript a qb:ComponentSpecification ;
+  rdfs:label "Annotation_Transcript" ;
+  qb:measure prop:Annotation_Transcript .
+
+cs:Transcript_Strand a qb:ComponentSpecification ;
+  rdfs:label "Transcript_Strand" ;
+  qb:measure prop:Transcript_Strand .
+
+cs:Transcript_Exon a qb:ComponentSpecification ;
+  rdfs:label "Transcript_Exon" ;
+  qb:measure prop:Transcript_Exon .
+
+cs:Transcript_Position a qb:ComponentSpecification ;
+  rdfs:label "Transcript_Position" ;
+  qb:measure prop:Transcript_Position .
+
+cs:cDNA_Change a qb:ComponentSpecification ;
+  rdfs:label "cDNA_Change" ;
+  qb:measure prop:cDNA_Change .
+
+cs:Codon_Change a qb:ComponentSpecification ;
+  rdfs:label "Codon_Change" ;
+  qb:measure prop:Codon_Change .
+
+cs:Protein_Change a qb:ComponentSpecification ;
+  rdfs:label "Protein_Change" ;
+  qb:measure prop:Protein_Change .
+
+cs:Other_Transcripts a qb:ComponentSpecification ;
+  rdfs:label "Other_Transcripts" ;
+  qb:measure prop:Other_Transcripts .
+
+cs:Refseq_mRNA_Id a qb:ComponentSpecification ;
+  rdfs:label "Refseq_mRNA_Id" ;
+  qb:measure prop:Refseq_mRNA_Id .
+
+cs:Refseq_prot_Id a qb:ComponentSpecification ;
+  rdfs:label "Refseq_prot_Id" ;
+  qb:measure prop:Refseq_prot_Id .
+
+cs:SwissProt_acc_Id a qb:ComponentSpecification ;
+  rdfs:label "SwissProt_acc_Id" ;
+  qb:measure prop:SwissProt_acc_Id .
+
+cs:SwissProt_entry_Id a qb:ComponentSpecification ;
+  rdfs:label "SwissProt_entry_Id" ;
+  qb:measure prop:SwissProt_entry_Id .
+
+cs:Description a qb:ComponentSpecification ;
+  rdfs:label "Description" ;
+  qb:measure prop:Description .
+
+cs:UniProt_AApos a qb:ComponentSpecification ;
+  rdfs:label "UniProt_AApos" ;
+  qb:measure prop:UniProt_AApos .
+
+cs:UniProt_Region a qb:ComponentSpecification ;
+  rdfs:label "UniProt_Region" ;
+  qb:measure prop:UniProt_Region .
+
+cs:UniProt_Site a qb:ComponentSpecification ;
+  rdfs:label "UniProt_Site" ;
+  qb:measure prop:UniProt_Site .
+
+cs:UniProt_Natural_Variations a qb:ComponentSpecification ;
+  rdfs:label "UniProt_Natural_Variations" ;
+  qb:measure prop:UniProt_Natural_Variations .
+
+cs:UniProt_Experimental_Info a qb:ComponentSpecification ;
+  rdfs:label "UniProt_Experimental_Info" ;
+  qb:measure prop:UniProt_Experimental_Info .
+
+cs:GO_Biological_Process a qb:ComponentSpecification ;
+  rdfs:label "GO_Biological_Process" ;
+  qb:measure prop:GO_Biological_Process .
+
+cs:GO_Cellular_Component a qb:ComponentSpecification ;
+  rdfs:label "GO_Cellular_Component" ;
+  qb:measure prop:GO_Cellular_Component .
+
+cs:GO_Molecular_Function a qb:ComponentSpecification ;
+  rdfs:label "GO_Molecular_Function" ;
+  qb:measure prop:GO_Molecular_Function .
+
+cs:COSMIC_overlapping_mutations a qb:ComponentSpecification ;
+  rdfs:label "COSMIC_overlapping_mutations" ;
+  qb:measure prop:COSMIC_overlapping_mutations .
+
+cs:COSMIC_fusion_genes a qb:ComponentSpecification ;
+  rdfs:label "COSMIC_fusion_genes" ;
+  qb:measure prop:COSMIC_fusion_genes .
+
+cs:COSMIC_tissue_types_affected a qb:ComponentSpecification ;
+  rdfs:label "COSMIC_tissue_types_affected" ;
+  qb:measure prop:COSMIC_tissue_types_affected .
+
+cs:COSMIC_total_alterations_in_gene a qb:ComponentSpecification ;
+  rdfs:label "COSMIC_total_alterations_in_gene" ;
+  qb:measure prop:COSMIC_total_alterations_in_gene .
+
+cs:Tumorscape_Amplification_Peaks a qb:ComponentSpecification ;
+  rdfs:label "Tumorscape_Amplification_Peaks" ;
+  qb:measure prop:Tumorscape_Amplification_Peaks .
+
+cs:Tumorscape_Deletion_Peaks a qb:ComponentSpecification ;
+  rdfs:label "Tumorscape_Deletion_Peaks" ;
+  qb:measure prop:Tumorscape_Deletion_Peaks .
+
+cs:TCGAscape_Amplification_Peaks a qb:ComponentSpecification ;
+  rdfs:label "TCGAscape_Amplification_Peaks" ;
+  qb:measure prop:TCGAscape_Amplification_Peaks .
+
+cs:TCGAscape_Deletion_Peaks a qb:ComponentSpecification ;
+  rdfs:label "TCGAscape_Deletion_Peaks" ;
+  qb:measure prop:TCGAscape_Deletion_Peaks .
+
+cs:DrugBank a qb:ComponentSpecification ;
+  rdfs:label "DrugBank" ;
+  qb:measure prop:DrugBank .
+
+cs:ref_context a qb:ComponentSpecification ;
+  rdfs:label "ref_context" ;
+  qb:measure prop:ref_context .
+
+cs:gc_content a qb:ComponentSpecification ;
+  rdfs:label "gc_content" ;
+  qb:measure prop:gc_content .
+
+cs:CCLE_ONCOMAP_overlapping_mutations a qb:ComponentSpecification ;
+  rdfs:label "CCLE_ONCOMAP_overlapping_mutations" ;
+  qb:measure prop:CCLE_ONCOMAP_overlapping_mutations .
+
+cs:CCLE_ONCOMAP_total_mutations_in_gene a qb:ComponentSpecification ;
+  rdfs:label "CCLE_ONCOMAP_total_mutations_in_gene" ;
+  qb:measure prop:CCLE_ONCOMAP_total_mutations_in_gene .
+
+cs:CGC_Mutation_Type a qb:ComponentSpecification ;
+  rdfs:label "CGC_Mutation_Type" ;
+  qb:measure prop:CGC_Mutation_Type .
+
+cs:CGC_Translocation_Partner a qb:ComponentSpecification ;
+  rdfs:label "CGC_Translocation_Partner" ;
+  qb:measure prop:CGC_Translocation_Partner .
+
+cs:CGC_Tumor_Types_Somatic a qb:ComponentSpecification ;
+  rdfs:label "CGC_Tumor_Types_Somatic" ;
+  qb:measure prop:CGC_Tumor_Types_Somatic .
+
+cs:CGC_Tumor_Types_Germline a qb:ComponentSpecification ;
+  rdfs:label "CGC_Tumor_Types_Germline" ;
+  qb:measure prop:CGC_Tumor_Types_Germline .
+
+cs:CGC_Other_Diseases a qb:ComponentSpecification ;
+  rdfs:label "CGC_Other_Diseases" ;
+  qb:measure prop:CGC_Other_Diseases .
+
+cs:DNARepairGenes_Role a qb:ComponentSpecification ;
+  rdfs:label "DNARepairGenes_Role" ;
+  qb:measure prop:DNARepairGenes_Role .
+
+cs:FamilialCancerDatabase_Syndromes a qb:ComponentSpecification ;
+  rdfs:label "FamilialCancerDatabase_Syndromes" ;
+  qb:measure prop:FamilialCancerDatabase_Syndromes .
+
+cs:MUTSIG_Published_Results a qb:ComponentSpecification ;
+  rdfs:label "MUTSIG_Published_Results" ;
+  qb:measure prop:MUTSIG_Published_Results .
+
+cs:OREGANNO_ID a qb:ComponentSpecification ;
+  rdfs:label "OREGANNO_ID" ;
+  qb:measure prop:OREGANNO_ID .
+
+cs:OREGANNO_Values a qb:ComponentSpecification ;
+  rdfs:label "OREGANNO_Values" ;
+  qb:measure prop:OREGANNO_Values .
+
+cs:t_alt_count a qb:ComponentSpecification ;
+  rdfs:label "t_alt_count" ;
+  qb:measure prop:t_alt_count .
+
+cs:t_ref_count a qb:ComponentSpecification ;
+  rdfs:label "t_ref_count" ;
+  qb:measure prop:t_ref_count .
+
+cs:validation_status a qb:ComponentSpecification ;
+  rdfs:label "validation_status" ;
+  qb:measure prop:validation_status .
+
+cs:validation_method a qb:ComponentSpecification ;
+  rdfs:label "validation_method" ;
+  qb:measure prop:validation_method .
+
+cs:validation_tumor_sample a qb:ComponentSpecification ;
+  rdfs:label "validation_tumor_sample" ;
+  qb:measure prop:validation_tumor_sample .
+
+cs:validation_alt_allele a qb:ComponentSpecification ;
+  rdfs:label "validation_alt_allele" ;
+  qb:measure prop:validation_alt_allele .
+
+cs:filter a qb:ComponentSpecification ;
+  rdfs:label "filter" ;
+  qb:measure prop:filter .
+
+cs:patient_id a qb:ComponentSpecification ;
+  rdfs:label "patient_id" ;
+  qb:measure prop:patient_id .
+
+cs:sample_id a qb:ComponentSpecification ;
+  rdfs:label "sample_id" ;
+  qb:measure prop:sample_id .
+
+<http://identifiers.org/hgnc.symbol/> a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "hgnc.symbol"@en .
+
+prop:Entrez_Gene_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Entrez_Gene_Id"@en .
+
+prop:Center a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Center"@en ;
+  rdfs:range xsd:string .
+
+prop:NCBI_Build a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "NCBI_Build"@en ;
+  rdfs:range xsd:int .
+
+prop:Chromosome a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Chromosome"@en ;
+  rdfs:range xsd:int .
+
+prop:Start_position a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Start_position"@en ;
+  rdfs:range xsd:int .
+
+prop:End_position a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "End_position"@en .
+
+prop:Strand a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Strand"@en .
+
+prop:Reference_Allele a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Reference_Allele"@en .
+
+prop:Tumor_Seq_Allele1 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Seq_Allele1"@en .
+
+prop:Tumor_Seq_Allele2 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Seq_Allele2"@en .
+
+prop:dbSNP_RS a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "dbSNP_RS"@en .
+
+prop:dbSNP_Val_Status a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "dbSNP_Val_Status"@en .
+
+prop:Tumor_Sample_Barcode a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Sample_Barcode"@en ;
+  rdfs:range xsd:string .
+
+prop:Matched_Norm_Sample_Barcode a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Matched_Norm_Sample_Barcode"@en .
+
+prop:Match_Norm_Seq_Allele1 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Match_Norm_Seq_Allele1"@en .
+
+prop:Match_Norm_Seq_Allele2 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Match_Norm_Seq_Allele2"@en .
+
+prop:Tumor_Validation_Allele1 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Validation_Allele1"@en .
+
+prop:Tumor_Validation_Allele2 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Validation_Allele2"@en .
+
+prop:Match_Norm_Validation_Allele1 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Match_Norm_Validation_Allele1"@en .
+
+prop:Match_Norm_Validation_Allele2 a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Match_Norm_Validation_Allele2"@en .
+
+prop:Verification_Status a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Verification_Status"@en .
+
+prop:Validation_Status a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Validation_Status"@en .
+
+prop:Mutation_Status a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Mutation_Status"@en .
+
+prop:Sequencing_Phase a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Sequencing_Phase"@en .
+
+prop:Sequence_Source a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Sequence_Source"@en .
+
+prop:Validation_Method a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Validation_Method"@en .
+
+prop:Score a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Score"@en .
+
+prop:BAM_file a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "BAM_file"@en .
+
+prop:Sequencer a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Sequencer"@en .
+
+prop:Tumor_Sample_UUID a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumor_Sample_UUID"@en .
+
+prop:Matched_Norm_Sample_UUID a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Matched_Norm_Sample_UUID"@en .
+
+prop:Genome_Change a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Genome_Change"@en .
+
+prop:Annotation_Transcript a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Annotation_Transcript"@en .
+
+prop:Transcript_Strand a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Transcript_Strand"@en .
+
+prop:Transcript_Exon a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Transcript_Exon"@en .
+
+prop:Transcript_Position a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Transcript_Position"@en .
+
+prop:cDNA_Change a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "cDNA_Change"@en .
+
+prop:Codon_Change a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Codon_Change"@en .
+
+prop:Protein_Change a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Protein_Change"@en .
+
+prop:Other_Transcripts a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Other_Transcripts"@en .
+
+prop:Refseq_mRNA_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Refseq_mRNA_Id"@en .
+
+prop:Refseq_prot_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Refseq_prot_Id"@en .
+
+prop:SwissProt_acc_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "SwissProt_acc_Id"@en .
+
+prop:SwissProt_entry_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "SwissProt_entry_Id"@en .
+
+prop:Description a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Description"@en .
+
+prop:UniProt_AApos a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "UniProt_AApos"@en .
+
+prop:UniProt_Region a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "UniProt_Region"@en .
+
+prop:UniProt_Site a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "UniProt_Site"@en .
+
+prop:UniProt_Natural_Variations a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "UniProt_Natural_Variations"@en .
+
+prop:UniProt_Experimental_Info a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "UniProt_Experimental_Info"@en .
+
+prop:GO_Biological_Process a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "GO_Biological_Process"@en .
+
+prop:GO_Cellular_Component a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "GO_Cellular_Component"@en .
+
+prop:GO_Molecular_Function a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "GO_Molecular_Function"@en .
+
+prop:COSMIC_overlapping_mutations a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "COSMIC_overlapping_mutations"@en .
+
+prop:COSMIC_fusion_genes a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "COSMIC_fusion_genes"@en .
+
+prop:COSMIC_tissue_types_affected a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "COSMIC_tissue_types_affected"@en .
+
+prop:COSMIC_total_alterations_in_gene a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "COSMIC_total_alterations_in_gene"@en .
+
+prop:Tumorscape_Amplification_Peaks a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumorscape_Amplification_Peaks"@en .
+
+prop:Tumorscape_Deletion_Peaks a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Tumorscape_Deletion_Peaks"@en .
+
+prop:TCGAscape_Amplification_Peaks a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "TCGAscape_Amplification_Peaks"@en .
+
+prop:TCGAscape_Deletion_Peaks a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "TCGAscape_Deletion_Peaks"@en .
+
+prop:DrugBank a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "DrugBank"@en .
+
+prop:ref_context a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "ref_context"@en .
+
+prop:gc_content a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "gc_content"@en .
+
+prop:CCLE_ONCOMAP_overlapping_mutations a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CCLE_ONCOMAP_overlapping_mutations"@en .
+
+prop:CCLE_ONCOMAP_total_mutations_in_gene a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CCLE_ONCOMAP_total_mutations_in_gene"@en .
+
+prop:CGC_Mutation_Type a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CGC_Mutation_Type"@en .
+
+prop:CGC_Translocation_Partner a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CGC_Translocation_Partner"@en .
+
+prop:CGC_Tumor_Types_Somatic a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CGC_Tumor_Types_Somatic"@en .
+
+prop:CGC_Tumor_Types_Germline a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CGC_Tumor_Types_Germline"@en .
+
+prop:CGC_Other_Diseases a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "CGC_Other_Diseases"@en .
+
+prop:DNARepairGenes_Role a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "DNARepairGenes_Role"@en .
+
+prop:FamilialCancerDatabase_Syndromes a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "FamilialCancerDatabase_Syndromes"@en .
+
+prop:MUTSIG_Published_Results a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "MUTSIG_Published_Results"@en .
+
+prop:OREGANNO_ID a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "OREGANNO_ID"@en .
+
+prop:OREGANNO_Values a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "OREGANNO_Values"@en .
+
+prop:t_alt_count a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "t_alt_count"@en .
+
+prop:t_ref_count a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "t_ref_count"@en .
+
+prop:validation_status a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "validation_status"@en .
+
+prop:validation_method a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "validation_method"@en .
+
+prop:validation_tumor_sample a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "validation_tumor_sample"@en .
+
+prop:validation_alt_allele a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "validation_alt_allele"@en .
+
+prop:filter a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "filter"@en .
+
+prop:patient_id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "patient_id"@en .
+
+prop:sample_id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "sample_id"@en .
+
+prop:Variant_Classification a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Variant_Classification"@en ;
+  qb:codeList code:variant_classification ;
+  rdfs:range code:Variant_classification .
+
+prop:Variant_Type a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Variant_Type"@en ;
+  qb:codeList code:variant_type ;
+  rdfs:range code:Variant_type .
+
+code:Variant_classification a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for variant_classification - codelist class"@en;
+  rdfs:comment "Specifies the variant_classification for each observation";
+  rdfs:seeAlso code:variant_classification .
+
+code:variant_classification a skos:ConceptScheme;
+  skos:prefLabel "Code list for variant_classification - codelist scheme"@en;
+  rdfs:label "Code list for variant_classification - codelist scheme"@en;
+  skos:notation "CL_VARIANT_CLASSIFICATION";
+  skos:note "Specifies the variant_classification for each observation";
+  skos:hasTopConcept <code/variant_classification/Frame_Shift_Del> ;
+  skos:hasTopConcept <code/variant_classification/Frame_Shift_Ins> ;
+  skos:hasTopConcept <code/variant_classification/In_Frame_Del> ;
+  skos:hasTopConcept <code/variant_classification/In_Frame_Ins> ;
+  skos:hasTopConcept <code/variant_classification/Missense_Mutation> ;
+  skos:hasTopConcept <code/variant_classification/Nonsense_Mutation> ;
+  skos:hasTopConcept <code/variant_classification/Silent> ;
+  skos:hasTopConcept <code/variant_classification/Splice_Site> ;
+  skos:hasTopConcept <code/variant_classification/Translation_Start_Site> ;
+  skos:hasTopConcept <code/variant_classification/Nonstop_Mutation> ;
+  skos:hasTopConcept <code/variant_classification/3'UTR> ;
+  skos:hasTopConcept <code/variant_classification/3'Flank> ;
+  skos:hasTopConcept <code/variant_classification/5'UTR> ;
+  skos:hasTopConcept <code/variant_classification/5'Flank> ;
+  skos:hasTopConcept <code/variant_classification/IGR1> ;
+  skos:hasTopConcept <code/variant_classification/Intron> ;
+  skos:hasTopConcept <code/variant_classification/RNA> ;
+  skos:hasTopConcept <code/variant_classification/Targeted_Region> ;
+  .
+
+code:Variant_type a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for variant_type - codelist class"@en;
+  rdfs:comment "Specifies the variant_type for each observation";
+  rdfs:seeAlso code:variant_type .
+
+code:variant_type a skos:ConceptScheme;
+  skos:prefLabel "Code list for variant_type - codelist scheme"@en;
+  rdfs:label "Code list for variant_type - codelist scheme"@en;
+  skos:notation "CL_VARIANT_TYPE";
+  skos:note "Specifies the variant_type for each observation";
+  skos:hasTopConcept <code/variant_type/SNP> ;
+  skos:hasTopConcept <code/variant_type/DNP> ;
+  skos:hasTopConcept <code/variant_type/TNP> ;
+  skos:hasTopConcept <code/variant_type/ONP> ;
+  skos:hasTopConcept <code/variant_type/INS> ;
+  skos:hasTopConcept <code/variant_type/DEL> ;
+  skos:hasTopConcept <code/variant_type/Consolidated> ;
+  .
+
+<code/variant_classification/Frame_Shift_Del> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Frame_Shift_Del" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Frame_Shift_Ins> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Frame_Shift_Ins" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/In_Frame_Del> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "In_Frame_Del" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/In_Frame_Ins> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "In_Frame_Ins" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Missense_Mutation> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Missense_Mutation" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Nonsense_Mutation> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Nonsense_Mutation" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Silent> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Silent" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Splice_Site> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Splice_Site" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Translation_Start_Site> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Translation_Start_Site" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Nonstop_Mutation> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Nonstop_Mutation" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/3'UTR> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "3'UTR" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/3'Flank> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "3'Flank" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/5'UTR> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "5'UTR" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/5'Flank> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "5'Flank" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/IGR1> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "IGR1" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Intron> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Intron" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/RNA> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "RNA" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_classification/Targeted_Region> a skos:Concept, code:Variant_classification;
+  skos:topConceptOf code:variant_classification ;
+  skos:prefLabel "Targeted_Region" ;
+  skos:inScheme code:variant_classification .
+
+<code/variant_type/SNP> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "SNP" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/DNP> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "DNP" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/TNP> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "TNP" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/ONP> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "ONP" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/INS> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "INS" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/DEL> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "DEL" ;
+  skos:inScheme code:variant_type .
+
+<code/variant_type/Consolidated> a skos:Concept, code:Variant_type;
+  skos:topConceptOf code:variant_type ;
+  skos:prefLabel "Consolidated" ;
+  skos:inScheme code:variant_type .
+
+ns:obs2 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 19 ;
+  prop:Start_position 58862784 ;
+  prop:End_position 58862784 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "C" ;
+  prop:Tumor_Seq_Allele1 "C" ;
+  prop:Tumor_Seq_Allele2 "T" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-E9-A22B-01A-11D-A159-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
+  prop:Match_Norm_Seq_Allele1 "C" ;
+  prop:Match_Norm_Seq_Allele2 "C" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Untested" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "none" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "e46a5d19-2dd7-4c34-8fff-6276278c58b3" ;
+  prop:Matched_Norm_Sample_UUID "f948182a-f814-4e3c-83ee-82b78aa423c1" ;
+  prop:Genome_Change 19 ;
+  prop:Annotation_Transcript 58862784 ;
+  prop:Transcript_Strand 58862784 ;
+  prop:Transcript_Exon "C" ;
+  prop:Transcript_Position "T" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A1BG" ;
+  prop:Protein_Change "NM_130786.3" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id -1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "missense" ;
+  prop:UniProt_AApos "c.883" ;
+  prop:UniProt_Region "p.A295T" ;
+  prop:UniProt_Site 0.915 ;
+  prop:UniProt_Natural_Variations "HMMSmart_SM00409,superfamily_Immunoglobulin" ;
+  prop:UniProt_Experimental_Info "HMMSmart_SM00408,HMMSmart_SM00409,HMMPfam_ig,superfamily_Immunoglobulin" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "E9-A22B" ;
+  prop:sample_id "01A-11D-A159-09" ;
+  .
+
+ns:obs3 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 19 ;
+  prop:Start_position 58864366 ;
+  prop:End_position 58864366 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS <http://identifiers.org/dbsnp/151098196> ;
+  prop:dbSNP_Val_Status "byFrequency" ;
+  prop:Tumor_Sample_Barcode "TCGA-E9-A1NH-01A-11D-A14G-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Untested" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "none" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "13c312ec-0add-4758-ab8d-c193e2e08c6d" ;
+  prop:Matched_Norm_Sample_UUID "0ee95056-a7cc-415c-a487-3ad08604dfc0" ;
+  prop:Genome_Change 19 ;
+  prop:Annotation_Transcript 58864366 ;
+  prop:Transcript_Strand 58864366 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "A" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A1BG" ;
+  prop:Protein_Change "NM_130786.3" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id -1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "missense" ;
+  prop:UniProt_AApos "c.268" ;
+  prop:UniProt_Region "p.R90C" ;
+  prop:UniProt_Site 0.95 ;
+  prop:UniProt_Natural_Variations "HMMSmart_SM00408,HMMSmart_SM00409,superfamily_Immunoglobulin" ;
+  prop:UniProt_Experimental_Info "HMMSmart_SM00408,HMMSmart_SM00409,HMMPfam_ig,superfamily_Immunoglobulin" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "E9-A1NH" ;
+  prop:sample_id "01A-11D-A14G-09" ;
+  .
+
+ns:obs4 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 10 ;
+  prop:Start_position 52595854 ;
+  prop:End_position 52595854 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-BH-A0HP-01A-12D-A099-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Untested" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "none" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "ad52a8fb-7a76-4aa0-95fb-d6edab0fe2b2" ;
+  prop:Matched_Norm_Sample_UUID "8c059d33-23de-439a-914a-290527c5efbe" ;
+  prop:Genome_Change 10 ;
+  prop:Annotation_Transcript 52595854 ;
+  prop:Transcript_Strand 52595854 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "A" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A1CF" ;
+  prop:Protein_Change "NM_138932.1" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id -1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "missense" ;
+  prop:UniProt_AApos "c.584" ;
+  prop:UniProt_Region "p.A195V" ;
+  prop:UniProt_Site 1.0 ;
+  prop:UniProt_Natural_Variations "HMMPfam_RRM_1,HMMSmart_SM00360,superfamily_RNA-binding domain RBD" ;
+  prop:UniProt_Experimental_Info "HMMPfam_RRM_1,HMMSmart_SM00360,superfamily_dsRNA-binding domain-like,superfamily_RNA-binding domain RBD" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "BH-A0HP" ;
+  prop:sample_id "01A-12D-A099-09" ;
+  .
+
+ns:obs5 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Silent> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 10 ;
+  prop:Start_position 52595937 ;
+  prop:End_position 52595937 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-BH-A18P-01A-11D-A12B-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Untested" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "none" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "add624a3-57e9-46be-9bcc-3e53d7c2dfb7" ;
+  prop:Matched_Norm_Sample_UUID "5cae8dca-b28a-4483-9c03-6f0645161c04" ;
+  prop:Genome_Change 10 ;
+  prop:Annotation_Transcript 52595937 ;
+  prop:Transcript_Strand 52595937 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "A" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A1CF" ;
+  prop:Protein_Change "NM_138932.1" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id -1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "silent" ;
+  prop:UniProt_AApos "c.501" ;
+  prop:UniProt_Region "p.I167" ;
+  prop:UniProt_Site 0.615 ;
+  prop:UniProt_Natural_Variations "HMMPfam_RRM_1,HMMSmart_SM00360,superfamily_RNA-binding domain RBD" ;
+  prop:UniProt_Experimental_Info "HMMPfam_RRM_1,HMMSmart_SM00360,superfamily_dsRNA-binding domain-like,superfamily_RNA-binding domain RBD" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "BH-A18P" ;
+  prop:sample_id "01A-11D-A12B-09" ;
+  .
+
+ns:obs6 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Silent> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 16 ;
+  prop:Start_position 7568361 ;
+  prop:End_position 7568361 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "C" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-D8-A1JN-01A-11D-A13L-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Untested" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "none" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "c83c7d48-8671-4f27-b3dd-05411fa2f784" ;
+  prop:Matched_Norm_Sample_UUID "c14cac2a-e308-44fa-b1af-ee51511ee0ee" ;
+  prop:Genome_Change 16 ;
+  prop:Annotation_Transcript 7568361 ;
+  prop:Transcript_Strand 7568361 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "C" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A2BP1" ;
+  prop:Protein_Change "NM_145891.2" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id 1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "silent" ;
+  prop:UniProt_AApos "c.300" ;
+  prop:UniProt_Region "p.T100" ;
+  prop:UniProt_Site 0.995 ;
+  prop:UniProt_Natural_Variations "NULL" ;
+  prop:UniProt_Experimental_Info "HMMPfam_RRM_1,HMMSmart_RRM,superfamily_SSF54928" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "D8-A1JN" ;
+  prop:sample_id "01A-11D-A13L-09" ;
+  .
+
+ns:obs7 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 16 ;
+  prop:Start_position 7102099 ;
+  prop:End_position 7102099 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "T" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-E2-A1BC-01A-11D-A14G-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-E2-A1BC-10A-01D-A12Q-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "T" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Valid" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "5947a9db-7d13-44ff-86ad-eb5e6c8dcec5" ;
+  prop:Matched_Norm_Sample_UUID "6a4cd52f-2247-4caf-9b37-e90b02fd4d8b" ;
+  prop:Genome_Change 16 ;
+  prop:Annotation_Transcript 7102099 ;
+  prop:Transcript_Strand 7102099 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "T" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A2BP1" ;
+  prop:Protein_Change "NM_001142334.1" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id 1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "missense" ;
+  prop:UniProt_AApos "c.27" ;
+  prop:UniProt_Region "p.R9S" ;
+  prop:UniProt_Site 1.0 ;
+  prop:UniProt_Natural_Variations "NULL" ;
+  prop:UniProt_Experimental_Info "HMMPfam_RRM_1,HMMSmart_SM00360,superfamily_RNA-binding domain RBD" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "E2-A1BC" ;
+  prop:sample_id "01A-11D-A14G-09" ;
+  .
+
+ns:obs8 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Silent> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 16 ;
+  prop:Start_position 7383011 ;
+  prop:End_position 7383011 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-AR-A1AJ-01A-21D-A12Q-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-AR-A1AJ-10A-01D-A12Q-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Valid" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "4e1f9084-4729-4b3f-b036-6226d64fd25b" ;
+  prop:Matched_Norm_Sample_UUID "63ee3781-4578-4d19-88e4-c8785fc7987e" ;
+  prop:Genome_Change 16 ;
+  prop:Annotation_Transcript 7383011 ;
+  prop:Transcript_Strand 7383011 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "A" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A2BP1" ;
+  prop:Protein_Change "NM_145891.2" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id 1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "silent" ;
+  prop:UniProt_AApos "c.9" ;
+  prop:UniProt_Region "p.A3" ;
+  prop:UniProt_Site 1.0 ;
+  prop:UniProt_Natural_Variations "NULL" ;
+  prop:UniProt_Experimental_Info "HMMPfam_RRM_1,HMMSmart_RRM,superfamily_SSF54928" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "AR-A1AJ" ;
+  prop:sample_id "01A-21D-A12Q-09" ;
+  .
+
+ns:obs9 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Nonsense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2M> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/2> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 12 ;
+  prop:Start_position 9251298 ;
+  prop:End_position 9251298 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-A8-A08G-01A-11W-A019-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-A8-A08G-10A-01W-A021-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Verification_Status "Unknown" ;
+  prop:Validation_Status "Valid" ;
+  prop:Mutation_Status "Somatic" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Sequence_Source "WXS" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_file "dbGAP" ;
+  prop:Sequencer "Illumina GAIIx" ;
+  prop:Tumor_Sample_UUID "8da61928-e935-4a33-8e46-840e637163d7" ;
+  prop:Matched_Norm_Sample_UUID "74a3a4af-c93a-4fcd-af11-1f5eeb847c3c" ;
+  prop:Genome_Change 12 ;
+  prop:Annotation_Transcript 9251298 ;
+  prop:Transcript_Strand 9251298 ;
+  prop:Transcript_Exon "G" ;
+  prop:Transcript_Position "A" ;
+  prop:cDNA_Change "SNP" ;
+  prop:Codon_Change "A2M" ;
+  prop:Protein_Change "NM_000014.4" ;
+  prop:Other_Transcripts "human" ;
+  prop:Refseq_mRNA_Id "genbank" ;
+  prop:Refseq_prot_Id "58_37c" ;
+  prop:SwissProt_acc_Id -1 ;
+  prop:SwissProt_entry_Id "reviewed" ;
+  prop:Description "nonsense" ;
+  prop:UniProt_AApos "c.1756" ;
+  prop:UniProt_Region "p.R586*" ;
+  prop:UniProt_Site 0.003 ;
+  prop:UniProt_Natural_Variations "HMMPfam_A2M_N_2" ;
+  prop:UniProt_Experimental_Info "HMMPfam_A2M,HMMPfam_A2M_N,superfamily_Terpenoid cyclases/Protein prenyltransferases,HMMPfam_A2M_recep,superfamily_Alpha-macroglobulin receptor domain,PatternScan_TONB_DEPENDENT_REC_1,HMMPfam_A2M_N_2,HMMPfam_A2M_comp,HMMPfam_Thiol-ester_cl,PatternScan_ALPHA_2_MACROGLOBULIN" ;
+  prop:GO_Biological_Process "-" ;
+  prop:GO_Cellular_Component "no_errors" ;
+  prop:patient_id "A8-A08G" ;
+  prop:sample_id "01A-11W-A019-09" ;
+  .
+
