@@ -17,6 +17,12 @@
 ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Variant_Classification ;
   qb:component cs:Variant_Type ;
+  qb:component cs:dbSNP_Val_Status ;
+  qb:component cs:Verification_Status ;
+  qb:component cs:Validation_Status ;
+  qb:component cs:Validation_Status ;
+  qb:component cs:Sequence_Source ;
+  qb:component cs:Sequencer ;
   qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> ;
   qb:component cs:Entrez_Gene_Id ;
   qb:component cs:Center ;
@@ -29,7 +35,6 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Tumor_Seq_Allele1 ;
   qb:component cs:Tumor_Seq_Allele2 ;
   qb:component cs:dbSNP_RS ;
-  qb:component cs:dbSNP_Val_Status ;
   qb:component cs:Tumor_Sample_Barcode ;
   qb:component cs:Matched_Norm_Sample_Barcode ;
   qb:component cs:Match_Norm_Seq_Allele1 ;
@@ -38,15 +43,11 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Tumor_Validation_Allele2 ;
   qb:component cs:Match_Norm_Validation_Allele1 ;
   qb:component cs:Match_Norm_Validation_Allele2 ;
-  qb:component cs:Verification_Status ;
-  qb:component cs:Validation_Status ;
   qb:component cs:Mutation_Status ;
   qb:component cs:Sequencing_Phase ;
-  qb:component cs:Sequence_Source ;
   qb:component cs:Validation_Method ;
   qb:component cs:Score ;
   qb:component cs:BAM_File ;
-  qb:component cs:Sequencer ;
   qb:component cs:Tumor_Sample_UUID ;
   qb:component cs:Matched_Norm_Sample_UUID ;
   qb:component cs:patient_id ;
@@ -63,6 +64,30 @@ cs:Variant_Classification a qb:ComponentSpecification ;
 cs:Variant_Type a qb:ComponentSpecification ;
   rdfs:label "Variant_Type" ;
   qb:dimension prop:Variant_Type .
+
+cs:dbSNP_Val_Status a qb:ComponentSpecification ;
+  rdfs:label "dbSNP_Val_Status" ;
+  qb:dimension prop:dbSNP_Val_Status .
+
+cs:Verification_Status a qb:ComponentSpecification ;
+  rdfs:label "Verification_Status" ;
+  qb:dimension prop:Verification_Status .
+
+cs:Validation_Status a qb:ComponentSpecification ;
+  rdfs:label "Validation_Status" ;
+  qb:dimension prop:Validation_Status .
+
+cs:Validation_Status a qb:ComponentSpecification ;
+  rdfs:label "Validation_Status" ;
+  qb:dimension prop:Validation_Status .
+
+cs:Sequence_Source a qb:ComponentSpecification ;
+  rdfs:label "Sequence_Source" ;
+  qb:dimension prop:Sequence_Source .
+
+cs:Sequencer a qb:ComponentSpecification ;
+  rdfs:label "Sequencer" ;
+  qb:dimension prop:Sequencer .
 
 <http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> a qb:ComponentSpecification ;
   rdfs:label "hgnc.symbol" ;
@@ -112,10 +137,6 @@ cs:dbSNP_RS a qb:ComponentSpecification ;
   rdfs:label "dbSNP_RS" ;
   qb:measure prop:dbSNP_RS .
 
-cs:dbSNP_Val_Status a qb:ComponentSpecification ;
-  rdfs:label "dbSNP_Val_Status" ;
-  qb:measure prop:dbSNP_Val_Status .
-
 cs:Tumor_Sample_Barcode a qb:ComponentSpecification ;
   rdfs:label "Tumor_Sample_Barcode" ;
   qb:measure prop:Tumor_Sample_Barcode .
@@ -148,14 +169,6 @@ cs:Match_Norm_Validation_Allele2 a qb:ComponentSpecification ;
   rdfs:label "Match_Norm_Validation_Allele2" ;
   qb:measure prop:Match_Norm_Validation_Allele2 .
 
-cs:Verification_Status a qb:ComponentSpecification ;
-  rdfs:label "Verification_Status" ;
-  qb:measure prop:Verification_Status .
-
-cs:Validation_Status a qb:ComponentSpecification ;
-  rdfs:label "Validation_Status" ;
-  qb:measure prop:Validation_Status .
-
 cs:Mutation_Status a qb:ComponentSpecification ;
   rdfs:label "Mutation_Status" ;
   qb:measure prop:Mutation_Status .
@@ -163,10 +176,6 @@ cs:Mutation_Status a qb:ComponentSpecification ;
 cs:Sequencing_Phase a qb:ComponentSpecification ;
   rdfs:label "Sequencing_Phase" ;
   qb:measure prop:Sequencing_Phase .
-
-cs:Sequence_Source a qb:ComponentSpecification ;
-  rdfs:label "Sequence_Source" ;
-  qb:measure prop:Sequence_Source .
 
 cs:Validation_Method a qb:ComponentSpecification ;
   rdfs:label "Validation_Method" ;
@@ -179,10 +188,6 @@ cs:Score a qb:ComponentSpecification ;
 cs:BAM_File a qb:ComponentSpecification ;
   rdfs:label "BAM_File" ;
   qb:measure prop:BAM_File .
-
-cs:Sequencer a qb:ComponentSpecification ;
-  rdfs:label "Sequencer" ;
-  qb:measure prop:Sequencer .
 
 cs:Tumor_Sample_UUID a qb:ComponentSpecification ;
   rdfs:label "Tumor_Sample_UUID" ;
@@ -239,9 +244,6 @@ prop:Tumor_Seq_Allele2 a rdf:Property, qb:MeasureProperty ;
 prop:dbSNP_RS a rdf:Property, qb:MeasureProperty ;
   rdfs:label "dbSNP_RS"@en .
 
-prop:dbSNP_Val_Status a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "dbSNP_Val_Status"@en .
-
 prop:Tumor_Sample_Barcode a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Tumor_Sample_Barcode"@en ;
   rdfs:range xsd:string .
@@ -267,20 +269,11 @@ prop:Match_Norm_Validation_Allele1 a rdf:Property, qb:MeasureProperty ;
 prop:Match_Norm_Validation_Allele2 a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Match_Norm_Validation_Allele2"@en .
 
-prop:Verification_Status a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Verification_Status"@en .
-
-prop:Validation_Status a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Validation_Status"@en .
-
 prop:Mutation_Status a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Mutation_Status"@en .
 
 prop:Sequencing_Phase a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Sequencing_Phase"@en .
-
-prop:Sequence_Source a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Sequence_Source"@en .
 
 prop:Validation_Method a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Validation_Method"@en .
@@ -290,9 +283,6 @@ prop:Score a rdf:Property, qb:MeasureProperty ;
 
 prop:BAM_File a rdf:Property, qb:MeasureProperty ;
   rdfs:label "BAM_File"@en .
-
-prop:Sequencer a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Sequencer"@en .
 
 prop:Tumor_Sample_UUID a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Tumor_Sample_UUID"@en .
@@ -315,6 +305,36 @@ prop:Variant_Type a rdf:Property, qb:DimensionProperty ;
   rdfs:label "Variant_Type"@en ;
   qb:codeList code:variant_type ;
   rdfs:range code:Variant_type .
+
+prop:dbSNP_Val_Status a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "dbSNP_Val_Status"@en ;
+  qb:codeList code:dbsnp_val_status ;
+  rdfs:range code:Dbsnp_val_status .
+
+prop:Verification_Status a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Verification_Status"@en ;
+  qb:codeList code:verification_status ;
+  rdfs:range code:Verification_status .
+
+prop:Validation_Status a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Validation_Status"@en ;
+  qb:codeList code:validation_status ;
+  rdfs:range code:Validation_status .
+
+prop:Validation_Status a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Validation_Status"@en ;
+  qb:codeList code:validation_status ;
+  rdfs:range code:Validation_status .
+
+prop:Sequence_Source a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Sequence_Source"@en ;
+  qb:codeList code:sequence_source ;
+  rdfs:range code:Sequence_source .
+
+prop:Sequencer a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Sequencer"@en ;
+  qb:codeList code:sequencer ;
+  rdfs:range code:Sequencer .
 
 code:Variant_classification a rdfs:Class, owl:Class;
   rdfs:subClassOf skos:Concept ;
@@ -365,6 +385,149 @@ code:variant_type a skos:ConceptScheme;
   skos:hasTopConcept <code/variant_type/INS> ;
   skos:hasTopConcept <code/variant_type/DEL> ;
   skos:hasTopConcept <code/variant_type/Consolidated> ;
+  .
+
+code:Dbsnp_val_status a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for dbsnp_val_status - codelist class"@en;
+  rdfs:comment "Specifies the dbsnp_val_status for each observation";
+  rdfs:seeAlso code:dbsnp_val_status .
+
+code:dbsnp_val_status a skos:ConceptScheme;
+  skos:prefLabel "Code list for dbsnp_val_status - codelist scheme"@en;
+  rdfs:label "Code list for dbsnp_val_status - codelist scheme"@en;
+  skos:notation "CL_DBSNP_VAL_STATUS";
+  skos:note "Specifies the dbsnp_val_status for each observation";
+  skos:hasTopConcept <code/dbsnp_val_status/by1000genomes> ;
+  skos:hasTopConcept <code/dbsnp_val_status/by2Hit2Allele> ;
+  skos:hasTopConcept <code/dbsnp_val_status/byCluster> ;
+  skos:hasTopConcept <code/dbsnp_val_status/byFrequency> ;
+  skos:hasTopConcept <code/dbsnp_val_status/byHapMap> ;
+  skos:hasTopConcept <code/dbsnp_val_status/byOtherPop> ;
+  skos:hasTopConcept <code/dbsnp_val_status/bySubmitter> ;
+  skos:hasTopConcept <code/dbsnp_val_status/alternate_allele> ;
+  .
+
+code:Verification_status a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for verification_status - codelist class"@en;
+  rdfs:comment "Specifies the verification_status for each observation";
+  rdfs:seeAlso code:verification_status .
+
+code:verification_status a skos:ConceptScheme;
+  skos:prefLabel "Code list for verification_status - codelist scheme"@en;
+  rdfs:label "Code list for verification_status - codelist scheme"@en;
+  skos:notation "CL_VERIFICATION_STATUS";
+  skos:note "Specifies the verification_status for each observation";
+  skos:hasTopConcept <code/verification_status/Verified,> ;
+  skos:hasTopConcept <code/verification_status/Unknown> ;
+  .
+
+code:Validation_status a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for validation_status - codelist class"@en;
+  rdfs:comment "Specifies the validation_status for each observation";
+  rdfs:seeAlso code:validation_status .
+
+code:validation_status a skos:ConceptScheme;
+  skos:prefLabel "Code list for validation_status - codelist scheme"@en;
+  rdfs:label "Code list for validation_status - codelist scheme"@en;
+  skos:notation "CL_VALIDATION_STATUS";
+  skos:note "Specifies the validation_status for each observation";
+  skos:hasTopConcept <code/validation_status/None> ;
+  skos:hasTopConcept <code/validation_status/Germline> ;
+  skos:hasTopConcept <code/validation_status/Somatic> ;
+  skos:hasTopConcept <code/validation_status/LOH> ;
+  skos:hasTopConcept <code/validation_status/Post-transcriptional> ;
+  skos:hasTopConcept <code/validation_status/modification> ;
+  skos:hasTopConcept <code/validation_status/Unknown> ;
+  .
+
+code:Validation_status a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for validation_status - codelist class"@en;
+  rdfs:comment "Specifies the validation_status for each observation";
+  rdfs:seeAlso code:validation_status .
+
+code:validation_status a skos:ConceptScheme;
+  skos:prefLabel "Code list for validation_status - codelist scheme"@en;
+  rdfs:label "Code list for validation_status - codelist scheme"@en;
+  skos:notation "CL_VALIDATION_STATUS";
+  skos:note "Specifies the validation_status for each observation";
+  skos:hasTopConcept <code/validation_status/None> ;
+  skos:hasTopConcept <code/validation_status/Germline> ;
+  skos:hasTopConcept <code/validation_status/Somatic> ;
+  skos:hasTopConcept <code/validation_status/LOH> ;
+  skos:hasTopConcept <code/validation_status/Post-transcriptional> ;
+  skos:hasTopConcept <code/validation_status/modification> ;
+  skos:hasTopConcept <code/validation_status/Unknown> ;
+  .
+
+code:Sequence_source a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for sequence_source - codelist class"@en;
+  rdfs:comment "Specifies the sequence_source for each observation";
+  rdfs:seeAlso code:sequence_source .
+
+code:sequence_source a skos:ConceptScheme;
+  skos:prefLabel "Code list for sequence_source - codelist scheme"@en;
+  rdfs:label "Code list for sequence_source - codelist scheme"@en;
+  skos:notation "CL_SEQUENCE_SOURCE";
+  skos:note "Specifies the sequence_source for each observation";
+  skos:hasTopConcept <code/sequence_source/WGS> ;
+  skos:hasTopConcept <code/sequence_source/WGA> ;
+  skos:hasTopConcept <code/sequence_source/WXS> ;
+  skos:hasTopConcept <code/sequence_source/RNA-Seq> ;
+  skos:hasTopConcept <code/sequence_source/miRNA-Seq> ;
+  skos:hasTopConcept <code/sequence_source/Bisulfite-Seq> ;
+  skos:hasTopConcept <code/sequence_source/VALIDATION> ;
+  skos:hasTopConcept <code/sequence_source/Other> ;
+  skos:hasTopConcept <code/sequence_source/ncRNA-Seq> ;
+  skos:hasTopConcept <code/sequence_source/WCS> ;
+  skos:hasTopConcept <code/sequence_source/CLONE> ;
+  skos:hasTopConcept <code/sequence_source/POOLCLONE> ;
+  skos:hasTopConcept <code/sequence_source/AMPLICON> ;
+  skos:hasTopConcept <code/sequence_source/CLONEEND> ;
+  skos:hasTopConcept <code/sequence_source/FINISHING> ;
+  skos:hasTopConcept <code/sequence_source/ChIP-Seq> ;
+  skos:hasTopConcept <code/sequence_source/MNase-Seq> ;
+  skos:hasTopConcept <code/sequence_source/DNase-Hypersensitivity> ;
+  skos:hasTopConcept <code/sequence_source/EST> ;
+  skos:hasTopConcept <code/sequence_source/FL-cDNA> ;
+  skos:hasTopConcept <code/sequence_source/CTS> ;
+  skos:hasTopConcept <code/sequence_source/MRE-Seq> ;
+  skos:hasTopConcept <code/sequence_source/MeDIP-Seq> ;
+  skos:hasTopConcept <code/sequence_source/MBD-Seq> ;
+  skos:hasTopConcept <code/sequence_source/Tn-Seq> ;
+  skos:hasTopConcept <code/sequence_source/FAIRE-seq> ;
+  skos:hasTopConcept <code/sequence_source/SELEX> ;
+  skos:hasTopConcept <code/sequence_source/RIP-Seq> ;
+  skos:hasTopConcept <code/sequence_source/ChIA-PET> ;
+  .
+
+code:Sequencer a rdfs:Class, owl:Class;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:label "Code list for sequencer - codelist class"@en;
+  rdfs:comment "Specifies the sequencer for each observation";
+  rdfs:seeAlso code:sequencer .
+
+code:sequencer a skos:ConceptScheme;
+  skos:prefLabel "Code list for sequencer - codelist scheme"@en;
+  rdfs:label "Code list for sequencer - codelist scheme"@en;
+  skos:notation "CL_SEQUENCER";
+  skos:note "Specifies the sequencer for each observation";
+  skos:hasTopConcept <code/sequencer/Illumina_GAIIx> ;
+  skos:hasTopConcept <code/sequencer/Illumina_HiSeq> ;
+  skos:hasTopConcept <code/sequencer/SOLID> ;
+  skos:hasTopConcept <code/sequencer/454> ;
+  skos:hasTopConcept <code/sequencer/ABI_3730xl> ;
+  skos:hasTopConcept <code/sequencer/Ion_Torrent_PGM> ;
+  skos:hasTopConcept <code/sequencer/Ion_Torrent_Proton> ;
+  skos:hasTopConcept <code/sequencer/PacBio_RS> ;
+  skos:hasTopConcept <code/sequencer/Illumina_MiSeq> ;
+  skos:hasTopConcept <code/sequencer/Illumina_HiSeq_2500> ;
+  skos:hasTopConcept <code/sequencer/454_GS_FLX_Titanium> ;
+  skos:hasTopConcept <code/sequencer/AB_SOLiD_4_System> ;
   .
 
 <code/variant_classification/Frame_Shift_Del> a skos:Concept, code:Variant_classification;
@@ -492,10 +655,340 @@ code:variant_type a skos:ConceptScheme;
   skos:prefLabel "Consolidated" ;
   skos:inScheme code:variant_type .
 
+<code/dbsnp_val_status/by1000genomes> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "by1000genomes" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/by2Hit2Allele> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "by2Hit2Allele" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/byCluster> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "byCluster" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/byFrequency> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "byFrequency" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/byHapMap> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "byHapMap" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/byOtherPop> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "byOtherPop" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/bySubmitter> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "bySubmitter" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/dbsnp_val_status/alternate_allele> a skos:Concept, code:Dbsnp_val_status;
+  skos:topConceptOf code:dbsnp_val_status ;
+  skos:prefLabel "alternate_allele" ;
+  skos:inScheme code:dbsnp_val_status .
+
+<code/verification_status/Verified,> a skos:Concept, code:Verification_status;
+  skos:topConceptOf code:verification_status ;
+  skos:prefLabel "Verified," ;
+  skos:inScheme code:verification_status .
+
+<code/verification_status/Unknown> a skos:Concept, code:Verification_status;
+  skos:topConceptOf code:verification_status ;
+  skos:prefLabel "Unknown" ;
+  skos:inScheme code:verification_status .
+
+<code/validation_status/None> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "None" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Germline> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Germline" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Somatic> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Somatic" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/LOH> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "LOH" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Post-transcriptional> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Post-transcriptional" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/modification> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "modification" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Unknown> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Unknown" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/None> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "None" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Germline> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Germline" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Somatic> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Somatic" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/LOH> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "LOH" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Post-transcriptional> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Post-transcriptional" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/modification> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "modification" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Unknown> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Unknown" ;
+  skos:inScheme code:validation_status .
+
+<code/sequence_source/WGS> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "WGS" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/WGA> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "WGA" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/WXS> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "WXS" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/RNA-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "RNA-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/miRNA-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "miRNA-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/Bisulfite-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "Bisulfite-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/VALIDATION> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "VALIDATION" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/Other> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "Other" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/ncRNA-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "ncRNA-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/WCS> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "WCS" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/CLONE> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "CLONE" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/POOLCLONE> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "POOLCLONE" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/AMPLICON> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "AMPLICON" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/CLONEEND> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "CLONEEND" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/FINISHING> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "FINISHING" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/ChIP-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "ChIP-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/MNase-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "MNase-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/DNase-Hypersensitivity> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "DNase-Hypersensitivity" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/EST> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "EST" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/FL-cDNA> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "FL-cDNA" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/CTS> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "CTS" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/MRE-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "MRE-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/MeDIP-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "MeDIP-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/MBD-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "MBD-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/Tn-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "Tn-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/FAIRE-seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "FAIRE-seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/SELEX> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "SELEX" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/RIP-Seq> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "RIP-Seq" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequence_source/ChIA-PET> a skos:Concept, code:Sequence_source;
+  skos:topConceptOf code:sequence_source ;
+  skos:prefLabel "ChIA-PET" ;
+  skos:inScheme code:sequence_source .
+
+<code/sequencer/Illumina_GAIIx> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Illumina GAIIx" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/Illumina_HiSeq> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Illumina HiSeq" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/SOLID> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "SOLID" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/454> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "454" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/ABI_3730xl> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "ABI 3730xl" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/Ion_Torrent_PGM> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Ion Torrent PGM" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/Ion_Torrent_Proton> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Ion Torrent Proton" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/PacBio_RS> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "PacBio RS" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/Illumina_MiSeq> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Illumina MiSeq" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/Illumina_HiSeq_2500> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "Illumina HiSeq 2500" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/454_GS_FLX_Titanium> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "454 GS FLX Titanium" ;
+  skos:inScheme code:sequencer .
+
+<code/sequencer/AB_SOLiD_4_System> a skos:Concept, code:Sequencer;
+  skos:topConceptOf code:sequencer ;
+  skos:prefLabel "AB SOLiD 4 System" ;
+  skos:inScheme code:sequencer .
+
 ns:obs2 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -511,15 +1004,11 @@ ns:obs2 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
   prop:Match_Norm_Seq_Allele1 "C" ;
   prop:Match_Norm_Seq_Allele2 "C" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Untested" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "e46a5d19-2dd7-4c34-8fff-6276278c58b3" ;
   prop:Matched_Norm_Sample_UUID "f948182a-f814-4e3c-83ee-82b78aa423c1" ;
   prop:patient_id 19 ;
@@ -530,6 +1019,12 @@ ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:dbSNP_Val_Status <code/dbsnp_val_status/byFrequency> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -541,20 +1036,15 @@ ns:obs3 a qb:Observation ;
   prop:Tumor_Seq_Allele1 "G" ;
   prop:Tumor_Seq_Allele2 "A" ;
   prop:dbSNP_RS <http://identifiers.org/dbsnp/151098196> ;
-  prop:dbSNP_Val_Status "byFrequency" ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A1NH-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Untested" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "13c312ec-0add-4758-ab8d-c193e2e08c6d" ;
   prop:Matched_Norm_Sample_UUID "0ee95056-a7cc-415c-a487-3ad08604dfc0" ;
   prop:patient_id 19 ;
@@ -565,6 +1055,11 @@ ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
   prop:Center "genome.wustl.edu" ;
@@ -581,15 +1076,11 @@ ns:obs4 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Untested" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "ad52a8fb-7a76-4aa0-95fb-d6edab0fe2b2" ;
   prop:Matched_Norm_Sample_UUID "8c059d33-23de-439a-914a-290527c5efbe" ;
   prop:patient_id 10 ;
@@ -600,6 +1091,11 @@ ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
   prop:Center "genome.wustl.edu" ;
@@ -616,15 +1112,11 @@ ns:obs5 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Untested" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "add624a3-57e9-46be-9bcc-3e53d7c2dfb7" ;
   prop:Matched_Norm_Sample_UUID "5cae8dca-b28a-4483-9c03-6f0645161c04" ;
   prop:patient_id 10 ;
@@ -635,6 +1127,11 @@ ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -650,15 +1147,11 @@ ns:obs6 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Untested" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "c83c7d48-8671-4f27-b3dd-05411fa2f784" ;
   prop:Matched_Norm_Sample_UUID "c14cac2a-e308-44fa-b1af-ee51511ee0ee" ;
   prop:patient_id 16 ;
@@ -669,6 +1162,11 @@ ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
   prop:Center "genome.wustl.edu" ;
@@ -689,57 +1187,14 @@ ns:obs7 a qb:Observation ;
   prop:Tumor_Validation_Allele2 "T" ;
   prop:Match_Norm_Validation_Allele1 "G" ;
   prop:Match_Norm_Validation_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Valid" ;
   prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
   prop:Validation_Method "Illumina_WXS_gDNA" ;
   prop:Score 1 ;
   prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
   prop:Tumor_Sample_UUID "5947a9db-7d13-44ff-86ad-eb5e6c8dcec5" ;
   prop:Matched_Norm_Sample_UUID "6a4cd52f-2247-4caf-9b37-e90b02fd4d8b" ;
   prop:patient_id 16 ;
   prop:sample_id 7102099 ;
-  .
-
-ns:obs8 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
-  prop:Variant_Classification <code/variant_classification/Silent> ;
-  prop:Variant_Type <code/variant_type/SNP> ;
-  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
-  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
-  prop:Center "genome.wustl.edu" ;
-  prop:NCBI_Build 37 ;
-  prop:Chromosome 16 ;
-  prop:Start_Position 7383011 ;
-  prop:End_Position 7383011 ;
-  prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "A" ;
-  prop:dbSNP_RS "novel" ;
-  prop:Tumor_Sample_Barcode "TCGA-AR-A1AJ-01A-21D-A12Q-09" ;
-  prop:Matched_Norm_Sample_Barcode "TCGA-AR-A1AJ-10A-01D-A12Q-09" ;
-  prop:Match_Norm_Seq_Allele1 "G" ;
-  prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Tumor_Validation_Allele1 "G" ;
-  prop:Tumor_Validation_Allele2 "A" ;
-  prop:Match_Norm_Validation_Allele1 "G" ;
-  prop:Match_Norm_Validation_Allele2 "G" ;
-  prop:Verification_Status "Unknown" ;
-  prop:Validation_Status "Valid" ;
-  prop:Mutation_Status "Somatic" ;
-  prop:Sequencing_Phase "Phase_IV" ;
-  prop:Sequence_Source "WXS" ;
-  prop:Validation_Method "Illumina_WXS_gDNA" ;
-  prop:Score 1 ;
-  prop:BAM_File "dbGAP" ;
-  prop:Sequencer "Illumina GAIIx" ;
-  prop:Tumor_Sample_UUID "4e1f9084-4729-4b3f-b036-6226d64fd25b" ;
-  prop:Matched_Norm_Sample_UUID "63ee3781-4578-4d19-88e4-c8785fc7987e" ;
-  prop:patient_id 16 ;
-  prop:sample_id 7383011 ;
   .
 

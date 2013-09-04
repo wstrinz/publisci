@@ -4,6 +4,18 @@ module PubliSci
     COLUMN_NAMES = %w{ http://identifiers.org/hgnc.symbol/ Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
+    
+    TCGA_CODES = 
+      {
+        "Variant_Classification" => %w{Frame_Shift_Del Frame_Shift_Ins In_Frame_Del In_Frame_Ins Missense_Mutation Nonsense_Mutation Silent Splice_Site Translation_Start_Site Nonstop_Mutation 3'UTR 3'Flank 5'UTR 5'Flank IGR1  Intron RNA Targeted_Region},
+        "Variant_Type" => %w{SNP DNP TNP ONP INS DEL Consolidated},
+        "dbSNP_Val_Status" => %w{by1000genomes by2Hit2Allele byCluster byFrequency byHapMap byOtherPop bySubmitter alternate_allele},
+        "Verification_Status" => %w{Verified, Unknown},
+        "Validation_Status" => %w{Untested Inconclusive Valid Invalid},
+        "Validation_Status" => %w{None Germline Somatic LOH Post-transcriptional modification Unknown},
+        "Sequence_Source" => %w{WGS WGA WXS RNA-Seq miRNA-Seq Bisulfite-Seq VALIDATION Other ncRNA-Seq WCS CLONE POOLCLONE AMPLICON CLONEEND FINISHING ChIP-Seq MNase-Seq DNase-Hypersensitivity EST FL-cDNA CTS MRE-Seq MeDIP-Seq MBD-Seq Tn-Seq FAIRE-seq SELEX RIP-Seq ChIA-PET},
+        "Sequencer" => ["Illumina GAIIx", "Illumina HiSeq", "SOLID", "454", "ABI 3730xl", "Ion Torrent PGM", "Ion Torrent Proton", "PacBio RS", "Illumina MiSeq", "Illumina HiSeq 2500", "454 GS FLX Titanium", "AB SOLiD 4 System" ]
+      }
 
       def generate_n3(input_file, options={})
 
@@ -11,8 +23,9 @@ module PubliSci
         output = options[:output] || :file
         output_base = options[:output_base] || nil
 
-        @dimensions = %w{Variant_Classification Variant_Type}
-        @codes = %w{Variant_Classification Variant_Type}
+        @dimensions = %w{Variant_Classification Variant_Type dbSNP_Val_Status Verification_Status Validation_Status Validation_Status Sequence_Source Sequencer} 
+        # @codes = %w{Variant_Classification Variant_Type}
+        @codes = @dimensions
         @measures = (COLUMN_NAMES - @dimensions - @codes)
         @dataset_name ||= File.basename(input_file,'.*')
         @barcode_index = COLUMN_NAMES.index('Tumor_Sample_Barcode')
@@ -121,18 +134,9 @@ module PubliSci
         component_specifications(@measures, @dimensions, @codes, @dataset_name, options).map{ |c| str << c }
         measure_properties(@measures,@dataset_name,options).map{|m| str << m}
         dimension_properties(@dimensions,@codes, @dataset_name,options).map{|d| str << d}
-        code_lists(@codes,tcga_codes,@dataset_name,options).map{|c| str << c}
-        concept_codes(@codes,tcga_codes,@dataset_name,options).map{|c| str << c}
+        code_lists(@codes,TCGA_CODES,@dataset_name,options).map{|c| str << c}
+        concept_codes(@codes,TCGA_CODES,@dataset_name,options).map{|c| str << c}
         str
-      end
-
-      def tcga_codes
-        {
-          "Variant_Classification" => %w{Frame_Shift_Del Frame_Shift_Ins In_Frame_Del In_Frame_Ins Missense_Mutation Nonsense_Mutation Silent Splice_Site Translation_Start_Site Nonstop_Mutation 3'UTR 3'Flank 5'UTR 5'Flank IGR1  Intron RNA Targeted_Region},
-
-          "Variant_Type" => %w{SNP DNP TNP ONP INS DEL Consolidated}
-
-        }
       end
     end
   end
