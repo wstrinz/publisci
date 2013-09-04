@@ -113,20 +113,22 @@ describe MafQuery do
     	end
     end
 
-    describe ".gene_length" do
-      it { @maf.gene_length('A2BP1').should == 1694245 }
-    end
+    context "remote service calls", no_travis: true do
+      describe ".gene_length" do
+        it { @maf.gene_length('A2BP1').should == 1694245 }
+      end
 
-    describe ".official_symbol" do
-      it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
-    end
+      describe ".official_symbol" do
+        it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
+      end
 
-    describe ".patient_info" do
-      it 'collects the number of mutations and gene lengths for each mutation' do
-        patient = @maf.patient_info('BH-A0HP',@repo)
-        patient[:mutation_count].should == 1
-        patient[:mutations].first[:length].should == 79113
-        patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
+      describe ".patient_info" do
+        it 'collects the number of mutations and gene lengths for each mutation' do
+          patient = @maf.patient_info('BH-A0HP',@repo)
+          patient[:mutation_count].should == 1
+          patient[:mutations].first[:length].should == 79113
+          patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
+        end
       end
     end
 end

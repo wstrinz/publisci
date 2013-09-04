@@ -24,6 +24,7 @@ describe PubliSci::Dataset do
 
   describe ".register_reader" do
     it "can register readers to be used by Dataset.for" do
+      PubliSci::Dataset.reader_registry.clear
       expect { PubliSci::Dataset.for('resources/maf_example.maf') }.to raise_error
       PubliSci::Dataset.register_reader('.maf',PubliSci::Readers::MAF)
       file = PubliSci::Dataset.for('resources/maf_example.maf')
