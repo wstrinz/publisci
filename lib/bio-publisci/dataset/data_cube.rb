@@ -75,7 +75,7 @@ module PubliSci
               elsif val =~ /^[a-zA-z]+:[a-zA-z]+$/
                 val
               else
-                "<code/#{k.downcase}/#{val}>"
+                "<code/#{k.downcase}/#{sanitize(val).first}>"
               end
             }
           else

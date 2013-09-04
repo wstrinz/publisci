@@ -922,12 +922,12 @@ code:sequencer a skos:ConceptScheme;
 
 <code/sequencer/Illumina_GAIIx> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Illumina GAIIx" ;
+  skos:prefLabel "Illumina_GAIIx" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/Illumina_HiSeq> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Illumina HiSeq" ;
+  skos:prefLabel "Illumina_HiSeq" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/SOLID> a skos:Concept, code:Sequencer;
@@ -942,42 +942,42 @@ code:sequencer a skos:ConceptScheme;
 
 <code/sequencer/ABI_3730xl> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "ABI 3730xl" ;
+  skos:prefLabel "ABI_3730xl" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/Ion_Torrent_PGM> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Ion Torrent PGM" ;
+  skos:prefLabel "Ion_Torrent_PGM" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/Ion_Torrent_Proton> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Ion Torrent Proton" ;
+  skos:prefLabel "Ion_Torrent_Proton" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/PacBio_RS> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "PacBio RS" ;
+  skos:prefLabel "PacBio_RS" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/Illumina_MiSeq> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Illumina MiSeq" ;
+  skos:prefLabel "Illumina_MiSeq" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/Illumina_HiSeq_2500> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "Illumina HiSeq 2500" ;
+  skos:prefLabel "Illumina_HiSeq_2500" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/454_GS_FLX_Titanium> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "454 GS FLX Titanium" ;
+  skos:prefLabel "454_GS_FLX_Titanium" ;
   skos:inScheme code:sequencer .
 
 <code/sequencer/AB_SOLiD_4_System> a skos:Concept, code:Sequencer;
   skos:topConceptOf code:sequencer ;
-  skos:prefLabel "AB SOLiD 4 System" ;
+  skos:prefLabel "AB_SOLiD_4_System" ;
   skos:inScheme code:sequencer .
 
 ns:obs2 a qb:Observation ;
@@ -988,7 +988,7 @@ ns:obs2 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -1024,7 +1024,7 @@ ns:obs3 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -1059,7 +1059,7 @@ ns:obs4 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
   prop:Center "genome.wustl.edu" ;
@@ -1095,7 +1095,7 @@ ns:obs5 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
   prop:Center "genome.wustl.edu" ;
@@ -1131,7 +1131,7 @@ ns:obs6 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Validation_Status <code/validation_status/Untested> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
@@ -1166,7 +1166,7 @@ ns:obs7 a qb:Observation ;
   prop:Validation_Status <code/validation_status/Valid> ;
   prop:Validation_Status <code/validation_status/Valid> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
-  prop:Sequencer <code/sequencer/Illumina GAIIx> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
   prop:Center "genome.wustl.edu" ;
