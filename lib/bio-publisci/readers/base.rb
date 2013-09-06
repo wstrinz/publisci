@@ -16,16 +16,19 @@ module PubliSci
         raise "#{self} does not implement a generate_n3 method!"
       end
 
-      def sio_value(type,id)
-        [["a", type],["http://semanticscience.org/resource/SIO_000300",id]]
+      def sio_value(type,value)
+        [
+          ["a", type],
+          ["http://semanticscience.org/resource/SIO_000300",value]
+        ]
       end
 
-      def sio_attribute(type,id)
+      def sio_attribute(type,value)
         [ 
           "http://semanticscience.org/resource/SIO_000008",
           [
             ["a", type],
-            ["http://semanticscience.org/resource/SIO_000300",id]
+            ["http://semanticscience.org/resource/SIO_000300",value]
           ]
         ]
       end
