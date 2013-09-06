@@ -973,9 +973,15 @@ ns:obs2 a qb:Observation ;
   prop:Start_Position 58862784 ;
   prop:End_Position 58862784 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "C" ;
-  prop:Tumor_Seq_Allele1 "C" ;
-  prop:Tumor_Seq_Allele2 "T" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "T"  
+ ]  ] ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A22B-01A-11D-A159-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
@@ -1010,9 +1016,15 @@ ns:obs3 a qb:Observation ;
   prop:Start_Position 58864366 ;
   prop:End_Position 58864366 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "A" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  
+ ]  ] ;
   prop:dbSNP_RS <http://identifiers.org/dbsnp/151098196> ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A1NH-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
@@ -1050,9 +1062,15 @@ ns:obs4 a qb:Observation ;
   prop:Start_Position 52595854 ;
   prop:End_Position 52595854 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "A" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  
+ ]  ] ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A0HP-01A-12D-A099-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
@@ -1090,9 +1108,15 @@ ns:obs5 a qb:Observation ;
   prop:Start_Position 52595937 ;
   prop:End_Position 52595937 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "A" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  
+ ]  ] ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A18P-01A-11D-A12B-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
@@ -1127,9 +1151,15 @@ ns:obs6 a qb:Observation ;
   prop:Start_Position 7568361 ;
   prop:End_Position 7568361 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "C" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  
+ ]  ] ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-D8-A1JN-01A-11D-A13L-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
@@ -1167,9 +1197,15 @@ ns:obs7 a qb:Observation ;
   prop:Start_Position 7102099 ;
   prop:End_Position 7102099 ;
   prop:Strand "+" ;
-  prop:Reference_Allele "G" ;
-  prop:Tumor_Seq_Allele1 "G" ;
-  prop:Tumor_Seq_Allele2 "T" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "T"  
+ ]  ] ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E2-A1BC-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E2-A1BC-10A-01D-A12Q-09" ;
@@ -1187,5 +1223,105 @@ ns:obs7 a qb:Observation ;
   prop:Matched_Norm_Sample_UUID "6a4cd52f-2247-4caf-9b37-e90b02fd4d8b" ;
   prop:patient_id 16 ;
   prop:sample_id 7102099 ;
+  .
+
+ns:obs8 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Silent> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 54715  
+ ] ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  
+ ]  ] ;
+  prop:Start_Position 7383011 ;
+  prop:End_Position 7383011 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  
+ ]  ] ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-AR-A1AJ-01A-21D-A12Q-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-AR-A1AJ-10A-01D-A12Q-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_File "dbGAP" ;
+  prop:Tumor_Sample_UUID "4e1f9084-4729-4b3f-b036-6226d64fd25b" ;
+  prop:Matched_Norm_Sample_UUID "63ee3781-4578-4d19-88e4-c8785fc7987e" ;
+  prop:patient_id 16 ;
+  prop:sample_id 7383011 ;
+  .
+
+ns:obs9 a qb:Observation ;
+  qb:dataSet ns:dataset-maf_example ;
+  prop:Variant_Classification <code/variant_classification/Nonsense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
+  <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2M> ;
+  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 2  
+ ] ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 12  
+ ]  ] ;
+  prop:Start_Position 9251298 ;
+  prop:End_Position 9251298 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  
+ ]  ] ;
+  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  
+ ]  ] ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-A8-A08G-01A-11W-A019-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-A8-A08G-10A-01W-A021-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_File "dbGAP" ;
+  prop:Tumor_Sample_UUID "8da61928-e935-4a33-8e46-840e637163d7" ;
+  prop:Matched_Norm_Sample_UUID "74a3a4af-c93a-4fcd-af11-1f5eeb847c3c" ;
+  prop:patient_id 12 ;
+  prop:sample_id 9251298 ;
   .
 
