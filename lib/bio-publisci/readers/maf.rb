@@ -1,7 +1,7 @@
 module PubliSci
   module Readers
     class MAF < Base
-    COLUMN_NAMES = %w{ http://identifiers.org/hgnc.symbol/ Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
+    COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
     
@@ -65,14 +65,14 @@ module PubliSci
 
       def process_line(line,label,options)
         unless line[0] == "#" || line[0..3] == "Hugo"
-          entry = ::CSV.parse(line, {col_sep: "\t"}).flatten
+          entry = ::CSV.parse(line, {col_sep: "\t"}).flatten[0..(COLUMN_NAMES.length-3)]
 
           entry = (entry.fill(nil,entry.length...COLUMN_NAMES.length-2) + parse_barcode(entry[@barcode_index])).flatten
 
           if options[:lookup_hugo]
-            entry[0] = "http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}" if entry[0]
+            entry[0] = sio_value('http://identifiers.org/hgnc.symbol',"http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}") if entry[0]
           else
-            entry[0] = "http://identifiers.org/hgnc.symbol/#{entry[0]}" if entry[0]
+            entry[0] = sio_value('http://identifiers.org/hgnc.symbol',"http://identifiers.org/hgnc.symbol/#{entry[0]}") if entry[0]
           end
 
           # A 0 in the entrez-id column appears to mean null
@@ -84,8 +84,9 @@ module PubliSci
 
           # Link known SNPs
           col = COLUMN_NAMES.index('dbSNP_RS')
-          if entry[col][0..1] == "rs"
+          if entry[col] && entry[col][0..1] == "rs"
             entry[col] = "http://identifiers.org/dbsnp/#{entry[col].gsub('rs','')}"
+            entry[col] = sio_value("http://identifiers.org/dbsnp", entry[col])
           end
 
           # test SIO attributes for chromosome
@@ -93,14 +94,22 @@ module PubliSci
           entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0000340",entry[col])
 
           # More SIO attrtibutes for alleles
-          col = COLUMN_NAMES.index('Reference_Allele')
-          entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
+          %w{Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 Match_Norm_Seq_Allele1 Match_Norm_Seq_Allele2}.each{|name|
+            col = COLUMN_NAMES.index(name)
+            entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
+          }
 
-          col = COLUMN_NAMES.index('Tumor_Seq_Allele1')
-          entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
+          col = COLUMN_NAMES.index("Strand")
+          entry[col] = sio_attribute("http://edamontology.org/data_0853",entry[col])
 
-          col = COLUMN_NAMES.index('Tumor_Seq_Allele2')
-          entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
+          %w{Start_Position End_Position}.each{|name|
+            col = COLUMN_NAMES.index(name)
+            entry[col] = [
+              ["a", "http://biohackathon.org/resource/faldo#Position"],
+              ["http://biohackathon.org/resource/faldo#position", entry[col]],
+            ]
+          }
+          
 
           data = {}
           COLUMN_NAMES.each_with_index{|col,i|

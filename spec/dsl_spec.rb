@@ -36,7 +36,9 @@ describe PubliSci::DSL do
         qry = <<-EOF
         SELECT ?observation where {
           ?observation a <http://purl.org/linked-data/cube#Observation>;
-            <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1>
+            <http://www.rqtl.org/dc/properties/Hugo_Symbol> ?node.
+
+          ?node <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>
         }
 
         EOF
