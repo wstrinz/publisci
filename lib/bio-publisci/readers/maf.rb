@@ -1,7 +1,7 @@
 module PubliSci
   module Readers
     class MAF < Base
-    COLUMN_NAMES = %w{ http://identifiers.org/hgnc.symbol/ Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
+    COLUMN_NAMES = %w{ http://identifiers.org/hgnc.symbol/ http://semanticscience.org/resource/SIO_000671 Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
     
@@ -76,12 +76,15 @@ module PubliSci
           end
 
           # A 0 in the entrez-id column appears to mean null
-          col = COLUMN_NAMES.index('Entrez_Gene_Id')
+          # col = COLUMN_NAMES.index('Entrez_Gene_Id')
+          col=1
           entry[col] = nil if entry[col] == '0'
 
           # Link entrez genes
-          col = COLUMN_NAMES.index('Entrez_Gene_Id')
-          entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
+          # col = COLUMN_NAMES.index('Entrez_Gene_Id')
+          # col= 1
+          # entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
+          entry[col] = [["a", "http://identifiers.org/ncbigene"],["http://semanticscience.org/resource/SIO_000300",entry[col].to_s]] if entry[col]
 
           # Link known SNPs
           col = COLUMN_NAMES.index('dbSNP_RS')
@@ -89,8 +92,14 @@ module PubliSci
             entry[col] = "http://identifiers.org/dbsnp/#{entry[col].gsub('rs','')}"
           end
 
-
-          data = Hash[*COLUMN_NAMES.zip(entry).flatten]
+          # puts "#{entry} #{COLUMN_NAMES.size} #{entry.size}"
+          data_h = {}
+          COLUMN_NAMES.each_with_index{|col,i|
+            data_h[col] = [entry[i]]
+          }
+          
+          data = data_h
+          # data = Hash[*COLUMN_NAMES.zip(entry).flatten]
 
           observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)
         end

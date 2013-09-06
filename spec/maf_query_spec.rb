@@ -99,7 +99,10 @@ describe MafQuery do
 
     describe ".select_property" do
     	it { @maf.select_property(@repo,"hgnc.symbol","BH-A0HP").size.should > 0 }
-    	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").size.should > 0 }
+    	it { 
+        pending("new query method since entrez gene is demoing SIO")
+        @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").size.should > 0 
+      }
     	it { @maf.select_property(@repo,"Center","BH-A0HP").size.should > 0 }
     	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
 

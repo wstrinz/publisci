@@ -1,8 +1,8 @@
 module PubliSci
 	module Parser
 
-    def is_uri?(string)
-      RDF::Resource(string).valid?
+    def is_uri?(obj)
+      RDF::Resource(obj).valid?
     end
 
     def sanitize(array)
@@ -98,14 +98,18 @@ module PubliSci
     def to_resource(obj, options={})
       if obj.is_a? String
 
-        obj = "<#{obj}>" if is_uri? obj
+        if is_uri? obj
+          obj = RDF::Resource(obj).to_base unless obj[/\w+:\w/]
+        else
 
-        #TODO decide the right way to handle missing values, since RDF has no null
-        #probably throw an error here since a missing resource is a bigger problem
-        obj = "rdf:nil" if obj.empty?
+          #TODO decide the right way to handle missing values, since RDF has no null
+          #probably throw an error here since a missing resource is a bigger problem
+          obj = "rdf:nil" if obj.empty?
+          obj=  obj.to_s.gsub(' ','_')
+        end
 
+        obj
         #TODO  remove special characters (faster) as well (eg '?')
-        obj=  obj.gsub(' ','_')
 
       elsif obj == nil && options[:encode_nulls]
         'rdf:nil'
@@ -141,9 +145,29 @@ module PubliSci
         to_resource(obj,options)
       elsif obj && obj.is_a?(String) && (obj[0]=="<" && obj[-1] = ">")
         obj
+      elsif obj.is_a?(Array)
+        bnode_value(obj)
       else
         to_literal(obj,options)
       end
+    end
+
+    def bnode_value(obj)
+      str = "["
+      # TODO - Implement recursion
+      # TODO - check if object is "a" (rdf:type) => or convert rdf:type to "a"
+      obj.each{|sub_obj|
+        if sub_obj.is_a?(Array) && sub_obj.size == 2
+          str  << " #{to_resource(sub_obj[0])} #{encode_value(sub_obj[1])} ;\n"
+        else
+          raise "Invalid Structured value: #{sub_obj}"
+        end
+      }
+
+      str[-2] = ""
+      str[-1] = "]"
+
+      str
     end
 
     def strip_uri(uri)
