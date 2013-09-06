@@ -90,7 +90,7 @@ module PubliSci
 
           # test SIO attributes for chromosome
           col = COLUMN_NAMES.index('Chromosome')
-          entry[col] = sio_attribute('http://example.org/chromosome_class',entry[col])
+          entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0000340",entry[col])
 
           data = {}
           COLUMN_NAMES.each_with_index{|col,i|

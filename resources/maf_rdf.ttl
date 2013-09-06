@@ -967,7 +967,7 @@ ns:obs2 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 19  
  ]  ] ;
   prop:Start_Position 58862784 ;
@@ -1004,7 +1004,7 @@ ns:obs3 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 19  
  ]  ] ;
   prop:Start_Position 58864366 ;
@@ -1044,7 +1044,7 @@ ns:obs4 a qb:Observation ;
  ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 10  
  ]  ] ;
   prop:Start_Position 52595854 ;
@@ -1084,7 +1084,7 @@ ns:obs5 a qb:Observation ;
  ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 10  
  ]  ] ;
   prop:Start_Position 52595937 ;
@@ -1121,7 +1121,7 @@ ns:obs6 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 16  
  ]  ] ;
   prop:Start_Position 7568361 ;
@@ -1161,7 +1161,7 @@ ns:obs7 a qb:Observation ;
  ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
 <http://semanticscience.org/resource/SIO_000300> 16  
  ]  ] ;
   prop:Start_Position 7102099 ;
