@@ -1,7 +1,7 @@
 module PubliSci
   module Readers
     class MAF < Base
-    COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
+    COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome http://biohackathon.org/resource/faldo#begin http://biohackathon.org/resource/faldo#end Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
     
@@ -84,6 +84,7 @@ module PubliSci
 
           # Link known SNPs
           col = COLUMN_NAMES.index('dbSNP_RS')
+
           if entry[col] && entry[col][0..1] == "rs"
             entry[col] = "http://identifiers.org/dbsnp/#{entry[col].gsub('rs','')}"
             entry[col] = sio_value("http://identifiers.org/dbsnp", entry[col])
@@ -109,16 +110,18 @@ module PubliSci
           ]
 
           # Use faldo for locations
-          %w{Start_Position End_Position}.each{|name|
-            col = COLUMN_NAMES.index(name)
-            entry[col] = [
-              ["a", "http://biohackathon.org/resource/faldo#Position"],
-              ["http://biohackathon.org/resource/faldo#position", entry[col]],
-            ]
-          }
+          col = COLUMN_NAMES.index("http://biohackathon.org/resource/faldo#begin")
+          entry[col] = [
+            entry[col] = sio_value("http://biohackathon.org/resource/faldo#Position", entry[col])
+            # ["a", "http://biohackathon.org/resource/faldo#Position"],
+          ]
 
-
-          
+          col = COLUMN_NAMES.index("http://biohackathon.org/resource/faldo#end")
+          entry[col] = [
+            entry[col] = sio_value("http://biohackathon.org/resource/faldo#Position", entry[col])
+            # ["a", "http://biohackathon.org/resource/faldo#Position"],
+            # ["http://biohackathon.org/resource/faldo#end", entry[col]],
+          ]
 
           data = {}
           COLUMN_NAMES.each_with_index{|col,i|

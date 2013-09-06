@@ -175,34 +175,46 @@ module PubliSci
       # TODO - check if object is "a" (rdf:type) => or convert rdf:type to "a"
       str = ""
       subnodes = []
-      if obj.is_a?(Array) && obj.size == 2
-        if obj[0].is_a?(String)
-          if is_complex?(obj[1])
-            str << "#{to_resource(obj[0])} #{add_node(node_index,node_str)} . \n"            
-            subnodes << encode_value(obj[1], options, node_index, node_str)
-          else
-            str << "#{to_resource(obj[0])} #{encode_value(obj[1], options, node_index, node_str)} "
-          end
-        elsif obj[0].is_a?(Array) && obj[1].is_a?(Array)
-          newnode = add_node(0,node_str)
-          v1 = bnode_value(obj[0], 0, node_str, options)
-          v2 = bnode_value(obj[1], 1, node_str, options)
+      if obj.is_a?(Array) # && obj.size == 2
+        if obj.size == 2
+          if obj[0].is_a?(String)
+            if is_complex?(obj[1])
+              str << "#{to_resource(obj[0])} #{add_node(node_index,node_str)} . \n"            
+              subnodes << encode_value(obj[1], options, node_index, node_str)
+            else
+              str << "#{to_resource(obj[0])} #{encode_value(obj[1], options, node_index, node_str)} "
+            end
+          elsif obj[0].is_a?(Array) && obj[1].is_a?(Array)
+            newnode = add_node(0,node_str)
+            v1 = bnode_value(obj[0], 0, node_str, options)
+            v2 = bnode_value(obj[1], 1, node_str, options)
 
-          if v1.is_a? Array
-            subnodes << v1
-            v1 = nil
-          end
+            if v1.is_a? Array
+              subnodes << v1
+              v1 = nil
+            end
 
-          if v2.is_a? Array
-            subnodes << v2
-            v2 = nil
-          end
+            if v2.is_a? Array
+              subnodes << v2
+              v2 = nil
+            end
 
-          if v1
-            str << "#{v1} ;"
-          end
+            if v1
+              str << "#{v1} ;"
+            end
 
-          str << "\n#{v2} .\n" if v2
+            str << "\n#{v2} .\n" if v2
+          end
+        elsif obj.all?{|ent| ent.is_a? Array}
+          obj.each{|ent|
+            bn = bnode_value(ent,node_index,node_str,options)
+            if bn.is_a? String
+              str << bn + "\n"
+            else
+              str << bn[0] + "\n"
+              subnodes << bn[1]
+            end
+          }
         end
       else
         raise "Invalid Structured value: #{obj}"

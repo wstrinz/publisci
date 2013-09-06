@@ -28,8 +28,8 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Center ;
   qb:component cs:NCBI_Build ;
   qb:component cs:Chromosome ;
-  qb:component cs:Start_Position ;
-  qb:component cs:End_Position ;
+  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#begin> ;
+  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#end> ;
   qb:component cs:Strand ;
   qb:component cs:Reference_Allele ;
   qb:component cs:Tumor_Seq_Allele1 ;
@@ -108,13 +108,13 @@ cs:Chromosome a qb:ComponentSpecification ;
   rdfs:label "Chromosome" ;
   qb:measure prop:Chromosome .
 
-cs:Start_Position a qb:ComponentSpecification ;
-  rdfs:label "Start_Position" ;
-  qb:measure prop:Start_Position .
+<http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#begin> a qb:ComponentSpecification ;
+  rdfs:label "begin" ;
+  qb:measure <http://biohackathon.org/resource/faldo#begin> .
 
-cs:End_Position a qb:ComponentSpecification ;
-  rdfs:label "End_Position" ;
-  qb:measure prop:End_Position .
+<http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#end> a qb:ComponentSpecification ;
+  rdfs:label "end" ;
+  qb:measure <http://biohackathon.org/resource/faldo#end> .
 
 cs:Strand a qb:ComponentSpecification ;
   rdfs:label "Strand" ;
@@ -218,11 +218,11 @@ prop:Chromosome a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Chromosome"@en ;
   rdfs:range xsd:int .
 
-prop:Start_Position a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Start_Position"@en .
+<http://biohackathon.org/resource/faldo#begin> a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "begin"@en .
 
-prop:End_Position a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "End_Position"@en .
+<http://biohackathon.org/resource/faldo#end> a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "end"@en .
 
 prop:Strand a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Strand"@en .
@@ -968,8 +968,8 @@ ns:obs2 a qb:Observation ;
   prop:Center <node/2/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/2/12> ;
-  prop:Start_Position <node/2/13> ;
-  prop:End_Position <node/2/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/2/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/2/14> ;
   prop:Strand <node/2/15> ;
   prop:Reference_Allele <node/2/16> ;
   prop:Tumor_Seq_Allele1 <node/2/17> ;
@@ -1006,11 +1006,13 @@ ns:obs2 a qb:Observation ;
 
 <node/2/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 58862784  .
+  <http://semanticscience.org/resource/SIO_000300> 58862784  .
+
 
 <node/2/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 58862784  .
+  <http://semanticscience.org/resource/SIO_000300> 58862784  .
+
 
 <node/2/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1068,8 +1070,8 @@ ns:obs3 a qb:Observation ;
   prop:Center <node/3/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/3/12> ;
-  prop:Start_Position <node/3/13> ;
-  prop:End_Position <node/3/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/3/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/3/14> ;
   prop:Strand <node/3/15> ;
   prop:Reference_Allele <node/3/16> ;
   prop:Tumor_Seq_Allele1 <node/3/17> ;
@@ -1106,11 +1108,13 @@ ns:obs3 a qb:Observation ;
 
 <node/3/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 58864366  .
+  <http://semanticscience.org/resource/SIO_000300> 58864366  .
+
 
 <node/3/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 58864366  .
+  <http://semanticscience.org/resource/SIO_000300> 58864366  .
+
 
 <node/3/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1173,8 +1177,8 @@ ns:obs4 a qb:Observation ;
   prop:Center <node/4/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/4/12> ;
-  prop:Start_Position <node/4/13> ;
-  prop:End_Position <node/4/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/4/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/4/14> ;
   prop:Strand <node/4/15> ;
   prop:Reference_Allele <node/4/16> ;
   prop:Tumor_Seq_Allele1 <node/4/17> ;
@@ -1215,11 +1219,13 @@ ns:obs4 a qb:Observation ;
 
 <node/4/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 52595854  .
+  <http://semanticscience.org/resource/SIO_000300> 52595854  .
+
 
 <node/4/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 52595854  .
+  <http://semanticscience.org/resource/SIO_000300> 52595854  .
+
 
 <node/4/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1278,8 +1284,8 @@ ns:obs5 a qb:Observation ;
   prop:Center <node/5/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/5/12> ;
-  prop:Start_Position <node/5/13> ;
-  prop:End_Position <node/5/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/5/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/5/14> ;
   prop:Strand <node/5/15> ;
   prop:Reference_Allele <node/5/16> ;
   prop:Tumor_Seq_Allele1 <node/5/17> ;
@@ -1320,11 +1326,13 @@ ns:obs5 a qb:Observation ;
 
 <node/5/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 52595937  .
+  <http://semanticscience.org/resource/SIO_000300> 52595937  .
+
 
 <node/5/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 52595937  .
+  <http://semanticscience.org/resource/SIO_000300> 52595937  .
+
 
 <node/5/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1382,8 +1390,8 @@ ns:obs6 a qb:Observation ;
   prop:Center <node/6/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/6/12> ;
-  prop:Start_Position <node/6/13> ;
-  prop:End_Position <node/6/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/6/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/6/14> ;
   prop:Strand <node/6/15> ;
   prop:Reference_Allele <node/6/16> ;
   prop:Tumor_Seq_Allele1 <node/6/17> ;
@@ -1420,11 +1428,13 @@ ns:obs6 a qb:Observation ;
 
 <node/6/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 7568361  .
+  <http://semanticscience.org/resource/SIO_000300> 7568361  .
+
 
 <node/6/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 7568361  .
+  <http://semanticscience.org/resource/SIO_000300> 7568361  .
+
 
 <node/6/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1483,8 +1493,8 @@ ns:obs7 a qb:Observation ;
   prop:Center <node/7/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/7/12> ;
-  prop:Start_Position <node/7/13> ;
-  prop:End_Position <node/7/14> ;
+  <http://biohackathon.org/resource/faldo#begin> <node/7/13> ;
+  <http://biohackathon.org/resource/faldo#end> <node/7/14> ;
   prop:Strand <node/7/15> ;
   prop:Reference_Allele <node/7/16> ;
   prop:Tumor_Seq_Allele1 <node/7/17> ;
@@ -1529,11 +1539,13 @@ ns:obs7 a qb:Observation ;
 
 <node/7/13>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 7102099  .
+  <http://semanticscience.org/resource/SIO_000300> 7102099  .
+
 
 <node/7/14>
   a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://biohackathon.org/resource/faldo#position> 7102099  .
+  <http://semanticscience.org/resource/SIO_000300> 7102099  .
+
 
 <node/7/15>
   a <http://edamontology.org/data_0853>  ;
