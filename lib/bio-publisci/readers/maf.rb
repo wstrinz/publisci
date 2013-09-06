@@ -12,7 +12,7 @@ module PubliSci
         "dbSNP_Val_Status" => %w{by1000genomes by2Hit2Allele byCluster byFrequency byHapMap byOtherPop bySubmitter alternate_allele},
         "Verification_Status" => %w{Verified, Unknown},
         "Validation_Status" => %w{Untested Inconclusive Valid Invalid},
-        "Validation_Status" => %w{None Germline Somatic LOH Post-transcriptional modification Unknown},
+        "Mutation_Status" => %w{None Germline Somatic LOH Post-transcriptional modification Unknown},
         "Sequence_Source" => %w{WGS WGA WXS RNA-Seq miRNA-Seq Bisulfite-Seq VALIDATION Other ncRNA-Seq WCS CLONE POOLCLONE AMPLICON CLONEEND FINISHING ChIP-Seq MNase-Seq DNase-Hypersensitivity EST FL-cDNA CTS MRE-Seq MeDIP-Seq MBD-Seq Tn-Seq FAIRE-seq SELEX RIP-Seq ChIA-PET},
         "Sequencer" => ["Illumina GAIIx", "Illumina HiSeq", "SOLID", "454", "ABI 3730xl", "Ion Torrent PGM", "Ion Torrent Proton", "PacBio RS", "Illumina MiSeq", "Illumina HiSeq 2500", "454 GS FLX Titanium", "AB SOLiD 4 System" ]
       }
@@ -23,7 +23,7 @@ module PubliSci
         output = options[:output] || :file
         output_base = options[:output_base] || nil
 
-        @dimensions = %w{Variant_Classification Variant_Type dbSNP_Val_Status Verification_Status Validation_Status Validation_Status Sequence_Source Sequencer} 
+        @dimensions = %w{Variant_Classification Variant_Type dbSNP_Val_Status Verification_Status Validation_Status Mutation_Status Sequence_Source Sequencer} 
         # @codes = %w{Variant_Classification Variant_Type}
         @codes = @dimensions
         @measures = (COLUMN_NAMES - @dimensions - @codes)
@@ -76,15 +76,11 @@ module PubliSci
           end
 
           # A 0 in the entrez-id column appears to mean null
-          # col = COLUMN_NAMES.index('Entrez_Gene_Id')
           col=1
           entry[col] = nil if entry[col] == '0'
 
           # Link entrez genes
-          # col = COLUMN_NAMES.index('Entrez_Gene_Id')
-          # col= 1
-          # entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
-          entry[col] = sio_identifier("http://identifiers.org/ncbigene",entry[col]) if entry[col]
+          entry[col] = sio_value("http://identifiers.org/ncbigene",entry[col]) if entry[col]
 
           # Link known SNPs
           col = COLUMN_NAMES.index('dbSNP_RS')
@@ -92,13 +88,18 @@ module PubliSci
             entry[col] = "http://identifiers.org/dbsnp/#{entry[col].gsub('rs','')}"
           end
 
-          # puts "#{entry} #{COLUMN_NAMES.size} #{entry.size}"
-          data_h = {}
+          # test SIO attributes for chromosome
+          col = COLUMN_NAMES.index('Chromosome')
+          entry[col] = sio_attribute('http://example.org/chromosome_class',entry[col])
+
+          data = {}
           COLUMN_NAMES.each_with_index{|col,i|
-            data_h[col] = [entry[i]]
+            data[col] = [entry[i]]
           }
+
+
           
-          data = data_h
+
           # data = Hash[*COLUMN_NAMES.zip(entry).flatten]
 
           observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)

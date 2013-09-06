@@ -20,7 +20,7 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:dbSNP_Val_Status ;
   qb:component cs:Verification_Status ;
   qb:component cs:Validation_Status ;
-  qb:component cs:Validation_Status ;
+  qb:component cs:Mutation_Status ;
   qb:component cs:Sequence_Source ;
   qb:component cs:Sequencer ;
   qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> ;
@@ -43,7 +43,6 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Tumor_Validation_Allele2 ;
   qb:component cs:Match_Norm_Validation_Allele1 ;
   qb:component cs:Match_Norm_Validation_Allele2 ;
-  qb:component cs:Mutation_Status ;
   qb:component cs:Sequencing_Phase ;
   qb:component cs:Validation_Method ;
   qb:component cs:Score ;
@@ -77,9 +76,9 @@ cs:Validation_Status a qb:ComponentSpecification ;
   rdfs:label "Validation_Status" ;
   qb:dimension prop:Validation_Status .
 
-cs:Validation_Status a qb:ComponentSpecification ;
-  rdfs:label "Validation_Status" ;
-  qb:dimension prop:Validation_Status .
+cs:Mutation_Status a qb:ComponentSpecification ;
+  rdfs:label "Mutation_Status" ;
+  qb:dimension prop:Mutation_Status .
 
 cs:Sequence_Source a qb:ComponentSpecification ;
   rdfs:label "Sequence_Source" ;
@@ -168,10 +167,6 @@ cs:Match_Norm_Validation_Allele1 a qb:ComponentSpecification ;
 cs:Match_Norm_Validation_Allele2 a qb:ComponentSpecification ;
   rdfs:label "Match_Norm_Validation_Allele2" ;
   qb:measure prop:Match_Norm_Validation_Allele2 .
-
-cs:Mutation_Status a qb:ComponentSpecification ;
-  rdfs:label "Mutation_Status" ;
-  qb:measure prop:Mutation_Status .
 
 cs:Sequencing_Phase a qb:ComponentSpecification ;
   rdfs:label "Sequencing_Phase" ;
@@ -269,9 +264,6 @@ prop:Match_Norm_Validation_Allele1 a rdf:Property, qb:MeasureProperty ;
 prop:Match_Norm_Validation_Allele2 a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Match_Norm_Validation_Allele2"@en .
 
-prop:Mutation_Status a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Mutation_Status"@en .
-
 prop:Sequencing_Phase a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Sequencing_Phase"@en .
 
@@ -321,10 +313,10 @@ prop:Validation_Status a rdf:Property, qb:DimensionProperty ;
   qb:codeList code:validation_status ;
   rdfs:range code:Validation_status .
 
-prop:Validation_Status a rdf:Property, qb:DimensionProperty ;
-  rdfs:label "Validation_Status"@en ;
-  qb:codeList code:validation_status ;
-  rdfs:range code:Validation_status .
+prop:Mutation_Status a rdf:Property, qb:DimensionProperty ;
+  rdfs:label "Mutation_Status"@en ;
+  qb:codeList code:mutation_status ;
+  rdfs:range code:Mutation_status .
 
 prop:Sequence_Source a rdf:Property, qb:DimensionProperty ;
   rdfs:label "Sequence_Source"@en ;
@@ -434,33 +426,30 @@ code:validation_status a skos:ConceptScheme;
   rdfs:label "Code list for validation_status - codelist scheme"@en;
   skos:notation "CL_VALIDATION_STATUS";
   skos:note "Specifies the validation_status for each observation";
-  skos:hasTopConcept <code/validation_status/None> ;
-  skos:hasTopConcept <code/validation_status/Germline> ;
-  skos:hasTopConcept <code/validation_status/Somatic> ;
-  skos:hasTopConcept <code/validation_status/LOH> ;
-  skos:hasTopConcept <code/validation_status/Post-transcriptional> ;
-  skos:hasTopConcept <code/validation_status/modification> ;
-  skos:hasTopConcept <code/validation_status/Unknown> ;
+  skos:hasTopConcept <code/validation_status/Untested> ;
+  skos:hasTopConcept <code/validation_status/Inconclusive> ;
+  skos:hasTopConcept <code/validation_status/Valid> ;
+  skos:hasTopConcept <code/validation_status/Invalid> ;
   .
 
-code:Validation_status a rdfs:Class, owl:Class;
+code:Mutation_status a rdfs:Class, owl:Class;
   rdfs:subClassOf skos:Concept ;
-  rdfs:label "Code list for validation_status - codelist class"@en;
-  rdfs:comment "Specifies the validation_status for each observation";
-  rdfs:seeAlso code:validation_status .
+  rdfs:label "Code list for mutation_status - codelist class"@en;
+  rdfs:comment "Specifies the mutation_status for each observation";
+  rdfs:seeAlso code:mutation_status .
 
-code:validation_status a skos:ConceptScheme;
-  skos:prefLabel "Code list for validation_status - codelist scheme"@en;
-  rdfs:label "Code list for validation_status - codelist scheme"@en;
-  skos:notation "CL_VALIDATION_STATUS";
-  skos:note "Specifies the validation_status for each observation";
-  skos:hasTopConcept <code/validation_status/None> ;
-  skos:hasTopConcept <code/validation_status/Germline> ;
-  skos:hasTopConcept <code/validation_status/Somatic> ;
-  skos:hasTopConcept <code/validation_status/LOH> ;
-  skos:hasTopConcept <code/validation_status/Post-transcriptional> ;
-  skos:hasTopConcept <code/validation_status/modification> ;
-  skos:hasTopConcept <code/validation_status/Unknown> ;
+code:mutation_status a skos:ConceptScheme;
+  skos:prefLabel "Code list for mutation_status - codelist scheme"@en;
+  rdfs:label "Code list for mutation_status - codelist scheme"@en;
+  skos:notation "CL_MUTATION_STATUS";
+  skos:note "Specifies the mutation_status for each observation";
+  skos:hasTopConcept <code/mutation_status/None> ;
+  skos:hasTopConcept <code/mutation_status/Germline> ;
+  skos:hasTopConcept <code/mutation_status/Somatic> ;
+  skos:hasTopConcept <code/mutation_status/LOH> ;
+  skos:hasTopConcept <code/mutation_status/Post-transcriptional> ;
+  skos:hasTopConcept <code/mutation_status/modification> ;
+  skos:hasTopConcept <code/mutation_status/Unknown> ;
   .
 
 code:Sequence_source a rdfs:Class, owl:Class;
@@ -705,75 +694,60 @@ code:sequencer a skos:ConceptScheme;
   skos:prefLabel "Unknown" ;
   skos:inScheme code:verification_status .
 
-<code/validation_status/None> a skos:Concept, code:Validation_status;
+<code/validation_status/Untested> a skos:Concept, code:Validation_status;
   skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Untested" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Inconclusive> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Inconclusive" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Valid> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Valid" ;
+  skos:inScheme code:validation_status .
+
+<code/validation_status/Invalid> a skos:Concept, code:Validation_status;
+  skos:topConceptOf code:validation_status ;
+  skos:prefLabel "Invalid" ;
+  skos:inScheme code:validation_status .
+
+<code/mutation_status/None> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "None" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/Germline> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/Germline> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "Germline" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/Somatic> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/Somatic> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "Somatic" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/LOH> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/LOH> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "LOH" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/Post-transcriptional> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/Post-transcriptional> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "Post-transcriptional" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/modification> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/modification> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "modification" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
-<code/validation_status/Unknown> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
+<code/mutation_status/Unknown> a skos:Concept, code:Mutation_status;
+  skos:topConceptOf code:mutation_status ;
   skos:prefLabel "Unknown" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/None> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "None" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/Germline> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "Germline" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/Somatic> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "Somatic" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/LOH> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "LOH" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/Post-transcriptional> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "Post-transcriptional" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/modification> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "modification" ;
-  skos:inScheme code:validation_status .
-
-<code/validation_status/Unknown> a skos:Concept, code:Validation_status;
-  skos:topConceptOf code:validation_status ;
-  skos:prefLabel "Unknown" ;
-  skos:inScheme code:validation_status .
+  skos:inScheme code:mutation_status .
 
 <code/sequence_source/WGS> a skos:Concept, code:Sequence_source;
   skos:topConceptOf code:sequence_source ;
@@ -987,13 +961,15 @@ ns:obs2 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Untested> ;
-  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 19 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 19  
+ ]  ] ;
   prop:Start_Position 58862784 ;
   prop:End_Position 58862784 ;
   prop:Strand "+" ;
@@ -1005,7 +981,6 @@ ns:obs2 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
   prop:Match_Norm_Seq_Allele1 "C" ;
   prop:Match_Norm_Seq_Allele2 "C" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1023,13 +998,15 @@ ns:obs3 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/byFrequency> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Untested> ;
-  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 19 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 19  
+ ]  ] ;
   prop:Start_Position 58864366 ;
   prop:End_Position 58864366 ;
   prop:Strand "+" ;
@@ -1041,7 +1018,6 @@ ns:obs3 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1059,15 +1035,18 @@ ns:obs4 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Untested> ;
-  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene> ;
- <http://semanticscience.org/resource/SIO_000300> 29974 ] ;
+  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 29974  
+ ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 10 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 10  
+ ]  ] ;
   prop:Start_Position 52595854 ;
   prop:End_Position 52595854 ;
   prop:Strand "+" ;
@@ -1079,7 +1058,6 @@ ns:obs4 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1097,15 +1075,18 @@ ns:obs5 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Untested> ;
-  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene> ;
- <http://semanticscience.org/resource/SIO_000300> 29974 ] ;
+  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 29974  
+ ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 10 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 10  
+ ]  ] ;
   prop:Start_Position 52595937 ;
   prop:End_Position 52595937 ;
   prop:Strand "+" ;
@@ -1117,7 +1098,6 @@ ns:obs5 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1135,13 +1115,15 @@ ns:obs6 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Untested> ;
-  prop:Validation_Status <code/validation_status/Untested> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 16 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  
+ ]  ] ;
   prop:Start_Position 7568361 ;
   prop:End_Position 7568361 ;
   prop:Strand "+" ;
@@ -1153,7 +1135,6 @@ ns:obs6 a qb:Observation ;
   prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
   prop:Match_Norm_Seq_Allele1 "G" ;
   prop:Match_Norm_Seq_Allele2 "G" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1171,15 +1152,18 @@ ns:obs7 a qb:Observation ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
   prop:Verification_Status <code/verification_status/Unknown> ;
   prop:Validation_Status <code/validation_status/Valid> ;
-  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene> ;
- <http://semanticscience.org/resource/SIO_000300> 54715 ] ;
+  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 54715  
+ ] ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome 16 ;
+  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://example.org/chromosome_class>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  
+ ]  ] ;
   prop:Start_Position 7102099 ;
   prop:End_Position 7102099 ;
   prop:Strand "+" ;
@@ -1195,7 +1179,6 @@ ns:obs7 a qb:Observation ;
   prop:Tumor_Validation_Allele2 "T" ;
   prop:Match_Norm_Validation_Allele1 "G" ;
   prop:Match_Norm_Validation_Allele2 "G" ;
-  prop:Mutation_Status "Somatic" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "Illumina_WXS_gDNA" ;
   prop:Score 1 ;

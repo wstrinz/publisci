@@ -146,26 +146,28 @@ module PubliSci
       elsif obj && obj.is_a?(String) && (obj[0]=="<" && obj[-1] = ">")
         obj
       elsif obj.is_a?(Array)
-        bnode_value(obj)
+        str = "[ " + bnode_value(obj) + " ]"
+        # str[str.rindex("\n")] = ""
+        str
       else
         to_literal(obj,options)
       end
     end
 
     def bnode_value(obj)
-      str = "["
-      # TODO - Implement recursion
+      # TODO - Implement proper recursion
       # TODO - check if object is "a" (rdf:type) => or convert rdf:type to "a"
-      obj.each{|sub_obj|
-        if sub_obj.is_a?(Array) && sub_obj.size == 2
-          str  << " #{to_resource(sub_obj[0])} #{encode_value(sub_obj[1])} ;\n"
-        else
-          raise "Invalid Structured value: #{sub_obj}"
+      str = ""
+      if obj.is_a?(Array) && obj.size == 2
+        if obj[0].is_a?(String)
+          str << "#{to_resource(obj[0])} #{encode_value(obj[1])}; "
+        elsif obj[0].is_a?(Array) && obj[1].is_a?(Array)
+          str << "#{bnode_value(obj[0])} ;\n#{bnode_value(obj[1])} ;\n"
         end
-      }
-
-      str[-2] = ""
-      str[-1] = "]"
+      else
+        raise "Invalid Structured value: #{sub_obj}"
+      end
+      str[str.rindex(";")] = "" if str[';']
 
       str
     end
