@@ -41,17 +41,18 @@ describe "DataCube Node Generation" do
         if ["producer","chunkiness"].include? k
           newdata[k] = [
           [
-            ["a", "rdf:Property"] ,
+            ["a", "rdf:MacGuffin"] ,
             [
               "<http://semanticscience.org/resource/SIO_000300>", 
               [
-                ["a", "rdf:absurdity"],[ 'rdf:value', newdata[k] ] 
+                ["a", "rdf:Absurdity"],
+                [ 'rdf:value', newdata[k] ] 
               ]
             ]
-          ]
-        ]
+          ]]
+
         end
-    }
+      }
 
       observations = @generator.observations(@measures, @dimensions, [], newdata, @labels[0], "bacon")
       observations.is_a?(Array).should == true

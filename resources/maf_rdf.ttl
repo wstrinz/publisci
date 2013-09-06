@@ -990,66 +990,66 @@ ns:obs2 a qb:Observation ;
   .
 
 <node/2/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
 
 <node/2/12>
-<http://semanticscience.org/resource/SIO_000008> <node/2/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/12/12> . 
+    
 <node/2/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 19  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 19  .
 
 <node/2/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 58862784  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 58862784  .
 
 <node/2/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 58862784  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 58862784  .
 
 <node/2/15>
-<http://semanticscience.org/resource/SIO_000008> <node/2/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/15/15> . 
+    
 <node/2/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/2/16>
-<http://semanticscience.org/resource/SIO_000008> <node/2/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/16/16> . 
+    
 <node/2/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/17>
-<http://semanticscience.org/resource/SIO_000008> <node/2/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/17/17> . 
+    
 <node/2/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/18>
-<http://semanticscience.org/resource/SIO_000008> <node/2/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/18/18> . 
+    
 <node/2/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "T"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "T"  .
 
 <node/2/22>
-<http://semanticscience.org/resource/SIO_000008> <node/2/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/22/22> . 
+    
 <node/2/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/23>
-<http://semanticscience.org/resource/SIO_000008> <node/2/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/2/23/23> . 
+    
 <node/2/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "C"  .  
+
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1086,70 +1086,70 @@ ns:obs3 a qb:Observation ;
   .
 
 <node/3/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
 
 <node/3/12>
-<http://semanticscience.org/resource/SIO_000008> <node/3/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/12/12> . 
+    
 <node/3/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 19  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 19  .
 
 <node/3/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 58864366  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 58864366  .
 
 <node/3/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 58864366  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 58864366  .
 
 <node/3/15>
-<http://semanticscience.org/resource/SIO_000008> <node/3/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/15/15> . 
+    
 <node/3/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/3/16>
-<http://semanticscience.org/resource/SIO_000008> <node/3/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/16/16> . 
+    
 <node/3/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/17>
-<http://semanticscience.org/resource/SIO_000008> <node/3/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/17/17> . 
+    
 <node/3/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/18>
-<http://semanticscience.org/resource/SIO_000008> <node/3/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/18/18> . 
+    
 <node/3/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/3/19>
-a <http://identifiers.org/dbsnp>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/dbsnp/151098196>  .
+  a <http://identifiers.org/dbsnp>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/dbsnp/151098196>  .
 
 <node/3/22>
-<http://semanticscience.org/resource/SIO_000008> <node/3/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/22/22> . 
+    
 <node/3/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/23>
-<http://semanticscience.org/resource/SIO_000008> <node/3/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/3/23/23> . 
+    
 <node/3/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
+
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1187,70 +1187,70 @@ ns:obs4 a qb:Observation ;
   .
 
 <node/4/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
 
 <node/4/9>
-a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 29974  .
+  a <http://identifiers.org/ncbigene>  ;
+  <http://semanticscience.org/resource/SIO_000300> 29974  .
 
 <node/4/12>
-<http://semanticscience.org/resource/SIO_000008> <node/4/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/12/12> . 
+    
 <node/4/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 10  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 10  .
 
 <node/4/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 52595854  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 52595854  .
 
 <node/4/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 52595854  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 52595854  .
 
 <node/4/15>
-<http://semanticscience.org/resource/SIO_000008> <node/4/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/15/15> . 
+    
 <node/4/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/4/16>
-<http://semanticscience.org/resource/SIO_000008> <node/4/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/16/16> . 
+    
 <node/4/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/17>
-<http://semanticscience.org/resource/SIO_000008> <node/4/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/17/17> . 
+    
 <node/4/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/18>
-<http://semanticscience.org/resource/SIO_000008> <node/4/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/18/18> . 
+    
 <node/4/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/4/22>
-<http://semanticscience.org/resource/SIO_000008> <node/4/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/22/22> . 
+    
 <node/4/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/23>
-<http://semanticscience.org/resource/SIO_000008> <node/4/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/4/23/23> . 
+    
 <node/4/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
+
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
@@ -1288,70 +1288,70 @@ ns:obs5 a qb:Observation ;
   .
 
 <node/5/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
 
 <node/5/9>
-a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 29974  .
+  a <http://identifiers.org/ncbigene>  ;
+  <http://semanticscience.org/resource/SIO_000300> 29974  .
 
 <node/5/12>
-<http://semanticscience.org/resource/SIO_000008> <node/5/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/12/12> . 
+    
 <node/5/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 10  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 10  .
 
 <node/5/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 52595937  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 52595937  .
 
 <node/5/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 52595937  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 52595937  .
 
 <node/5/15>
-<http://semanticscience.org/resource/SIO_000008> <node/5/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/15/15> . 
+    
 <node/5/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/5/16>
-<http://semanticscience.org/resource/SIO_000008> <node/5/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/16/16> . 
+    
 <node/5/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/17>
-<http://semanticscience.org/resource/SIO_000008> <node/5/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/17/17> . 
+    
 <node/5/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/18>
-<http://semanticscience.org/resource/SIO_000008> <node/5/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/18/18> . 
+    
 <node/5/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/5/22>
-<http://semanticscience.org/resource/SIO_000008> <node/5/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/22/22> . 
+    
 <node/5/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/23>
-<http://semanticscience.org/resource/SIO_000008> <node/5/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/5/23/23> . 
+    
 <node/5/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
+
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
@@ -1388,66 +1388,66 @@ ns:obs6 a qb:Observation ;
   .
 
 <node/6/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
 
 <node/6/12>
-<http://semanticscience.org/resource/SIO_000008> <node/6/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/12/12> . 
+    
 <node/6/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 16  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 16  .
 
 <node/6/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 7568361  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 7568361  .
 
 <node/6/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 7568361  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 7568361  .
 
 <node/6/15>
-<http://semanticscience.org/resource/SIO_000008> <node/6/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/15/15> . 
+    
 <node/6/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/6/16>
-<http://semanticscience.org/resource/SIO_000008> <node/6/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/16/16> . 
+    
 <node/6/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/17>
-<http://semanticscience.org/resource/SIO_000008> <node/6/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/17/17> . 
+    
 <node/6/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/18>
-<http://semanticscience.org/resource/SIO_000008> <node/6/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/18/18> . 
+    
 <node/6/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/6/22>
-<http://semanticscience.org/resource/SIO_000008> <node/6/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/22/22> . 
+    
 <node/6/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/23>
-<http://semanticscience.org/resource/SIO_000008> <node/6/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/6/23/23> . 
+    
 <node/6/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
+
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1489,67 +1489,67 @@ ns:obs7 a qb:Observation ;
   .
 
 <node/7/8>
-a <http://identifiers.org/hgnc.symbol>  ;
-<http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
 
 <node/7/9>
-a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 54715  .
+  a <http://identifiers.org/ncbigene>  ;
+  <http://semanticscience.org/resource/SIO_000300> 54715  .
 
 <node/7/12>
-<http://semanticscience.org/resource/SIO_000008> <node/7/12/12> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/12/12> . 
+    
 <node/7/12/12>
-a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 16  .
+  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+  <http://semanticscience.org/resource/SIO_000300> 16  .
 
 <node/7/13>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 7102099  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 7102099  .
 
 <node/7/14>
-a <http://biohackathon.org/resource/faldo#Position>  ;
-<http://biohackathon.org/resource/faldo#position> 7102099  .
+  a <http://biohackathon.org/resource/faldo#Position>  ;
+  <http://biohackathon.org/resource/faldo#position> 7102099  .
 
 <node/7/15>
-<http://semanticscience.org/resource/SIO_000008> <node/7/15/15> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/15/15> . 
+    
 <node/7/15/15>
-a <http://edamontology.org/data_0853>  ;
-<http://semanticscience.org/resource/SIO_000300> "+"  .
+  a <http://edamontology.org/data_0853>  ;
+  <http://semanticscience.org/resource/SIO_000300> "+"  .
 
 <node/7/16>
-<http://semanticscience.org/resource/SIO_000008> <node/7/16/16> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/16/16> . 
+    
 <node/7/16/16>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/17>
-<http://semanticscience.org/resource/SIO_000008> <node/7/17/17> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/17/17> . 
+    
 <node/7/17/17>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/18>
-<http://semanticscience.org/resource/SIO_000008> <node/7/18/18> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/18/18> . 
+    
 <node/7/18/18>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "T"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "T"  .
 
 <node/7/22>
-<http://semanticscience.org/resource/SIO_000008> <node/7/22/22> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/22/22> . 
+    
 <node/7/22/22>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/23>
-<http://semanticscience.org/resource/SIO_000008> <node/7/23/23> . 
-
+  <http://semanticscience.org/resource/SIO_000008> <node/7/23/23> . 
+    
 <node/7/23/23>
-a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  .
-  
+  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
+

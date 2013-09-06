@@ -192,7 +192,7 @@ module PubliSci
             subnodes << v1
             v1 = nil
           end
-          
+
           if v2.is_a? Array
             subnodes << v2
             v2 = nil
@@ -212,6 +212,31 @@ module PubliSci
       else
         str
       end
+    end
+
+    def turtle_indent(turtle_str)
+      tabs = 0
+      turtle_str.split("\n").map{|str|
+        case str[-1]
+        when "."
+          last_tabs = tabs
+          tabs = 0
+          ("  " * last_tabs) + str
+        when ";"
+          last_tabs = tabs
+          tabs = 1 if tabs == 0
+          ("  " * last_tabs) + str
+        else
+          last_tabs = tabs
+          if str.size < 2
+            tabs = 0
+          else
+            tabs += 1
+          end
+          ("  " * last_tabs) + str
+        end
+      }.join("\n")
+
     end
 
     def strip_uri(uri)

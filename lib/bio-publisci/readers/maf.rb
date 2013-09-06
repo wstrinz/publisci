@@ -102,6 +102,7 @@ module PubliSci
           col = COLUMN_NAMES.index("Strand")
           entry[col] = sio_attribute("http://edamontology.org/data_0853",entry[col])
 
+          # Use faldo for locations
           %w{Start_Position End_Position}.each{|name|
             col = COLUMN_NAMES.index(name)
             entry[col] = [
@@ -115,8 +116,6 @@ module PubliSci
           COLUMN_NAMES.each_with_index{|col,i|
             data[col] = [entry[i]]
           }
-
-          # data = Hash[*COLUMN_NAMES.zip(entry).flatten]
 
           observations(@measures,@dimensions,@codes,data,[label],@dataset_name,options)
         end

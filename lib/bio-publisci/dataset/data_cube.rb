@@ -318,7 +318,6 @@ module PubliSci
               else
                 str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
               end
-              # str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options, obs_index, add_node(i))} ;\n"
             end
 
             obs_index += 1
@@ -326,9 +325,11 @@ module PubliSci
 
           str << "  .\n\n"
 
-          flatted = obs_nodes.flatten
-          str << flatted.join("\n")
-          str << "  \n"
+          if obs_nodes.size > 0
+            flatted = obs_nodes.flatten
+            str << turtle_indent(flatted.join("\n"))
+            str << "  \n\n"
+          end
 
           obs << str
 
