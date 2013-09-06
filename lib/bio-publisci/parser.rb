@@ -140,36 +140,78 @@ module PubliSci
       end
     end
 
-    def encode_value(obj,options={})
+    def is_complex?(obj)
+      obj.is_a? Array
+    end
+
+    def add_node(n,str="")
+
+      raise "need index or identifier to generate blank nodes" unless n
+      raise "need base string or blank string for blank node" unless str.is_a? String
+      if str["node"]
+        ret = str[0..-2] + "/#{n}" + ">"
+        ret
+        # str[0..-2] + "/#{n}" + ">"
+      else
+        "<node/#{n}>"
+      end
+    end
+
+    def encode_value(obj,options={}, node_index=nil, node_str = "")
       if RDF::Resource(obj).valid?
         to_resource(obj,options)
       elsif obj && obj.is_a?(String) && (obj[0]=="<" && obj[-1] = ">")
         obj
-      elsif obj.is_a?(Array)
-        str = "[ " + bnode_value(obj) + " ]"
-        # str[str.rindex("\n")] = ""
-        str
+      elsif obj.is_a?(Array)        
+        node_str = add_node(node_index,node_str)
+        ["#{node_str}" ] + [bnode_value(obj, node_index, node_str, options)]
       else
         to_literal(obj,options)
       end
     end
 
-    def bnode_value(obj)
+    def bnode_value(obj, node_index, node_str, options)
       # TODO - Implement proper recursion
       # TODO - check if object is "a" (rdf:type) => or convert rdf:type to "a"
       str = ""
+      subnodes = []
       if obj.is_a?(Array) && obj.size == 2
         if obj[0].is_a?(String)
-          str << "#{to_resource(obj[0])} #{encode_value(obj[1])}; "
+          if is_complex?(obj[1])
+            str << "#{to_resource(obj[0])} #{add_node(node_index,node_str)} . \n"            
+            subnodes << encode_value(obj[1], options, node_index, node_str)
+          else
+            str << "#{to_resource(obj[0])} #{encode_value(obj[1], options, node_index, node_str)} "
+          end
         elsif obj[0].is_a?(Array) && obj[1].is_a?(Array)
-          str << "#{bnode_value(obj[0])} ;\n#{bnode_value(obj[1])} ;\n"
+          newnode = add_node(0,node_str)
+          v1 = bnode_value(obj[0], 0, node_str, options)
+          # puts v1 if v1.is_a? String
+          v2 = bnode_value(obj[1], 1, node_str, options)
+          if v1.is_a? Array
+            subnodes << v1
+            v1 = nil
+          end
+          
+          if v2.is_a? Array
+            subnodes << v2
+            v2 = nil
+          end
+
+
+          str << "#{v1} ;" if v1
+          str << "\n#{v2} .\n" if v2
         end
       else
-        raise "Invalid Structured value: #{sub_obj}"
+        raise "Invalid Structured value: #{obj}"
       end
-      str[str.rindex(";")] = "" if str[';']
+      # str[str.rindex(";")] = "" if str[';']
 
-      str
+      if subnodes.size > 0 
+        [str, subnodes.flatten].flatten
+      else
+        str
+      end
     end
 
     def strip_uri(uri)

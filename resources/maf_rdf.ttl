@@ -24,7 +24,7 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Sequence_Source ;
   qb:component cs:Sequencer ;
   qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/identifiers.org/hgnc.symbol/> ;
-  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/semanticscience.org/resource/SIO_000671> ;
+  qb:component cs:Entrez_Gene_Id ;
   qb:component cs:Center ;
   qb:component cs:NCBI_Build ;
   qb:component cs:Chromosome ;
@@ -92,9 +92,9 @@ cs:Sequencer a qb:ComponentSpecification ;
   rdfs:label "hgnc.symbol" ;
   qb:measure <http://identifiers.org/hgnc.symbol/> .
 
-<http://www.rqtl.org/dc/dataset/maf_example/cs/semanticscience.org/resource/SIO_000671> a qb:ComponentSpecification ;
-  rdfs:label "SIO_000671" ;
-  qb:measure <http://semanticscience.org/resource/SIO_000671> .
+cs:Entrez_Gene_Id a qb:ComponentSpecification ;
+  rdfs:label "Entrez_Gene_Id" ;
+  qb:measure prop:Entrez_Gene_Id .
 
 cs:Center a qb:ComponentSpecification ;
   rdfs:label "Center" ;
@@ -203,8 +203,8 @@ cs:sample_id a qb:ComponentSpecification ;
 <http://identifiers.org/hgnc.symbol/> a rdf:Property, qb:MeasureProperty ;
   rdfs:label "hgnc.symbol"@en .
 
-<http://semanticscience.org/resource/SIO_000671> a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "SIO_000671"@en .
+prop:Entrez_Gene_Id a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Entrez_Gene_Id"@en .
 
 prop:Center a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Center"@en ;
@@ -967,21 +967,13 @@ ns:obs2 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 19  
- ]  ] ;
+  prop:Chromosome <node/2/12> ;
   prop:Start_Position 58862784 ;
   prop:End_Position 58862784 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "T"  
- ]  ] ;
+  prop:Reference_Allele <node/2/16> ;
+  prop:Tumor_Seq_Allele1 <node/2/17> ;
+  prop:Tumor_Seq_Allele2 <node/2/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A22B-01A-11D-A159-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
@@ -997,6 +989,34 @@ ns:obs2 a qb:Observation ;
   prop:sample_id 58862784 ;
   .
 
+<node/2/12>
+<http://semanticscience.org/resource/SIO_000008> <node/2/12/12> . 
+
+<node/2/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 19  .
+
+<node/2/16>
+<http://semanticscience.org/resource/SIO_000008> <node/2/16/16> . 
+
+<node/2/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  .
+
+<node/2/17>
+<http://semanticscience.org/resource/SIO_000008> <node/2/17/17> . 
+
+<node/2/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  .
+
+<node/2/18>
+<http://semanticscience.org/resource/SIO_000008> <node/2/18/18> . 
+
+<node/2/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "T"  .
+  
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1010,21 +1030,13 @@ ns:obs3 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1BG> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 19  
- ]  ] ;
+  prop:Chromosome <node/3/12> ;
   prop:Start_Position 58864366 ;
   prop:End_Position 58864366 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  
- ]  ] ;
+  prop:Reference_Allele <node/3/16> ;
+  prop:Tumor_Seq_Allele1 <node/3/17> ;
+  prop:Tumor_Seq_Allele2 <node/3/18> ;
   prop:dbSNP_RS <http://identifiers.org/dbsnp/151098196> ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A1NH-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
@@ -1040,6 +1052,34 @@ ns:obs3 a qb:Observation ;
   prop:sample_id 58864366 ;
   .
 
+<node/3/12>
+<http://semanticscience.org/resource/SIO_000008> <node/3/12/12> . 
+
+<node/3/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 19  .
+
+<node/3/16>
+<http://semanticscience.org/resource/SIO_000008> <node/3/16/16> . 
+
+<node/3/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/3/17>
+<http://semanticscience.org/resource/SIO_000008> <node/3/17/17> . 
+
+<node/3/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/3/18>
+<http://semanticscience.org/resource/SIO_000008> <node/3/18/18> . 
+
+<node/3/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  .
+  
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1051,26 +1091,16 @@ ns:obs4 a qb:Observation ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 29974  
- ] ;
+  prop:Entrez_Gene_Id <node/4/9> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 10  
- ]  ] ;
+  prop:Chromosome <node/4/12> ;
   prop:Start_Position 52595854 ;
   prop:End_Position 52595854 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  
- ]  ] ;
+  prop:Reference_Allele <node/4/16> ;
+  prop:Tumor_Seq_Allele1 <node/4/17> ;
+  prop:Tumor_Seq_Allele2 <node/4/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A0HP-01A-12D-A099-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
@@ -1086,6 +1116,38 @@ ns:obs4 a qb:Observation ;
   prop:sample_id 52595854 ;
   .
 
+<node/4/9>
+a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 29974  .
+
+<node/4/12>
+<http://semanticscience.org/resource/SIO_000008> <node/4/12/12> . 
+
+<node/4/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 10  .
+
+<node/4/16>
+<http://semanticscience.org/resource/SIO_000008> <node/4/16/16> . 
+
+<node/4/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/4/17>
+<http://semanticscience.org/resource/SIO_000008> <node/4/17/17> . 
+
+<node/4/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/4/18>
+<http://semanticscience.org/resource/SIO_000008> <node/4/18/18> . 
+
+<node/4/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  .
+  
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
@@ -1097,26 +1159,16 @@ ns:obs5 a qb:Observation ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A1CF> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 29974  
- ] ;
+  prop:Entrez_Gene_Id <node/5/9> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 10  
- ]  ] ;
+  prop:Chromosome <node/5/12> ;
   prop:Start_Position 52595937 ;
   prop:End_Position 52595937 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  
- ]  ] ;
+  prop:Reference_Allele <node/5/16> ;
+  prop:Tumor_Seq_Allele1 <node/5/17> ;
+  prop:Tumor_Seq_Allele2 <node/5/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A18P-01A-11D-A12B-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
@@ -1132,6 +1184,38 @@ ns:obs5 a qb:Observation ;
   prop:sample_id 52595937 ;
   .
 
+<node/5/9>
+a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 29974  .
+
+<node/5/12>
+<http://semanticscience.org/resource/SIO_000008> <node/5/12/12> . 
+
+<node/5/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 10  .
+
+<node/5/16>
+<http://semanticscience.org/resource/SIO_000008> <node/5/16/16> . 
+
+<node/5/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/5/17>
+<http://semanticscience.org/resource/SIO_000008> <node/5/17/17> . 
+
+<node/5/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/5/18>
+<http://semanticscience.org/resource/SIO_000008> <node/5/18/18> . 
+
+<node/5/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  .
+  
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
@@ -1145,21 +1229,13 @@ ns:obs6 a qb:Observation ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 16  
- ]  ] ;
+  prop:Chromosome <node/6/12> ;
   prop:Start_Position 7568361 ;
   prop:End_Position 7568361 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "C"  
- ]  ] ;
+  prop:Reference_Allele <node/6/16> ;
+  prop:Tumor_Seq_Allele1 <node/6/17> ;
+  prop:Tumor_Seq_Allele2 <node/6/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-D8-A1JN-01A-11D-A13L-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
@@ -1175,6 +1251,34 @@ ns:obs6 a qb:Observation ;
   prop:sample_id 7568361 ;
   .
 
+<node/6/12>
+<http://semanticscience.org/resource/SIO_000008> <node/6/12/12> . 
+
+<node/6/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  .
+
+<node/6/16>
+<http://semanticscience.org/resource/SIO_000008> <node/6/16/16> . 
+
+<node/6/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/6/17>
+<http://semanticscience.org/resource/SIO_000008> <node/6/17/17> . 
+
+<node/6/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/6/18>
+<http://semanticscience.org/resource/SIO_000008> <node/6/18/18> . 
+
+<node/6/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "C"  .
+  
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
@@ -1186,26 +1290,16 @@ ns:obs7 a qb:Observation ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 54715  
- ] ;
+  prop:Entrez_Gene_Id <node/7/9> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 16  
- ]  ] ;
+  prop:Chromosome <node/7/12> ;
   prop:Start_Position 7102099 ;
   prop:End_Position 7102099 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "T"  
- ]  ] ;
+  prop:Reference_Allele <node/7/16> ;
+  prop:Tumor_Seq_Allele1 <node/7/17> ;
+  prop:Tumor_Seq_Allele2 <node/7/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E2-A1BC-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E2-A1BC-10A-01D-A12Q-09" ;
@@ -1225,6 +1319,38 @@ ns:obs7 a qb:Observation ;
   prop:sample_id 7102099 ;
   .
 
+<node/7/9>
+a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 54715  .
+
+<node/7/12>
+<http://semanticscience.org/resource/SIO_000008> <node/7/12/12> . 
+
+<node/7/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  .
+
+<node/7/16>
+<http://semanticscience.org/resource/SIO_000008> <node/7/16/16> . 
+
+<node/7/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/7/17>
+<http://semanticscience.org/resource/SIO_000008> <node/7/17/17> . 
+
+<node/7/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/7/18>
+<http://semanticscience.org/resource/SIO_000008> <node/7/18/18> . 
+
+<node/7/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "T"  .
+  
 ns:obs8 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
@@ -1236,26 +1362,16 @@ ns:obs8 a qb:Observation ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2BP1> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 54715  
- ] ;
+  prop:Entrez_Gene_Id <node/8/9> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 16  
- ]  ] ;
+  prop:Chromosome <node/8/12> ;
   prop:Start_Position 7383011 ;
   prop:End_Position 7383011 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  
- ]  ] ;
+  prop:Reference_Allele <node/8/16> ;
+  prop:Tumor_Seq_Allele1 <node/8/17> ;
+  prop:Tumor_Seq_Allele2 <node/8/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-AR-A1AJ-01A-21D-A12Q-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-AR-A1AJ-10A-01D-A12Q-09" ;
@@ -1275,6 +1391,38 @@ ns:obs8 a qb:Observation ;
   prop:sample_id 7383011 ;
   .
 
+<node/8/9>
+a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 54715  .
+
+<node/8/12>
+<http://semanticscience.org/resource/SIO_000008> <node/8/12/12> . 
+
+<node/8/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 16  .
+
+<node/8/16>
+<http://semanticscience.org/resource/SIO_000008> <node/8/16/16> . 
+
+<node/8/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/8/17>
+<http://semanticscience.org/resource/SIO_000008> <node/8/17/17> . 
+
+<node/8/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/8/18>
+<http://semanticscience.org/resource/SIO_000008> <node/8/18/18> . 
+
+<node/8/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  .
+  
 ns:obs9 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
   prop:Variant_Classification <code/variant_classification/Nonsense_Mutation> ;
@@ -1286,26 +1434,16 @@ ns:obs9 a qb:Observation ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
   <http://identifiers.org/hgnc.symbol/> <http://identifiers.org/hgnc.symbol/A2M> ;
-  <http://semanticscience.org/resource/SIO_000671> [ a <http://identifiers.org/ncbigene>  ;
-<http://semanticscience.org/resource/SIO_000300> 2  
- ] ;
+  prop:Entrez_Gene_Id <node/9/9> ;
   prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-<http://semanticscience.org/resource/SIO_000300> 12  
- ]  ] ;
+  prop:Chromosome <node/9/12> ;
   prop:Start_Position 9251298 ;
   prop:End_Position 9251298 ;
   prop:Strand "+" ;
-  prop:Reference_Allele [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele1 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "G"  
- ]  ] ;
-  prop:Tumor_Seq_Allele2 [ <http://semanticscience.org/resource/SIO_000008> [ a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-<http://semanticscience.org/resource/SIO_000300> "A"  
- ]  ] ;
+  prop:Reference_Allele <node/9/16> ;
+  prop:Tumor_Seq_Allele1 <node/9/17> ;
+  prop:Tumor_Seq_Allele2 <node/9/18> ;
   prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-A8-A08G-01A-11W-A019-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-A8-A08G-10A-01W-A021-09" ;
@@ -1325,3 +1463,35 @@ ns:obs9 a qb:Observation ;
   prop:sample_id 9251298 ;
   .
 
+<node/9/9>
+a <http://identifiers.org/ncbigene>  ;
+<http://semanticscience.org/resource/SIO_000300> 2  .
+
+<node/9/12>
+<http://semanticscience.org/resource/SIO_000008> <node/9/12/12> . 
+
+<node/9/12/12>
+a <http://purl.org/obo/owl/SO#SO_0000340>  ;
+<http://semanticscience.org/resource/SIO_000300> 12  .
+
+<node/9/16>
+<http://semanticscience.org/resource/SIO_000008> <node/9/16/16> . 
+
+<node/9/16/16>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/9/17>
+<http://semanticscience.org/resource/SIO_000008> <node/9/17/17> . 
+
+<node/9/17/17>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "G"  .
+
+<node/9/18>
+<http://semanticscience.org/resource/SIO_000008> <node/9/18/18> . 
+
+<node/9/18/18>
+a <http://purl.org/obo/owl/SO#SO_0001023>  ;
+<http://semanticscience.org/resource/SIO_000300> "A"  .
+  

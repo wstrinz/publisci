@@ -288,33 +288,50 @@ module PubliSci
 
           str << "  rdfs:label \"#{r}\" ;\n" unless options[:no_labels]
 
-          dimensions.each_with_index{|d,j|
+          obs_index = 0
+          obs_nodes = []
 
-            # contains_nulls = contains_nulls | (data[d][i] == nil)
+          dimensions.each_with_index{|d,j|
             contains_nulls = (data[d][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
-                # if codes.include? d
-                  # str << " #{rdf_dimensions[j]} #{data[d][i]} ;\n"
-                # else
-                  str << "  #{rdf_dimensions[j]} #{encode_value(data[d][i], options)} ;\n"
-                # end
+              if is_complex?(data[d][i])
+                str << "  #{rdf_dimensions[j]} #{add_node(obs_index,add_node(r))} ;\n"
+                obs_nodes << encode_value(data[d][i], options, obs_index, add_node(r))
+              else
+                str << "  #{rdf_dimensions[j]} #{encode_value(data[d][i], options)} ;\n"
+              end
             end
+
+            obs_index += 1
           }
 
           measures.each_with_index{|m,j|
-            # contains_nulls = contains_nulls | (data[m][i] == nil)
             contains_nulls = (data[m][i] == nil)
 
             unless contains_nulls && !options[:encode_nulls]
-              str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
+              if is_complex?(data[m][i])
+                str << "  #{rdf_measures[j]} #{add_node(obs_index,add_node(r))} ;\n"
+                val = encode_value(data[m][i], options, obs_index, add_node(r))
+                
+                obs_nodes << val
+              else
+                str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
+              end
+              # str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options, obs_index, add_node(i))} ;\n"
             end
 
+            obs_index += 1
           }
 
           str << "  .\n\n"
 
+          flatted = obs_nodes.flatten
+          str << flatted.join("\n")
+          str << "  \n"
+
           obs << str
+
         }
         obs
       end
@@ -367,7 +384,6 @@ module PubliSci
           else
             refcode = code[0]
           end
-          # puts data[refcode].uniq
           data[refcode].uniq.each_with_index{|value,i|
             unless value == nil && !options[:encode_nulls]
             concepts << <<-EOF.unindent
