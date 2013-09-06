@@ -15,6 +15,10 @@ module PubliSci
       def generate_n3(*args)
         raise "#{self} does not implement a generate_n3 method!"
       end
+
+      def sio_identifier(type,id)
+        [["a", type],["http://semanticscience.org/resource/SIO_000300",id]]
+      end
     end
   end
 end

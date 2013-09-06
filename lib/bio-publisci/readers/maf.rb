@@ -84,7 +84,7 @@ module PubliSci
           # col = COLUMN_NAMES.index('Entrez_Gene_Id')
           # col= 1
           # entry[col] = "http://identifiers.org/ncbigene/#{entry[col]}" if entry[col]
-          entry[col] = [["a", "http://identifiers.org/ncbigene"],["http://semanticscience.org/resource/SIO_000300",entry[col].to_s]] if entry[col]
+          entry[col] = sio_identifier("http://identifiers.org/ncbigene",entry[col]) if entry[col]
 
           # Link known SNPs
           col = COLUMN_NAMES.index('dbSNP_RS')
