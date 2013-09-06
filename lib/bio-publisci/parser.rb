@@ -186,8 +186,8 @@ module PubliSci
         elsif obj[0].is_a?(Array) && obj[1].is_a?(Array)
           newnode = add_node(0,node_str)
           v1 = bnode_value(obj[0], 0, node_str, options)
-          # puts v1 if v1.is_a? String
           v2 = bnode_value(obj[1], 1, node_str, options)
+
           if v1.is_a? Array
             subnodes << v1
             v1 = nil
@@ -198,14 +198,15 @@ module PubliSci
             v2 = nil
           end
 
+          if v1
+            str << "#{v1} ;"
+          end
 
-          str << "#{v1} ;" if v1
           str << "\n#{v2} .\n" if v2
         end
       else
         raise "Invalid Structured value: #{obj}"
       end
-      # str[str.rindex(";")] = "" if str[';']
 
       if subnodes.size > 0 
         [str, subnodes.flatten].flatten

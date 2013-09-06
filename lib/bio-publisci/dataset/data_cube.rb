@@ -313,8 +313,14 @@ module PubliSci
               if is_complex?(data[m][i])
                 str << "  #{rdf_measures[j]} #{add_node(obs_index,add_node(r))} ;\n"
                 val = encode_value(data[m][i], options, obs_index, add_node(r))
+
+                if val.last.is_a? Array
+                  unless val.last.last[-2] == "."
+                    val.last.last << ".\n"
+                  end
+                end
                 
-                obs_nodes << val
+                obs_nodes << val 
               else
                 str << "  #{rdf_measures[j]} #{encode_value(data[m][i], options)} ;\n"
               end

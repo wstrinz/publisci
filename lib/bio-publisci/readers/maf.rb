@@ -102,6 +102,12 @@ module PubliSci
           col = COLUMN_NAMES.index("Strand")
           entry[col] = sio_attribute("http://edamontology.org/data_0853",entry[col])
 
+          col = COLUMN_NAMES.index("Center")
+          entry[col] = [
+            ["a", "foaf:Organization"],
+            ["foaf:homepage", entry[col]],
+          ]
+
           # Use faldo for locations
           %w{Start_Position End_Position}.each{|name|
             col = COLUMN_NAMES.index(name)
@@ -110,6 +116,8 @@ module PubliSci
               ["http://biohackathon.org/resource/faldo#position", entry[col]],
             ]
           }
+
+
           
 
           data = {}

@@ -23,14 +23,26 @@ module PubliSci
         ]
       end
 
-      def sio_attribute(type,value)
-        [ 
+      def sio_attribute(attribute_type,value,data_type=nil)
+        inner = ["http://semanticscience.org/resource/SIO_000300",value]
+        if data_type
+          inner = [["a", data_type], inner]
+        end
+        
+        outer = 
+        [
           "http://semanticscience.org/resource/SIO_000008",
-          [
-            ["a", type],
-            ["http://semanticscience.org/resource/SIO_000300",value]
-          ]
+            inner
+            # ["a", data_type],
+            # ["http://semanticscience.org/resource/SIO_000300",value]
         ]
+
+        if attribute_type
+          outer = [["a", attribute_type], outer] 
+        end
+
+        # puts "#{outer}"
+        outer
       end
 
       def next_label
