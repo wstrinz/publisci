@@ -156,6 +156,7 @@ ns:obs1 a qb:Observation ;
   prop:temperature 85 ;
   .
 
+  
 ns:obs2 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
@@ -165,6 +166,7 @@ ns:obs2 a qb:Observation ;
   prop:temperature 80 ;
   .
 
+  
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
@@ -174,6 +176,7 @@ ns:obs3 a qb:Observation ;
   prop:temperature 83 ;
   .
 
+  
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
@@ -183,6 +186,7 @@ ns:obs4 a qb:Observation ;
   prop:temperature 70 ;
   .
 
+  
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
@@ -192,6 +196,7 @@ ns:obs5 a qb:Observation ;
   prop:temperature 68 ;
   .
 
+  
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
@@ -201,6 +206,7 @@ ns:obs6 a qb:Observation ;
   prop:temperature 65 ;
   .
 
+  
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
@@ -210,6 +216,7 @@ ns:obs7 a qb:Observation ;
   prop:temperature 64 ;
   .
 
+  
 ns:obs8 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
@@ -219,6 +226,7 @@ ns:obs8 a qb:Observation ;
   prop:temperature 72 ;
   .
 
+  
 ns:obs9 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
@@ -228,6 +236,7 @@ ns:obs9 a qb:Observation ;
   prop:temperature 69 ;
   .
 
+  
 ns:obs10 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
@@ -237,6 +246,7 @@ ns:obs10 a qb:Observation ;
   prop:temperature 75 ;
   .
 
+  
 ns:obs11 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/sunny> ;
@@ -246,6 +256,7 @@ ns:obs11 a qb:Observation ;
   prop:temperature 75 ;
   .
 
+  
 ns:obs12 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
@@ -255,6 +266,7 @@ ns:obs12 a qb:Observation ;
   prop:temperature 72 ;
   .
 
+  
 ns:obs13 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/overcast> ;
@@ -264,6 +276,7 @@ ns:obs13 a qb:Observation ;
   prop:temperature 81 ;
   .
 
+  
 ns:obs14 a qb:Observation ;
   qb:dataSet ns:dataset-weather ;
   prop:outlook <code/outlook/rainy> ;
@@ -273,3 +286,4 @@ ns:obs14 a qb:Observation ;
   prop:temperature 71 ;
   .
 
+  

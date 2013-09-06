@@ -111,33 +111,6 @@ describe PubliSci::Dataset::DataCube do
         observations.is_a?(Array).should == true
         observations.first.is_a?(String).should == true
       end
-
-      it "represents nested arrays using blank nodes" do
-        newdata = Hash[@data.map{|k,v| [k,v.first] }]
-        newdata.keys.each{|k| newdata[k] =[[["a", "rdf:Property"],["<http://semanticscience.org/resource/SIO_000300>", newdata[k]]]] }
-        observations = @generator.observations(@measures, [], [], newdata, @labels[0], "bacon")
-        observations.is_a?(Array).should == true
-        observations.first.is_a?(String).should == true
-        observations.first[%r{\[ a rdf:Property  ;\n<http://semanticscience.org/resource/SIO_000300> 1  \n \]}].should_not be nil
-      end
-
-      it "can nest arrays to some depth" do
-        newdata = Hash[@data.map{|k,v| [k,v.first] }]
-        newdata.keys.each{|k| newdata[k] = [
-          [
-            ["a", "rdf:Property"] , ["<http://semanticscience.org/resource/SIO_000300>", 
-              [
-                ["a", "rdf:absurdity"],[ 'rdf:value', newdata[k]] 
-                ]]]
-          ]}
-
-        observations = @generator.observations(@measures, [], [], newdata, @labels[0], "bacon")
-        observations.is_a?(Array).should == true
-        observations.first.is_a?(String).should == true
-        observations.first.count('[').should == 4
-        observations.first.count(']').should == 4
-        # observations.first[%r{\[ a rdf:Property ;\n <http://semanticscience.org/resource/SIO_000300> 1 \]}].should_not be nil
-      end
   end
 
 

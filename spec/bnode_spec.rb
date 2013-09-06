@@ -58,7 +58,7 @@ describe "DataCube Node Generation" do
       observations.first.is_a?(String).should == true
       # observations.first.count('[').should == 4
       # observations.first.count(']').should == 4
-      puts observations
+      # puts observations
 
       # observations.first[%r{\[ a rdf:Property ;\n <http://semanticscience.org/resource/SIO_000300> 1 \]}].should_not be nil
     end

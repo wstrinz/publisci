@@ -127,6 +127,7 @@ ns:obshormel a qb:Observation ;
   prop:deliciousness 1 ;
   .
 
+  
 ns:obsnewskies a qb:Observation ;
   qb:dataSet ns:dataset-bacon ;
   rdfs:label "newskies" ;
@@ -136,6 +137,7 @@ ns:obsnewskies a qb:Observation ;
   prop:deliciousness 9 ;
   .
 
+  
 ns:obswhys a qb:Observation ;
   qb:dataSet ns:dataset-bacon ;
   rdfs:label "whys" ;
@@ -145,3 +147,4 @@ ns:obswhys a qb:Observation ;
   prop:deliciousness 6 ;
   .
 
+  
