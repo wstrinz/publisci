@@ -77,7 +77,7 @@ class MafQuery
     end
 
     def gene_length(hugo_symbol)
-      hugo_symbol = hugo_symbol.split('/').last
+      hugo_symbol = official_symbol(hugo_symbol.split('/').last)
       qry = IO.read('resources/queries/hugo_to_ensembl.rq').gsub('%{hugo_symbol}',hugo_symbol)
       sparql = SPARQL::Client.new("http://cu.hgnc.bio2rdf.org/sparql")
       sol = sparql.query(qry)
@@ -108,6 +108,15 @@ class MafQuery
 
       symbols.each{|sym| patient[:mutations] << {symbol: sym, length: gene_length(sym)}}
       patient
+    end
+
+    def gene_info(id,repo)
+      # symbols = select_property(repo,"Hugo_Symbol",id).map(&:to_s)
+      # patient_id = select_property(repo,"patient_id",id).first.to_s
+      # patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
+
+      # symbols.each{|sym| patient[:mutations] << {symbol: sym, length: gene_length(sym)}}
+      # patient
     end
 end
 
@@ -153,12 +162,21 @@ describe MafQuery do
         it { @maf.gene_length('A2BP1').should == 1694245 }
       end
 
-      describe ".official_symbol" do
-        it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
-      end
+      # describe ".official_symbol" do
+      #   it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
+      # end
 
       describe ".patient_info" do
         it 'collects the number of mutations and gene lengths for each mutation' do
+          patient = @maf.patient_info('BH-A0HP',@repo)
+          patient[:mutation_count].should == 1
+          patient[:mutations].first[:length].should == 79113
+          patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
+        end
+      end
+
+      describe ".gene_info" do
+        it 'collects the number of patients with a mutation in a gene and its length' do
           patient = @maf.patient_info('BH-A0HP',@repo)
           patient[:mutation_count].should == 1
           patient[:mutations].first[:length].should == 79113
