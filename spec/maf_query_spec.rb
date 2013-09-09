@@ -1,4 +1,6 @@
 require_relative '../lib/bio-publisci.rb'
+       
+#sparql = SPARQL::Client.new("#{repo.uri}/sparql/").query(qry)
 
 class MafQuery
     def generate_data
@@ -27,7 +29,29 @@ class MafQuery
 
     def select_property(repo,property="hgnc.symbol",patient_id="A8-A08G")
     	qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
-    	SPARQL.execute(qry,repo).map(&:column)
+      results = SPARQL.execute(qry,repo).map(&:column).map{|val| 
+        if val.is_a?(RDF::URI) and val.to_s["node"]
+          node_value(repo,val)
+        else
+          val
+        end
+
+      }.flatten
+
+    end
+
+    def node_value(repo,uri)
+      qry = "SELECT DISTINCT ?p ?o where { <#{uri.to_s}> ?p ?o}"
+      SPARQL.execute(qry,repo).map{|sol|
+        if sol[:p].to_s == "http://semanticscience.org/resource/SIO_000300"
+          sol[:o]
+        elsif sol[:p].to_s == "http://semanticscience.org/resource/SIO_000008"
+          qry = "SELECT DISTINCT ?p ?o where { <#{sol[:o].to_s}> ?p ?o}"
+          SPARQL.execute(qry,repo).select{|sol| sol[:p].to_s == "http://semanticscience.org/resource/SIO_000300"}.first[:o]
+        elsif sol[:p].to_s != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          sol[:o]
+        end
+      }.reject{|sol| sol == nil}
     end
 
     def official_symbol(hugo_symbol)
@@ -73,7 +97,7 @@ class MafQuery
     end
 
     def patient_info(id,repo)
-      symbols = select_property(repo,"hgnc.symbol",id).map(&:to_s)
+      symbols = select_property(repo,"Hugo_Symbol",id).map(&:to_s)
       patient_id = select_property(repo,"patient_id",id).first.to_s
       patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
 
@@ -100,10 +124,10 @@ describe MafQuery do
     describe ".select_property" do
     	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }
     	it { 
-        pending("new query method since entrez gene is demoing SIO")
-        @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").size.should > 0 
+        # pending("new query method since entrez gene is demoing SIO")
+        @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974
       }
-    	it { @maf.select_property(@repo,"Center","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"Center","BH-A0HP").first.to_s.should == "genome.wustl.edu" }
     	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
 
     	context "extra parsed properties" do
@@ -128,6 +152,7 @@ describe MafQuery do
       describe ".patient_info" do
         it 'collects the number of mutations and gene lengths for each mutation' do
           patient = @maf.patient_info('BH-A0HP',@repo)
+          puts patient
           patient[:mutation_count].should == 1
           patient[:mutations].first[:length].should == 79113
           patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'

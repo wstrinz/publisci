@@ -48,12 +48,17 @@ module PubliSci
     end
 
     def execute_from_file(file,store,type=:fourstore,substitutions={})
+      if Gem::Dependency.new('bio-publisci').matching_specs.size > 0
+        queries_dir = Gem::Specification.find_by_name("bio-publisci").gem_dir + "/resources/queries/"
+      else
+        queries_dir = File.dirname(__FILE__) + '/../../../resources/queries/'
+      end
       if File.exist?(file)
         string = IO.read(file)
-      elsif File.exist?(File.dirname(__FILE__) + '/../../../resources/queries/' + file)
-        string = IO.read(File.dirname(__FILE__) + '/../../../resources/queries/' + file)
-      elsif File.exist?(File.dirname(__FILE__) + '/../../../resources/queries/' + file + '.rq')
-        string = IO.read(File.dirname(__FILE__) + '/../../../resources/queries/' + file + '.rq')
+      elsif File.exist?(queries_dir + file)
+        string = IO.read(queries_dir + file)
+      elsif File.exist?(queries_dir + file + '.rq')
+        string = IO.read(queries_dir + file + '.rq')
       else
         raise "couldn't find query for #{file}"
       end
