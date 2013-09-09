@@ -12,7 +12,6 @@ SELECT DISTINCT ?column WHERE {
 
   [] a qb:Observation;
     ?barcode_measure ?barcode;
-    ?column_measure ?column.
-  
-  FILTER (regex(?barcode, "TCGA-%{patient}.*"))
+    ?column_measure ?column;
+    ?patient_id "%{patient}" .
 }
