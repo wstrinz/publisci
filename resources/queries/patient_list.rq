@@ -1,11 +1,11 @@
 PREFIX qb:   <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT (COUNT(?barcode) as ?barcodes) WHERE {
+SELECT DISTINCT ?id WHERE {
   [] a qb:ComponentSpecification;
     rdfs:label "patient_id";
     qb:measure ?patient_id.
 
   [] a qb:Observation;
-    ?patient_id ?barcode.
+    ?patient_id ?id.
 }

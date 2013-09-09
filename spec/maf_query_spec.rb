@@ -18,7 +18,12 @@ class MafQuery
     def select_patient_count(repo,patient_id="A8-A08G")
       qry = IO.read('resources/queries/patient.rq')
       qry = qry.gsub('%{patient}',patient_id)
-      SPARQL.execute(qry,repo)
+      SPARQL.execute(qry,repo)#[:barcodes].to_i
+    end
+
+    def patients(repo)
+      qry = IO.read('resources/queries/patient_list.rq')
+      SPARQL.execute(qry,repo).map(&:id).map(&:to_s)
     end
 
     def select_patient_genes(repo,patient_id="A8-A08G")
@@ -121,14 +126,17 @@ describe MafQuery do
     end
 
 
+    describe ".patients" do
+      it "retrieves a list of patients" do
+        @maf.patients(@repo).first.should == "E9-A22B"
+      end
+    end
+
     describe ".select_property" do
-    	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").size.should > 0 }
-    	it { 
-        # pending("new query method since entrez gene is demoing SIO")
-        @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974
-      }
+    	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").first.to_s.should == "http://identifiers.org/hgnc.symbol/A1CF" }
+    	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974 }
     	it { @maf.select_property(@repo,"Center","BH-A0HP").first.to_s.should == "genome.wustl.edu" }
-    	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").size.should > 0 }
+    	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").first.to_i.should == 37 }
 
     	context "extra parsed properties" do
     		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
@@ -152,7 +160,6 @@ describe MafQuery do
       describe ".patient_info" do
         it 'collects the number of mutations and gene lengths for each mutation' do
           patient = @maf.patient_info('BH-A0HP',@repo)
-          puts patient
           patient[:mutation_count].should == 1
           patient[:mutations].first[:length].should == 79113
           patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
