@@ -28,8 +28,8 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:Center ;
   qb:component cs:NCBI_Build ;
   qb:component cs:Chromosome ;
-  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#begin> ;
-  qb:component <http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#end> ;
+  qb:component cs:Start_Position ;
+  qb:component cs:End_Position ;
   qb:component cs:Strand ;
   qb:component cs:Reference_Allele ;
   qb:component cs:Tumor_Seq_Allele1 ;
@@ -108,13 +108,13 @@ cs:Chromosome a qb:ComponentSpecification ;
   rdfs:label "Chromosome" ;
   qb:measure prop:Chromosome .
 
-<http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#begin> a qb:ComponentSpecification ;
-  rdfs:label "begin" ;
-  qb:measure <http://biohackathon.org/resource/faldo#begin> .
+cs:Start_Position a qb:ComponentSpecification ;
+  rdfs:label "Start_Position" ;
+  qb:measure prop:Start_Position .
 
-<http://www.rqtl.org/dc/dataset/maf_example/cs/biohackathon.org/resource/faldo#end> a qb:ComponentSpecification ;
-  rdfs:label "end" ;
-  qb:measure <http://biohackathon.org/resource/faldo#end> .
+cs:End_Position a qb:ComponentSpecification ;
+  rdfs:label "End_Position" ;
+  qb:measure prop:End_Position .
 
 cs:Strand a qb:ComponentSpecification ;
   rdfs:label "Strand" ;
@@ -218,11 +218,11 @@ prop:Chromosome a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Chromosome"@en ;
   rdfs:range xsd:int .
 
-<http://biohackathon.org/resource/faldo#begin> a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "begin"@en .
+prop:Start_Position a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "Start_Position"@en .
 
-<http://biohackathon.org/resource/faldo#end> a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "end"@en .
+prop:End_Position a rdf:Property, qb:MeasureProperty ;
+  rdfs:label "End_Position"@en .
 
 prop:Strand a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Strand"@en .
@@ -968,8 +968,8 @@ ns:obs2 a qb:Observation ;
   prop:Center <node/2/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/2/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/2/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/2/14> ;
+  prop:Start_Position <node/2/13> ;
+  prop:End_Position <node/2/14> ;
   prop:Strand <node/2/15> ;
   prop:Reference_Allele <node/2/16> ;
   prop:Tumor_Seq_Allele1 <node/2/17> ;
@@ -994,25 +994,31 @@ ns:obs2 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
 
 <node/2/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/2/10/1> . 
+    
+<node/2/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/2/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/12/1> . 
-    
-<node/2/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 19 .
+  <http://semanticscience.org/resource/SIO_000300> 19  .
 
 <node/2/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/2/13/1> . 
+    
+<node/2/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 58862784  .
-
 
 <node/2/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/2/14/1> . 
+    
+<node/2/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 58862784  .
-
 
 <node/2/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1023,38 +1029,23 @@ ns:obs2 a qb:Observation ;
 
 <node/2/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/16/1> . 
-    
-<node/2/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "C" .
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/17/1> . 
-    
-<node/2/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "C" .
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/18/1> . 
-    
-<node/2/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "T" .
+  <http://semanticscience.org/resource/SIO_000300> "T"  .
 
 <node/2/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/22/1> . 
-    
-<node/2/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "C" .
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/2/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/23/1> . 
-    
-<node/2/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "C" .  
+  <http://semanticscience.org/resource/SIO_000300> "C"  .  
 
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1070,8 +1061,8 @@ ns:obs3 a qb:Observation ;
   prop:Center <node/3/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/3/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/3/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/3/14> ;
+  prop:Start_Position <node/3/13> ;
+  prop:End_Position <node/3/14> ;
   prop:Strand <node/3/15> ;
   prop:Reference_Allele <node/3/16> ;
   prop:Tumor_Seq_Allele1 <node/3/17> ;
@@ -1096,25 +1087,31 @@ ns:obs3 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
 
 <node/3/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/3/10/1> . 
+    
+<node/3/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/3/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/12/1> . 
-    
-<node/3/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 19 .
+  <http://semanticscience.org/resource/SIO_000300> 19  .
 
 <node/3/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/3/13/1> . 
+    
+<node/3/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 58864366  .
-
 
 <node/3/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/3/14/1> . 
+    
+<node/3/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 58864366  .
-
 
 <node/3/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1125,24 +1122,15 @@ ns:obs3 a qb:Observation ;
 
 <node/3/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/16/1> . 
-    
-<node/3/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/17/1> . 
-    
-<node/3/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/18/1> . 
-    
-<node/3/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "A" .
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/3/19>
   a <http://identifiers.org/dbsnp>  ;
@@ -1150,17 +1138,11 @@ ns:obs3 a qb:Observation ;
 
 <node/3/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/22/1> . 
-    
-<node/3/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/3/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/23/1> . 
-    
-<node/3/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .  
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1177,8 +1159,8 @@ ns:obs4 a qb:Observation ;
   prop:Center <node/4/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/4/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/4/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/4/14> ;
+  prop:Start_Position <node/4/13> ;
+  prop:End_Position <node/4/14> ;
   prop:Strand <node/4/15> ;
   prop:Reference_Allele <node/4/16> ;
   prop:Tumor_Seq_Allele1 <node/4/17> ;
@@ -1207,25 +1189,31 @@ ns:obs4 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> 29974  .
 
 <node/4/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/4/10/1> . 
+    
+<node/4/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/4/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/12/1> . 
-    
-<node/4/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 10 .
+  <http://semanticscience.org/resource/SIO_000300> 10  .
 
 <node/4/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/4/13/1> . 
+    
+<node/4/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 52595854  .
-
 
 <node/4/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/4/14/1> . 
+    
+<node/4/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 52595854  .
-
 
 <node/4/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1236,38 +1224,23 @@ ns:obs4 a qb:Observation ;
 
 <node/4/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/16/1> . 
-    
-<node/4/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/17/1> . 
-    
-<node/4/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/18/1> . 
-    
-<node/4/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "A" .
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/4/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/22/1> . 
-    
-<node/4/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/4/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/23/1> . 
-    
-<node/4/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .  
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1284,8 +1257,8 @@ ns:obs5 a qb:Observation ;
   prop:Center <node/5/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/5/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/5/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/5/14> ;
+  prop:Start_Position <node/5/13> ;
+  prop:End_Position <node/5/14> ;
   prop:Strand <node/5/15> ;
   prop:Reference_Allele <node/5/16> ;
   prop:Tumor_Seq_Allele1 <node/5/17> ;
@@ -1314,25 +1287,31 @@ ns:obs5 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> 29974  .
 
 <node/5/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/5/10/1> . 
+    
+<node/5/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/5/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/12/1> . 
-    
-<node/5/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 10 .
+  <http://semanticscience.org/resource/SIO_000300> 10  .
 
 <node/5/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/5/13/1> . 
+    
+<node/5/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 52595937  .
-
 
 <node/5/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/5/14/1> . 
+    
+<node/5/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 52595937  .
-
 
 <node/5/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1343,38 +1322,23 @@ ns:obs5 a qb:Observation ;
 
 <node/5/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/16/1> . 
-    
-<node/5/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/17/1> . 
-    
-<node/5/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/18/1> . 
-    
-<node/5/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "A" .
+  <http://semanticscience.org/resource/SIO_000300> "A"  .
 
 <node/5/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/22/1> . 
-    
-<node/5/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/5/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/23/1> . 
-    
-<node/5/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .  
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1390,8 +1354,8 @@ ns:obs6 a qb:Observation ;
   prop:Center <node/6/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/6/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/6/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/6/14> ;
+  prop:Start_Position <node/6/13> ;
+  prop:End_Position <node/6/14> ;
   prop:Strand <node/6/15> ;
   prop:Reference_Allele <node/6/16> ;
   prop:Tumor_Seq_Allele1 <node/6/17> ;
@@ -1416,25 +1380,31 @@ ns:obs6 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
 
 <node/6/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/6/10/1> . 
+    
+<node/6/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/6/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/12/1> . 
-    
-<node/6/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 16 .
+  <http://semanticscience.org/resource/SIO_000300> 16  .
 
 <node/6/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/6/13/1> . 
+    
+<node/6/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 7568361  .
-
 
 <node/6/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/6/14/1> . 
+    
+<node/6/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 7568361  .
-
 
 <node/6/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1445,38 +1415,23 @@ ns:obs6 a qb:Observation ;
 
 <node/6/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/16/1> . 
-    
-<node/6/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/17/1> . 
-    
-<node/6/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/18/1> . 
-    
-<node/6/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "C" .
+  <http://semanticscience.org/resource/SIO_000300> "C"  .
 
 <node/6/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/22/1> . 
-    
-<node/6/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/6/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/23/1> . 
-    
-<node/6/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .  
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1493,8 +1448,8 @@ ns:obs7 a qb:Observation ;
   prop:Center <node/7/10> ;
   prop:NCBI_Build 37 ;
   prop:Chromosome <node/7/12> ;
-  <http://biohackathon.org/resource/faldo#begin> <node/7/13> ;
-  <http://biohackathon.org/resource/faldo#end> <node/7/14> ;
+  prop:Start_Position <node/7/13> ;
+  prop:End_Position <node/7/14> ;
   prop:Strand <node/7/15> ;
   prop:Reference_Allele <node/7/16> ;
   prop:Tumor_Seq_Allele1 <node/7/17> ;
@@ -1527,25 +1482,31 @@ ns:obs7 a qb:Observation ;
   <http://semanticscience.org/resource/SIO_000300> 54715  .
 
 <node/7/10>
-  a foaf:Organization  ;
-  foaf:homepage "genome.wustl.edu"  .
+  a foaf:homepage  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/7/10/1> . 
+    
+<node/7/10/1>
+  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
 
 <node/7/12>
   a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/12/1> . 
-    
-<node/7/12/1>
-  <http://semanticscience.org/resource/SIO_000300> 16 .
+  <http://semanticscience.org/resource/SIO_000300> 16  .
 
 <node/7/13>
+  a <http://biohackathon.org/resource/faldo#begin>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/7/13/1> . 
+    
+<node/7/13/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 7102099  .
-
 
 <node/7/14>
+  a <http://biohackathon.org/resource/faldo#end>  ;
+  <http://semanticscience.org/resource/SIO_000008> <node/7/14/1> . 
+    
+<node/7/14/1>
   a <http://biohackathon.org/resource/faldo#Position>  ;
   <http://semanticscience.org/resource/SIO_000300> 7102099  .
-
 
 <node/7/15>
   a <http://edamontology.org/data_0853>  ;
@@ -1556,36 +1517,21 @@ ns:obs7 a qb:Observation ;
 
 <node/7/16>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/16/1> . 
-    
-<node/7/16/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/17>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/17/1> . 
-    
-<node/7/17/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/18>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/18/1> . 
-    
-<node/7/18/1>
-  <http://semanticscience.org/resource/SIO_000300> "T" .
+  <http://semanticscience.org/resource/SIO_000300> "T"  .
 
 <node/7/22>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/22/1> . 
-    
-<node/7/22/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .
+  <http://semanticscience.org/resource/SIO_000300> "G"  .
 
 <node/7/23>
   a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/23/1> . 
-    
-<node/7/23/1>
-  <http://semanticscience.org/resource/SIO_000300> "G" .  
+  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 

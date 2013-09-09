@@ -24,7 +24,9 @@ module PubliSci
       end
 
       def sio_attribute(attribute_type,value,data_type=nil)
-        inner = ["http://semanticscience.org/resource/SIO_000300",value]
+        inner = [
+          "http://semanticscience.org/resource/SIO_000300",value
+        ]
         if data_type
           inner = [["a", data_type], inner]
         end
@@ -33,8 +35,6 @@ module PubliSci
         [
           "http://semanticscience.org/resource/SIO_000008",
             inner
-            # ["a", data_type],
-            # ["http://semanticscience.org/resource/SIO_000300",value]
         ]
 
         if attribute_type

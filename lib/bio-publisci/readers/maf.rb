@@ -1,7 +1,7 @@
 module PubliSci
   module Readers
     class MAF < Base
-    COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome http://biohackathon.org/resource/faldo#begin http://biohackathon.org/resource/faldo#end Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
+    COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
     
@@ -92,36 +92,31 @@ module PubliSci
 
           # test SIO attributes for chromosome
           col = COLUMN_NAMES.index('Chromosome')
-          entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0000340",entry[col])
+          entry[col] = sio_value("http://purl.org/obo/owl/SO#SO_0000340",entry[col])
 
           # More SIO attrtibutes for alleles
           %w{Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 Match_Norm_Seq_Allele1 Match_Norm_Seq_Allele2}.each{|name|
             col = COLUMN_NAMES.index(name)
-            entry[col] = sio_attribute("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
+            entry[col] = sio_value("http://purl.org/obo/owl/SO#SO_0001023",entry[col])
           }
 
           col = COLUMN_NAMES.index("Strand")
           entry[col] = sio_attribute("http://edamontology.org/data_0853",entry[col])
 
           col = COLUMN_NAMES.index("Center")
-          entry[col] = [
-            ["a", "foaf:Organization"],
-            ["foaf:homepage", entry[col]],
-          ]
+          entry[col] = sio_attribute("foaf:homepage",entry[col])
+          # entry[col] = [
+          #   ["a", "foaf:Organization"],
+          #   ["foaf:homepage", entry[col]],
+          # ]
 
-          # Use faldo for locations
-          col = COLUMN_NAMES.index("http://biohackathon.org/resource/faldo#begin")
-          entry[col] = [
-            entry[col] = sio_value("http://biohackathon.org/resource/faldo#Position", entry[col])
-            # ["a", "http://biohackathon.org/resource/faldo#Position"],
-          ]
+          # Use faldo for locations End_Position
+          col = COLUMN_NAMES.index("Start_Position")
+          entry[col] = sio_attribute("http://biohackathon.org/resource/faldo#begin", entry[col],"http://biohackathon.org/resource/faldo#Position")
 
-          col = COLUMN_NAMES.index("http://biohackathon.org/resource/faldo#end")
-          entry[col] = [
-            entry[col] = sio_value("http://biohackathon.org/resource/faldo#Position", entry[col])
-            # ["a", "http://biohackathon.org/resource/faldo#Position"],
-            # ["http://biohackathon.org/resource/faldo#end", entry[col]],
-          ]
+          col = COLUMN_NAMES.index("End_Position")
+          entry[col] = sio_attribute("http://biohackathon.org/resource/faldo#end", entry[col],"http://biohackathon.org/resource/faldo#Position")
+          
 
           data = {}
           COLUMN_NAMES.each_with_index{|col,i|

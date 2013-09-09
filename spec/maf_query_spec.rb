@@ -34,7 +34,6 @@ class MafQuery
 
     def select_property(repo,property="hgnc.symbol",patient_id="A8-A08G")
     	qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
-      # puts "#{qry}"
       results = SPARQL.execute(qry,repo).map(&:column).map{|val| 
         if val.is_a?(RDF::URI) and val.to_s["node"]
           node_value(repo,val)
@@ -111,7 +110,12 @@ class MafQuery
       patient
     end
 
-    def gene_info(id,repo)
+    def gene_info(hugo_symbol,repo)
+      qry = IO.read('resources/queries/patients_with_mutation.rq').gsub('%{hugo_symbol}',hugo_symbol)
+      sols = SPARQL.execute(qry,repo)
+      patient_count = sols.size
+      {mutations: patient_count, gene_length: gene_length(hugo_symbol), patients: sols.map(&:patient_id).map(&:to_s)}
+
       # symbols = select_property(repo,"Hugo_Symbol",id).map(&:to_s)
       # patient_id = select_property(repo,"patient_id",id).first.to_s
       # patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
@@ -127,62 +131,62 @@ describe MafQuery do
 		@repo = @maf.generate_data
 	end
 
-    describe "query genes" do
-      it { @maf.select_patient_genes(@repo,"BH-A0HP").size.should > 0 }
+  describe "query genes" do
+    it { @maf.select_patient_genes(@repo,"BH-A0HP").size.should > 0 }
+  end
+
+  describe "query number of entries" do
+    it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
+  end
+
+
+  describe ".patients" do
+    it "retrieves a list of patients" do
+      @maf.patients(@repo).first.should == "E9-A22B"
+    end
+  end
+
+  describe ".select_property" do
+  	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").first.to_s.should == "http://identifiers.org/hgnc.symbol/A1CF" }
+  	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974 }
+  	it { @maf.select_property(@repo,"Center","BH-A0HP").first.to_s.should == "genome.wustl.edu" }
+  	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").first.to_i.should == 37 }
+
+  	context "extra parsed properties" do
+  		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
+  		it { @maf.select_property(@repo,"patient_id","BH-A0HP").size.should > 0 }
+  	end
+
+  	context "non-existant properties" do
+  		it { @maf.select_property(@repo,"Chunkiness","BH-A0HP").should == [] }
+  	end
+  end
+
+  context "remote service calls", no_travis: true do
+    describe ".gene_length" do
+      it { @maf.gene_length('A2BP1').should == 1694245 }
     end
 
-    describe "query number of entries" do
-      it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
-    end
+    # describe ".official_symbol" do
+    #   it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
+    # end
 
-
-    describe ".patients" do
-      it "retrieves a list of patients" do
-        @maf.patients(@repo).first.should == "E9-A22B"
+    describe ".patient_info" do
+      it 'collects the number of mutations and gene lengths for each mutation' do
+        gene = @maf.gene_info('A1BG',@repo)
+        gene[:mutations].should == 2
+        gene[:gene_length].should == 8321
+        gene[:patients].first.should == "E9-A22B"
       end
     end
 
-    describe ".select_property" do
-    	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").first.to_s.should == "http://identifiers.org/hgnc.symbol/A1CF" }
-    	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974 }
-    	it { @maf.select_property(@repo,"Center","BH-A0HP").first.to_s.should == "genome.wustl.edu" }
-    	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").first.to_i.should == 37 }
-
-    	context "extra parsed properties" do
-    		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
-    		it { @maf.select_property(@repo,"patient_id","BH-A0HP").size.should > 0 }
-    	end
-
-    	context "non-existant properties" do
-    		it { @maf.select_property(@repo,"Chunkiness","BH-A0HP").should == [] }
-    	end
-    end
-
-    context "remote service calls", no_travis: true do
-      describe ".gene_length" do
-        it { @maf.gene_length('A2BP1').should == 1694245 }
-      end
-
-      # describe ".official_symbol" do
-      #   it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
-      # end
-
-      describe ".patient_info" do
-        it 'collects the number of mutations and gene lengths for each mutation' do
-          patient = @maf.patient_info('BH-A0HP',@repo)
-          patient[:mutation_count].should == 1
-          patient[:mutations].first[:length].should == 79113
-          patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
-        end
-      end
-
-      describe ".gene_info" do
-        it 'collects the number of patients with a mutation in a gene and its length' do
-          patient = @maf.patient_info('BH-A0HP',@repo)
-          patient[:mutation_count].should == 1
-          patient[:mutations].first[:length].should == 79113
-          patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
-        end
+    describe ".gene_info" do
+      it 'collects the number of patients with a mutation in a gene and its length' do
+        patient = @maf.patient_info('BH-A0HP',@repo)
+        patient[:mutation_count].should == 1
+        patient[:mutations].first[:length].should == 79113
+        patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
       end
     end
+  end
 end
