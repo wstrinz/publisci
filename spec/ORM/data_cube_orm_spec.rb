@@ -3,6 +3,7 @@ require_relative '../../lib/bio-publisci.rb'
 describe PubliSci::ORM do
 
   it "should load and save a turtle file without loss of information in old ORM" do
+    pending("pending rewrite of abbreviaton method to account for base_url")
     ref = IO.read(File.dirname(__FILE__) + '/../turtle/bacon')
     cube = PubliSci::DataSet::ORM::DataCube.load(ref, {skip_metadata: true, generator_options: {label_column: 0}})
     cube.abbreviate_known(cube.to_n3).should == ref

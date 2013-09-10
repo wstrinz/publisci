@@ -4,7 +4,6 @@ module PubliSci
       class DataCube
         extend PubliSci::Dataset::DataCube
         extend PubliSci::Analyzer
-        # extend PubliSci::Metadata
         extend PubliSci::Query
         extend PubliSci::Parser
 

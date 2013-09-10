@@ -8,7 +8,7 @@ SELECT DISTINCT ?gene WHERE {
 
   ?patient_obs a qb:Observation;
     ?barcode_measure ?barcode;
-    <http://www.rqtl.org/dc/properties/Hugo_Symbol> ?node.
+    <http://onto.strinz.me/properties/Hugo_Symbol> ?node.
 
   FILTER (regex(?barcode, "TCGA-%{patient}.*"))
 

@@ -35,7 +35,7 @@ describe PubliSci::Readers::CSV do
 
 		dims = RDF::Query.execute(graph){ pattern [:dataset, qb.dimension, :dimension] }
 		dims.size.should == 1
-		dims.first[:dimension].to_s.should == "http://www.rqtl.org/dc/properties/producer"
+		dims.first[:dimension].to_s.should == "http://onto.strinz.me/properties/producer"
 
 		measures = RDF::Query.execute(graph){ pattern [:dataset, qb.measure, :measure] }
 		measures.map{|s| s[:measure].to_s.split('/').last}.should == ["pricerange", "chunkiness", "deliciousness"]

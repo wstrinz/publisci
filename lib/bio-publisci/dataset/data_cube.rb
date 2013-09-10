@@ -13,7 +13,7 @@ module PubliSci
       {
         type: :dataframe,
         encode_nulls: false,
-        base_url: "http://www.rqtl.org",
+        base_url: "http://onto.strinz.me",
       }
       end
 
@@ -124,7 +124,7 @@ module PubliSci
         @prefix qb:    <http://purl.org/linked-data/cube#> .
         @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-        @prefix prop:  <#{base}/dc/properties/> .
+        @prefix prop:  <#{base}/properties/> .
         @prefix dct:   <http://purl.org/dc/terms/> .
         @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
         @prefix cs:    <#{base}/dc/dataset/#{var}/cs/> .

@@ -56,7 +56,7 @@ describe PubliSci::Writers do
       writer = PubliSci::Writers::ARFF.new
       repo = RDF::Repository.load('spec/turtle/weather')
       repo.load('spec/turtle/bacon')
-      out = writer.from_store(repo, 'http://www.rqtl.org/dc/dataset/weather/dataset-weather','weather')
+      out = writer.from_store(repo, 'http://onto.strinz.me/dc/dataset/weather/dataset-weather','weather')
 
       out = out.gsub(/%.*\n/,'')
 
@@ -67,7 +67,7 @@ describe PubliSci::Writers do
       writer = PubliSci::Writers::CSV.new
       repo = RDF::Repository.load('spec/turtle/reference')
       repo.load('spec/turtle/bacon')
-      out = writer.from_store(repo,'http://www.rqtl.org/dc/dataset/bacon/dataset-bacon')
+      out = writer.from_store(repo,'http://onto.strinz.me/dc/dataset/bacon/dataset-bacon')
 
       out.should == IO.read('spec/csv/bacon.csv')
     end
