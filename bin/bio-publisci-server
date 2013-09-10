@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'sinatra/base'
+require 'bio-publisci'
+
+class PubliSciServer < Sinatra::Base
+  set :sessions, true
+  set :foo, 'bar'
+
+  require_relative '../server/helpers.rb'
+  
+  get "/" its
+    "do working + #{ba} #{PubliSci}"
+  end
+  
+  run! if app_file == $0
+end
