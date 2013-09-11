@@ -3,6 +3,25 @@ require_relative '../lib/bio-publisci.rb'
 #sparql = SPARQL::Client.new("#{repo.uri}/sparql/").query(qry)
 
 class MafQuery
+
+
+    def to_por(solution)
+      if solution.is_a? RDF::Query::Solutions
+        raise "turn solutions into hash not implemented yet"
+      elsif solution.is_a? Array
+        solution.map{|sol| to_por(sol)}
+      else
+        if solution.is_a? RDF::Literal
+          solution.object
+        elsif solution.is_a? RDF::URI
+          solution.to_s
+        else
+          puts "don't recognzize #{solution.class}"
+          solution.to_s
+        end
+      end
+    end
+
     def generate_data
     	generator = PubliSci::Readers::MAF.new
     	in_file = 'resources/maf_example.maf'
@@ -18,7 +37,7 @@ class MafQuery
     def select_patient_count(repo,patient_id="A8-A08G")
       qry = IO.read('resources/queries/patient.rq')
       qry = qry.gsub('%{patient}',patient_id)
-      SPARQL.execute(qry,repo)#[:barcodes].to_i
+      SPARQL.execute(qry,repo).first[:barcodes]
     end
 
     def patients(repo)
@@ -43,6 +62,11 @@ class MafQuery
 
       }.flatten
 
+      if results.size == 1
+        results.first
+      else
+        results
+      end
     end
 
     def node_value(repo,uri)
@@ -102,8 +126,8 @@ class MafQuery
     end
 
     def patient_info(id,repo)
-      symbols = select_property(repo,"Hugo_Symbol",id).map(&:to_s)
-      patient_id = select_property(repo,"patient_id",id).first.to_s
+      symbols = Array(select_property(repo,"Hugo_Symbol",id)).map(&:to_s)
+      patient_id = select_property(repo,"patient_id",id).to_s
       patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
 
       symbols.each{|sym| patient[:mutations] << {symbol: sym, length: gene_length(sym)}}
@@ -125,6 +149,8 @@ class MafQuery
     end
 end
 
+
+
 describe MafQuery do
 	before(:all) do
     @maf = MafQuery.new
@@ -136,7 +162,7 @@ describe MafQuery do
   end
 
   describe "query number of entries" do
-    it { @maf.select_patient_count(@repo,"BH-A0HP").first[:barcodes].to_s.to_i.should > 0 }
+    it { @maf.select_patient_count(@repo,"BH-A0HP").should > 0 }
   end
 
 
@@ -147,14 +173,14 @@ describe MafQuery do
   end
 
   describe ".select_property" do
-  	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").first.to_s.should == "http://identifiers.org/hgnc.symbol/A1CF" }
-  	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").first.to_i == 29974 }
-  	it { @maf.select_property(@repo,"Center","BH-A0HP").first.to_s.should == "genome.wustl.edu" }
-  	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").first.to_i.should == 37 }
+  	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").should == "http://identifiers.org/hgnc.symbol/A1CF" }
+  	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").to_i == 29974 }
+  	it { @maf.select_property(@repo,"Center","BH-A0HP").to_s.should == "genome.wustl.edu" }
+  	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").to_i.should == 37 }
 
   	context "extra parsed properties" do
-  		it { @maf.select_property(@repo,"sample_id","BH-A0HP").size.should > 0 }
-  		it { @maf.select_property(@repo,"patient_id","BH-A0HP").size.should > 0 }
+  		it { @maf.select_property(@repo,"sample_id","BH-A0HP").should == "01A-12D-A099-09" }
+  		it { @maf.select_property(@repo,"patient_id","BH-A0HP").should == "BH-A0HP" }
   	end
 
   	context "non-existant properties" do
@@ -187,6 +213,37 @@ describe MafQuery do
         patient[:mutations].first[:length].should == 79113
         patient[:mutations].first[:symbol].should == 'http://identifiers.org/hgnc.symbol/A1CF'
       end
+    end
+  end
+end
+
+class QueryScript
+  def initialize(repo=nil)
+    @__maf = MafQuery.new
+    unless repo
+      @__repo = @__maf.generate_data
+    else
+      @__repo = repo
+    end
+  end
+
+  def select(operation,*args)
+    @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))
+  end
+end
+
+describe QueryScript do
+  describe ".select" do
+    before(:all){
+      @ev = QueryScript.new
+    }
+    
+    it { @ev.select('patient_count', "BH-A0HP").should > 0 }
+  
+    context "with instance_eval" do
+      it { @ev.instance_eval("select 'patient_count', 'BH-A0HP'").should > 0 }
+      it { @ev.instance_eval("select 'property', 'Hugo_Symbol', 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }
+      it { @ev.instance_eval("select 'property', 'Chromosome', 'BH-A0HP'").is_a?(Fixnum).should be true }
     end
   end
 end
