@@ -228,7 +228,19 @@ class QueryScript
   end
 
   def select(operation,*args)
-    @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))
+    if @__maf.methods.include?(:"select_#{operation}")
+      @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))  
+    else
+      @__maf.to_por(@__maf.select_property(operation,@__repo,*args)) 
+    end
+  end
+
+  def gene_length(gene)
+    @__maf.to_por(@__maf.gene_length(gene))
+  end
+
+  def report_for(type, id)
+    @__maf.send(:"#{type}_info",id, @__repo)
   end
 end
 
@@ -244,6 +256,7 @@ describe QueryScript do
       it { @ev.instance_eval("select 'patient_count', 'BH-A0HP'").should > 0 }
       it { @ev.instance_eval("select 'property', 'Hugo_Symbol', 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }
       it { @ev.instance_eval("select 'property', 'Chromosome', 'BH-A0HP'").is_a?(Fixnum).should be true }
+      it { @ev.instance_eval("report_for 'patient', 'BH-A0HP'").is_a?(Hash).should be true }
     end
   end
 end
