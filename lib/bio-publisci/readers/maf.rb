@@ -31,7 +31,7 @@ module PubliSci
         @barcode_index = COLUMN_NAMES.index('Tumor_Sample_Barcode')
 
         options[:no_labels] ||= true
-        options[:lookup_hugo] ||= false
+        options[:lookup_hugo] ||= true
         options[:ranges] ||= COMPONENT_RANGES
 
 
@@ -59,7 +59,11 @@ module PubliSci
             out.write(processed.first) if processed
             n += 1
           }
-          out
+          if options[:lookup_hugo]
+            post_process(out)
+          else
+            out
+          end
         end
       end
 
@@ -70,9 +74,9 @@ module PubliSci
           entry = (entry.fill(nil,entry.length...COLUMN_NAMES.length-2) + parse_barcode(entry[@barcode_index])).flatten
 
           if options[:lookup_hugo]
-            entry[0] = sio_value('http://identifiers.org/hgnc.symbol',"http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}") if entry[0]
+            entry[0] = sio_value('http://edamontology.org/data_1791',"http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}") if entry[0]
           else
-            entry[0] = sio_value('http://identifiers.org/hgnc.symbol',"http://identifiers.org/hgnc.symbol/#{entry[0]}") if entry[0]
+            entry[0] = sio_value('http://edamontology.org/data_1791',"http://identifiers.org/hgnc.symbol/#{entry[0]}") if entry[0]
           end
 
           # A 0 in the entrez-id column appears to mean null
@@ -168,6 +172,15 @@ module PubliSci
         code_lists(@codes,TCGA_CODES,@dataset_name,options).map{|c| str << c}
         concept_codes(@codes,TCGA_CODES,@dataset_name,options).map{|c| str << c}
         str
+      end
+
+      def post_process(file)
+        reg = %r{http://identifiers.org/hgnc.symbol/(\w+)}
+        cache = {}
+        PubliSci::PostProcessor.process(file,file,reg){|g|
+          cache[g] ||= official_symbol(g)
+         'http://identifiers.org/hgnc.symbol/' + cache[g]
+       }
       end
     end
   end

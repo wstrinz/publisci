@@ -6,10 +6,28 @@ class MafQuery
 
 
     def to_por(solution)
-      if solution.is_a? RDF::Query::Solutions
-        raise "turn solutions into hash not implemented yet"
+      if solution.is_a?(Fixnum) or solution.is_a?(String)
+        solution
+      elsif solution.is_a? RDF::Query::Solutions
+        solution.map{|sol|
+          if sol.bindings.size == 1
+            to_por(sol.bindings.first.last)
+          else
+            Hash(solution.bindings.map{|bind,result| [bind,to_por(result)]})
+          end
+        }
+      elsif solution.is_a? RDF::Query::Solution
+        if solution.bindings.size == 1
+          to_por(solution.bindings.first.last)
+        else
+          solution.bindings.map{|bind,result| [bind,to_por(result)] }
+        end
       elsif solution.is_a? Array
-        solution.map{|sol| to_por(sol)}
+        if solution.size == 1
+          to_por(solution.first)
+        else
+          solution.map{|sol| to_por(sol)}
+        end
       else
         if solution.is_a? RDF::Literal
           solution.object
@@ -42,7 +60,7 @@ class MafQuery
 
     def patients(repo)
       qry = IO.read('resources/queries/patient_list.rq')
-      SPARQL.execute(qry,repo).map(&:id).map(&:to_s)
+      SPARQL.execute(qry,repo) #.map(&:id).map(&:to_s)
     end
 
     def select_patient_genes(repo,patient_id="A8-A08G")
@@ -168,7 +186,7 @@ describe MafQuery do
 
   describe ".patients" do
     it "retrieves a list of patients" do
-      @maf.patients(@repo).first.should == "E9-A22B"
+      @maf.to_por(@maf.patients(@repo)).first.should == "E9-A22B"
     end
   end
 
@@ -231,7 +249,7 @@ class QueryScript
     if @__maf.methods.include?(:"select_#{operation}")
       @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))  
     else
-      @__maf.to_por(@__maf.select_property(operation,@__repo,*args)) 
+      @__maf.to_por(@__maf.select_property(@__repo,operation,*args)) 
     end
   end
 
@@ -254,8 +272,8 @@ describe QueryScript do
   
     context "with instance_eval" do
       it { @ev.instance_eval("select 'patient_count', 'BH-A0HP'").should > 0 }
-      it { @ev.instance_eval("select 'property', 'Hugo_Symbol', 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }
-      it { @ev.instance_eval("select 'property', 'Chromosome', 'BH-A0HP'").is_a?(Fixnum).should be true }
+      it { @ev.instance_eval("select 'Hugo_Symbol', 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }
+      it { @ev.instance_eval("select 'Chromosome', 'BH-A0HP'").is_a?(Fixnum).should be true }
       it { @ev.instance_eval("report_for 'patient', 'BH-A0HP'").is_a?(Hash).should be true }
     end
   end

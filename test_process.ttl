@@ -990,8 +990,8 @@ ns:obs2 a qb:Observation ;
   .
 
 <node/2/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/lookup A1BG >  .
 
 <node/2/10>
   a foaf:homepage  ;
@@ -1083,8 +1083,8 @@ ns:obs3 a qb:Observation ;
   .
 
 <node/3/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/lookup A1BG >  .
 
 <node/3/10>
   a foaf:homepage  ;
@@ -1181,8 +1181,8 @@ ns:obs4 a qb:Observation ;
   .
 
 <node/4/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/lookup A1CF >  .
 
 <node/4/9>
   a <http://identifiers.org/ncbigene>  ;
@@ -1279,8 +1279,8 @@ ns:obs5 a qb:Observation ;
   .
 
 <node/5/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
+  a <http://identifiers.org/hgnc.symbol>  ;
+  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/lookup A1CF >  .
 
 <node/5/9>
   a <http://identifiers.org/ncbigene>  ;
@@ -1315,4 +1315,3 @@ ns:obs5 a qb:Observation ;
 
 <node/5/15>
   a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/15/1> . 
