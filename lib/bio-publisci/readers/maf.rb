@@ -31,7 +31,7 @@ module PubliSci
         @barcode_index = COLUMN_NAMES.index('Tumor_Sample_Barcode')
 
         options[:no_labels] ||= true
-        options[:lookup_hugo] ||= true
+        options[:lookup_hugo] ||= false
         options[:ranges] ||= COMPONENT_RANGES
 
 
@@ -73,11 +73,11 @@ module PubliSci
 
           entry = (entry.fill(nil,entry.length...COLUMN_NAMES.length-2) + parse_barcode(entry[@barcode_index])).flatten
 
-          if options[:lookup_hugo]
-            entry[0] = sio_value('http://edamontology.org/data_1791',"http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}") if entry[0]
-          else
+          # if options[:lookup_hugo]
+            # entry[0] = sio_value('http://edamontology.org/data_1791',"http://identifiers.org/hgnc.symbol/#{official_symbol(entry[0])}") if entry[0]
+          # else
             entry[0] = sio_value('http://edamontology.org/data_1791',"http://identifiers.org/hgnc.symbol/#{entry[0]}") if entry[0]
-          end
+          # end
 
           # A 0 in the entrez-id column appears to mean null
           col=1
@@ -176,9 +176,9 @@ module PubliSci
 
       def post_process(file)
         reg = %r{http://identifiers.org/hgnc.symbol/(\w+)}
-        cache = {}
+        @@hugo_cache ||= {}
         PubliSci::PostProcessor.process(file,file,reg){|g|
-          cache[g] ||= official_symbol(g)
+          @@hugo_cache[g] ||= official_symbol(g)
          'http://identifiers.org/hgnc.symbol/' + cache[g]
        }
       end
