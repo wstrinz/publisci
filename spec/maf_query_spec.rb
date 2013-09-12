@@ -192,7 +192,7 @@ describe MafQuery do
 
   describe ".select_property" do
   	it { @maf.select_property(@repo,"Hugo_Symbol","BH-A0HP").should == "http://identifiers.org/hgnc.symbol/A1CF" }
-  	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").to_i == 29974 }
+  	it { @maf.select_property(@repo,"Entrez_Gene_Id","BH-A0HP").to_s.should == 'http://identifiers.org/ncbigene/29974' }
   	it { @maf.select_property(@repo,"Center","BH-A0HP").to_s.should == "genome.wustl.edu" }
   	it { @maf.select_property(@repo,"NCBI_Build","BH-A0HP").to_i.should == 37 }
 
