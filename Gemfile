@@ -24,3 +24,5 @@ gem 'rdf-turtle'
 gem 'rserve-client'
 gem 'sparql'
 
+gem 'sinatra'
+gem 'sinatra-contrib'

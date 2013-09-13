@@ -1,0 +1,25 @@
+%table{border: "1"}
+  %tbody
+    %tr
+      %td
+        %a{:href => "repo"} Repository
+      %td
+        %a{:href => "dsl"} DSL
+
+%div
+  %p Query Repository
+  %p=@repo
+%table{border: "1"}
+  %tbody
+    %tr
+      %td
+        %strong Query
+      %td
+        %strong Results
+    %tr
+      %td
+        %form{ action: "", method: "post"}
+          %textarea{name: "query", :class => "text", cols: "80", rows: "20"}=@query
+          %input{:type => "submit", :value => "Send", :class => "button"}
+      %td
+        %p=@result

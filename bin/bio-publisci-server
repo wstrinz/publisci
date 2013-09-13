@@ -1,17 +1,51 @@
 #!/usr/bin/env ruby
-
 require 'sinatra/base'
 require 'bio-publisci'
+require 'rack-flash'
 
 class PubliSciServer < Sinatra::Base
-  set :sessions, true
-  set :foo, 'bar'
+  enable :sessions
+
+  set :views, File.dirname(__FILE__) + '/../server/views'
+  set :repository, nil
+
+  use Rack::Flash
 
   require_relative '../server/helpers.rb'
-  
-  get "/" its
-    "do working + #{ba} #{PubliSci}"
+
+  get "/" do
+    "its working + #{ba} #{PubliSci}"
   end
-  
+
+  get "/query" do
+    unless settings.repository
+
+      flash[:notice] = "Need to Load a repository first!"
+
+      redirect 'repository'
+    end
+    haml :query
+  end
+
+  post "/query" do
+    unless settings.repository
+      flash[:notice] = "Need to Load a repository first!"
+
+      redirect 'repository'
+    end
+    haml :query
+  end
+
+  get "/repository" do
+    @repo = settings.repository
+
+    haml :repository
+  end
+
+  post "/repository" do
+
+    haml :repository
+  end
+
   run! if app_file == $0
 end
