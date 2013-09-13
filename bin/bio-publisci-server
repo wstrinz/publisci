@@ -2,24 +2,25 @@
 require 'sinatra/base'
 require 'bio-publisci'
 require 'rack-flash'
+require 'cgi'
 
 class PubliSciServer < Sinatra::Base
   enable :sessions
 
   set :views, File.dirname(__FILE__) + '/../server/views'
   set :repository, nil
+  set :sudo_pass, nil
 
   use Rack::Flash
 
   require_relative '../server/helpers.rb'
 
   get "/" do
-    "its working + #{ba} #{PubliSci}"
+    redirect 'repository'
   end
 
   get "/query" do
     unless settings.repository
-
       flash[:notice] = "Need to Load a repository first!"
 
       redirect 'repository'
@@ -43,8 +44,52 @@ class PubliSciServer < Sinatra::Base
   end
 
   post "/repository" do
+    type = params[:repo_type]
+    settings.sudo_pass = params[:sudo_pass] if params[:sudo_pass]
+    uri = params[:repo_uri] if params[:repo_uri]
+
+    @repo = create_repository(type,uri)
+    settings.repository = @repo
 
     haml :repository
+  end
+
+  get "/repository/import" do
+    @repo = settings.repository
+    redirect 'repository' unless @repo
+
+    haml :import
+  end
+
+  post "/repository/import" do
+    @repo = settings.repository
+    redirect 'repository' unless @repo
+
+    if params[:upload_file]
+      import_rdf(params[:upload_file][:tempfile], :file)
+    else
+      import_rdf(params[:rdf_string], params[:rdf_format])
+    end
+
+    haml :import
+  end
+
+  post "/repository/export" do
+    type = params[:repo_type]
+    settings.sudo_pass = params[:sudo_pass] if params[:sudo_pass]
+    uri = params[:repo_uri] if params[:repo_uri]
+
+    @repo = create_repository(type,uri)
+
+    haml :export
+  end
+
+  get "/repository/delete" do
+    clear_repository
+
+    redirect 'repository'
+
+    haml :delete
   end
 
   run! if app_file == $0
