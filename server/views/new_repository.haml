@@ -1,0 +1,25 @@
+%h2 New Repository
+
+%form#repoform{ action: "", method: "post", :onsubmit => ("return confirm('Create new store? If youve been using the in-memory repository, this will delete it!')" if @repo)}
+  %p
+    Repository Type
+    %br
+
+    %select{:form => "repoform", :name => "repo_type"}
+      %option{:value => "in_memory"} In Memory
+      %option{:value => "4store"} Fourstore
+  %br
+
+  %p
+    %strong FourStore Settings
+    %br
+    Repository URI (FourStore only)
+    %br
+    %input{type: 'text', name: "repo_uri", size: "70", value: (@repo.uri if @repo)}
+    %br
+    Sudo Password (optional, but required for clearing the store)
+    %br
+    %input{type: 'password', name: "sudo_pass", size: "70" }
+    %br
+
+    %input{:type => "submit", :value => "Create", :class => "button"}

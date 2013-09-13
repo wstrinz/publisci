@@ -1,20 +1,22 @@
 %div
   %p Query Repository
   %p=@repo
+  %p=@repo.uri if @repo.uri
+
 %table{border: "1"}
   %tbody
     %tr
       %td
         %strong Query
       %td
-        %strong Results
-    %tr
-      %td
         %form{ action: "", method: "post"}
           %textarea{name: "query", :class => "text", cols: "80", rows: "20"}=@query
           %input{:type => "submit", :value => "Send", :class => "button"}
+    %tr
       %td
-        %p=@result
+        %strong Results
+      %td
+        %p=h(@result)
 
 
 %table{border: "1"}

@@ -29,9 +29,26 @@ class PubliSciServer < Sinatra::Base
 
     def import_rdf(input,type)
       if type == :file
+
         raise "file type #{input.read}"
       else
-        raise "string type #{type}"
+        oldsize = settings.repository.size
+        read = RDF::Reader.for(type.to_sym)
+        read = read.new(input)
+        settings.repository << read
+        flash.now[:notice] = "#{settings.repository.size - oldsize} triples imported"
+        # raise "string type #{type}"
+      end
+    end
+
+    def query_repository(query)
+      case settings.repository.class
+      when RDF::FourStore::Repository
+        SPARQL::Client.new("#{settings.repository.uri}/sparql/").query(query)
+      when RDF::Repository
+        SPARQL::Client.new(settings.repository).query(query)
+      else
+        raise "Unrecognized Repository: #{settings.repository.class}"
       end
     end
   end

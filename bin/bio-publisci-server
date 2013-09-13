@@ -20,7 +20,8 @@ class PubliSciServer < Sinatra::Base
   end
 
   get "/query" do
-    unless settings.repository
+    @repo = settings.repository
+    unless @repo
       flash[:notice] = "Need to Load a repository first!"
 
       redirect 'repository'
@@ -29,21 +30,34 @@ class PubliSciServer < Sinatra::Base
   end
 
   post "/query" do
-    unless settings.repository
+    @repo = settings.repository
+
+    unless @repo
       flash[:notice] = "Need to Load a repository first!"
 
       redirect 'repository'
     end
+
+    @result = query_repository(params[:query])
+    # @result =" asdfasdfas"
+
     haml :query
   end
 
   get "/repository" do
+    redirect 'repository/new' unless settings.repository
     @repo = settings.repository
 
     haml :repository
   end
 
-  post "/repository" do
+  get "/repository/new" do
+    @repo = settings.repository
+
+    haml :new_repository
+  end
+
+  post "/repository/new" do
     type = params[:repo_type]
     settings.sudo_pass = params[:sudo_pass] if params[:sudo_pass]
     uri = params[:repo_uri] if params[:repo_uri]
@@ -51,19 +65,19 @@ class PubliSciServer < Sinatra::Base
     @repo = create_repository(type,uri)
     settings.repository = @repo
 
-    haml :repository
+    redirect '/repository'
   end
 
   get "/repository/import" do
     @repo = settings.repository
-    redirect 'repository' unless @repo
+    redirect '/repository' unless @repo
 
     haml :import
   end
 
   post "/repository/import" do
     @repo = settings.repository
-    redirect 'repository' unless @repo
+    redirect '/repository' unless @repo
 
     if params[:upload_file]
       import_rdf(params[:upload_file][:tempfile], :file)
