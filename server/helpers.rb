@@ -41,15 +41,32 @@ class PubliSciServer < Sinatra::Base
       end
     end
 
-    def query_repository(query)
-      case settings.repository.class
-      when RDF::FourStore::Repository
-        SPARQL::Client.new("#{settings.repository.uri}/sparql/").query(query)
-      when RDF::Repository
-        SPARQL::Client.new(settings.repository).query(query)
+    def query_repository(query,format_result = true)
+      repo = settings.repository
+      if repo.is_a? RDF::FourStore::Repository
+        sols = SPARQL::Client.new("#{settings.repository.uri}/sparql/").query(query)
+      elsif repo.is_a? RDF::Repository
+        sols = SPARQL::Client.new(settings.repository).query(query)
       else
         raise "Unrecognized Repository: #{settings.repository.class}"
       end
+
+      if format_result
+        str = '<table border="1">'
+        sols.map{|solution|
+          str << "<tr>"
+          solution.bindings.map{|bind,result|
+            str << "<td>" + CGI.escapeHTML("#{bind}:  #{result.to_s}") + "</td>"
+          }
+          str << "</tr>"
+        }
+        str << "</table>"
+        
+        str
+      else
+        sols
+      end
+
     end
   end
 end
