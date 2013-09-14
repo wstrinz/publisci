@@ -13,14 +13,14 @@ SELECT DISTINCT ?column WHERE {
     qb:measure ?patient_id.
 
   ?obs a qb:Observation;
-    ?patient_id "%{patient}" .
-  
-  {
-    ?obs ?column_measure ?column.
-    FILTER isLiteral(?column)
-  }
-  UNION
-  {?obs ?column_measure [ sio:SIO_000300 ?column ]}
-  UNION
-  {?obs ?column_measure [ sio:SIO_000008 [sio:SIO_000300 ?column] ]}
+    ?patient_id "%{patient}" ;
+    ?column_measure ?column.
+ # {
+ #   ?obs ?column_measure ?column.
+ #   FILTER isLiteral(?column)
+ # }
+ # UNION
+ # {?obs ?column_measure [ sio:SIO_000300 ?column ]}
+ # UNION
+ # {?obs ?column_measure [ sio:SIO_000008 [sio:SIO_000300 ?column] ]}
 }

@@ -8,9 +8,9 @@ SELECT DISTINCT ?gene WHERE {
 
   ?patient_obs a qb:Observation;
     ?barcode_measure ?barcode;
-    <http://onto.strinz.me/properties/Hugo_Symbol> ?node.
+    <http://onto.strinz.me/properties/patient_id> "%{patient}";
+    <http://onto.strinz.me/properties/Hugo_Symbol> ?gene.
 
-  FILTER (regex(?barcode, "TCGA-%{patient}.*"))
 
-    ?node <http://semanticscience.org/resource/SIO_000300> ?gene ;  
+  #  ?node <http://semanticscience.org/resource/SIO_000300> ?gene ;  
 }

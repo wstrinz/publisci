@@ -215,7 +215,7 @@ describe MafQuery do
     #   it { @maf.official_symbol('A2BP1').should == 'RBFOX1' }
     # end
 
-    describe ".patient_info" do
+    describe ".gene_info" do
       it 'collects the number of mutations and gene lengths for each mutation' do
         gene = @maf.gene_info('A1BG',@repo)
         gene[:mutations].should == 2
@@ -224,7 +224,7 @@ describe MafQuery do
       end
     end
 
-    describe ".gene_info" do
+    describe ".patient_info" do
       it 'collects the number of patients with a mutation in a gene and its length' do
         patient = @maf.patient_info('BH-A0HP',@repo)
         patient[:mutation_count].should == 1

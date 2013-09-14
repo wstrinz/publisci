@@ -13,6 +13,6 @@ SELECT DISTINCT ?patient_id WHERE {
     qb:measure ?patient_id_property.
 
   ?obs a qb:Observation;
-    ?column_measure [ sio:SIO_000300 <http://identifiers.org/hgnc.symbol/%{hugo_symbol}> ];
+    ?column_measure <http://identifiers.org/hgnc.symbol/%{hugo_symbol}> ;
     ?patient_id_property ?patient_id .
 }

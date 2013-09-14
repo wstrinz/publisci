@@ -38,7 +38,6 @@ describe PubliSci::DSL do
           ?observation a <http://purl.org/linked-data/cube#Observation>;
             <http://onto.strinz.me/properties/Hugo_Symbol> ?node.
 
-          ?node <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>
         }
 
         EOF
