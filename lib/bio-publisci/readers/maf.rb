@@ -32,7 +32,7 @@ module PubliSci
 
         options[:no_labels] ||= true
         options[:lookup_hugo] ||= false
-        options[:complex_objects] ||= true
+        options[:complex_objects] ||= false
         options[:ranges] ||= COMPONENT_RANGES
 
 

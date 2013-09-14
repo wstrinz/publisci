@@ -964,21 +964,21 @@ ns:obs2 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/2/8> ;
-  prop:Center <node/2/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A1BG> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/2/12> ;
-  prop:Start_Position <node/2/13> ;
-  prop:End_Position <node/2/14> ;
-  prop:Strand <node/2/15> ;
-  prop:Reference_Allele <node/2/16> ;
-  prop:Tumor_Seq_Allele1 <node/2/17> ;
-  prop:Tumor_Seq_Allele2 <node/2/18> ;
-  prop:dbSNP_RS <node/2/19> ;
+  prop:Chromosome 19 ;
+  prop:Start_Position 58862784 ;
+  prop:End_Position 58862784 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "C" ;
+  prop:Tumor_Seq_Allele1 "C" ;
+  prop:Tumor_Seq_Allele2 "T" ;
+  prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A22B-01A-11D-A159-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A22B-10A-01D-A159-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/2/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/2/23> ;
+  prop:Match_Norm_Seq_Allele1 "C" ;
+  prop:Match_Norm_Seq_Allele2 "C" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -988,68 +988,6 @@ ns:obs2 a qb:Observation ;
   prop:patient_id "E9-A22B" ;
   prop:sample_id "01A-11D-A159-09" ;
   .
-
-<node/2/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
-
-<node/2/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/10/1> . 
-    
-<node/2/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/2/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 19  .
-
-<node/2/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/13/1> . 
-    
-<node/2/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 58862784  .
-
-<node/2/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/14/1> . 
-    
-<node/2/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 58862784  .
-
-<node/2/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/2/15/1> . 
-    
-<node/2/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/2/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "C"  .
-
-<node/2/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "C"  .
-
-<node/2/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "T"  .
-
-<node/2/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> "novel"  .
-
-<node/2/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "C"  .
-
-<node/2/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "C"  .  
 
 ns:obs3 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1061,21 +999,21 @@ ns:obs3 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/3/8> ;
-  prop:Center <node/3/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A1BG> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/3/12> ;
-  prop:Start_Position <node/3/13> ;
-  prop:End_Position <node/3/14> ;
-  prop:Strand <node/3/15> ;
-  prop:Reference_Allele <node/3/16> ;
-  prop:Tumor_Seq_Allele1 <node/3/17> ;
-  prop:Tumor_Seq_Allele2 <node/3/18> ;
-  prop:dbSNP_RS <node/3/19> ;
+  prop:Chromosome 19 ;
+  prop:Start_Position 58864366 ;
+  prop:End_Position 58864366 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS <http://identifiers.org/dbsnp/151098196> ;
   prop:Tumor_Sample_Barcode "TCGA-E9-A1NH-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E9-A1NH-11A-33D-A14G-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/3/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/3/23> ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1085,68 +1023,6 @@ ns:obs3 a qb:Observation ;
   prop:patient_id "E9-A1NH" ;
   prop:sample_id "01A-11D-A14G-09" ;
   .
-
-<node/3/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1BG>  .
-
-<node/3/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/10/1> . 
-    
-<node/3/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/3/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 19  .
-
-<node/3/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/13/1> . 
-    
-<node/3/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 58864366  .
-
-<node/3/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/14/1> . 
-    
-<node/3/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 58864366  .
-
-<node/3/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/3/15/1> . 
-    
-<node/3/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/3/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/3/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/3/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "A"  .
-
-<node/3/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/dbsnp/151098196>  .
-
-<node/3/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/3/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs4 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1158,22 +1034,22 @@ ns:obs4 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/4/8> ;
-  prop:Entrez_Gene_Id <node/4/9> ;
-  prop:Center <node/4/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A1CF> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/4/12> ;
-  prop:Start_Position <node/4/13> ;
-  prop:End_Position <node/4/14> ;
-  prop:Strand <node/4/15> ;
-  prop:Reference_Allele <node/4/16> ;
-  prop:Tumor_Seq_Allele1 <node/4/17> ;
-  prop:Tumor_Seq_Allele2 <node/4/18> ;
-  prop:dbSNP_RS <node/4/19> ;
+  prop:Chromosome 10 ;
+  prop:Start_Position 52595854 ;
+  prop:End_Position 52595854 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A0HP-01A-12D-A099-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A0HP-10A-01D-A099-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/4/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/4/23> ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1183,72 +1059,6 @@ ns:obs4 a qb:Observation ;
   prop:patient_id "BH-A0HP" ;
   prop:sample_id "01A-12D-A099-09" ;
   .
-
-<node/4/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
-
-<node/4/9>
-  a <http://identifiers.org/ncbigene>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/ncbigene29974>  .
-
-<node/4/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/10/1> . 
-    
-<node/4/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/4/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 10  .
-
-<node/4/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/13/1> . 
-    
-<node/4/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 52595854  .
-
-<node/4/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/14/1> . 
-    
-<node/4/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 52595854  .
-
-<node/4/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/4/15/1> . 
-    
-<node/4/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/4/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/4/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/4/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "A"  .
-
-<node/4/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> "novel"  .
-
-<node/4/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/4/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs5 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1260,22 +1070,22 @@ ns:obs5 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/5/8> ;
-  prop:Entrez_Gene_Id <node/5/9> ;
-  prop:Center <node/5/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A1CF> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/29974> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/5/12> ;
-  prop:Start_Position <node/5/13> ;
-  prop:End_Position <node/5/14> ;
-  prop:Strand <node/5/15> ;
-  prop:Reference_Allele <node/5/16> ;
-  prop:Tumor_Seq_Allele1 <node/5/17> ;
-  prop:Tumor_Seq_Allele2 <node/5/18> ;
-  prop:dbSNP_RS <node/5/19> ;
+  prop:Chromosome 10 ;
+  prop:Start_Position 52595937 ;
+  prop:End_Position 52595937 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-BH-A18P-01A-11D-A12B-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-BH-A18P-11A-43D-A12B-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/5/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/5/23> ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1285,72 +1095,6 @@ ns:obs5 a qb:Observation ;
   prop:patient_id "BH-A18P" ;
   prop:sample_id "01A-11D-A12B-09" ;
   .
-
-<node/5/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A1CF>  .
-
-<node/5/9>
-  a <http://identifiers.org/ncbigene>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/ncbigene29974>  .
-
-<node/5/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/10/1> . 
-    
-<node/5/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/5/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 10  .
-
-<node/5/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/13/1> . 
-    
-<node/5/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 52595937  .
-
-<node/5/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/14/1> . 
-    
-<node/5/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 52595937  .
-
-<node/5/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/5/15/1> . 
-    
-<node/5/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/5/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/5/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/5/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "A"  .
-
-<node/5/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> "novel"  .
-
-<node/5/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/5/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs6 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1362,21 +1106,21 @@ ns:obs6 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/6/8> ;
-  prop:Center <node/6/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/6/12> ;
-  prop:Start_Position <node/6/13> ;
-  prop:End_Position <node/6/14> ;
-  prop:Strand <node/6/15> ;
-  prop:Reference_Allele <node/6/16> ;
-  prop:Tumor_Seq_Allele1 <node/6/17> ;
-  prop:Tumor_Seq_Allele2 <node/6/18> ;
-  prop:dbSNP_RS <node/6/19> ;
+  prop:Chromosome 16 ;
+  prop:Start_Position 7568361 ;
+  prop:End_Position 7568361 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "C" ;
+  prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-D8-A1JN-01A-11D-A13L-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-D8-A1JN-10A-01D-A13O-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/6/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/6/23> ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
   prop:Sequencing_Phase "Phase_IV" ;
   prop:Validation_Method "none" ;
   prop:Score 1 ;
@@ -1386,68 +1130,6 @@ ns:obs6 a qb:Observation ;
   prop:patient_id "D8-A1JN" ;
   prop:sample_id "01A-11D-A13L-09" ;
   .
-
-<node/6/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
-
-<node/6/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/10/1> . 
-    
-<node/6/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/6/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 16  .
-
-<node/6/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/13/1> . 
-    
-<node/6/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 7568361  .
-
-<node/6/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/14/1> . 
-    
-<node/6/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 7568361  .
-
-<node/6/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/6/15/1> . 
-    
-<node/6/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/6/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/6/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/6/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "C"  .
-
-<node/6/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> "novel"  .
-
-<node/6/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/6/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
 ns:obs7 a qb:Observation ;
   qb:dataSet ns:dataset-maf_example ;
@@ -1459,22 +1141,22 @@ ns:obs7 a qb:Observation ;
   prop:Mutation_Status <code/mutation_status/Somatic> ;
   prop:Sequence_Source <code/sequence_source/WXS> ;
   prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
-  prop:Hugo_Symbol <node/7/8> ;
-  prop:Entrez_Gene_Id <node/7/9> ;
-  prop:Center <node/7/10> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
+  prop:Center "genome.wustl.edu" ;
   prop:NCBI_Build 37 ;
-  prop:Chromosome <node/7/12> ;
-  prop:Start_Position <node/7/13> ;
-  prop:End_Position <node/7/14> ;
-  prop:Strand <node/7/15> ;
-  prop:Reference_Allele <node/7/16> ;
-  prop:Tumor_Seq_Allele1 <node/7/17> ;
-  prop:Tumor_Seq_Allele2 <node/7/18> ;
-  prop:dbSNP_RS <node/7/19> ;
+  prop:Chromosome 16 ;
+  prop:Start_Position 7102099 ;
+  prop:End_Position 7102099 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "T" ;
+  prop:dbSNP_RS "novel" ;
   prop:Tumor_Sample_Barcode "TCGA-E2-A1BC-01A-11D-A14G-09" ;
   prop:Matched_Norm_Sample_Barcode "TCGA-E2-A1BC-10A-01D-A12Q-09" ;
-  prop:Match_Norm_Seq_Allele1 <node/7/22> ;
-  prop:Match_Norm_Seq_Allele2 <node/7/23> ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
   prop:Tumor_Validation_Allele1 "G" ;
   prop:Tumor_Validation_Allele2 "T" ;
   prop:Match_Norm_Validation_Allele1 "G" ;
@@ -1488,70 +1170,4 @@ ns:obs7 a qb:Observation ;
   prop:patient_id "E2-A1BC" ;
   prop:sample_id "01A-11D-A14G-09" ;
   .
-
-<node/7/8>
-  a <http://edamontology.org/data_1791>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/hgnc.symbol/A2BP1>  .
-
-<node/7/9>
-  a <http://identifiers.org/ncbigene>  ;
-  <http://semanticscience.org/resource/SIO_000300> <http://identifiers.org/ncbigene54715>  .
-
-<node/7/10>
-  a foaf:homepage  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/10/1> . 
-    
-<node/7/10/1>
-  <http://semanticscience.org/resource/SIO_000300> "genome.wustl.edu" .
-
-<node/7/12>
-  a <http://purl.org/obo/owl/SO#SO_0000340>  ;
-  <http://semanticscience.org/resource/SIO_000300> 16  .
-
-<node/7/13>
-  a <http://biohackathon.org/resource/faldo#begin>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/13/1> . 
-    
-<node/7/13/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 7102099  .
-
-<node/7/14>
-  a <http://biohackathon.org/resource/faldo#end>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/14/1> . 
-    
-<node/7/14/1>
-  a <http://biohackathon.org/resource/faldo#Position>  ;
-  <http://semanticscience.org/resource/SIO_000300> 7102099  .
-
-<node/7/15>
-  a <http://edamontology.org/data_0853>  ;
-  <http://semanticscience.org/resource/SIO_000008> <node/7/15/1> . 
-    
-<node/7/15/1>
-  <http://semanticscience.org/resource/SIO_000300> "+" .
-
-<node/7/16>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/7/17>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/7/18>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "T"  .
-
-<node/7/19>
-  a <http://identifiers.org/dbsnp>  ;
-  <http://semanticscience.org/resource/SIO_000300> "novel"  .
-
-<node/7/22>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .
-
-<node/7/23>
-  a <http://purl.org/obo/owl/SO#SO_0001023>  ;
-  <http://semanticscience.org/resource/SIO_000300> "G"  .  
 
