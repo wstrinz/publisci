@@ -90,7 +90,13 @@ class MafQuery
       restrictions.each{|restrict,value|
         prop = RESTRICTIONS[restrict.to_sym] || "<http://onto.strinz.me/properties/#{restrict}>"
         if value.is_a? String
-          value = '"' + value + '"'
+          if RDF::Resource(value).valid?
+            if(value[/http:\/\//])
+              value = RDF::Resource(value).to_base
+            end
+          else
+            value = '"' + value + '"'
+          end
         end
         str << "\n  #{prop} #{value} ;"
       }
@@ -187,8 +193,8 @@ class MafQuery
 
     def patient_info(id,repo)
       symbols = Array(to_por(select_property(repo,"Hugo_Symbol",patient: id)))
-      patient_id = select_property(repo,"patient_id",patient: id).to_s
-      patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
+      # patient_id = select_property(repo,"patient_id",patient: id).to_s
+      patient = {patient_id: id, mutation_count: symbols.size, mutations:[]}
 
       symbols.each{|sym| patient[:mutations] << {symbol: sym, length: gene_length(sym)}}
       patient
