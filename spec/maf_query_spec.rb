@@ -10,7 +10,7 @@ class MafQuery
   }
 
     def to_por(solution)
-      if solution.is_a?(Fixnum) or solution.is_a?(String)
+      if solution.is_a?(Fixnum) or solution.is_a?(String) or solution.is_a?(Symbol)
         solution
       elsif solution.is_a? RDF::Query::Solutions
         solution.map{|sol|
@@ -73,9 +73,19 @@ class MafQuery
       SPARQL.execute(qry,repo)
     end
 
-    def select_property(repo,property="Hugo_Symbol",restrictions={})
+    def select_property(repo,property=["Hugo_Symbol"],restrictions={})
     	# qry = IO.read('resources/queries/maf_column.rq').gsub('%{patient}',patient_id).gsub('%{column}',property)
-      target_property = RESTRICTIONS[property.to_sym] || "<http://onto.strinz.me/properties/#{property}>"
+      property = Array(property)
+      selects = property
+      property = property.map{|prop|
+        RESTRICTIONS[prop.to_sym] || "<http://onto.strinz.me/properties/#{prop}>"
+      }
+      
+      targets = ""
+      property.each_with_index{|p,i|
+        targets << "\n  #{p} ?#{selects[i]} ;"
+      }
+
       str = ""
       restrictions.each{|restrict,value|
         prop = RESTRICTIONS[restrict.to_sym] || "<http://onto.strinz.me/properties/#{restrict}>"
@@ -84,26 +94,33 @@ class MafQuery
         end
         str << "\n  #{prop} #{value} ;"
       }
+
+
       qry = <<-EOF
       PREFIX qb:   <http://purl.org/linked-data/cube#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX sio: <http://semanticscience.org/resource/>
 
-      SELECT DISTINCT ?column WHERE {
+      SELECT DISTINCT ?#{selects.join(" ?")} WHERE {
         ?obs a qb:Observation;
         #{str}
-        #{target_property} ?column .
+        #{targets} 
+        .
       }
       EOF
 
-      results = SPARQL.execute(qry,repo).map(&:column).map{|val| 
-        if val.is_a?(RDF::URI) and val.to_s["node"]
-          node_value(repo,val)
-        else
-          val
-        end
+      results = SPARQL.execute(qry,repo)
+      # results = results.map{ |solution| 
+      #   solution.bindings.map{ |bind,result| [bind, result]}
 
-      }.flatten
+      #         # .map(&:column).map{|val| 
+      #   # if val.is_a?(RDF::URI) and val.to_s["node"]
+      #   #   node_value(repo,val)
+      #   # else
+      #   #   val
+      #   # end
+
+      # }.flatten
 
       if results.size == 1
         results.first
@@ -169,7 +186,7 @@ class MafQuery
     end
 
     def patient_info(id,repo)
-      symbols = Array(select_property(repo,"Hugo_Symbol",patient: id)).map(&:to_s)
+      symbols = Array(to_por(select_property(repo,"Hugo_Symbol",patient: id)))
       patient_id = select_property(repo,"patient_id",patient: id).to_s
       patient = {patient_id: patient_id, mutation_count: symbols.size, mutations:[]}
 
@@ -216,15 +233,26 @@ describe MafQuery do
   end
 
   describe ".select_property" do
-  	it { @maf.select_property(@repo,"Hugo_Symbol", patient: "BH-A0HP").should == "http://identifiers.org/hgnc.symbol/A1CF" }
-  	it { @maf.select_property(@repo,"Entrez_Gene_Id",patient: "BH-A0HP").to_s.should == 'http://identifiers.org/ncbigene/29974' }
-  	it { @maf.select_property(@repo,"Center",patient: "BH-A0HP").to_s.should == "genome.wustl.edu" }
-  	it { @maf.select_property(@repo,"NCBI_Build",patient: "BH-A0HP").to_i.should == 37 }
+  	it { @maf.to_por(@maf.select_property(@repo,"Hugo_Symbol", patient: "BH-A0HP")).should == "http://identifiers.org/hgnc.symbol/A1CF" }
+    it { @maf.select_property(@repo,"Entrez_Gene_Id",patient: "BH-A0HP")[:Entrez_Gene_Id].to_s.should == 'http://identifiers.org/ncbigene/29974' }
+    it { @maf.select_property(@repo,"Center",patient: "BH-A0HP")[:Center].to_s.should == "genome.wustl.edu" }
+    it { @maf.select_property(@repo,"NCBI_Build",patient: "BH-A0HP")[:NCBI_Build].to_i.should == 37 }
 
-  	context "extra parsed properties" do
-  		it { @maf.select_property(@repo,"sample_id",patient: "BH-A0HP").should == "01A-12D-A099-09" }
-  		it { @maf.select_property(@repo,"patient_id",patient: "BH-A0HP").should ==  "BH-A0HP" }
-  	end
+    context "extra parsed properties" do
+      it { @maf.select_property(@repo,"sample_id",patient: "BH-A0HP")[:sample_id].should == "01A-12D-A099-09" }
+      it { @maf.select_property(@repo,"patient_id",patient: "BH-A0HP")[:patient_id].should ==  "BH-A0HP" }
+    end
+
+    context "multiple restrictions" do
+      it { @maf.select_property(@repo,"Entrez_Gene_Id",patient: "BH-A0HP", :Chromosome => 10)[:Entrez_Gene_Id].to_s.should == 'http://identifiers.org/ncbigene/29974' }
+      it { @maf.select_property(@repo,"Entrez_Gene_Id",patient: "BH-A0HP", :Chromosome => 2).should == [] }
+    end
+
+    context "multiple selections" do
+      it { @maf.select_property(@repo,['Hugo_Symbol', 'Entrez_Gene_Id'],patient: "BH-A0HP")[:Entrez_Gene_Id].to_s.should == 'http://identifiers.org/ncbigene/29974' }
+      it { @maf.select_property(@repo,['Hugo_Symbol', 'Entrez_Gene_Id'],patient: "BH-A0HP")[:Hugo_Symbol].to_s.should == 'http://identifiers.org/hgnc.symbol/A1CF' }
+      
+    end
 
   	context "non-existant properties" do
   		it { @maf.select_property(@repo,"Chunkiness",patient: "BH-A0HP").should == [] }
