@@ -32,9 +32,13 @@ class PubliSciServer < Sinatra::Base
         end
     end
 
-    def content_response(haml_page,content=:no_content)
+    def content_response(html_resp,content=:no_content)
       if request.accept? 'text/html'
-        haml :"#{haml_page}"
+        if html_resp.is_a? Symbol
+          haml html_resp
+        else
+          html_resp
+        end
       else
         content
       end
@@ -58,17 +62,36 @@ class PubliSciServer < Sinatra::Base
     end
 
     def clear_repository
-      raise "not implemented yet"
+      repo = settings.repository
+      if repo.is_a? RDF::FourStore::Repository
+      passwd = settings.sudo_pass
+      raise "need sudo password set to clear 4store" unless passwd
+      `echo #{passwd} | sudo -S killall 4s-backend`
+      `echo #{passwd} | sudo -S killall 4s-httpd`
+      `echo #{passwd} | sudo -S 4s-backend-setup test`
+      `echo #{passwd} | sudo -S 4s-backend test`
+      `echo #{passwd} | sudo -S 4s-httpd -U test`
+
+      else
+        repo.clear
+      end
     end
 
     def example_query
-      "SELECT * WHERE {?s ?p ?o}"
+      "SELECT * WHERE {?s ?p ?o} LIMIT 10"
     end
 
     def import_rdf(input,type)
-      if type == :file
-        oldsize = settings.repository.size
-        settings.repository.load(input.path)
+      if input.is_a?(File) || input.is_a?(Tempfile)
+        f = Tempfile.new(['',".#{type}"])
+        begin
+        f.write(input.read)
+        f.close
+          oldsize = settings.repository.size
+          settings.repository.load(f.path, format: type)
+        ensure
+          f.unlink
+        end
         "#{settings.repository.size - oldsize} triples imported"
       else
         oldsize = settings.repository.size

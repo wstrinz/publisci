@@ -10,7 +10,8 @@ class PubliSciServer < Sinatra::Base
   enable :sessions
 
   set :views, File.dirname(__FILE__) + '/../server/views'
-  set :repository, RDF::Repository.new
+  set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
+  # set :repository, RDF::Repository.new
   settings.repository.load(File.dirname(__FILE__) + '/../resources/primer.ttl')
   set :sudo_pass, nil
 
@@ -44,7 +45,6 @@ class PubliSciServer < Sinatra::Base
 
     @query = params[:query]
     @result = content_for(query_repository(params[:query]))
-    # @result =" asdfasdfas"
 
     content_response :query, @result
   end
@@ -85,28 +85,31 @@ class PubliSciServer < Sinatra::Base
     redirect '/repository' unless @repo
 
     if params[:upload_file]
-      @result = import_rdf(params[:upload_file][:tempfile], :file)
+      type = File.extname(params[:upload_file][:filename])
+      if type.size > 0
+        type = type[1..-1].to_sym
+      else
+        raise "Unknown Type for file #{params[:upload_file][:filename]}"
+      end
+      @result = import_rdf(params[:upload_file][:tempfile], type)
     else
       @result = import_rdf(params[:rdf_string], params[:rdf_format])
     end
     flash.now[:notice] = @result
-    content_response haml :import, content_for(@result)
+    content_response :import, content_for(@result)
   end
 
-  post "/repository/export" do
-    type = params[:repo_type]
-    settings.sudo_pass = params[:sudo_pass] if params[:sudo_pass]
-    uri = params[:repo_uri] if params[:repo_uri]
+  get "/repository/dump" do
+    @repo = settings.repository
+    redirect '/repository' unless @repo
 
-    @repo = create_repository(type,uri)
-
-    haml :export
+    content_response(:dump, @repo)
   end
 
-  get "/repository/delete" do
+  get "/repository/clear" do
     clear_repository
 
-    redirect 'repository'
+    redirect '/'
   end
 
   run! if app_file == $0
