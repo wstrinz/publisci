@@ -1,4 +1,6 @@
 class PubliSciServer < Sinatra::Base
+  set :public_dir, File.dirname(__FILE__) + '/public'
+
   get "/" do
     redirect 'repository'
   end

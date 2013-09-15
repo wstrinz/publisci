@@ -1,25 +1,65 @@
-%p{style: "color:green"}=flash[:notice]
+%div{style: "color:green"}=flash[:notice]
+%style{:media => "screen", :type => "text/css"}
+  body {
+  overflow: hidden;
+  }
+  
+  \#editor {
+  margin: 0;
+  position: absolute;
+  top: 70;
+  bottom: 80;
+  left: 0;
+  right: 0;
+  }
+  
+  \#links {
+  margin: 0;
+  position: absolute;
+  top: 550;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  }
+
+  \#send {
+  margin: 0;
+  position: absolute;
+  top: 510;
+  bottom: 40;
+  left: 800;
+  right: 0;
+  }
 
 %div
   %p DSL
   %p=h(@repo)
   %p=h(@repo.uri) if @repo.uri
 
-%table{border: "1"}
-  %tbody
-    %tr
-      %td
-        %strong Input
-      %td
-        %form{ action: "", method: "post"}
-          %textarea{name: "script", :class => "text", cols: "80", rows: "20"}=@script
-          %input{:type => "submit", :value => "Send", :class => "button"}
+%pre#editor=@script
+%script{:charset => "utf-8", :src => "src-min-noconflict/ace.js", :type => "text/javascript"}
+:javascript
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/twilight");
+  editor.getSession().setMode("ace/mode/ruby");
+  document.getElementById('editor').style.fontSize='16px';
 
+  function doSubmit(){
 
-%table{border: "1"}
-  %tbody
-    %tr
-      %td
-        %a{:href => "/repository"} Repository
-      %td
-        %a{:href => "/query"} Query
+    document.getElementById("dslInput").value = editor.getSession().getValue();
+    document.getElementById("dslForm").submit()
+  }
+
+%input#send{:onclick => "doSubmit();", :type => "button", :value => "Submit"}/
+
+%div#links
+  %table{border: "1"}
+    %tbody
+      %tr
+        %td
+          %a{:href => "/repository"} Repository
+        %td
+          %a{:href => "/query"} Query
+
+%form#dslForm{ action: "", method: "post"}
+  %input#dslInput{name: "script", type: "hidden"}
