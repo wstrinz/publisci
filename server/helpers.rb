@@ -6,6 +6,40 @@ class PubliSciServer < Sinatra::Base
       CGI::escapeHTML(str.to_s)
     end
 
+    CONTENT_TYPES={'xml' => 'text/xml','json' => 'application/json'}
+
+    def content_for(data,fallback=:to_html,format=(params[:format] || request.accept))
+        if params[:format]
+          format = CONTENT_TYPES[format]
+        else
+          format = format.first
+        end
+        if CONTENT_TYPES.values.include? format
+          content_type format #, :charset => 'utf-8'
+        end
+
+        case format.to_s
+        when 'text/xml'
+          data.to_xml
+        when 'application/json'
+          data.to_json
+        else
+          if data.respond_to? fallback
+            data.send(fallback)
+          else
+            data.to_s
+          end
+        end
+    end
+
+    def content_response(haml_page,content=:no_content)
+      if request.accept? 'text/html'
+        haml :"#{haml_page}"
+      else
+        content
+      end
+    end
+
     def create_repository(type,uri)
       if type == "in_memory"
         flash[:notice] = "#{type} repository created!"
@@ -27,17 +61,21 @@ class PubliSciServer < Sinatra::Base
       raise "not implemented yet"
     end
 
+    def example_query
+      "SELECT * WHERE {?s ?p ?o}"
+    end
+
     def import_rdf(input,type)
       if type == :file
-
-        raise "file type #{input.read}"
+        oldsize = settings.repository.size
+        settings.repository.load(input.path)
+        "#{settings.repository.size - oldsize} triples imported"
       else
         oldsize = settings.repository.size
         read = RDF::Reader.for(type.to_sym)
         read = read.new(input)
         settings.repository << read
-        flash.now[:notice] = "#{settings.repository.size - oldsize} triples imported"
-        # raise "string type #{type}"
+        "#{settings.repository.size - oldsize} triples imported"
       end
     end
 
@@ -51,21 +89,7 @@ class PubliSciServer < Sinatra::Base
         raise "Unrecognized Repository: #{settings.repository.class}"
       end
 
-      if format_result
-        str = '<table border="1">'
-        sols.map{|solution|
-          str << "<tr>"
-          solution.bindings.map{|bind,result|
-            str << "<td>" + CGI.escapeHTML("#{bind}:  #{result.to_s}") + "</td>"
-          }
-          str << "</tr>"
-        }
-        str << "</table>"
-        
-        str
-      else
-        sols
-      end
+     sols
 
     end
   end

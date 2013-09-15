@@ -1,7 +1,7 @@
 %div
   %p Query Repository
-  %p=@repo
-  %p=@repo.uri if @repo.uri
+  %p=h(@repo)
+  %p=h(@repo.uri) if @repo.uri
 
 %table{border: "1"}
   %tbody
@@ -23,6 +23,6 @@
   %tbody
     %tr
       %td
-        %a{:href => "repo"} Repository
+        %a{:href => "repository"} Repository
       %td
         %a{:href => "dsl"} DSL
