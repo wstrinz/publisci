@@ -6,6 +6,10 @@ class PubliSciServer < Sinatra::Base
       CGI::escapeHTML(str.to_s)
     end
 
+    def format_ttl(str)
+      str.gsub("\n","\n<br>").gsub('<br>     ','<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ').gsub('<br>   ','<br>&nbsp; &nbsp; &nbsp; ')
+    end
+
     CONTENT_TYPES={'xml' => 'text/xml','json' => 'application/json'}
 
     def content_for(data,fallback=:to_html,format=(params[:format] || request.accept))

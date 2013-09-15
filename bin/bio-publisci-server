@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-require 'sinatra/base'
-require 'bio-publisci'
-require 'rack-flash'
 require 'cgi'
-require "sinatra/reloader"
+
+require 'bio-publisci'
+
+require 'sinatra/base'
 require "sinatra/linkeddata"
 require "sinatra/cross_origin"
-require "sinatra/cross_origin"
+require 'rack-flash'
 
 class PubliSciServer < Sinatra::Base
   configure do
@@ -27,5 +27,5 @@ class PubliSciServer < Sinatra::Base
   require_relative '../server/routes.rb'
   
 
-  run! if app_file == $0
+  run!
 end
