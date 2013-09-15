@@ -1,5 +1,7 @@
+%p{style: "color:green"}=flash[:notice]
+
 %div
-  %p Query Repository
+  %p DSL
   %p=h(@repo)
   %p=h(@repo.uri) if @repo.uri
 
@@ -7,16 +9,11 @@
   %tbody
     %tr
       %td
-        %strong Query
+        %strong Input
       %td
         %form{ action: "", method: "post"}
-          %textarea{name: "query", :class => "text", cols: "80", rows: "20"}=@query
+          %textarea{name: "script", :class => "text", cols: "80", rows: "20"}=@script
           %input{:type => "submit", :value => "Send", :class => "button"}
-    %tr
-      %td
-        %strong Results
-      %td
-        %p=@result
 
 
 %table{border: "1"}
@@ -25,4 +22,4 @@
       %td
         %a{:href => "/repository"} Repository
       %td
-        %a{:href => "/dsl"} DSL
+        %a{:href => "/query"} Query

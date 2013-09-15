@@ -81,6 +81,27 @@ class PubliSciServer < Sinatra::Base
       "SELECT * WHERE {?s ?p ?o} LIMIT 10"
     end
 
+    def example_dsl
+      <<-EOF
+data do
+  object "https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv"
+
+  object "https://raw.github.com/wstrinz/bioruby-publisci/master/resources/weather.numeric.arff"
+end
+      EOF
+    end
+
+    def load_dsl(script)
+      ev = PubliSci::DSL::Instance.new
+      begin
+        ev.instance_eval(script)
+      rescue Exception => e
+        raise "Caught error in eval #{e} #{e.backtrace}"
+      end
+      
+      import_rdf(ev.instance_eval("generate_n3"),:ttl)
+    end
+
     def import_rdf(input,type)
       if input.is_a?(File) || input.is_a?(Tempfile)
         f = Tempfile.new(['',".#{type}"])
