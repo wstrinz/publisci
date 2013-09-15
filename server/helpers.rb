@@ -85,8 +85,8 @@ class PubliSciServer < Sinatra::Base
       if input.is_a?(File) || input.is_a?(Tempfile)
         f = Tempfile.new(['',".#{type}"])
         begin
-        f.write(input.read)
-        f.close
+          f.write(input.read)
+          f.close
           oldsize = settings.repository.size
           settings.repository.load(f.path, format: type)
         ensure
