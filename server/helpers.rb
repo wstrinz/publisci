@@ -7,7 +7,29 @@ class PubliSciServer < Sinatra::Base
     end
 
     def format_ttl(str)
+      #TODO make this actually work right
       str.gsub("\n","\n<br>").gsub('<br>     ','<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ').gsub('<br>   ','<br>&nbsp; &nbsp; &nbsp; ')
+    end
+
+    def configure_server(opts)
+      if opts.size == 1
+        if File.exist? opts[0]
+          raise "configuration from file not yet supported"
+        else
+          print_usage
+        end
+      end
+    end
+
+    def print_usage
+      str = puts <<-EOF
+Bio-PubliSci Server Interface
+
+Description: Start the server and point your browser to localhost:4567
+
+Usage: bio-publisci-server [options]
+
+      EOF
     end
 
     CONTENT_TYPES={'xml' => 'text/xml','json' => 'application/json'}

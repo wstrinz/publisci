@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'cgi'
+require 'yaml'
 
 require 'bio-publisci'
 
@@ -17,12 +18,17 @@ class PubliSciServer < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/../server/views'
   set :repository, RDF::Repository.new
   # set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
-  settings.repository.load(File.dirname(__FILE__) + '/../resources/primer.ttl')
   set :sudo_pass, nil
 
   use Rack::Flash
 
   require_relative '../server/helpers.rb'
+
+  if ARGV[0]
+    configure_server(ARGV)
+  else
+    settings.repository.load(File.dirname(__FILE__) + '/../resources/primer.ttl')
+  end
 
   require_relative '../server/routes.rb'
   
