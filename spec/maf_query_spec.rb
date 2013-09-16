@@ -1,5 +1,5 @@
 require_relative '../lib/bio-publisci.rb'
-       
+
 #sparql = SPARQL::Client.new("#{repo.uri}/sparql/").query(qry)
 
 class MafQuery
@@ -80,7 +80,7 @@ class MafQuery
       property = property.map{|prop|
         RESTRICTIONS[prop.to_sym] || "<http://onto.strinz.me/properties/#{prop}>"
       }
-      
+
       targets = ""
       property.each_with_index{|p,i|
         targets << "\n  #{p} ?#{selects[i]} ;"
@@ -110,16 +110,16 @@ class MafQuery
       SELECT DISTINCT ?#{selects.join(" ?")} WHERE {
         ?obs a qb:Observation;
         #{str}
-        #{targets} 
+        #{targets}
         .
       }
       EOF
 
       results = SPARQL.execute(qry,repo)
-      # results = results.map{ |solution| 
+      # results = results.map{ |solution|
       #   solution.bindings.map{ |bind,result| [bind, result]}
 
-      #         # .map(&:column).map{|val| 
+      #         # .map(&:column).map{|val|
       #   # if val.is_a?(RDF::URI) and val.to_s["node"]
       #   #   node_value(repo,val)
       #   # else
@@ -191,6 +191,10 @@ class MafQuery
       end
     end
 
+    def derive_gene_lengths
+
+    end
+
     def patient_info(id,repo)
       symbols = Array(to_por(select_property(repo,"Hugo_Symbol",patient: id)))
       # patient_id = select_property(repo,"patient_id",patient: id).to_s
@@ -257,7 +261,7 @@ describe MafQuery do
     context "multiple selections" do
       it { @maf.select_property(@repo,['Hugo_Symbol', 'Entrez_Gene_Id'],patient: "BH-A0HP")[:Entrez_Gene_Id].to_s.should == 'http://identifiers.org/ncbigene/29974' }
       it { @maf.select_property(@repo,['Hugo_Symbol', 'Entrez_Gene_Id'],patient: "BH-A0HP")[:Hugo_Symbol].to_s.should == 'http://identifiers.org/hgnc.symbol/A1CF' }
-      
+
     end
 
   	context "non-existant properties" do
@@ -306,9 +310,9 @@ class QueryScript
 
   def select(operation,*args)
     if @__maf.methods.include?(:"select_#{operation}")
-      @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))  
+      @__maf.to_por(@__maf.send(:"select_#{operation}",@__repo,*args))
     else
-      @__maf.to_por(@__maf.select_property(@__repo,operation,*args)) 
+      @__maf.to_por(@__maf.select_property(@__repo,operation,*args))
     end
   end
 
@@ -326,9 +330,9 @@ describe QueryScript do
     before(:all){
       @ev = QueryScript.new
     }
-    
+
     it { @ev.select('patient_count', "BH-A0HP").should > 0 }
-  
+
     context "with instance_eval" do
       it { @ev.instance_eval("select 'patient_count', patient: 'BH-A0HP'").should > 0 }
       it { @ev.instance_eval("select 'Hugo_Symbol', patient: 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }

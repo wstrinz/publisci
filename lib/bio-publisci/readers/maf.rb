@@ -4,8 +4,8 @@ module PubliSci
     COLUMN_NAMES = %w{ Hugo_Symbol Entrez_Gene_Id Center NCBI_Build Chromosome Start_Position End_Position Strand Variant_Classification Variant_Type Reference_Allele Tumor_Seq_Allele1 Tumor_Seq_Allele2 dbSNP_RS  dbSNP_Val_Status Tumor_Sample_Barcode Matched_Norm_Sample_Barcode Match_Norm_Seq_Allele1  Match_Norm_Seq_Allele2  Tumor_Validation_Allele1  Tumor_Validation_Allele2  Match_Norm_Validation_Allele1 Match_Norm_Validation_Allele2 Verification_Status Validation_Status Mutation_Status Sequencing_Phase  Sequence_Source Validation_Method Score BAM_File  Sequencer Tumor_Sample_UUID Matched_Norm_Sample_UUID patient_id sample_id}
 
     COMPONENT_RANGES = { "Tumor_Sample_Barcode" => "xsd:string", "Start_position" => "xsd:int", "Center" => "xsd:string", "NCBI_Build" => "xsd:int", "Chromosome" => "xsd:int" }
-    
-    TCGA_CODES = 
+
+    TCGA_CODES =
       {
         "Variant_Classification" => %w{Frame_Shift_Del Frame_Shift_Ins In_Frame_Del In_Frame_Ins Missense_Mutation Nonsense_Mutation Silent Splice_Site Translation_Start_Site Nonstop_Mutation 3'UTR 3'Flank 5'UTR 5'Flank IGR1  Intron RNA Targeted_Region},
         "Variant_Type" => %w{SNP DNP TNP ONP INS DEL Consolidated},
@@ -23,7 +23,7 @@ module PubliSci
         output = options[:output] || :file
         output_base = options[:output_base] || nil
 
-        @dimensions = %w{Variant_Classification Variant_Type dbSNP_Val_Status Verification_Status Validation_Status Mutation_Status Sequence_Source Sequencer} 
+        @dimensions = %w{Variant_Classification Variant_Type dbSNP_Val_Status Verification_Status Validation_Status Mutation_Status Sequence_Source Sequencer}
         # @codes = %w{Variant_Classification Variant_Type}
         @codes = @dimensions
         @measures = (COLUMN_NAMES - @dimensions - @codes)
@@ -103,11 +103,11 @@ module PubliSci
 
       def sio_values(entry)
         entry[0] = sio_value('http://edamontology.org/data_1791',entry[0]) if entry[0]
-        
+
         # Link entrez genes
         col=1
         entry[col] = sio_value("http://identifiers.org/ncbigene",entry[col]) if entry[col]
-        
+
         col = COLUMN_NAMES.index('dbSNP_RS')
         entry[col] = sio_value("http://identifiers.org/dbsnp", entry[col])
 

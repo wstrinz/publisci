@@ -131,8 +131,24 @@ Usage: bio-publisci-server [options]
       end
     end
 
+    def default_prefixes
+      <<-EOF
+PREFIX qb:    <http://purl.org/linked-data/cube#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
+
+      EOF
+    end
+
     def example_query
-      "SELECT * WHERE {?s ?p ?o} LIMIT 10"
+      default_prefixes +
+      <<-EOF
+SELECT * WHERE {
+  ?s ?p ?o
+} LIMIT 10
+      EOF
     end
 
     def example_dsl
@@ -152,7 +168,7 @@ end
       rescue Exception => e
         raise "Caught error in eval #{e} #{e.backtrace}"
       end
-      
+
       import_rdf(ev.instance_eval("generate_n3"),:ttl)
     end
 

@@ -12,6 +12,7 @@ require 'rdf/rdfxml'
 require 'json/ld'
 
 require 'rserve'
+require 'rest-client'
 
 begin
 	require 'spira'

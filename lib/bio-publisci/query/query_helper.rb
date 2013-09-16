@@ -37,10 +37,10 @@ module PubliSci
     # end
 
     def execute(string,store,type=:fourstore)
-    	if type == :graph || store.is_a?(RDF::Graph) || store.is_a?(RDF::Repository)
-				sparql = SPARQL::Client.new(store)
-			elsif store.is_a? PubliSci::Store
+			if store.is_a?(PubliSci::Store) || store.is_a?(RDF::FourStore)
 				sparql = SPARQL::Client.new(store.url+"/sparql/")
+      elsif type == :graph || store.is_a?(RDF::Graph) || store.is_a?(RDF::Repository)
+        sparql = SPARQL::Client.new(store)
 			elsif type == :fourstore
 				sparql = SPARQL::Client.new(store+"/sparql/")
       end
@@ -118,6 +118,6 @@ SELECT DISTINCT ?label WHERE {
   end
 
   class QueryHelper
-    include PubliSci::Query
+    extend PubliSci::Query
   end
 end

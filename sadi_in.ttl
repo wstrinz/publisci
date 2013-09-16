@@ -1,0 +1,506 @@
+  @prefix sio: <http://semanticscience.org/resource/>.
+  @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+  @prefix serviceowl: <http://biordf.org:8080/sadi_service_ontologies/HUGO_2_ENSEMBLGENEINFO.owl/>.
+
+    <http://identifiers.org/hgnc.symbol/ZAN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZAN".
+    <http://identifiers.org/hgnc.symbol/FUNDC2P2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FUNDC2P2".
+    <http://identifiers.org/hgnc.symbol/KIAA1377> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KIAA1377".
+    <http://identifiers.org/hgnc.symbol/SOX9> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SOX9".
+    <http://identifiers.org/hgnc.symbol/COL7A1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/COL7A1".
+    <http://identifiers.org/hgnc.symbol/SLC4A11> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SLC4A11".
+    <http://identifiers.org/hgnc.symbol/RTL1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RTL1".
+    <http://identifiers.org/hgnc.symbol/OR5P2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR5P2".
+    <http://identifiers.org/hgnc.symbol/NCOR1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NCOR1".
+    <http://identifiers.org/hgnc.symbol/LDLR> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LDLR".
+    <http://identifiers.org/hgnc.symbol/CHST9> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CHST9".
+    <http://identifiers.org/hgnc.symbol/F2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/F2".
+    <http://identifiers.org/hgnc.symbol/FAM53A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FAM53A".
+    <http://identifiers.org/hgnc.symbol/ADAM19> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ADAM19".
+    <http://identifiers.org/hgnc.symbol/DAB2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DAB2".
+    <http://identifiers.org/hgnc.symbol/GRID2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GRID2".
+    <http://identifiers.org/hgnc.symbol/WDR64> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/WDR64".
+    <http://identifiers.org/hgnc.symbol/MECOM> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MECOM".
+    <http://identifiers.org/hgnc.symbol/MYH1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MYH1".
+    <http://identifiers.org/hgnc.symbol/PFKL> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PFKL".
+    <http://identifiers.org/hgnc.symbol/RDH16> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RDH16".
+    <http://identifiers.org/hgnc.symbol/HARS> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/HARS".
+    <http://identifiers.org/hgnc.symbol/DTX4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DTX4".
+    <http://identifiers.org/hgnc.symbol/LRRC40> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LRRC40".
+    <http://identifiers.org/hgnc.symbol/PRX> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PRX".
+    <http://identifiers.org/hgnc.symbol/TRUB1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TRUB1".
+    <http://identifiers.org/hgnc.symbol/ADCK4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ADCK4".
+    <http://identifiers.org/hgnc.symbol/ENSG00000249665> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000249665".
+    <http://identifiers.org/hgnc.symbol/ADD3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ADD3".
+    <http://identifiers.org/hgnc.symbol/IGHV3-21> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/IGHV3-21".
+    <http://identifiers.org/hgnc.symbol/KIR3DL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KIR3DL2".
+    <http://identifiers.org/hgnc.symbol/LOC729057> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC729057".
+    <http://identifiers.org/hgnc.symbol/INTS1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/INTS1".
+    <http://identifiers.org/hgnc.symbol/BCHE> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/BCHE".
+    <http://identifiers.org/hgnc.symbol/IGKV3-15> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/IGKV3-15".
+    <http://identifiers.org/hgnc.symbol/C14orf145> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C14orf145".
+    <http://identifiers.org/hgnc.symbol/MPDZ> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MPDZ".
+    <http://identifiers.org/hgnc.symbol/TANC2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TANC2".
+    <http://identifiers.org/hgnc.symbol/ADAMTS20> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ADAMTS20".
+    <http://identifiers.org/hgnc.symbol/NTRK2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NTRK2".
+    <http://identifiers.org/hgnc.symbol/TMCC1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TMCC1".
+    <http://identifiers.org/hgnc.symbol/IQGAP3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/IQGAP3".
+    <http://identifiers.org/hgnc.symbol/ANXA4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ANXA4".
+    <http://identifiers.org/hgnc.symbol/ASPM> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ASPM".
+    <http://identifiers.org/hgnc.symbol/SETX> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SETX".
+    <http://identifiers.org/hgnc.symbol/OR13C9> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR13C9".
+    <http://identifiers.org/hgnc.symbol/XRCC6BP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/XRCC6BP1".
+    <http://identifiers.org/hgnc.symbol/AKR1C2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AKR1C2".
+    <http://identifiers.org/hgnc.symbol/KIF2A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KIF2A".
+    <http://identifiers.org/hgnc.symbol/EPB41L5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/EPB41L5".
+    <http://identifiers.org/hgnc.symbol/SSX3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SSX3".
+    <http://identifiers.org/hgnc.symbol/CHD8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CHD8".
+    <http://identifiers.org/hgnc.symbol/LOC642373> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC642373".
+    <http://identifiers.org/hgnc.symbol/RNF215> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RNF215".
+    <http://identifiers.org/hgnc.symbol/LOC388692> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC388692".
+    <http://identifiers.org/hgnc.symbol/PCNXL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PCNXL2".
+    <http://identifiers.org/hgnc.symbol/PCDHB6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PCDHB6".
+    <http://identifiers.org/hgnc.symbol/ODZ4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ODZ4".
+    <http://identifiers.org/hgnc.symbol/MUC5B> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MUC5B".
+    <http://identifiers.org/hgnc.symbol/COL25A1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/COL25A1".
+    <http://identifiers.org/hgnc.symbol/EMB> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/EMB".
+    <http://identifiers.org/hgnc.symbol/BAG4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/BAG4".
+    <http://identifiers.org/hgnc.symbol/POTEE> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/POTEE".
+    <http://identifiers.org/hgnc.symbol/LOC646214> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC646214".
+    <http://identifiers.org/hgnc.symbol/TDRD6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TDRD6".
+    <http://identifiers.org/hgnc.symbol/TRPM1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TRPM1".
+    <http://identifiers.org/hgnc.symbol/SORBS3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SORBS3".
+    <http://identifiers.org/hgnc.symbol/FLJ36000> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FLJ36000".
+    <http://identifiers.org/hgnc.symbol/C10orf93> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C10orf93".
+    <http://identifiers.org/hgnc.symbol/OR5M3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR5M3".
+    <http://identifiers.org/hgnc.symbol/AQPEP> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AQPEP".
+    <http://identifiers.org/hgnc.symbol/FLNB> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FLNB".
+    <http://identifiers.org/hgnc.symbol/ATP13A3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ATP13A3".
+    <http://identifiers.org/hgnc.symbol/SLC1A6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SLC1A6".
+    <http://identifiers.org/hgnc.symbol/VANGL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/VANGL2".
+    <http://identifiers.org/hgnc.symbol/ANKRD18B> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ANKRD18B".
+    <http://identifiers.org/hgnc.symbol/SLC28A2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SLC28A2".
+    <http://identifiers.org/hgnc.symbol/WDR72> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/WDR72".
+    <http://identifiers.org/hgnc.symbol/CUL3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CUL3".
+    <http://identifiers.org/hgnc.symbol/GRIN2A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GRIN2A".
+    <http://identifiers.org/hgnc.symbol/LOC100130331> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC100130331".
+    <http://identifiers.org/hgnc.symbol/DDX11> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DDX11".
+    <http://identifiers.org/hgnc.symbol/ZNF296> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF296".
+    <http://identifiers.org/hgnc.symbol/PGCP> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PGCP".
+    <http://identifiers.org/hgnc.symbol/ABCA5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ABCA5".
+    <http://identifiers.org/hgnc.symbol/USP15> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/USP15".
+    <http://identifiers.org/hgnc.symbol/RYR2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RYR2".
+    <http://identifiers.org/hgnc.symbol/EXOC6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/EXOC6".
+    <http://identifiers.org/hgnc.symbol/COL6A5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/COL6A5".
+    <http://identifiers.org/hgnc.symbol/ZNF75A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF75A".
+    <http://identifiers.org/hgnc.symbol/CEP78> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CEP78".
+    <http://identifiers.org/hgnc.symbol/FRMD7> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FRMD7".
+    <http://identifiers.org/hgnc.symbol/LILRA4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LILRA4".
+    <http://identifiers.org/hgnc.symbol/ZNF439> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF439".
+    <http://identifiers.org/hgnc.symbol/LOC729915> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC729915".
+    <http://identifiers.org/hgnc.symbol/OR5L2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR5L2".
+    <http://identifiers.org/hgnc.symbol/RFX4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RFX4".
+    <http://identifiers.org/hgnc.symbol/ELN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ELN".
+    <http://identifiers.org/hgnc.symbol/ENSG00000245520> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000245520".
+    <http://identifiers.org/hgnc.symbol/GRM8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GRM8".
+    <http://identifiers.org/hgnc.symbol/LOC440243> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC440243".
+    <http://identifiers.org/hgnc.symbol/TP53> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TP53".
+    <http://identifiers.org/hgnc.symbol/DCP1B> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DCP1B".
+    <http://identifiers.org/hgnc.symbol/FBXL14> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FBXL14".
+    <http://identifiers.org/hgnc.symbol/AMPD3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AMPD3".
+    <http://identifiers.org/hgnc.symbol/INPP4A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/INPP4A".
+    <http://identifiers.org/hgnc.symbol/MYOM3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MYOM3".
+    <http://identifiers.org/hgnc.symbol/PTGER3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PTGER3".
+    <http://identifiers.org/hgnc.symbol/ERO1LB> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ERO1LB".
+    <http://identifiers.org/hgnc.symbol/CLASP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CLASP1".
+    <http://identifiers.org/hgnc.symbol/LOC100294128> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC100294128".
+    <http://identifiers.org/hgnc.symbol/OR1L4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR1L4".
+    <http://identifiers.org/hgnc.symbol/SF4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SF4".
+    <http://identifiers.org/hgnc.symbol/ITSN2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ITSN2".
+    <http://identifiers.org/hgnc.symbol/KIF4B> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KIF4B".
+    <http://identifiers.org/hgnc.symbol/AEBP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AEBP1".
+    <http://identifiers.org/hgnc.symbol/BNC2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/BNC2".
+    <http://identifiers.org/hgnc.symbol/KRTAP10-7> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KRTAP10-7".
+    <http://identifiers.org/hgnc.symbol/LOC392335> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC392335".
+    <http://identifiers.org/hgnc.symbol/SAT2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SAT2".
+    <http://identifiers.org/hgnc.symbol/CCDC63> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CCDC63".
+    <http://identifiers.org/hgnc.symbol/OLFM4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OLFM4".
+    <http://identifiers.org/hgnc.symbol/KCNU1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KCNU1".
+    <http://identifiers.org/hgnc.symbol/CDH8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CDH8".
+    <http://identifiers.org/hgnc.symbol/SPEN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SPEN".
+    <http://identifiers.org/hgnc.symbol/MUC4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MUC4".
+    <http://identifiers.org/hgnc.symbol/ASNSD1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ASNSD1".
+    <http://identifiers.org/hgnc.symbol/CYFIP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CYFIP1".
+    <http://identifiers.org/hgnc.symbol/MRPS31> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MRPS31".
+    <http://identifiers.org/hgnc.symbol/BAZ1A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/BAZ1A".
+    <http://identifiers.org/hgnc.symbol/ZNF845> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF845".
+    <http://identifiers.org/hgnc.symbol/POM121L12> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/POM121L12".
+    <http://identifiers.org/hgnc.symbol/MUC16> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MUC16".
+    <http://identifiers.org/hgnc.symbol/ITPKA> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ITPKA".
+    <http://identifiers.org/hgnc.symbol/DNM2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DNM2".
+    <http://identifiers.org/hgnc.symbol/APEX2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/APEX2".
+    <http://identifiers.org/hgnc.symbol/ANP32C> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ANP32C".
+    <http://identifiers.org/hgnc.symbol/ZIC3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZIC3".
+    <http://identifiers.org/hgnc.symbol/ENSG00000218227> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000218227".
+    <http://identifiers.org/hgnc.symbol/DMD> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DMD".
+    <http://identifiers.org/hgnc.symbol/PES1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PES1".
+    <http://identifiers.org/hgnc.symbol/HS6ST2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/HS6ST2".
+    <http://identifiers.org/hgnc.symbol/ACD> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ACD".
+    <http://identifiers.org/hgnc.symbol/MYF5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MYF5".
+    <http://identifiers.org/hgnc.symbol/PRKCG> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PRKCG".
+    <http://identifiers.org/hgnc.symbol/C10orf71> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C10orf71".
+    <http://identifiers.org/hgnc.symbol/HGC6.3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/HGC6.3".
+    <http://identifiers.org/hgnc.symbol/TMEM214> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TMEM214".
+    <http://identifiers.org/hgnc.symbol/C2orf18> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C2orf18".
+    <http://identifiers.org/hgnc.symbol/FAM171A1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FAM171A1".
+    <http://identifiers.org/hgnc.symbol/RBBP5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RBBP5".
+    <http://identifiers.org/hgnc.symbol/PALLD> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PALLD".
+    <http://identifiers.org/hgnc.symbol/GALNTL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GALNTL2".
+    <http://identifiers.org/hgnc.symbol/FADS2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FADS2".
+    <http://identifiers.org/hgnc.symbol/ARMC7> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ARMC7".
+    <http://identifiers.org/hgnc.symbol/CDHR1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CDHR1".
+    <http://identifiers.org/hgnc.symbol/UBE3C> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/UBE3C".
+    <http://identifiers.org/hgnc.symbol/SCRN1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SCRN1".
+    <http://identifiers.org/hgnc.symbol/C10orf18> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C10orf18".
+    <http://identifiers.org/hgnc.symbol/XPO4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/XPO4".
+    <http://identifiers.org/hgnc.symbol/LOC100289151> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC100289151".
+    <http://identifiers.org/hgnc.symbol/ZNF682> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF682".
+    <http://identifiers.org/hgnc.symbol/AHCTF1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AHCTF1".
+    <http://identifiers.org/hgnc.symbol/LRTOMT> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LRTOMT".
+    <http://identifiers.org/hgnc.symbol/HGS> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/HGS".
+    <http://identifiers.org/hgnc.symbol/FXR1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FXR1".
+    <http://identifiers.org/hgnc.symbol/MAP3K10> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MAP3K10".
+    <http://identifiers.org/hgnc.symbol/PLA2G3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PLA2G3".
+    <http://identifiers.org/hgnc.symbol/ZEB1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZEB1".
+    <http://identifiers.org/hgnc.symbol/LPO> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LPO".
+    <http://identifiers.org/hgnc.symbol/B3GNT8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/B3GNT8".
+    <http://identifiers.org/hgnc.symbol/TFIP11> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TFIP11".
+    <http://identifiers.org/hgnc.symbol/SPTB> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SPTB".
+    <http://identifiers.org/hgnc.symbol/CLCN4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CLCN4".
+    <http://identifiers.org/hgnc.symbol/CPAMD8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CPAMD8".
+    <http://identifiers.org/hgnc.symbol/GCAT> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GCAT".
+    <http://identifiers.org/hgnc.symbol/RASD2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RASD2".
+    <http://identifiers.org/hgnc.symbol/UGT2B15> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/UGT2B15".
+    <http://identifiers.org/hgnc.symbol/MYC> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MYC".
+    <http://identifiers.org/hgnc.symbol/UBE2W> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/UBE2W".
+    <http://identifiers.org/hgnc.symbol/NOC3L> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NOC3L".
+    <http://identifiers.org/hgnc.symbol/RAX2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RAX2".
+    <http://identifiers.org/hgnc.symbol/RHO> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RHO".
+    <http://identifiers.org/hgnc.symbol/SDR16C6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SDR16C6".
+    <http://identifiers.org/hgnc.symbol/SH2B2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SH2B2".
+    <http://identifiers.org/hgnc.symbol/FAM22F> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FAM22F".
+    <http://identifiers.org/hgnc.symbol/FOXD3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FOXD3".
+    <http://identifiers.org/hgnc.symbol/IGF2BP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/IGF2BP1".
+    <http://identifiers.org/hgnc.symbol/LOC643310> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC643310".
+    <http://identifiers.org/hgnc.symbol/WRN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/WRN".
+    <http://identifiers.org/hgnc.symbol/SLC13A4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SLC13A4".
+    <http://identifiers.org/hgnc.symbol/ZMYM3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZMYM3".
+    <http://identifiers.org/hgnc.symbol/NSUN7> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NSUN7".
+    <http://identifiers.org/hgnc.symbol/ZFHX3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZFHX3".
+    <http://identifiers.org/hgnc.symbol/RFC2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RFC2".
+    <http://identifiers.org/hgnc.symbol/SNORA21> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SNORA21".
+    <http://identifiers.org/hgnc.symbol/GCK> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GCK".
+    <http://identifiers.org/hgnc.symbol/TTN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TTN".
+    <http://identifiers.org/hgnc.symbol/SEMA6A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SEMA6A".
+    <http://identifiers.org/hgnc.symbol/TIE1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TIE1".
+    <http://identifiers.org/hgnc.symbol/DCHS1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DCHS1".
+    <http://identifiers.org/hgnc.symbol/MLL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MLL2".
+    <http://identifiers.org/hgnc.symbol/TNFAIP3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TNFAIP3".
+    <http://identifiers.org/hgnc.symbol/CCDC94> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CCDC94".
+    <http://identifiers.org/hgnc.symbol/ZNF829> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF829".
+    <http://identifiers.org/hgnc.symbol/ENSG00000231520> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000231520".
+    <http://identifiers.org/hgnc.symbol/ATP2B3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ATP2B3".
+    <http://identifiers.org/hgnc.symbol/PCLO> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PCLO".
+    <http://identifiers.org/hgnc.symbol/AKT2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/AKT2".
+    <http://identifiers.org/hgnc.symbol/UBR1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/UBR1".
+    <http://identifiers.org/hgnc.symbol/KLK13> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/KLK13".
+    <http://identifiers.org/hgnc.symbol/TRIP12> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/TRIP12".
+    <http://identifiers.org/hgnc.symbol/ZNF469> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZNF469".
+    <http://identifiers.org/hgnc.symbol/FKSG83> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FKSG83".
+    <http://identifiers.org/hgnc.symbol/LOXHD1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOXHD1".
+    <http://identifiers.org/hgnc.symbol/OR6C2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OR6C2".
+    <http://identifiers.org/hgnc.symbol/VPS8> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/VPS8".
+    <http://identifiers.org/hgnc.symbol/LOC440419> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LOC440419".
+    <http://identifiers.org/hgnc.symbol/PIK3CA> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PIK3CA".
+    <http://identifiers.org/hgnc.symbol/STXBP2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/STXBP2".
+    <http://identifiers.org/hgnc.symbol/SLC4A3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SLC4A3".
+    <http://identifiers.org/hgnc.symbol/C1orf26> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C1orf26".
+    <http://identifiers.org/hgnc.symbol/WDR24> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/WDR24".
+    <http://identifiers.org/hgnc.symbol/FURIN> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FURIN".
+    <http://identifiers.org/hgnc.symbol/C10orf12> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C10orf12".
+    <http://identifiers.org/hgnc.symbol/PAXIP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PAXIP1".
+    <http://identifiers.org/hgnc.symbol/PADI6> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PADI6".
+    <http://identifiers.org/hgnc.symbol/ZWILCH> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ZWILCH".
+    <http://identifiers.org/hgnc.symbol/SCN7A> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/SCN7A".
+    <http://identifiers.org/hgnc.symbol/DYRK1B> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/DYRK1B".
+    <http://identifiers.org/hgnc.symbol/LRP4> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LRP4".
+    <http://identifiers.org/hgnc.symbol/CCDC3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CCDC3".
+    <http://identifiers.org/hgnc.symbol/CDH19> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/CDH19".
+    <http://identifiers.org/hgnc.symbol/NRG3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NRG3".
+    <http://identifiers.org/hgnc.symbol/OPRM1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/OPRM1".
+    <http://identifiers.org/hgnc.symbol/ITGB3BP> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ITGB3BP".
+    <http://identifiers.org/hgnc.symbol/APOL2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/APOL2".
+    <http://identifiers.org/hgnc.symbol/C9orf5> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/C9orf5".
+    <http://identifiers.org/hgnc.symbol/FBXO21> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FBXO21".
+    <http://identifiers.org/hgnc.symbol/LAMB1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LAMB1".
+    <http://identifiers.org/hgnc.symbol/GP2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/GP2".
+    <http://identifiers.org/hgnc.symbol/VCPIP1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/VCPIP1".
+    <http://identifiers.org/hgnc.symbol/LARP7> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/LARP7".
+    <http://identifiers.org/hgnc.symbol/MTTP> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/MTTP".
+    <http://identifiers.org/hgnc.symbol/PCDH1> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/PCDH1".
+    <http://identifiers.org/hgnc.symbol/NLRP2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/NLRP2".
+    <http://identifiers.org/hgnc.symbol/FPR2> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/FPR2".
+    <http://identifiers.org/hgnc.symbol/USP34> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/USP34".
+    <http://identifiers.org/hgnc.symbol/RYR3> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/RYR3".
+    <http://identifiers.org/hgnc.symbol/ENSG00000251143> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000251143".
+    <http://identifiers.org/hgnc.symbol/ENSG00000206769> a serviceowl:HUGO_2_ENSEMBLGENEINFO_Input;
+       sio:SIO_000300 "http://identifiers.org/hgnc.symbol/ENSG00000206769".

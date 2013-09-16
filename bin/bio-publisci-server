@@ -16,7 +16,8 @@ class PubliSciServer < Sinatra::Base
   end
 
   set :views, File.dirname(__FILE__) + '/../server/views'
-  set :repository, RDF::Repository.new
+  set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
+  # set :repository, RDF::Repository.new
   set :sudo_pass, nil
 
   use Rack::Flash
@@ -30,7 +31,7 @@ class PubliSciServer < Sinatra::Base
   end
 
   require_relative '../server/routes.rb'
-  
+
 
   run!
 end
