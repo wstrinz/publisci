@@ -32,34 +32,60 @@ Usage: bio-publisci-server [options]
       EOF
     end
 
-    CONTENT_TYPES={'xml' => 'text/xml','json' => 'application/json'}
+    CONTENT_TYPES={'xml' => 'text/xml','json' => 'application/json','ttl' => 'text/n3'}
 
     def content_for(data,fallback=:to_html,format=(params[:format] || request.accept))
-        if params[:format]
-          format = CONTENT_TYPES[format]
-        else
-          format = format.first
-        end
-        if CONTENT_TYPES.values.include? format
-          content_type format #, :charset => 'utf-8'
-        end
+      if params[:format]
+        format = CONTENT_TYPES[format]
+      else
+        format = format.first
+      end
+      if CONTENT_TYPES.values.include? format
+        content_type format #, :charset => 'utf-8'
+      end
 
-        case format.to_s
-        when 'text/xml'
-          data.to_xml
-        when 'application/json'
-          data.to_json
+      case format.to_s
+      when 'text/xml'
+        data.to_xml
+      when 'application/json'
+        data.to_json
+      else
+        if data.respond_to? fallback
+          data.send(fallback)
         else
-          if data.respond_to? fallback
-            data.send(fallback)
-          else
-            data.to_s
-          end
+          data.to_s
         end
+      end
+    end
+
+    def rdf_content_for(data,fallback=:to_html,format=(params[:format] || request.accept))
+      if params[:format]
+        format = CONTENT_TYPES[format]
+      else
+        format = format.first
+      end
+      if CONTENT_TYPES.values.include? format
+        content_type format #, :charset => 'utf-8'
+      end
+
+      case format.to_s
+      when 'text/xml'
+        data.to_xml
+      when 'application/json'
+        data.to_json
+      when 'text/n3'
+        data.to_ttl
+      else
+        if data.respond_to? fallback
+          data.send(fallback)
+        else
+          data.to_s
+        end
+      end
     end
 
     def content_response(html_resp,content=:no_content)
-      if request.accept? 'text/html'
+      if request.accept.size == 1 and request.accept? 'text/html'
         if html_resp.is_a? Symbol
           haml html_resp
         else

@@ -16,7 +16,7 @@ class PubliSciServer < Sinatra::Base
     haml :query
   end
 
-  post "/query" do
+  post "/query.?:format?" do
     @repo = settings.repository
 
     unless @repo
@@ -57,11 +57,11 @@ class PubliSciServer < Sinatra::Base
     content_response :dsl, @result
   end
 
-  get "/repository" do
+  get "/repository.?:format?" do
     redirect 'repository/new' unless settings.repository
     @repo = settings.repository
 
-    content_response :repository, @repo
+    content_response :repository, rdf_content_for(@repo)
   end
 
   get "/repository/new" do
@@ -107,11 +107,12 @@ class PubliSciServer < Sinatra::Base
     content_response :import, content_for(@result)
   end
 
-  get "/repository/dump" do
+  get "/repository/dump.?:format?" do
     @repo = settings.repository
     redirect '/repository' unless @repo
 
-    content_response(:dump, @repo)
+
+    content_response(:dump, rdf_content_for(@repo))
   end
 
   get "/repository/clear" do

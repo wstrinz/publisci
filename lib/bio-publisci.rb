@@ -8,6 +8,8 @@ require 'rdf'
 require 'sparql'
 require 'sparql/client'
 require 'rdf/turtle'
+require 'rdf/rdfxml'
+require 'json/ld'
 
 require 'rserve'
 
