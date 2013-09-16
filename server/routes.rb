@@ -15,7 +15,7 @@ class PubliSciServer < Sinatra::Base
     end
     haml :query
   end
-
+  
   post "/query.?:format?" do
     @repo = settings.repository
 

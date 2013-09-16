@@ -28,3 +28,6 @@ gem 'sparql'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-linkeddata'
+gem 'sinatra-cross_origin'
+gem 'rack-flash3'

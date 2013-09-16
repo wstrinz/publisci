@@ -70,6 +70,7 @@ Usage: bio-publisci-server [options]
 
       case format.to_s
       when 'text/xml'
+        data.to_rdfxml
       when 'application/rdf+xml'
         data.to_rdfxml
       when 'application/json'
@@ -86,7 +87,7 @@ Usage: bio-publisci-server [options]
     end
 
     def content_response(html_resp,content=:no_content)
-      if request.accept.size == 1 and request.accept? 'text/html'
+      if !CONTENT_TYPES.keys.include?(params[:format].to_s) and request.accept? 'text/html'
         if html_resp.is_a? Symbol
           haml html_resp
         else

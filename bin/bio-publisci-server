@@ -17,7 +17,6 @@ class PubliSciServer < Sinatra::Base
 
   set :views, File.dirname(__FILE__) + '/../server/views'
   set :repository, RDF::Repository.new
-  # set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
   set :sudo_pass, nil
 
   use Rack::Flash
