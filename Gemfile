@@ -21,6 +21,8 @@ end
 gem 'rdf'
 gem 'rdf-4store', :git => "https://github.com/fumi/rdf-4store.git"
 gem 'rdf-turtle'
+gem 'rdf-rdfxml'
+gem 'json-ld'
 gem 'rserve-client'
 gem 'sparql'
 

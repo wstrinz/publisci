@@ -70,9 +70,10 @@ Usage: bio-publisci-server [options]
 
       case format.to_s
       when 'text/xml'
-        data.to_xml
+      when 'application/rdf+xml'
+        data.to_rdfxml
       when 'application/json'
-        data.to_json
+        data.dump(:jsonld, :standard_prefixes => true)
       when 'text/n3'
         data.to_ttl
       else
