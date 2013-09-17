@@ -2,7 +2,6 @@ module PubliSci
 
   class SADI_request
     def self.send_request(service, turtle)
-      #.gsub('^^<http://www.w3.org/2001/XMLSchema#string>','')
       response = RestClient.post(service, turtle, content_type: 'text/rdf+n3', accept: 'text/rdf+n3')
       RDF::Repository.new << RDF::Turtle::Reader.new(response)
     end
@@ -71,26 +70,26 @@ module PubliSci
     end
   end
 
-	class PostProcessor
+  class PostProcessor
 
 
-		def self.process(infile,outfile,pattern)
+    def self.process(infile,outfile,pattern)
 
-			tmp = Tempfile.new('annot_temp')
-			open(infile).each_line{|line|
-				if line[pattern]
-					line.scan(pattern).each{|loc|
-						line.sub!(pattern,yield(loc.first))
-					}
-					tmp.write(line)
-				else
-					tmp.write(line)
-				end
-			}
+      tmp = Tempfile.new('annot_temp')
+      open(infile).each_line{|line|
+        if line[pattern]
+          line.scan(pattern).each{|loc|
+            line.sub!(pattern,yield(loc.first))
+          }
+          tmp.write(line)
+        else
+          tmp.write(line)
+        end
+      }
 
-			FileUtils.copy(tmp.path,outfile)
+      FileUtils.copy(tmp.path,outfile)
 
-			outfile
-		end
-	end
+      outfile
+    end
+  end
 end

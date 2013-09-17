@@ -2,10 +2,6 @@
 require 'bio-publisci'
 def gene_lengths(repo)
 
-  templ = <<-EOF
-
-  EOF
-
   gene_query = <<-EOF
   PREFIX qb:   <http://purl.org/linked-data/cube#>
 
