@@ -3,6 +3,7 @@ require 'cgi'
 require 'yaml'
 
 require 'bio-publisci'
+require 'slop'
 
 require 'sinatra/base'
 require "sinatra/linkeddata"
@@ -16,7 +17,6 @@ class PubliSciServer < Sinatra::Base
   end
 
   set :views, File.dirname(__FILE__) + '/../server/views'
-  set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
   # set :repository, RDF::Repository.new
   set :sudo_pass, nil
 
@@ -25,8 +25,21 @@ class PubliSciServer < Sinatra::Base
   require_relative '../server/helpers.rb'
 
   if ARGV[0]
-    configure_server(ARGV)
+    opts = Slop.parse do
+      banner 'Usage: bio-publisci-server [options]'
+
+      on 'uri', 'Store URI', argument: :optional
+      on 't', 'type', 'The repository type', argument: :optional
+      on 'a', 'sudo_pass', 'Password for sudo (currently needed to clear 4store)', argument: :optional
+      on 'p', 'port', 'Sinatra port', argument: :optional
+      on 'o', 'bind', 'Bind address ', argument: :optional
+    end
+
+    configure_server(opts)
   else
+    # set :repository, RDF::FourStore::Repository.new('http://localhost:8080')
+    set :repository, RDF::Repository.new
+
     settings.repository.load(File.dirname(__FILE__) + '/../resources/primer.ttl')
   end
 

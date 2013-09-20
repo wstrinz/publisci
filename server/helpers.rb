@@ -11,13 +11,18 @@ class PubliSciServer < Sinatra::Base
       str.gsub("\n","\n<br>").gsub('<br>     ','<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ').gsub('<br>   ','<br>&nbsp; &nbsp; &nbsp; ')
     end
 
-    def configure_server(opts)
-      if opts.size == 1
-        if File.exist? opts[0]
-          raise "configuration from file not yet supported"
+    def self.configure_server(opts)
+      set :port, opts[:port].to_i if opts[:port]
+      set :bind, opts[:bind] if opts[:bind]
+      if opts[:type]
+        if opts[:type] == "fourstore"
+          uri = opts[:uri] || 'http://localhost:80802'
+          set :repository, RDF::FourStore::Repository.new(uri.dup)
         else
-          print_usage
+          set :repository, RDF::Repository.new
         end
+      else
+        set :repository, RDF::Repository.new
       end
     end
 

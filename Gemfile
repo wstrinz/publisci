@@ -26,6 +26,8 @@ gem 'json-ld'
 gem 'rserve-client'
 gem 'sparql'
 
+gem 'slop'
+
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-linkeddata'
