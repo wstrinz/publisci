@@ -14,14 +14,14 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "PubliSci"
+  gem.name = "publisci"
   gem.homepage = "http://github.com/wstrinz/bioruby-publisci"
   gem.license = "MIT"
   gem.summary = %Q{Publish scientific results to the semantic web}
   gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF, OWL, and related technologies }
   gem.email = "wstrinz@gmail.com"
   gem.authors = ["Will Strinz"]
-  gem.version = "0.1.1"
+  gem.version = "0.1.2"
 
   # dependencies defined in Gemfile
 end
