@@ -14,14 +14,14 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "bio-publisci"
+  gem.name = "PubliSci"
   gem.homepage = "http://github.com/wstrinz/bioruby-publisci"
   gem.license = "MIT"
   gem.summary = %Q{Publish scientific results to the semantic web}
   gem.description = %Q{A toolkit for publishing scientific results and datasets using RDF, OWL, and related technologies }
   gem.email = "wstrinz@gmail.com"
   gem.authors = ["Will Strinz"]
-  gem.version = "0.1.0"
+  gem.version = "0.1.1"
 
   # dependencies defined in Gemfile
 end
@@ -62,7 +62,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : "0.0.1"
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "bio-publisci #{version}"
+  rdoc.title = "publisci #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
