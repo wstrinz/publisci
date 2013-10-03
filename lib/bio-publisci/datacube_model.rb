@@ -3,11 +3,6 @@ begin
   require 'spira'
   module PubliSci
     module ORM
-      # class Observation < Spira::Base
-      #   type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
-      #   property :label, predicate: RDFS.label
-
-      # end
       QB ||= RDF::Vocabulary.new(RDF::URI.new('http://purl.org/linked-data/cube#'))
 
       class Component < Spira::Base
@@ -45,22 +40,6 @@ begin
         Spira.add_repository :default, repo
       end
 
-      # def observation
-      #   unless PubliSci::ORM.const_defined?("Observation")
-      #     obs = Class.new(Spira::Base) do
-      #       type RDF::URI.new('http://purl.org/linked-data/cube#Observation')
-
-      #       property :structure, predicate: QB.dataSet
-
-      #       ((Dimension.each.to_a | Measure.each.to_a) || []).each{|component|
-      #         property strip_uri(component.subject.to_s), predicate: component.subject
-      #       }
-      #     end
-      #     PubliSci::ORM.const_set("Observation",obs)
-      #   end
-      #   Observation
-      # end
-
       class Observation < Spira::Base
         type QB.Observation
         property :label, predicate: RDFS.label
@@ -76,22 +55,12 @@ begin
           }
         end
 
-        # for testing; DRY up eventually
         def strip_uri(uri)
           uri = uri.to_s.dup
           uri[-1] = '' if uri[-1] == '>'
           uri.to_s.split('/').last.split('#').last
         end
-
-        # def method_missing(meth, *args, &block)
-        #         if meth.to_s =~ /^find_by_(.+)$/
-        #           run_find_by_method($1, *args, &block)
-        #         else
-        #           super # You *must* call super if you don't handle the
-        #                 # method, otherwise you'll mess up Ruby's method
-        #                 # lookup.
-        #         end
-        #       end
+        
       end
 
       def reload_observation
