@@ -14,9 +14,9 @@ group :development do
   gem "bio", ">= 1.4.2"
   gem "rdoc", "~> 3.12"
   gem "spoon"
-  gem "spira", git: "https://github.com/ruby-rdf/spira.git"
 end
 
+gem 'rest-client'
 
 gem 'rdf'
 gem 'rdf-4store', :git => "https://github.com/fumi/rdf-4store.git"
@@ -26,11 +26,4 @@ gem 'json-ld'
 gem 'rserve-client'
 gem 'sparql'
 
-gem 'slop'
-
-gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'sinatra-linkeddata'
-gem 'sinatra-cross_origin'
-gem 'rack-flash3'
-gem 'rest-client'
+gem "spira", git: "https://github.com/ruby-rdf/spira.git"
