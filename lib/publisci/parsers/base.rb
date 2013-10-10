@@ -17,8 +17,8 @@ module PubliSci
       end
 
       def each(input)
-        input.send(enum_method) do |rec|
-          yield process_record(rec) if valid? rec
+        input.send(enum_method).each_with_index do |rec, i|
+          yield process_record(rec), i if valid? rec
         end
       end
       alias_method :each_rec, :each

@@ -12,14 +12,10 @@ module PubliSci
           output = open "#{out_base}.ttl",'w'
         end
 
-        # each_record should pass index as second arg
-        indx = 0
-
         PubliSci::Generators::MAF.write_structure(input_file, output, options)
 
-        PubliSci::Parsers::MAF.each_record(input_file) do |rec|
-          PubliSci::Generators::MAF.write(rec, output, indx, options)
-          indx += 1
+        PubliSci::Parsers::MAF.each_record(input_file) do |rec, label|
+          PubliSci::Generators::MAF.write(rec, output, label, options)
         end
 
         output.close

@@ -63,7 +63,7 @@ an triplifier for your input.
 
 For example, the following
 
-```
+```sh
 publisci https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv
 ```
 
