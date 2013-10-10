@@ -14,6 +14,8 @@ gem install publisci
 
 ## Usage
 
+#### DSL
+
 ```ruby
 require 'publisci'
 include PubliSci::DSL
@@ -21,18 +23,18 @@ include PubliSci::DSL
 # Specify input data
 data do
   # use local or remote paths
-  source 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv' 
+  source 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv'
 
   # specify datacube properties
-  dimension 'producer', 'pricerange'                                         
+  dimension 'producer', 'pricerange'
   measure 'chunkiness'
 
   # set parser specific options
-  option 'label_column', 'producer'                                          
+  option 'label_column', 'producer'
 end
 
 # Describe dataset
-metadata do                                                                  
+metadata do
   dataset 'bacon'
   title 'Bacon dataset'
   creator 'Will Strinz'
@@ -48,10 +50,33 @@ repo = to_repository
 PubliSci::QueryHelper.execute('select * where {?s ?p ?o} limit 5', repo)
 
 # export in other formats
-PubliSci::Writers::ARFF.new.from_store(repo)                                     
+PubliSci::Writers::ARFF.new.from_store(repo)
 ```
 
 
+#### Gem executable
+
+Running the gem using the `publisci` executable will attempt to find and run
+an triplifier for your input.
+
+For example, the following
+
+```
+publisci https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv
+```
+
+Is equivalent to the DSL code
+
+```ruby
+require 'publisci'
+include PubliSci::DSL
+
+data do
+  source 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv'
+end
+
+generate_n3
+```
 
 The API doc is online. For more code examples see the test files in
 the source tree.
