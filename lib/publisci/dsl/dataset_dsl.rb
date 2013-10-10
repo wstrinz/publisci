@@ -18,6 +18,7 @@ module PubliSci
         add_or_get('object',file)
       end
       alias_method :source, :object
+      alias_method :input, :object
 
       def dimension(*args)
         if args.size == 0

@@ -21,7 +21,7 @@ include PubliSci::DSL
 # Specify input data
 data do
   # use local or remote paths
-  object 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv' 
+  source 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv' 
 
   # specify datacube properties
   dimension 'producer', 'pricerange'                                         
