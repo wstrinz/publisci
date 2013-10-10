@@ -2,7 +2,7 @@ module PubliSci
   module Readers
     class Base
       include PubliSci::Query
-      include PubliSci::Parser
+      include PubliSci::RDFParser
       include PubliSci::Analyzer
       include PubliSci::Interactive
       include PubliSci::Dataset::DataCube

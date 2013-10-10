@@ -7,7 +7,7 @@ end
 module PubliSci
   class Metadata
     module Generator
-      include PubliSci::Parser
+      include PubliSci::RDFParser
 
       def defaults
       {

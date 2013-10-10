@@ -30,17 +30,21 @@ def load_folder(folder)
 end
 
 load_folder('publisci/mixins')
-
-load File.dirname(__FILE__) + '/publisci/dataset/interactive.rb'
-load File.dirname(__FILE__) + '/publisci/query/query_helper.rb'
 load File.dirname(__FILE__) + '/publisci/parser.rb'
-load File.dirname(__FILE__) + '/publisci/post_processor.rb'
-load File.dirname(__FILE__) + '/publisci/analyzer.rb'
-load File.dirname(__FILE__) + '/publisci/store.rb'
+load File.dirname(__FILE__) + '/publisci/dataset/interactive.rb'
+
 load File.dirname(__FILE__) + '/publisci/dataset/data_cube.rb'
 load File.dirname(__FILE__) + '/publisci/dataset/dataset_for.rb'
 load File.dirname(__FILE__) + '/publisci/dataset/configuration.rb'
 load File.dirname(__FILE__) + '/publisci/dataset/dataset.rb'
+
+load_folder('publisci/parsers')
+load_folder('publisci/generators')
+
+load File.dirname(__FILE__) + '/publisci/query/query_helper.rb'
+load File.dirname(__FILE__) + '/publisci/post_processor.rb'
+load File.dirname(__FILE__) + '/publisci/analyzer.rb'
+load File.dirname(__FILE__) + '/publisci/store.rb'
 load File.dirname(__FILE__) + '/publisci/datacube_model.rb'
 load File.dirname(__FILE__) + '/publisci/output.rb'
 load File.dirname(__FILE__) + '/publisci/metadata/prov/element.rb'

@@ -2,7 +2,7 @@ module PubliSci
   module Writers
     class Base
       include PubliSci::Query
-      include PubliSci::Parser
+      include PubliSci::RDFParser
       include PubliSci::Analyzer
 
       def handle_input(input)

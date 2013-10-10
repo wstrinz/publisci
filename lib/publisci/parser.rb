@@ -1,5 +1,5 @@
 module PubliSci
-	module Parser
+	module RDFParser
 
     def is_uri?(obj)
       RDF::Resource(obj).valid?

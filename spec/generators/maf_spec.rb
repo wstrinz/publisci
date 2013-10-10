@@ -13,6 +13,7 @@ describe PubliSci::Readers::MAF do
 
   describe ".generate_n3" do
     def is_cube(str)
+
       str[/a qb:Observation/].should_not be nil
       str[/a rdf:Property, qb:DimensionProperty/].should_not be nil
       str[/a rdf:Property, qb:MeasureProperty/].should_not be nil

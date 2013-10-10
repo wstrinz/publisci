@@ -5,13 +5,13 @@ module PubliSci
         extend PubliSci::Dataset::DataCube
         extend PubliSci::Analyzer
         extend PubliSci::Query
-        extend PubliSci::Parser
+        extend PubliSci::RDFParser
 
         include PubliSci::Dataset::DataCube
         include PubliSci::Analyzer
         include PubliSci::Metadata::Generator
         include PubliSci::Query
-        include PubliSci::Parser
+        include PubliSci::RDFParser
 
         attr_accessor :labels
         attr_accessor :dimensions

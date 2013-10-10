@@ -1,20 +1,20 @@
-@base <http://onto.strinz.me/dc/dataset/maf_example/> .
-@prefix ns:    <http://onto.strinz.me/dc/dataset/maf_example/> .
+@base <http://onto.strinz.me/dc/dataset/MAF_pm2dd1/> .
+@prefix ns:    <http://onto.strinz.me/dc/dataset/MAF_pm2dd1/> .
 @prefix qb:    <http://purl.org/linked-data/cube#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix prop:  <http://onto.strinz.me/properties/> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix cs:    <http://onto.strinz.me/dc/dataset/maf_example/cs/> .
-@prefix code:  <http://onto.strinz.me/dc/dataset/maf_example/code/> .
+@prefix cs:    <http://onto.strinz.me/dc/dataset/MAF_pm2dd1/cs/> .
+@prefix code:  <http://onto.strinz.me/dc/dataset/MAF_pm2dd1/code/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
 @prefix org:      <http://www.w3.org/ns/org#> .
 @prefix prov:     <http://www.w3.org/ns/prov#> .
 
-ns:dsd-maf_example a qb:DataStructureDefinition;
+ns:dsd-MAF_pm2dd1 a qb:DataStructureDefinition;
   qb:component cs:Variant_Classification ;
   qb:component cs:Variant_Type ;
   qb:component cs:dbSNP_Val_Status ;
@@ -52,9 +52,9 @@ ns:dsd-maf_example a qb:DataStructureDefinition;
   qb:component cs:patient_id ;
   qb:component cs:sample_id .
 
-ns:dataset-maf_example a qb:DataSet ;
-  rdfs:label "maf_example"@en ;
-  qb:structure ns:dsd-maf_example .
+ns:dataset-MAF_pm2dd1 a qb:DataSet ;
+  rdfs:label "MAF_pm2dd1"@en ;
+  qb:structure ns:dsd-MAF_pm2dd1 .
 
 cs:Variant_Classification a qb:ComponentSpecification ;
   rdfs:label "Variant_Classification" ;
@@ -207,16 +207,13 @@ prop:Entrez_Gene_Id a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Entrez_Gene_Id"@en .
 
 prop:Center a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Center"@en ;
-  rdfs:range xsd:string .
+  rdfs:label "Center"@en .
 
 prop:NCBI_Build a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "NCBI_Build"@en ;
-  rdfs:range xsd:int .
+  rdfs:label "NCBI_Build"@en .
 
 prop:Chromosome a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Chromosome"@en ;
-  rdfs:range xsd:int .
+  rdfs:label "Chromosome"@en .
 
 prop:Start_Position a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Start_Position"@en .
@@ -240,8 +237,7 @@ prop:dbSNP_RS a rdf:Property, qb:MeasureProperty ;
   rdfs:label "dbSNP_RS"@en .
 
 prop:Tumor_Sample_Barcode a rdf:Property, qb:MeasureProperty ;
-  rdfs:label "Tumor_Sample_Barcode"@en ;
-  rdfs:range xsd:string .
+  rdfs:label "Tumor_Sample_Barcode"@en .
 
 prop:Matched_Norm_Sample_Barcode a rdf:Property, qb:MeasureProperty ;
   rdfs:label "Matched_Norm_Sample_Barcode"@en .
@@ -954,8 +950,8 @@ code:sequencer a skos:ConceptScheme;
   skos:prefLabel "AB_SOLiD_4_System" ;
   skos:inScheme code:sequencer .
 
-ns:obs2 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs0 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
@@ -989,8 +985,8 @@ ns:obs2 a qb:Observation ;
   prop:sample_id "01A-11D-A159-09" ;
   .
 
-ns:obs3 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs1 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/byFrequency> ;
@@ -1024,8 +1020,8 @@ ns:obs3 a qb:Observation ;
   prop:sample_id "01A-11D-A14G-09" ;
   .
 
-ns:obs4 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs2 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
@@ -1060,8 +1056,8 @@ ns:obs4 a qb:Observation ;
   prop:sample_id "01A-12D-A099-09" ;
   .
 
-ns:obs5 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs3 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
@@ -1096,8 +1092,8 @@ ns:obs5 a qb:Observation ;
   prop:sample_id "01A-11D-A12B-09" ;
   .
 
-ns:obs6 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs4 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Silent> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
@@ -1131,8 +1127,8 @@ ns:obs6 a qb:Observation ;
   prop:sample_id "01A-11D-A13L-09" ;
   .
 
-ns:obs7 a qb:Observation ;
-  qb:dataSet ns:dataset-maf_example ;
+ns:obs5 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
   prop:Variant_Classification <code/variant_classification/Missense_Mutation> ;
   prop:Variant_Type <code/variant_type/SNP> ;
   prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
@@ -1169,5 +1165,85 @@ ns:obs7 a qb:Observation ;
   prop:Matched_Norm_Sample_UUID "6a4cd52f-2247-4caf-9b37-e90b02fd4d8b" ;
   prop:patient_id "E2-A1BC" ;
   prop:sample_id "01A-11D-A14G-09" ;
+  .
+
+ns:obs6 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
+  prop:Variant_Classification <code/variant_classification/Silent> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A2BP1> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/54715> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 16 ;
+  prop:Start_Position 7383011 ;
+  prop:End_Position 7383011 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-AR-A1AJ-01A-21D-A12Q-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-AR-A1AJ-10A-01D-A12Q-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_File "dbGAP" ;
+  prop:Tumor_Sample_UUID "4e1f9084-4729-4b3f-b036-6226d64fd25b" ;
+  prop:Matched_Norm_Sample_UUID "63ee3781-4578-4d19-88e4-c8785fc7987e" ;
+  prop:patient_id "AR-A1AJ" ;
+  prop:sample_id "01A-21D-A12Q-09" ;
+  .
+
+ns:obs7 a qb:Observation ;
+  qb:dataSet ns:dataset-MAF_pm2dd1 ;
+  prop:Variant_Classification <code/variant_classification/Nonsense_Mutation> ;
+  prop:Variant_Type <code/variant_type/SNP> ;
+  prop:dbSNP_Val_Status <code/dbsnp_val_status/> ;
+  prop:Verification_Status <code/verification_status/Unknown> ;
+  prop:Validation_Status <code/validation_status/Valid> ;
+  prop:Mutation_Status <code/mutation_status/Somatic> ;
+  prop:Sequence_Source <code/sequence_source/WXS> ;
+  prop:Sequencer <code/sequencer/Illumina_GAIIx> ;
+  prop:Hugo_Symbol <http://identifiers.org/hgnc.symbol/A2M> ;
+  prop:Entrez_Gene_Id <http://identifiers.org/ncbigene/2> ;
+  prop:Center "genome.wustl.edu" ;
+  prop:NCBI_Build 37 ;
+  prop:Chromosome 12 ;
+  prop:Start_Position 9251298 ;
+  prop:End_Position 9251298 ;
+  prop:Strand "+" ;
+  prop:Reference_Allele "G" ;
+  prop:Tumor_Seq_Allele1 "G" ;
+  prop:Tumor_Seq_Allele2 "A" ;
+  prop:dbSNP_RS "novel" ;
+  prop:Tumor_Sample_Barcode "TCGA-A8-A08G-01A-11W-A019-09" ;
+  prop:Matched_Norm_Sample_Barcode "TCGA-A8-A08G-10A-01W-A021-09" ;
+  prop:Match_Norm_Seq_Allele1 "G" ;
+  prop:Match_Norm_Seq_Allele2 "G" ;
+  prop:Tumor_Validation_Allele1 "G" ;
+  prop:Tumor_Validation_Allele2 "A" ;
+  prop:Match_Norm_Validation_Allele1 "G" ;
+  prop:Match_Norm_Validation_Allele2 "G" ;
+  prop:Sequencing_Phase "Phase_IV" ;
+  prop:Validation_Method "Illumina_WXS_gDNA" ;
+  prop:Score 1 ;
+  prop:BAM_File "dbGAP" ;
+  prop:Tumor_Sample_UUID "8da61928-e935-4a33-8e46-840e637163d7" ;
+  prop:Matched_Norm_Sample_UUID "74a3a4af-c93a-4fcd-af11-1f5eeb847c3c" ;
+  prop:patient_id "A8-A08G" ;
+  prop:sample_id "01A-11W-A019-09" ;
   .
 

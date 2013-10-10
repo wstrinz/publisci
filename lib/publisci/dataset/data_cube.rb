@@ -8,7 +8,7 @@ end
 module PubliSci
   class Dataset
     module DataCube
-      include PubliSci::Parser
+      include PubliSci::RDFParser
       def defaults
       {
         type: :dataframe,

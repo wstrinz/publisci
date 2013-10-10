@@ -2,7 +2,7 @@ module PubliSci
   module Writers
     class ARFF < Base
       # include PubliSci::Query
-      # include PubliSci::Parser
+      # include PubliSci::RDFParser
       # include PubliSci::Analyzer
 
       def build_arff(relation, attributes, data, source)
