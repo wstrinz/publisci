@@ -1,8 +1,8 @@
 = publisci
 
 {<img
-src="https://secure.travis-ci.org/wstrinz/bioruby-publisci.png"
-/>}[http://travis-ci.org/#!/wstrinz/bioruby-publisci]
+src="https://secure.travis-ci.org/wstrinz/publisci.png"
+/>}[http://travis-ci.org/#!/wstrinz/publisci]
 
 Full description goes here
 
@@ -27,7 +27,7 @@ the source tree.
 
 Information on the source tree, documentation, issues and how to contribute, see
 
-  http://github.com/wstrinz/bioruby-publisci
+  http://github.com/wstrinz/publisci
 
 The BioRuby community is on IRC server: irc.freenode.org, channel: #bioruby.
 
