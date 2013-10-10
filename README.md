@@ -18,21 +18,20 @@ gem install publisci
 require 'publisci'
 include PubliSci::DSL
 
+# Specify input data
 data do
-  # local or remote path
+  # use local or remote paths
   object 'https://github.com/wstrinz/publisci/raw/master/spec/csv/bacon.csv' 
 
   # specify datacube properties
   dimension 'producer', 'pricerange'                                         
   measure 'chunkiness'
 
-
   # set parser specific options
   option 'label_column', 'producer'                                          
 end
 
-
-# describe metadata
+# Describe dataset
 metadata do                                                                  
   dataset 'bacon'
   title 'Bacon dataset'
@@ -41,14 +40,12 @@ metadata do
   date '1-10-2010'
 end
 
-
-# send output to an RDF::Repository
-#  can also use 'generate_n3' to output plain turtle
+# Send output to an RDF::Repository
+#  can also use 'generate_n3' to output a turtle string
 repo = to_repository
 
 # run SPARQL queries on the dataset
 PubliSci::QueryHelper.execute('select * where {?s ?p ?o} limit 5', repo)
-
 
 # export in other formats
 PubliSci::Writers::ARFF.new.from_store(repo)                                     
