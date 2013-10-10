@@ -2,7 +2,7 @@ puts "Really rewrite reference files? This could mess up the tests... [y/N]"
 exit unless gets.chomp == 'y'
 
 puts "overwriting #{File.absolute_path(File.dirname(__FILE__) + '/../spec/turtle/bacon')}"
-load File.dirname(__FILE__) + '/../lib/bio-publisci.rb'
+load File.dirname(__FILE__) + '/../lib/publisci.rb'
 
 gen = PubliSci::Readers::CSV.new
 turtle_string = gen.generate_n3(File.dirname(__FILE__) + '/../spec/csv/bacon.csv','bacon',{dimensions:["producer","pricerange"], label_column:0})

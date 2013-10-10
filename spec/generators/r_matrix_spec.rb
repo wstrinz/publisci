@@ -2,7 +2,7 @@
 # require_relative '../../lib/r2rdf/generators/r_matrix.rb'
 # require 'rdf/turtle'
 # require 'rserve'
-require_relative '../../lib/bio-publisci.rb'
+require_relative '../../lib/publisci.rb'
 
 require 'tempfile'
 

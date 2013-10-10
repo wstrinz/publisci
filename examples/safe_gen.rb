@@ -1,4 +1,4 @@
-require 'bio-publisci'
+require 'publisci'
 
 str = IO.read(ARGV[0])
 str.untaint

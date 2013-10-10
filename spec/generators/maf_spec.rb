@@ -1,6 +1,6 @@
 # require_relative '../../lib/r2rdf/data_cube.rb'
 # require_relative '../../lib/r2rdf/generators/csv.rb'
-require_relative '../../lib/bio-publisci.rb'
+require_relative '../../lib/publisci.rb'
 
 # require 'rdf/turtle'
 require 'tempfile'

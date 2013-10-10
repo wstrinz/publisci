@@ -55,7 +55,7 @@ module PubliSci
       def generate_n3
         opts = {}
         %w{dimension measure}.each{|field|
-          opts[field.to_sym] = send(field.to_sym) if send(field.to_sym)
+          opts["#{field}s".to_sym] = send(field.to_sym) if send(field.to_sym)
         }
         interact = settings.interactive
         if options

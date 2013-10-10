@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 describe PubliSci::Dataset do
   it "should use sio:has_value for unknown string types" do

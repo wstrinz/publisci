@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 Given /a store of type (.*?)$/ do |type|
 	@store = PubliSci::Store.new(type: :"#{type}")

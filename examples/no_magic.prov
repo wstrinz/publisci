@@ -3,7 +3,7 @@
 #
 # Run using "ruby no_magic.prov"
 
-require 'bio-publisci'
+require 'publisci'
 include PubliSci::Prov::DSL
 
 

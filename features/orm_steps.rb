@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 Given /^an ORM::DataCube entitled "(.*?)"$/ do |name|
 	@cube = PubliSci::DataSet::ORM::DataCube.new(name: name)

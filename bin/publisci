@@ -1,23 +1,23 @@
 #!/usr/bin/env ruby
 #
-# BioRuby bio-publisci Plugin BioPublisci
+# BioRuby publisci Plugin BioPublisci
 # Author:: wstrinz
 # Copyright:: 2013
 
 version = "0.0.4" #File.new(VERSION_FILENAME).read.chomp
 
 USAGE = <<-EOF
-  bio-publisci #{version} by Will Strinz 2013
+  publisci #{version} by Will Strinz 2013
 
   Usage:
 
-  bio-publisci file
+  publisci file
   (execute PROV dsl file)
 EOF
 
 gempath = File.dirname(File.dirname(__FILE__))
 $: << File.join(gempath,'lib')
-require 'bio-publisci'
+require 'publisci'
 
 #VERSION_FILENAME=File.join(gempath,'VERSION')
 
@@ -42,7 +42,7 @@ else
   end
 end
 
-require 'bio-publisci'
+require 'publisci'
 require 'optparse'
 
 # Uncomment when using the bio-logger
@@ -97,7 +97,7 @@ begin
   opts.parse!(ARGV)
 
   # Uncomment the following when using the bio-logger
-  # Bio::Log::CLI.configure('bio-publisci')
+  # Bio::Log::CLI.configure('publisci')
 
   # TODO: your code here
   # use options for your logic

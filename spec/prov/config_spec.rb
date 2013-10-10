@@ -1,4 +1,4 @@
-require_relative '../../lib/bio-publisci.rb'
+require_relative '../../lib/publisci.rb'
 include PubliSci::Prov::DSL
 include PubliSci
 

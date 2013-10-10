@@ -1,4 +1,4 @@
-= bio-publisci
+= publisci
 
 {<img
 src="https://secure.travis-ci.org/wstrinz/bioruby-publisci.png"
@@ -10,7 +10,7 @@ Note: this software is under active development!
 
 == Installation
 
-        gem install bio-publisci
+        gem install publisci
 
 == Usage
 
@@ -18,7 +18,7 @@ Note: this software is under active development!
 
 To use the library 
 
-        require 'bio-publisci'
+        require 'publisci'
 
 The API doc is online. For more code examples see also the test files in
 the source tree.
@@ -40,7 +40,7 @@ The BioRuby community is on IRC server: irc.freenode.org, channel: #bioruby.
 
 == Biogems.info
 
-This Biogem is published at http://biogems.info/index.html#bio-publisci
+This Biogem is published at http://biogems.info/index.html#publisci
 
 == Copyright
 

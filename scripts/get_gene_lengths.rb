@@ -1,5 +1,5 @@
-# require_relative '../lib/bio-publisci.rb'
-require 'bio-publisci'
+# require_relative '../lib/publisci.rb'
+require 'publisci'
 def gene_lengths(repo)
 
   gene_query = <<-EOF

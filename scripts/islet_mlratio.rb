@@ -1,4 +1,4 @@
-load File.dirname(__FILE__) + '/../lib/bio-publisci.rb'
+load File.dirname(__FILE__) + '/../lib/publisci.rb'
 
 gen = PubliSci::Readers::RMatrix.new
 con = Rserve::Connection.new

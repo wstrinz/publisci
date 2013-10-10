@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 describe PubliSci::DSL do
   include PubliSci::DSL
@@ -98,6 +98,16 @@ describe PubliSci::DSL do
     repo = to_repository
     repo.is_a?(RDF::Repository).should be true
     repo.size.should > 0
+  end
+
+  it "can specify dimesions and measures" do
+    dat = data do
+      object 'spec/csv/bacon.csv'
+      dimension 'producer','pricerange','chunkiness','deliciousness'
+    end
+    
+    n3 = generate_n3
+    n3["qb:measure"].should be nil
   end
 
   it "can output to 4store repository", no_travis: true do

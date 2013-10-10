@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 
 describe "DataCube Node Generation" do

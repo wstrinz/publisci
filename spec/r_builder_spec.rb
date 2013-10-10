@@ -4,7 +4,7 @@
 # require_relative '../lib/r2rdf/r_builder.rb'
 # require_relative '../lib/r2rdf/query_helper.rb'
 # require_relative '../lib/r2rdf/generators/csv.rb'
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 
 describe PubliSci::Writers::Dataframe do

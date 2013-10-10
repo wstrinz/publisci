@@ -48,8 +48,8 @@ module PubliSci
     end
 
     def execute_from_file(file,store,type=:fourstore,substitutions={})
-      if Gem::Dependency.new('bio-publisci').matching_specs.size > 0
-        queries_dir = Gem::Specification.find_by_name("bio-publisci").gem_dir + "/resources/queries/"
+      if Gem::Dependency.new('publisci').matching_specs.size > 0
+        queries_dir = Gem::Specification.find_by_name("publisci").gem_dir + "/resources/queries/"
       else
         queries_dir = File.dirname(__FILE__) + '/../../../resources/queries/'
       end

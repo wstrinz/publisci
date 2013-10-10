@@ -32,6 +32,10 @@ module PubliSci
         add_or_get('topic',sub)
       end
 
+      def date(d=nil)
+        add_or_get('date',d)
+      end
+
       def publishers(pub=nil,&block)
         if block_given?
           p = Publisher.new

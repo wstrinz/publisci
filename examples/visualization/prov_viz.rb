@@ -1,4 +1,4 @@
-require 'bio-publisci'
+require 'publisci'
 require 'graphviz'
 
 def entity_node(label)

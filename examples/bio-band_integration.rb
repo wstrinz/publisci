@@ -1,5 +1,5 @@
 require 'bio-band'
-require 'bio-publisci'
+require 'publisci'
 
 f = open(File.dirname(__FILE__) + '/../resources/weather.numeric.arff')
 clustering = Weka::Clusterer::SimpleKMeans::Base

@@ -1,4 +1,4 @@
-require_relative '../lib/bio-publisci.rb'
+require_relative '../lib/publisci.rb'
 
 Given /^a (.*) generator$/ do |generator|
 	@generator = PubliSci::Readers.const_get(generator).new

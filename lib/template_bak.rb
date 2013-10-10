@@ -8,5 +8,5 @@
 #
 # In this file only require other files. Avoid other source code.
 
-require 'bio-publisci/publisci.rb'
+require 'publisci/publisci.rb'
 
