@@ -71,7 +71,7 @@ describe PubliSci::DSL do
     ev = PubliSci::DSL::Instance.new
     dat = ev.instance_eval <<-EOF
     data do
-      object 'https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv'
+      object 'https://raw.github.com/wstrinz/publisci/master/spec/csv/bacon.csv'
     end
     EOF
     dat.should_not be nil

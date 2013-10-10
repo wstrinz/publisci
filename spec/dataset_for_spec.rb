@@ -46,7 +46,7 @@ describe PubliSci::Dataset do
     end
 
     it "will download remote files" do
-      turtle_string = PubliSci::Dataset.for('https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv',false)
+      turtle_string = PubliSci::Dataset.for('https://raw.github.com/wstrinz/publisci/master/spec/csv/bacon.csv',false)
       (turtle_string =~ /prop:pricerange/).should_not be nil
       (turtle_string =~ /prop:producer/).should_not be nil
     end
@@ -67,7 +67,7 @@ describe PubliSci::Dataset do
     end
 
     it "will attempt to load remote file if given URI" do
-      loc = 'https://raw.github.com/wstrinz/bioruby-publisci/master/spec/csv/bacon.csv'
+      loc = 'https://raw.github.com/wstrinz/publisci/master/spec/csv/bacon.csv'
       turtle_string = PubliSci::Dataset.for(loc,false)
       (turtle_string =~ /prop:pricerange/).should_not be nil
       (turtle_string =~ /prop:producer/).should_not be nil
