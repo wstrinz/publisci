@@ -38,6 +38,8 @@ load File.dirname(__FILE__) + '/publisci/dataset/dataset_for.rb'
 load File.dirname(__FILE__) + '/publisci/dataset/configuration.rb'
 load File.dirname(__FILE__) + '/publisci/dataset/dataset.rb'
 
+load File.dirname(__FILE__) + '/publisci/generators/base.rb'
+load File.dirname(__FILE__) + '/publisci/parsers/base.rb'
 load_folder('publisci/parsers')
 load_folder('publisci/generators')
 
