@@ -16,6 +16,8 @@ gem install publisci
 
 #### DSL
 
+Most of the gem's functions can be accessed through its DSL
+
 ```ruby
 require 'publisci'
 include PubliSci::DSL
