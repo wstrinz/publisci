@@ -1,6 +1,6 @@
 # PubliSci
 
-[![Build Status](https://secure.travis-ci.org/wstrinz/bioruby-publisci.png)](http://travis-ci.org/wstrinz/publisci)
+[![Build Status](https://travis-ci.org/wstrinz/publisci.png?branch=master)](https://travis-ci.org/wstrinz/publisci)
 
 Full description goes here
 
