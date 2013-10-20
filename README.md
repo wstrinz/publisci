@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wstrinz/publisci.png?branch=master)](https://travis-ci.org/wstrinz/publisci)
 
-Full description goes here
-
-Note: this software is under active development!
+Note: this software is under active development! Until it hits v 1.0.0, the overall API and usage pattern is subject to change.
 
 ## Installation
 
