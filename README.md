@@ -89,7 +89,7 @@ Building a parser simply requires you to implement a `generate_n3` method, eithe
 
 Including or extending the `Publisci::Readers::Base` will give you access to many helpful methods for creating a triplifying your data. There is a post on the [project blog](http://gsocsemantic.wordpress.com/2013/08/31/parsing-with-publisci-how-to-get-your-data-into-the-semantic-web/) with further details about how to design and implement a parser.
 
-The interface is in the process of being more rigdly defined to separate parsing, generation, and output, and it is encourage that you make your parsing code as stateless as possible to assist in handling large inputs. Pull requests with parsers for new formats are greatly appreciated however!
+The interface is in the process of being more rigdly defined to separate parsing, generation, and output, and it is advisable to you make your parsing code as stateless as possible for better handling of large inputs. Pull requests with parsers for new formats are greatly appreciated however!
 
 ## Project home page
 
