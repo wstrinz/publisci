@@ -1,5 +1,5 @@
 module PubliSci
-	module RDFParser
+  module RDFParser
 
     def is_uri?(obj)
       RDF::Resource(obj).valid?
@@ -38,61 +38,61 @@ module PubliSci
       h
     end
 
-		def load_string(string,repo=RDF::Repository.new)
-			f = Tempfile.new('repo')
-			f.write(string)
-			f.close
-			repo.load(f.path, :format => :ttl)
-			f.unlink
-			repo
-		end
+    def load_string(string,repo=RDF::Repository.new)
+      f = Tempfile.new('repo')
+      f.write(string)
+      f.close
+      repo.load(f.path, :format => :ttl)
+      f.unlink
+      repo
+    end
 
-		def get_ary(query_results,method='to_s')
+    def get_ary(query_results,method='to_s')
       query_results.map{|solution|
         solution.to_a.map{|entry|
           if entry.last.respond_to? method
-	          entry.last.send(method)
-	        else
-	        	entry.last.to_s
-	        end
+            entry.last.send(method)
+          else
+            entry.last.to_s
+          end
         }
       }
     end
 
     def get_hashes(query_results,method=nil)
-    	arr=[]
-    	query_results.map{|solution|
-    		h={}
-    		solution.map{|element|
-					if method && element[1].respond_to?(method)
-					 	h[element[0]] = element[1].send(method)
-					else
-					 	h[element[0]] = element[1]
-					end
-    		}
-    		arr << h
-    	}
-    	arr
+      arr=[]
+      query_results.map{|solution|
+        h={}
+        solution.map{|element|
+          if method && element[1].respond_to?(method)
+            h[element[0]] = element[1].send(method)
+          else
+            h[element[0]] = element[1]
+          end
+        }
+        arr << h
+      }
+      arr
     end
 
     def observation_hash(query_results,shorten_uris=false,method='to_s')
-    	h={}
-    	query_results.map{|sol|
-    		(h[sol[:observation].to_s] ||= {})[sol[:property].to_s] = sol[:value].to_s
-    	}
+      h={}
+      query_results.map{|sol|
+        (h[sol[:observation].to_s] ||= {})[sol[:property].to_s] = sol[:value].to_s
+      }
 
-    	if shorten_uris
-	    	newh= {}
-	    	h.map{|k,v|
-	    		newh[strip_uri(k)] ||= {}
-	    		v.map{|kk,vv|
-	    			newh[strip_uri(k)][strip_uri(kk)] = strip_uri(vv)
-	    		}
-	    	}
-	    	newh
-	    else
-	    	h
-	    end
+      if shorten_uris
+        newh= {}
+        h.map{|k,v|
+          newh[strip_uri(k)] ||= {}
+          v.map{|kk,vv|
+            newh[strip_uri(k)][strip_uri(kk)] = strip_uri(vv)
+          }
+        }
+        newh
+      else
+        h
+      end
     end
 
     def to_resource(obj, options={})
@@ -162,7 +162,7 @@ module PubliSci
         to_resource(obj,options)
       elsif obj && obj.is_a?(String) && (obj[0]=="<" && obj[-1] = ">")
         obj
-      elsif obj.is_a?(Array)        
+      elsif obj.is_a?(Array)
         node_str = add_node(node_index,node_str)
         ["#{node_str}" ] + [bnode_value(obj, node_index, node_str, options)]
       else
@@ -179,7 +179,7 @@ module PubliSci
         if obj.size == 2
           if obj[0].is_a?(String)
             if is_complex?(obj[1])
-              str << "#{to_resource(obj[0])} #{add_node(node_index,node_str)} . \n"            
+              str << "#{to_resource(obj[0])} #{add_node(node_index,node_str)} . \n"
               subnodes << encode_value(obj[1], options, node_index, node_str)
             else
               str << "#{to_resource(obj[0])} #{encode_value(obj[1], options, node_index, node_str)} "
@@ -220,7 +220,7 @@ module PubliSci
         raise "Invalid Structured value: #{obj}"
       end
 
-      if subnodes.size > 0 
+      if subnodes.size > 0
         [str, subnodes.flatten].flatten
       else
         str
@@ -231,22 +231,22 @@ module PubliSci
       tabs = 0
       turtle_str.split("\n").map{|str|
         case str[-1]
-        when "."
-          last_tabs = tabs
-          tabs = 0
-          ("  " * last_tabs) + str
-        when ";"
-          last_tabs = tabs
-          tabs = 1 if tabs == 0
-          ("  " * last_tabs) + str
-        else
-          last_tabs = tabs
-          if str.size < 2
+          when "."
+            last_tabs = tabs
             tabs = 0
+            ("  " * last_tabs) + str
+          when ";"
+            last_tabs = tabs
+            tabs = 1 if tabs == 0
+            ("  " * last_tabs) + str
           else
-            tabs += 1
-          end
-          ("  " * last_tabs) + str
+            last_tabs = tabs
+            if str.size < 2
+              tabs = 0
+            else
+              tabs += 1
+            end
+            ("  " * last_tabs) + str
         end
       }.join("\n")
 
@@ -262,5 +262,5 @@ module PubliSci
       string.to_s.split(':').last
     end
 
-	end
+  end
 end
