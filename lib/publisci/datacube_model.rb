@@ -37,7 +37,7 @@ begin
 
       def load_repo(repo)
         raise "Not an RDF::Repository - #{repo}" unless repo.is_a? RDF::Repository
-        Spira.add_repository :default, repo
+        Spira.repository = repo
       end
 
       class Observation < Spira::Base
@@ -60,7 +60,7 @@ begin
           uri[-1] = '' if uri[-1] == '>'
           uri.to_s.split('/').last.split('#').last
         end
-        
+
       end
 
       def reload_observation

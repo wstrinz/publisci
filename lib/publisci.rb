@@ -4,6 +4,8 @@ require 'tempfile'
 require 'fileutils'
 require 'csv'
 
+require 'spira'
+
 require 'rdf'
 require 'sparql'
 require 'sparql/client'
@@ -14,11 +16,11 @@ require 'json/ld'
 require 'rserve'
 require 'rest-client'
 
-begin
-	require 'spira'
-rescue LoadError
-	puts "can't load spira; orm unavailable"
-end
+# begin
+# 	require 'spira'
+# rescue LoadError
+# 	puts "can't load spira; orm unavailable"
+# end
 
 def load_folder(folder)
 	Dir.foreach(File.dirname(__FILE__) + "/#{folder}") do |file|

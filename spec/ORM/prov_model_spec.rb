@@ -13,7 +13,7 @@ describe PubliSci::Prov::Model do
       to_repository
     end
 
-    Spira.add_repository :default, r
+    Spira.repository = r
     PubliSci::Prov::Model::Entity.first.should_not be nil
   end
 
@@ -40,7 +40,7 @@ describe PubliSci::Prov::Model do
       #   generate_n3
       # end
 
-      Spira.add_repository :default, r
+      Spira.repository = r
       model_agent = PubliSci::Prov::Model::Agent.first
       ag.subject.should == model_agent.subject
       acts =  model_agent.activities
@@ -64,7 +64,7 @@ describe PubliSci::Prov::Model do
         to_repository
       end
 
-      Spira.add_repository :default, r
+      Spira.repository = r
       PubliSci::Prov::Model::Entity.first.all_types.should == %w{http://www.w3.org/ns/prov#Entity http://purl.org/linked-data/cube#DataSet}
       PubliSci::Prov::Model::Entity.first.has_data?.should == true
     end

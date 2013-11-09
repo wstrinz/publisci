@@ -19,7 +19,7 @@ describe PubliSci::ORM do
 
       to_repository
     end
-    Spira.add_repository :default, r
+    Spira.repository = r
 
     PubliSci::ORM::Observation.count.should > 0
 
