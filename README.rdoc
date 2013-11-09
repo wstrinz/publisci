@@ -4,8 +4,6 @@
 src="https://secure.travis-ci.org/wstrinz/publisci.png"
 />}[http://travis-ci.org/#!/wstrinz/publisci]
 
-Full description goes here
-
 Note: this software is under active development!
 
 == Installation
@@ -16,13 +14,13 @@ Note: this software is under active development!
 
 == Developers
 
-To use the library 
+To use the library
 
         require 'publisci'
 
 The API doc is online. For more code examples see also the test files in
 the source tree.
-        
+
 == Project home page
 
 Information on the source tree, documentation, issues and how to contribute, see
@@ -34,7 +32,7 @@ The BioRuby community is on IRC server: irc.freenode.org, channel: #bioruby.
 == Cite
 
   If you use this software, please cite one of
- 
+
 * [BioRuby: bioinformatics software for the Ruby programming language](http://dx.doi.org/10.1093/bioinformatics/btq475)
 * [Biogem: an effective tool-based approach for scaling up open source software development in bioinformatics](http://dx.doi.org/10.1093/bioinformatics/bts080)
 
