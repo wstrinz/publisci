@@ -23,7 +23,6 @@ Jeweler::Tasks.new do |gem|
   gem.authors = ["Will Strinz"]
   gem.version = "0.1.4"
 
-  # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 
