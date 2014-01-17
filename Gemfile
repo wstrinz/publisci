@@ -8,7 +8,7 @@ source "http://rubygems.org"
 group :development do
   gem "rspec", "~> 2.8.0"
   gem "cucumber", ">= 0"
-  gem "jeweler", "~> 1.8.4", :git => "https://github.com/technicalpickles/jeweler.git"
+  gem "jeweler"
   gem "bundler", ">= 1.0.21"
   gem "bio", ">= 1.4.2"
   gem "rdoc"

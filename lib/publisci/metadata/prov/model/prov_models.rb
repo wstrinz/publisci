@@ -62,9 +62,10 @@ module PubliSci
 
         def activities
           #should do this in a SPARQL query instead
+          #
           Activity.enum_for.map{|act|
             subj = subject()
-            act if act.wasAssociatedWith.any?{|assoc| assoc == subj}
+            act if act.wasAssociatedWith.any?{|assoc| RDF::URI(assoc) == subj}
           }.reject{|x| x==nil}
         end
       end

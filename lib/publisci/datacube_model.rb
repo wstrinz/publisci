@@ -46,8 +46,8 @@ begin
         property :dataset, predicate: QB.dataSet
 
         def load_properties
-          comps = dataset.as(DataSet).structure.as(DataStructureDefinition).component.map{|comp| comp.as(Component)}
-          props = comps.map{|comp| comp.dimension ? comp.dimension.as(Dimension) : comp.measure.as(Measure) }
+          comps = RDF::URI(RDF::URI(dataset).as(DataSet).structure).as(DataStructureDefinition).component.map{|comp| RDF::URI(comp).as(Component)}
+          props = comps.map{|comp| comp.dimension ? RDF::URI(comp.dimension).as(Dimension) : RDF::URI(comp.measure).as(Measure) }
           props.each{|prop|
             ss =  strip_uri(prop.subject.to_s)
 
