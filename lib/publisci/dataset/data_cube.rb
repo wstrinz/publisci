@@ -13,7 +13,7 @@ module PubliSci
       {
         type: :dataframe,
         encode_nulls: false,
-        base_url: "http://onto.strinz.me",
+        base_url: "http://example.org",
       }
       end
 

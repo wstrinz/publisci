@@ -1,13 +1,13 @@
-@base <http://onto.strinz.me/dc/dataset/weather/> .
-@prefix ns:    <http://onto.strinz.me/dc/dataset/weather/> .
+@base <http://example.org/dc/dataset/weather/> .
+@prefix ns:    <http://example.org/dc/dataset/weather/> .
 @prefix qb:    <http://purl.org/linked-data/cube#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix prop:  <http://onto.strinz.me/properties/> .
+@prefix prop:  <http://example.org/properties/> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix cs:    <http://onto.strinz.me/dc/dataset/weather/cs/> .
-@prefix code:  <http://onto.strinz.me/dc/dataset/weather/code/> .
+@prefix cs:    <http://example.org/dc/dataset/weather/cs/> .
+@prefix code:  <http://example.org/dc/dataset/weather/code/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .

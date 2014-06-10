@@ -36,7 +36,7 @@ describe PubliSci::DSL do
         qry = <<-EOF
         SELECT ?observation where {
           ?observation a <http://purl.org/linked-data/cube#Observation>;
-            <http://onto.strinz.me/properties/Hugo_Symbol> ?node.
+            <http://example.org/properties/Hugo_Symbol> ?node.
 
         }
 

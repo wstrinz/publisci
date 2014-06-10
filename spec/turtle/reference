@@ -1,13 +1,13 @@
-@base <http://onto.strinz.me/dc/dataset/mr/> .
-@prefix ns:    <http://onto.strinz.me/dc/dataset/mr/> .
+@base <http://example.org/dc/dataset/mr/> .
+@prefix ns:    <http://example.org/dc/dataset/mr/> .
 @prefix qb:    <http://purl.org/linked-data/cube#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix prop:  <http://onto.strinz.me/properties/> .
+@prefix prop:  <http://example.org/properties/> .
 @prefix dct:   <http://purl.org/dc/terms/> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix cs:    <http://onto.strinz.me/dc/dataset/mr/cs/> .
-@prefix code:  <http://onto.strinz.me/dc/dataset/mr/code/> .
+@prefix cs:    <http://example.org/dc/dataset/mr/cs/> .
+@prefix code:  <http://example.org/dc/dataset/mr/code/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:     <http://xmlns.com/foaf/0.1/> .
@@ -898,7 +898,7 @@ ns:obsD1M215 a qb:Observation ;
   prop:refRow <code/refrow/D1M215> ;
   prop:chr 1 ;
   prop:pos 40.41360872065924 ;
-  prop:lod 0.07012015768922852 ;
+  prop:lod 0.07012015768917834 ;
   .
 
 ns:obsD1M309 a qb:Observation ;
@@ -943,7 +943,7 @@ ns:obsD1M113 a qb:Observation ;
   prop:refRow <code/refrow/D1M113> ;
   prop:chr 1 ;
   prop:pos 80.62323562923214 ;
-  prop:lod 2.072608394873848 ;
+  prop:lod 2.0726083948737966 ;
   .
 
 ns:obsD1M355 a qb:Observation ;
@@ -970,7 +970,7 @@ ns:obsD1M209 a qb:Observation ;
   prop:refRow <code/refrow/D1M209> ;
   prop:chr 1 ;
   prop:pos 92.68393779641761 ;
-  prop:lod 1.077029280756939 ;
+  prop:lod 1.0770292807569852 ;
   .
 
 ns:obsD1M155 a qb:Observation ;
@@ -979,7 +979,7 @@ ns:obsD1M155 a qb:Observation ;
   prop:refRow <code/refrow/D1M155> ;
   prop:chr 1 ;
   prop:pos 93.64343584009433 ;
-  prop:lod 1.1873613330194863 ;
+  prop:lod 1.187361333019437 ;
   .
 
 ns:obsD2M365 a qb:Observation ;
@@ -1060,7 +1060,7 @@ ns:obsD3M106 a qb:Observation ;
   prop:refRow <code/refrow/D3M106> ;
   prop:chr 3 ;
   prop:pos 43.938030995679 ;
-  prop:lod 0.4537402388347749 ;
+  prop:lod 0.45374023883481307 ;
   .
 
 ns:obsD3M257 a qb:Observation ;
@@ -1087,7 +1087,7 @@ ns:obsD3M19 a qb:Observation ;
   prop:refRow <code/refrow/D3M19> ;
   prop:chr 3 ;
   prop:pos 70.83899918659391 ;
-  prop:lod 0.5681404735364763 ;
+  prop:lod 0.5681404735365145 ;
   .
 
 ns:obsD4M2 a qb:Observation ;
@@ -1096,7 +1096,7 @@ ns:obsD4M2 a qb:Observation ;
   prop:refRow <code/refrow/D4M2> ;
   prop:chr 4 ;
   prop:pos 0.0 ;
-  prop:lod 0.24331723281211204 ;
+  prop:lod 0.24331723281215023 ;
   .
 
 ns:obsD4M178 a qb:Observation ;
@@ -1114,7 +1114,7 @@ ns:obsD4M187 a qb:Observation ;
   prop:refRow <code/refrow/D4M187> ;
   prop:chr 4 ;
   prop:pos 35.32085637897066 ;
-  prop:lod 0.08949770136006929 ;
+  prop:lod 0.08949770136010748 ;
   .
 
 ns:obsD4M251 a qb:Observation ;
@@ -1123,7 +1123,7 @@ ns:obsD4M251 a qb:Observation ;
   prop:refRow <code/refrow/D4M251> ;
   prop:chr 4 ;
   prop:pos 68.10315769609147 ;
-  prop:lod 1.1744313367512866 ;
+  prop:lod 1.1744313367512351 ;
   .
 
 ns:obsD5M148 a qb:Observation ;
@@ -1186,7 +1186,7 @@ ns:obsD5M205 a qb:Observation ;
   prop:refRow <code/refrow/D5M205> ;
   prop:chr 5 ;
   prop:pos 30.896651923893483 ;
-  prop:lod 5.72843784026734 ;
+  prop:lod 5.72843784026729 ;
   .
 
 ns:obsD5M398 a qb:Observation ;
@@ -1195,7 +1195,7 @@ ns:obsD5M398 a qb:Observation ;
   prop:refRow <code/refrow/D5M398> ;
   prop:chr 5 ;
   prop:pos 30.897651923893616 ;
-  prop:lod 3.1808212906241233 ;
+  prop:lod 3.180821290624097 ;
   .
 
 ns:obsD5M91 a qb:Observation ;
@@ -1222,7 +1222,7 @@ ns:obsD5M188 a qb:Observation ;
   prop:refRow <code/refrow/D5M188> ;
   prop:chr 5 ;
   prop:pos 44.02376273652883 ;
-  prop:lod 3.249708646147218 ;
+  prop:lod 3.249708646147167 ;
   .
 
 ns:obsD5M29 a qb:Observation ;
@@ -1258,7 +1258,7 @@ ns:obsD6M188 a qb:Observation ;
   prop:refRow <code/refrow/D6M188> ;
   prop:chr 6 ;
   prop:pos 18.187535696625936 ;
-  prop:lod 1.296092065769738 ;
+  prop:lod 1.296092065769776 ;
   .
 
 ns:obsD6M284 a qb:Observation ;
@@ -1294,7 +1294,7 @@ ns:obsD6M194 a qb:Observation ;
   prop:refRow <code/refrow/D6M194> ;
   prop:chr 6 ;
   prop:pos 45.14579226981843 ;
-  prop:lod 1.4515021912782906 ;
+  prop:lod 1.4515021912783288 ;
   .
 
 ns:obsD6M290 a qb:Observation ;
@@ -1330,7 +1330,7 @@ ns:obsD6M59_ a qb:Observation ;
   prop:refRow <code/refrow/D6M59_> ;
   prop:chr 6 ;
   prop:pos 55.304776117994045 ;
-  prop:lod 2.9298420181331215 ;
+  prop:lod 2.9298420181331597 ;
   .
 
 ns:obsD6M201 a qb:Observation ;
@@ -1411,7 +1411,7 @@ ns:obsD7M259 a qb:Observation ;
   prop:refRow <code/refrow/D7M259> ;
   prop:chr 7 ;
   prop:pos 72.084242243197 ;
-  prop:lod 0.10483451594920368 ;
+  prop:lod 0.10483451594923476 ;
   .
 
 ns:obsD8M94 a qb:Observation ;
@@ -1429,7 +1429,7 @@ ns:obsD8M339 a qb:Observation ;
   prop:refRow <code/refrow/D8M339> ;
   prop:chr 8 ;
   prop:pos 1.3398698853272393 ;
-  prop:lod 0.5508803120345833 ;
+  prop:lod 0.5508803120345327 ;
   .
 
 ns:obsD8M178 a qb:Observation ;
@@ -1447,7 +1447,7 @@ ns:obsD8M242 a qb:Observation ;
   prop:refRow <code/refrow/D8M242> ;
   prop:chr 8 ;
   prop:pos 27.140658391256373 ;
-  prop:lod 0.018444232219031242 ;
+  prop:lod 0.018444232219069434 ;
   .
 
 ns:obsD8M213 a qb:Observation ;
@@ -1465,7 +1465,7 @@ ns:obsD8M156 a qb:Observation ;
   prop:refRow <code/refrow/D8M156> ;
   prop:chr 8 ;
   prop:pos 50.8636380045854 ;
-  prop:lod 0.028466493643733326 ;
+  prop:lod 0.02846649364377729 ;
   .
 
 ns:obsD9M247 a qb:Observation ;
@@ -1501,7 +1501,7 @@ ns:obsD9M269 a qb:Observation ;
   prop:refRow <code/refrow/D9M269> ;
   prop:chr 9 ;
   prop:pos 27.324165906766122 ;
-  prop:lod 0.6881242583427478 ;
+  prop:lod 0.6881242583427829 ;
   .
 
 ns:obsD9M346 a qb:Observation ;
@@ -1510,7 +1510,7 @@ ns:obsD9M346 a qb:Observation ;
   prop:refRow <code/refrow/D9M346> ;
   prop:chr 9 ;
   prop:pos 32.95643946351727 ;
-  prop:lod 0.372234007257759 ;
+  prop:lod 0.3722340072577168 ;
   .
 
 ns:obsD9M55 a qb:Observation ;
@@ -1519,7 +1519,7 @@ ns:obsD9M55 a qb:Observation ;
   prop:refRow <code/refrow/D9M55> ;
   prop:chr 9 ;
   prop:pos 45.335668616330956 ;
-  prop:lod 0.48324303581159445 ;
+  prop:lod 0.48324303581163264 ;
   .
 
 ns:obsD9M18 a qb:Observation ;
@@ -1546,7 +1546,7 @@ ns:obsD10M294 a qb:Observation ;
   prop:refRow <code/refrow/D10M294> ;
   prop:chr 10 ;
   prop:pos 24.747450377130114 ;
-  prop:lod 0.7596876212377595 ;
+  prop:lod 0.7596876212377977 ;
   .
 
 ns:obsD10M42_ a qb:Observation ;
@@ -1582,7 +1582,7 @@ ns:obsD11M78 a qb:Observation ;
   prop:refRow <code/refrow/D11M78> ;
   prop:chr 11 ;
   prop:pos 0.0 ;
-  prop:lod 0.18398849359834646 ;
+  prop:lod 0.18398849359838465 ;
   .
 
 ns:obsD11M20 a qb:Observation ;
@@ -1636,7 +1636,7 @@ ns:obsD12M105 a qb:Observation ;
   prop:refRow <code/refrow/D12M105> ;
   prop:chr 12 ;
   prop:pos 0.0 ;
-  prop:lod 0.6422735562057706 ;
+  prop:lod 0.6422735562058088 ;
   .
 
 ns:obsD12M46 a qb:Observation ;
@@ -1672,7 +1672,7 @@ ns:obsD12M99 a qb:Observation ;
   prop:refRow <code/refrow/D12M99> ;
   prop:chr 12 ;
   prop:pos 41.79568874486233 ;
-  prop:lod 1.1794642920048046 ;
+  prop:lod 1.1794642920048428 ;
   .
 
 ns:obsD12M150 a qb:Observation ;
@@ -1708,7 +1708,7 @@ ns:obsD13M21 a qb:Observation ;
   prop:refRow <code/refrow/D13M21> ;
   prop:chr 13 ;
   prop:pos 10.365882919967524 ;
-  prop:lod 2.8121111806924652 ;
+  prop:lod 2.812111180692509 ;
   .
 
 ns:obsD13M39 a qb:Observation ;
@@ -1825,7 +1825,7 @@ ns:obsD14M266 a qb:Observation ;
   prop:refRow <code/refrow/D14M266> ;
   prop:chr 14 ;
   prop:pos 45.55021769882338 ;
-  prop:lod 0.0725330541792637 ;
+  prop:lod 0.07253305417930189 ;
   .
 
 ns:obsD15M226 a qb:Observation ;
@@ -1906,7 +1906,7 @@ ns:obsD16M154 a qb:Observation ;
   prop:refRow <code/refrow/D16M154> ;
   prop:chr 16 ;
   prop:pos 0.0 ;
-  prop:lod 0.5400677999540768 ;
+  prop:lod 0.540067799954115 ;
   .
 
 ns:obsD16M4 a qb:Observation ;
@@ -1933,7 +1933,7 @@ ns:obsD16M86 a qb:Observation ;
   prop:refRow <code/refrow/D16M86> ;
   prop:chr 16 ;
   prop:pos 41.79901031770399 ;
-  prop:lod 0.7981309541993609 ;
+  prop:lod 0.7981309541993991 ;
   .
 
 ns:obsD17M260 a qb:Observation ;
@@ -1942,7 +1942,7 @@ ns:obsD17M260 a qb:Observation ;
   prop:refRow <code/refrow/D17M260> ;
   prop:chr 17 ;
   prop:pos 0.0 ;
-  prop:lod 0.18188727999483412 ;
+  prop:lod 0.1818872799948723 ;
   .
 
 ns:obsD17M66 a qb:Observation ;
@@ -1951,7 +1951,7 @@ ns:obsD17M66 a qb:Observation ;
   prop:refRow <code/refrow/D17M66> ;
   prop:chr 17 ;
   prop:pos 11.728225830166531 ;
-  prop:lod 0.41891147924969907 ;
+  prop:lod 0.41891147924973726 ;
   .
 
 ns:obsD17M88 a qb:Observation ;
@@ -1978,7 +1978,7 @@ ns:obsD18M94 a qb:Observation ;
   prop:refRow <code/refrow/D18M94> ;
   prop:chr 18 ;
   prop:pos 0.0 ;
-  prop:lod 1.230336527961505 ;
+  prop:lod 1.2303365279615814 ;
   .
 
 ns:obsD18M58 a qb:Observation ;
@@ -2014,7 +2014,7 @@ ns:obsD19M68 a qb:Observation ;
   prop:refRow <code/refrow/D19M68> ;
   prop:chr 19 ;
   prop:pos 0.0 ;
-  prop:lod 0.37693262717035303 ;
+  prop:lod 0.3769326271704294 ;
   .
 
 ns:obsD19M117 a qb:Observation ;
@@ -2032,7 +2032,7 @@ ns:obsD19M65 a qb:Observation ;
   prop:refRow <code/refrow/D19M65> ;
   prop:chr 19 ;
   prop:pos 32.82934898998137 ;
-  prop:lod 0.007363598013061079 ;
+  prop:lod 0.0073635980130237755 ;
   .
 
 ns:obsD19M10 a qb:Observation ;

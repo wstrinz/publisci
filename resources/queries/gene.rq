@@ -8,8 +8,8 @@ SELECT DISTINCT ?gene WHERE {
 
   ?patient_obs a qb:Observation;
     ?barcode_measure ?barcode;
-    <http://onto.strinz.me/properties/patient_id> "%{patient}";
-    <http://onto.strinz.me/properties/Hugo_Symbol> ?gene.
+    <http://example.org/properties/patient_id> "%{patient}";
+    <http://example.org/properties/Hugo_Symbol> ?gene.
 
 
   #  ?node <http://semanticscience.org/resource/SIO_000300> ?gene ;  
