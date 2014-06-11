@@ -1,7 +1,7 @@
 SELECT distinct ?hgnc ?ensembl where {
- {?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> "%{hugo_symbol}"}
+ {?hgnc <http://ncicb.nci.nih.gov/xml/owl/EVS/Hugo.owl#Approved_Symbol> "%{hugo_symbol}"^^<http://www.w3.org/2001/XMLSchema#string>}
  UNION
- {?hgnc <http://bio2rdf.org/hgnc_vocabulary:synonym> "%{hugo_symbol}"}
+ {?hgnc <http://bio2rdf.org/hgnc_vocabulary:synonym> "%{hugo_symbol}"^^<http://www.w3.org/2001/XMLSchema#string>}
  
- ?hgnc <http://bio2rdf.org/hgnc_vocabulary:x-ensembl> ?ensembl
+ ?hgnc <http://ncicb.nci.nih.gov/xml/owl/EVS/Hugo.owl#Ensembl_ID__mapped_data_supplied_by_Ensembl_> ?ensembl
 }

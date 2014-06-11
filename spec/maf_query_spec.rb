@@ -153,23 +153,24 @@ class MafQuery
       qry = <<-EOF
 
       SELECT distinct ?official where {
-       {?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> "#{hugo_symbol}"}
-       UNION
-       {?hgnc <http://bio2rdf.org/hgnc_vocabulary:synonym> "#{hugo_symbol}"}
+        {?hgnc <http://ncicb.nci.nih.gov/xml/owl/EVS/Hugo.owl#Approved_Symbol> "#{hugo_symbol}"^^<http://www.w3.org/2001/XMLSchema#string>}
+        UNION
+        {?hgnc <http://ncicb.nci.nih.gov/xml/owl/EVS/Hugo.owl#Aliases> "#{hugo_symbol}"^^<http://www.w3.org/2001/XMLSchema#string>}
 
-       ?hgnc <http://bio2rdf.org/hgnc_vocabulary:approved_symbol> ?official
+        ?hgnc <http://ncicb.nci.nih.gov/xml/owl/EVS/Hugo.owl#Approved_Symbol> ?official
       }
 
       EOF
 
-      sparql = SPARQL::Client.new("http://cu.hgnc.bio2rdf.org/sparql")
+
+      sparql = SPARQL::Client.new("http://bioportal.bio2rdf.org/sparql")
       sparql.query(qry).map(&:official).first.to_s
     end
 
     def gene_length(hugo_symbol)
       hugo_symbol = official_symbol(hugo_symbol.split('/').last)
       qry = IO.read('resources/queries/hugo_to_ensembl.rq').gsub('%{hugo_symbol}',hugo_symbol)
-      sparql = SPARQL::Client.new("http://cu.hgnc.bio2rdf.org/sparql")
+      sparql = SPARQL::Client.new("http://bioportal.bio2rdf.org/sparql")
       sol = sparql.query(qry)
 
       if sol.size == 0
@@ -333,10 +334,7 @@ describe QueryScript do
       it { @ev.instance_eval("select 'patient_count', patient: 'BH-A0HP'").should > 0 }
       it { @ev.instance_eval("select 'Hugo_Symbol', patient: 'BH-A0HP'").should == 'http://identifiers.org/hgnc.symbol/A1CF' }
       it { @ev.instance_eval("select 'Chromosome', patient: 'BH-A0HP'").is_a?(Fixnum).should be true }
-      it { 
-        pending("bio2rdf vocabulary changed")
-        #@ev.instance_eval("report_for 'patient', 'BH-A0HP'").is_a?(Hash).should be true 
-      }
+      it { @ev.instance_eval("report_for 'patient', 'BH-A0HP'").is_a?(Hash).should be true }
     end
   end
 end
